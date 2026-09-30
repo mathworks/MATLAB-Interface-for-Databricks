@@ -1,0 +1,65 @@
+{
+  "type": "compiler",
+  "funcname": "fVarArrSize2",
+  "fullFilename": "/matlab-databricks/Modules/matlab-spark-api/Software/MATLAB/test/fixtures/fVarArrSize2.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "Tin",
+      "Direction": "in",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "name": "id",
+            "nullable": false,
+            "type": "long",
+            "metadata": {}
+          },
+          {
+            "name": "ts",
+            "nullable": false,
+            "type": "timestamp",
+            "metadata": {}
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "Tout",
+      "Direction": "out",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "name": "id",
+            "nullable": false,
+            "type": "long",
+            "metadata": {}
+          },
+          {
+            "name": "ts",
+            "nullable": false,
+            "type": "timestamp",
+            "metadata": {}
+          },
+          {
+            "name": "timez",
+            "nullable": false,
+            "type": {
+              "containsNull": true,
+              "elementType": "string",
+              "type": "array"
+            },
+            "metadata": {}
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ]
+}

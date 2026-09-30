@@ -1,0 +1,353 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jobs API &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Libraries" href="LibraryAPI.html" />
+    <link rel="prev" title="Files API" href="Files.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Jobs API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-job">Create a job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-jobs">List Jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup-of-job-based-event-notifications">Setup of Job-based event notifications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#connect-to-an-existing-job">Connect to an existing job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-a-job">Run a job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#schedule-a-job">Schedule a job</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#run-a-job-as-a-user-or-service-principal">Run a job as a user or service principal</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Jobs API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/JobsAPI.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jobs-api">
+<h1>Jobs API<a class="headerlink" href="#jobs-api" title="Link to this heading"></a></h1>
+<p>A job allows users to create automation clusters based on a specified cluster configuration.
+This allows creation and submission of jobs that will either use an existing cluster or create a new Spark™ cluster for the execution of the job.</p>
+<section id="create-a-job">
+<h2>Create a job<a class="headerlink" href="#create-a-job" title="Link to this heading"></a></h2>
+<p>A job can be created using the <code class="docutils literal notranslate"><span class="pre">create</span></code> method. If a cluster profile is specified, the job will create the Spark cluster based on the configuration.</p>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Cluster object based configuration</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setNumWorkers</span><span class="p">([</span><span class="mi">2</span><span class="w"> </span><span class="mi">10</span><span class="p">]);</span>
+<span class="c">% Note: do not specify cluster name</span>
+</pre></div>
+</div>
+<p>Furthermore, a job without a task (or a list of tasks), has no purpose, as it will not do anything.
+As an example, create a notebook task.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">NT</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">NotebookTask</span><span class="p">();</span>
+<span class="n">nbPath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'/Shared/UnitTests/Simulink_3DOFs'</span><span class="p">;</span>
+<span class="n">baseParams</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">'massLow'</span><span class="p">,</span><span class="w"> </span><span class="s">'1200'</span><span class="p">,</span><span class="w"> </span><span class="s">'massHigh'</span><span class="p">,</span><span class="w"> </span><span class="s">'1400'</span><span class="p">);</span>
+<span class="n">NT</span><span class="p">.</span><span class="n">notebook_path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">nbPath</span><span class="p">;</span>
+<span class="n">NT</span><span class="p">.</span><span class="n">base_parameters</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">baseParams</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>To create a new job using the cluster definition, minimally:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">jb</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">;</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'Example'</span><span class="p">;</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">setCluster</span><span class="p">(</span><span class="n">cl</span><span class="p">);</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">NT</span><span class="p">);</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This will result in a job being created on the Databricks® platform.
+The job has still not run. It can be started through other methods on the <code class="docutils literal notranslate"><span class="pre">databricks.Job</span></code> object,
+or by starting it from the Databricks web interface.</p>
+<p><img alt="JobCreation" src="_images/jobcreation.png" /></p>
+</section>
+<section id="list-jobs">
+<h2>List Jobs<a class="headerlink" href="#list-jobs" title="Link to this heading"></a></h2>
+<p>A list of all jobs can be queried using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">jobs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">.</span><span class="n">list</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This will return a list of Jobs on Databricks as an array of Databricks jobs.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">jobs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">  </span><span class="n">Job</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+
+<span class="w">                   </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">'TestJob31-Jul-2019 13:16:16'</span>
+<span class="w">        </span><span class="n">timeout_seconds</span><span class="p">:</span><span class="w"> </span><span class="mi">3600</span>
+<span class="w">            </span><span class="n">max_retries</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">           </span><span class="n">created_time</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5646e+12</span>
+<span class="w">                 </span><span class="n">job_id</span><span class="p">:</span><span class="w"> </span><span class="mi">8</span>
+<span class="w">            </span><span class="n">new_cluster</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">    </span><span class="n">email_notifications</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">    </span><span class="n">max_concurrent_runs</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">      </span><span class="n">creator_user_name</span><span class="p">:</span><span class="w"> </span><span class="s">'user@example.com'</span>
+</pre></div>
+</div>
+</section>
+<section id="setup-of-job-based-event-notifications">
+<h2>Setup of Job-based event notifications<a class="headerlink" href="#setup-of-job-based-event-notifications" title="Link to this heading"></a></h2>
+<p>Databricks can be configured to send out email notifications on Job based events. To configure a job
+to respond to these events by sending emails, users can use the <code class="docutils literal notranslate"><span class="pre">databricks.JobEmailNotifications</span></code> object.
+For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">notify</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">JobEmailNotifications</span><span class="p">;</span>
+<span class="nb">notify</span><span class="p">.</span><span class="n">on_start</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'user@example.com'</span><span class="p">;</span>
+<span class="nb">notify</span><span class="p">.</span><span class="n">on_success</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'user@example.com'</span><span class="p">;</span>
+<span class="nb">notify</span><span class="p">.</span><span class="n">on_failure</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'user@example.com'</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>An additional property <code class="docutils literal notranslate"><span class="pre">no_alert_for_skipped_runs</span></code> exists. If true, there will be no email sent to recipients specified in <code class="docutils literal notranslate"><span class="pre">on_failure</span></code> if the run is skipped.</p>
+<p>This object can be attached to a job using the <code class="docutils literal notranslate"><span class="pre">setJobEmailNotifications</span></code> method.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">jb</span><span class="p">.</span><span class="n">setJobEmailNotifications</span><span class="p">(</span><span class="nb">notify</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To set all of the notification conditions more concisely call:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="p">.</span><span class="n">setJobEmailNotifications</span><span class="p">(</span><span class="s">'user@example.com'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Or if a notification address is configured in <code class="docutils literal notranslate"><span class="pre">databricks-settings.json</span></code>, simply:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">job</span><span class="p">.</span><span class="n">setJobEmailNotifications</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="connect-to-an-existing-job">
+<h2>Connect to an existing job<a class="headerlink" href="#connect-to-an-existing-job" title="Link to this heading"></a></h2>
+<p>A job on the databricks system is identified by a job_id. It is possible to connect to an existing job using its job_id.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">jb</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">;</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">setJobId</span><span class="p">(</span><span class="mi">87</span><span class="p">);</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">refresh</span><span class="p">();</span>
+
+<span class="n">jb</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w">  </span><span class="n">Job</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+
+<span class="w">                   </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">'Untitled'</span>
+<span class="w">        </span><span class="n">timeout_seconds</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="n">max_retries</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00</span>
+<span class="w">                 </span><span class="n">job_id</span><span class="p">:</span><span class="w"> </span><span class="mf">101.00</span>
+<span class="w">    </span><span class="n">max_concurrent_runs</span><span class="p">:</span><span class="w"> </span><span class="mf">1.00</span>
+<span class="w">      </span><span class="n">creator_user_name</span><span class="p">:</span><span class="w"> </span><span class="s">'user@example.com'</span>
+<span class="w">           </span><span class="n">created_time</span><span class="p">:</span><span class="w"> </span><span class="mf">1566439248663.00</span>
+<span class="w">    </span><span class="n">email_notifications</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">            </span><span class="n">new_cluster</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="run-a-job">
+<h2>Run a job<a class="headerlink" href="#run-a-job" title="Link to this heading"></a></h2>
+<p>To run a configured job:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">jb</span><span class="p">.</span><span class="n">runNow</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="schedule-a-job">
+<h2>Schedule a job<a class="headerlink" href="#schedule-a-job" title="Link to this heading"></a></h2>
+<p>A job can be scheduled to run at a given time(s) using a Cron Schedule:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Sample job and cluster objects</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">jb</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">;</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'Example'</span><span class="p">;</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">setCluster</span><span class="p">(</span><span class="n">cl</span><span class="p">);</span>
+
+<span class="c">% Create a CronSchedule object</span>
+<span class="n">cs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">CronSchedule</span><span class="p">;</span>
+<span class="c">% Configure its Quartz Cron Expression</span>
+<span class="c">% see: http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html</span>
+<span class="n">cs</span><span class="p">.</span><span class="n">setQuartzCronExpression</span><span class="p">(</span><span class="s">"0 15 22 * * ?"</span><span class="p">);</span>
+<span class="c">% Optionally set its execution to PAUSED or UNPAUSED</span>
+<span class="n">cs</span><span class="p">.</span><span class="n">setPauseStatus</span><span class="p">(</span><span class="s">"UNPAUSED"</span><span class="p">);</span>
+<span class="c">% Set the timezone for the schedule</span>
+<span class="n">cs</span><span class="p">.</span><span class="n">setTimezoneId</span><span class="p">(</span><span class="s">"Ireland/Dublin"</span><span class="p">);</span>
+<span class="c">% Apply the schedule to the job</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">setSchedule</span><span class="p">(</span><span class="n">cs</span><span class="p">);</span>
+
+<span class="c">% Configure a task</span>
+<span class="n">task</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">MATLABBatchTask</span><span class="p">(</span><span class="s">"disp(datetime)"</span><span class="p">);</span>
+<span class="n">job</span><span class="p">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+
+<span class="n">jb</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="run-a-job-as-a-user-or-service-principal">
+<h2>Run a job as a user or service principal<a class="headerlink" href="#run-a-job-as-a-user-or-service-principal" title="Link to this heading"></a></h2>
+<p>The setRunAs method specifies the user or service principal that the job runs as.
+If not specified, the job runs as the user who created the job.
+Only <code class="docutils literal notranslate"><span class="pre">user_name</span></code> or <code class="docutils literal notranslate"><span class="pre">service_principal_name</span></code> can be specified as the type.</p>
+<p>Type <code class="docutils literal notranslate"><span class="pre">user_name</span></code> should specify the email of an active workspace user.
+Non-admin users can only set this field to their own email.</p>
+<p>Type <code class="docutils literal notranslate"><span class="pre">service_principal_name</span></code> should specify Application ID of an active
+service principal. Setting this field requires the servicePrincipal/user
+role.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">;</span>
+<span class="nb">j</span><span class="p">.</span><span class="n">runAs</span><span class="p">(</span><span class="s">"user_name"</span><span class="p">,</span><span class="w"> </span><span class="s">"joe@example.com"</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">j</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">;</span>
+<span class="nb">j</span><span class="p">.</span><span class="n">runAs</span><span class="p">(</span><span class="s">"service_principal_name"</span><span class="p">,</span><span class="w"> </span><span class="s">"123bc6d0-ffa3-11ed-be56-1234ac123456"</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Files.html" class="btn btn-neutral float-left" title="Files API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="LibraryAPI.html" class="btn btn-neutral float-right" title="Libraries" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

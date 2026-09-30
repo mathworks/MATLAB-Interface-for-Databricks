@@ -1,0 +1,61 @@
+{
+  "type": "compiler",
+  "funcname": "addStringCol",
+  "fullFilename": "/matlab-databricks/Software/MATLAB/examples/DatabricksConnect/Artifacts/addStringCol.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "T_IN",
+      "Direction": "in",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "metadata": {},
+            "name": "id",
+            "nullable": true,
+            "type": "long"
+          },
+          {
+            "metadata": {},
+            "name": "did",
+            "nullable": true,
+            "type": "double"
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "T_OUT",
+      "Direction": "out",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "metadata": {},
+            "name": "id",
+            "nullable": true,
+            "type": "long"
+          },
+          {
+            "metadata": {},
+            "name": "did",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "hello",
+            "nullable": true,
+            "type": "string"
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ]
+}

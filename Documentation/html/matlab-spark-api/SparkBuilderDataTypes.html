@@ -1,0 +1,471 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SparkBuilder data types &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Code generation" href="CodeGeneration.html" />
+    <link rel="prev" title="Function signatures" href="FunctionSignatures.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SparkBuilder data types</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#function-signatures">Function signatures</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#value-function">Value function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table-function">Table function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Table+ function</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#supported-data-types">Supported Data Types</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#notes">Notes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#n1">N1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#n2">N2</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#footnotes">Footnotes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SparkBuilder data types</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/matlab-spark-api/SparkBuilderDataTypes.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sparkbuilder-data-types">
+<h1>SparkBuilder data types<a class="headerlink" href="#sparkbuilder-data-types" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>The following describes what datatypes can be used, and in what combinations,
+with the package's MATLAB® Compiler SDK™ based workflow when building .whl libraries using <code class="docutils literal notranslate"><span class="pre">PythonSparkBuilder</span></code>.</p>
+</section>
+<section id="function-signatures">
+<h2>Function signatures<a class="headerlink" href="#function-signatures" title="Link to this heading"></a></h2>
+<p>The functions generated with the MATLAB® Compiler SDK™ workflows can be used in a Spark™ workflow, e.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span> <span class="o">=</span> <span class="n">DataFrame</span><span class="o">.</span><span class="n">mapInPandas</span><span class="p">(</span><span class="n">myFunc</span><span class="p">,</span> <span class="n">myFunc_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The source for the data is in general a Spark <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code><a class="footnote-reference brackets" href="#id3" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, but it can also be used in
+some other contexts, such as with <em>UDF</em>s.</p>
+<p>The methods on a Dataset will in general be applied to either <strong>one row</strong>,
+or <strong>a set of rows</strong>, and the methods will correspondingly return the same,
+i.e. <strong>one row</strong>, or <strong>a set of rows</strong>.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> is basically a table, and the distinction above means that the function
+that the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method is applied to, will either get one row as input, or a table
+(in general a chunk of the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>). These method types are called <em>row</em> and <em>chunk</em>
+in the following documentation.</p>
+<p>There is a distinction between two forms of input types for these functions
+-- <strong>table</strong> and <strong>value</strong>. On the MATLAB® side, a <strong>table</strong> will correspond
+to a <strong>MATLAB® table</strong>, and a <strong>value</strong> will correspond to some <strong>MATLAB® value</strong> (which
+is not a table). The value can be a scalar or a vector (some restrictions apply).</p>
+<p>Depending on the input/output of a function, different functions will be generated
+for use with the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> methods.</p>
+<p>The following combinations of input/output variables are currently supported.
+If values are used, there can be one or more entries. If tables are used, there can
+only be one table. This is determined by the Spark methods, which always act on one
+<code class="docutils literal notranslate"><span class="pre">Dataset</span></code>. If two or more <code class="docutils literal notranslate"><span class="pre">Dataset</span></code>s should be used, they must first be <code class="docutils literal notranslate"><span class="pre">join</span></code>ed
+in some way:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Input</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Value</p></td>
+<td><p>Value</p></td>
+<td><p>Value</p></td>
+</tr>
+<tr class="row-odd"><td><p>Table</p></td>
+<td><p>Table</p></td>
+<td><p>Table</p></td>
+</tr>
+<tr class="row-even"><td><p>Table+</p></td>
+<td><p>Table + Value</p></td>
+<td><p>Table</p></td>
+</tr>
+</tbody>
+</table>
+<p>The names in this list are not formal names, merely placeholders to facilitate the description
+below.</p>
+<section id="value-function">
+<h3>Value function<a class="headerlink" href="#value-function" title="Link to this heading"></a></h3>
+<p>A value function simply has <em>normal values</em> as inputs and outputs, e.g.:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="p">[</span>x,y<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">myfunc</span><span class="p">(</span>a,b,c<span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="o">*</span><span class="n">c</span><span class="p">;</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">a</span><span class="o">+</span><span class="n">b</span><span class="o">+</span><span class="n">c</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>When this is used, the <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method will always act on one row at a time, e.g. with the
+<code class="docutils literal notranslate"><span class="pre">map</span></code> method. The generated function can also be used with <code class="docutils literal notranslate"><span class="pre">mapPartitions</span></code>, i.e. a <em>chunk</em> method.
+In this case, the MATLAB® function will still be invoked on one row at a time, but Spark will give a set
+of rows that will then be applied to the MATLAB® function one by one.</p>
+<blockquote>
+<div><p><strong>Note:</strong> There can be a performance advantage of using <code class="docutils literal notranslate"><span class="pre">mapPartitions</span></code> instead of <code class="docutils literal notranslate"><span class="pre">map</span></code>, as
+the MATLAB® Runtime will only be invocated once instead of for every row. The results of these two
+variants is however the same.</p>
+</div></blockquote>
+</section>
+<section id="table-function">
+<h3>Table function<a class="headerlink" href="#table-function" title="Link to this heading"></a></h3>
+<p>A table function has a MATLAB® table input and a MATLAB® table output, e.g.:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>Tout<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">otherfunc</span><span class="p">(</span>Tin<span class="p">)</span>
+<span class="w">    </span><span class="n">Tout</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Tin</span><span class="p">;</span>
+<span class="w">    </span><span class="n">meanDist</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mean</span><span class="p">(</span><span class="n">Tin</span><span class="p">.</span><span class="n">distance</span><span class="p">)</span>
+<span class="w">    </span><span class="n">Tout</span><span class="p">.</span><span class="n">distance</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Tout</span><span class="p">.</span><span class="n">distance</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">meanDist</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>A function like this can be called with <code class="docutils literal notranslate"><span class="pre">mapPartitions</span></code>, but not with <code class="docutils literal notranslate"><span class="pre">map</span></code>, as it can only act
+on tables (<em>chunks</em>).</p>
+</section>
+<section id="id2">
+<h3>Table+ function<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>A Table+ function is a variant of the table function. It returns a table, and takes a table as
+an input argument, but also takes additional arguments that can be used to parametrize the function.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>Tout<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">plusfunc</span><span class="p">(</span>Tin, mass<span class="p">)</span>
+<span class="w">    </span><span class="n">Tout</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Tin</span><span class="p">;</span>
+<span class="w">    </span><span class="n">Tout</span><span class="p">.</span><span class="n">momentum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Tin</span><span class="p">.</span><span class="n">velocity</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">mass</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> method cannot take additional arguments, however, only a function that acts on a <em>chunk</em>,
+so to use this with different parametrization, it's called like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mass</span> <span class="o">=</span> <span class="mf">1750.0</span>
+<span class="n">OUT</span> <span class="o">=</span> <span class="n">myDataset</span><span class="o">.</span><span class="n">mapInPandas</span><span class="p">(</span><span class="n">plusFunc_mapInPandas</span><span class="p">(</span><span class="n">mass</span><span class="p">),</span> <span class="n">plusFunc_output_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In the previous function code snippet, the function is called with one argument, <code class="docutils literal notranslate"><span class="pre">mass</span></code>, instead of
+with 2, <code class="docutils literal notranslate"><span class="pre">Tin</span></code> and <code class="docutils literal notranslate"><span class="pre">mass</span></code>. The reason is that the <code class="docutils literal notranslate"><span class="pre">mapPartitions</span></code> method expects a function handle
+as argument, and the intention is to parameterize the function invocation with the additional
+arguments (<code class="docutils literal notranslate"><span class="pre">mass</span></code> in this example). <code class="docutils literal notranslate"><span class="pre">plusFunc(mass)</span></code> will actually return a function handle
+of a function that only takes one argument (the table <code class="docutils literal notranslate"><span class="pre">Tin</span></code>).</p>
+</section>
+</section>
+<section id="supported-data-types">
+<h2>Supported Data Types<a class="headerlink" href="#supported-data-types" title="Link to this heading"></a></h2>
+<p>Currently, not all datatypes are that exist in MATLAB® and/or Spark are supported. The following table
+describes what datatypes are supported, and if any restrictions apply.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Please note that the Datatypes listed below, refer to what is supported
+with the new <em>schema</em> version of the library. Several of these types are not
+supported in the earlier <em>JSON signature</em> version of the library.
+It is recommended to switch to the new workflow.</p>
+</div></blockquote>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Spark Datatype</p></th>
+<th class="head"><p>MATLAB Datatype</p></th>
+<th class="head"><p>Remark</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>BinaryType</p></td>
+<td><p>uint8 array</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>BooleanType</p></td>
+<td><p>logical</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>ByteType</p></td>
+<td><p>int8</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>ShortType</p></td>
+<td><p>int16</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>IntegerType</p></td>
+<td><p>int32</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>DoubleType</p></td>
+<td><p>double</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>FloatType</p></td>
+<td><p>single</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>LongType</p></td>
+<td><p>int64</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>DateType</p></td>
+<td><p>datetime</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>TimestampType</p></td>
+<td><p>datetime</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>DayTimeIntervalType</p></td>
+<td><p>duration</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>StringType</p></td>
+<td><p>string</p></td>
+<td><p>Currently only support <code class="docutils literal notranslate"><span class="pre">string</span></code>, not <code class="docutils literal notranslate"><span class="pre">char</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>StructType</p></td>
+<td><p>struct</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p>ArrayType</p></td>
+<td><p>an array</p></td>
+<td><p>N1</p></td>
+</tr>
+<tr class="row-even"><td><p>MapType</p></td>
+<td><p>a map/dictionary</p></td>
+<td><p>N2</p></td>
+</tr>
+<tr class="row-odd"><td><p>DecimalType</p></td>
+<td><p>decimal</p></td>
+<td><p>Will be converted to a double in MATLAB®. Precision loss possible.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="notes">
+<h3>Notes<a class="headerlink" href="#notes" title="Link to this heading"></a></h3>
+<section id="n1">
+<h4>N1<a class="headerlink" href="#n1" title="Link to this heading"></a></h4>
+<p>An array column must always be a cell array. The reason for this is that a
+square column, i.e. an array column where each row has the same number of
+elements could be just a matrix in MATLAB®.</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">id</span><span class="p">=[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">];</span>
+<span class="gp">&gt;&gt; </span><span class="n">arr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">;</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">];</span>
+<span class="gp">&gt;&gt; </span><span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<span class="go">T =</span>
+<span class="go">  2x2 table</span>
+<span class="go">    id     arr  </span>
+<span class="go">    __    ______</span>
+<span class="go">    1     1    2</span>
+<span class="go">    2     3    4</span>
+</pre></div>
+</div>
+<p>The arrays in a Spark DataFrame column, however, can be of different length, and
+this can only be done in MATLAB® with a cell array.</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">id</span><span class="p">=[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">];</span>
+<span class="gp">&gt;&gt; </span><span class="n">arr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="mi">1</span><span class="p">;[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]};</span>
+<span class="gp">&gt;&gt; </span><span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">arr</span><span class="p">)</span>
+<span class="go">T =</span>
+<span class="go">  2×2 table</span>
+<span class="go">    id      arr  </span>
+<span class="go">    __    _______</span>
+<span class="go">    1     {[  1]}</span>
+<span class="go">    2     {[2 3]}</span>
+</pre></div>
+</div>
+<p>An array, that is not a column, but a subtype in a column, should be a normal
+array.</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">id</span><span class="p">=[</span><span class="mi">1</span><span class="p">;</span><span class="mi">2</span><span class="p">];</span>
+<span class="gp">&gt;&gt; </span><span class="n">s</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">struct</span><span class="p">(</span><span class="s">'Name'</span><span class="p">,</span><span class="w"> </span><span class="s">'A'</span><span class="p">,</span><span class="w"> </span><span class="s">'Val'</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">'Name'</span><span class="p">,</span><span class="w"> </span><span class="s">'B'</span><span class="p">,</span><span class="w"> </span><span class="s">'Val'</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">])];</span>
+<span class="gp">&gt;&gt; </span><span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="n">s</span><span class="p">)</span>
+<span class="go">T =</span>
+<span class="go">  2×2 table</span>
+<span class="go">    id        s     </span>
+<span class="go">    __    __________</span>
+<span class="go">    1     1×1 struct</span>
+<span class="go">    2     1×1 struct</span>
+<span class="gp">&gt;&gt; </span><span class="n">T</span><span class="p">.</span><span class="n">s</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">ans = </span>
+<span class="go">  struct with fields:</span>
+
+<span class="go">    Name: 'A'</span>
+<span class="go">     Val: [1 2 3]</span>
+<span class="gp">&gt;&gt; </span><span class="n">T</span><span class="p">.</span><span class="n">s</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">ans = </span>
+<span class="go">  struct with fields:</span>
+
+<span class="go">    Name: 'B'</span>
+<span class="go">     Val: [1 2]</span>
+</pre></div>
+</div>
+</section>
+<section id="n2">
+<h4>N2<a class="headerlink" href="#n2" title="Link to this heading"></a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">MapType</span></code> has some restrictions, imposed either by Spark, Python® or MATLAB®.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">keyType</span></code> cannot be a <code class="docutils literal notranslate"><span class="pre">StructType</span></code>, a <code class="docutils literal notranslate"><span class="pre">MapType</span></code> or an <code class="docutils literal notranslate"><span class="pre">ArrayType</span></code>. Basically
+no compound types.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">valueType</span></code> cannot be an <code class="docutils literal notranslate"><span class="pre">ArrayType</span></code> or a <code class="docutils literal notranslate"><span class="pre">MapType</span></code>.</p>
+</section>
+</section>
+<section id="footnotes">
+<h3>Footnotes<a class="headerlink" href="#footnotes" title="Link to this heading"></a></h3>
+</section>
+</section>
+</section>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id3" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>The terms <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code> and <code class="docutils literal notranslate"><span class="pre">Dataset</span></code> are used interchangeably in this text,
+although the data is almost invariably a <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>.</p>
+</aside>
+</aside>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="FunctionSignatures.html" class="btn btn-neutral float-left" title="Function signatures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CodeGeneration.html" class="btn btn-neutral float-right" title="Code generation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

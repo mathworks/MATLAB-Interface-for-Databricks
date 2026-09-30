@@ -1,0 +1,49 @@
+%% SYSTLC: Embedded Coder (host-based shared library target) TMF: ert_default_tmf MAKE: make_rtw \
+%%    EXTMODE: ext_comm
+%%
+%% 
+%% 
+%%
+%%     % Copyright 2024 The MathWorks, Inc.
+%% Abstract: Embedded real-time system target file for shared library generation.
+%%
+%selectfile NULL_FILE
+
+%assign CodeFormat = "Embedded-C"
+%assign TargetType = "RT"
+%assign Language   = "C"
+%assign AutoBuildProcedure = !GenerateSampleERTMain
+
+%assign PreCodeGenExecCompliant = 1
+
+%include "codegenentry.tlc"
+
+%% Error out on incompatible options
+%if (ExtMode != 0)
+  %assign errTxt = "External mode is not supported by the Embedded Coder shared library target."
+  %<LibReportError(errTxt)>
+%endif
+
+%if SLibHasAnyAsyncRate(CompiledModel.NumSampleTimes)
+  %assign warnTxt = "Asynchronous functions are not supported by the Embedded Coder shared library target."
+  %<LibReportWarning(warnTxt)>
+%endif
+
+%% generate export symbol description files.
+%include "export_shrlib_def.tlc"
+
+
+
+%% The contents between 'BEGIN_RTW_OPTIONS' and 'END_RTW_OPTIONS' in this file
+%% are used to maintain backward compatibility to R13 and preR13 custom target 
+%% file only.  If you want to use this file as a template to develop your
+%% own system target file, you need to remove the 'CONFIGSET_TARGET_COMPONENT'
+%% section at the end of this file.
+%%
+/%
+  BEGIN_RTW_OPTIONS
+
+  [rtwoptions, rtwgensettings] = sim_pandas_opts();
+
+  END_RTW_OPTIONS 
+ %/

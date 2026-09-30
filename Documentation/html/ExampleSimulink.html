@@ -1,0 +1,376 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Executing Simulink models with data on Databricks &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="JDBC and Database Toolbox workflow" href="JDBCWorkflow.html" />
+    <link rel="prev" title="Code generation" href="matlab-spark-api/CodeGeneration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Executing Simulink models with data on Databricks</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#deploying-a-simulink-model-with-pythonsparkbuilder">Deploying a Simulink model with PythonSparkBuilder</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-model-on-the-desktop">Run the model on the desktop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#upload-the-data">Upload the data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiling-the-function">Compiling the function</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#running-the-model-function-in-a-databricks-notebook">Running the model/function in a Databricks notebook</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Executing Simulink models with data on Databricks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ExampleSimulink.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="executing-simulink-models-with-data-on-databricks">
+<h1>Executing Simulink models with data on Databricks<a class="headerlink" href="#executing-simulink-models-with-data-on-databricks" title="Link to this heading"></a></h1>
+<p>A Simulink model can be run as part of a Spark™/Databricks® pipeline, allowing
+the user to simulate a mode with Spark functions,
+(e.g. <code class="docutils literal notranslate"><span class="pre">DF.applyInPandas(mySimulinkFunction,...)</span></code>).</p>
+<blockquote>
+<div><p><strong>Note</strong> Simulink® Compiler™ output is platform dependent, and Databricks runs on Linux®.
+Therefore the model must be compiled on a Linux system.
+If a model is compiled on Windows® and deployed to Databricks, an
+error message similar to the following will appear:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Application</span> <span class="ow">not</span> <span class="n">supported</span> <span class="n">on</span> <span class="n">Linux</span> <span class="n">due</span> <span class="n">to</span> <span class="n">platform</span> <span class="n">dependencies</span><span class="o">.</span> <span class="n">Intended</span>
+<span class="n">platforms</span> <span class="n">include</span><span class="p">:</span> <span class="n">Windows</span><span class="o">.</span>
+<span class="n">For</span> <span class="n">more</span> <span class="n">information</span><span class="p">,</span> <span class="n">please</span> <span class="n">contact</span> <span class="n">the</span> <span class="n">application</span> <span class="n">author</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Furthermore, some versions of Linux may not interoperate with Databricks
+due to <code class="docutils literal notranslate"><span class="pre">glibc</span></code> version differences.
+Databricks versions 13.3, 14.3 and 15.4 all use Ubuntu® 22.04
+Using compilation systems with the same or compatible <code class="docutils literal notranslate"><span class="pre">glibc</span></code> versions is important
+for compatibility, so in the current version, using Ubuntu 22.04 is a good choice.</p>
+</div></blockquote>
+<section id="deploying-a-simulink-model-with-pythonsparkbuilder">
+<h2>Deploying a Simulink model with PythonSparkBuilder<a class="headerlink" href="#deploying-a-simulink-model-with-pythonsparkbuilder" title="Link to this heading"></a></h2>
+<p>This demo uses <code class="docutils literal notranslate"><span class="pre">sldemo_suspn_3dof_with_input</span></code> model, an adapted version of the
+demo included with Simulink, <code class="docutils literal notranslate"><span class="pre">sldemo_suspn_3dof</span></code>. This model has been adapted to take the
+road profiles as inputs, instead of from a MAT-file.</p>
+<p>The demo files can be found in the installed package, here:</p>
+<p><code class="docutils literal notranslate"><span class="pre">&lt;databricks&gt;/Software/MATLAB/examples/SimulinkSuspension3DoF</span></code></p>
+<p><img alt="3DOF Simulink with inputs" src="_images/sldemo_suspn_3dof_with_input.png" /></p>
+<section id="run-the-model-on-the-desktop">
+<h3>Run the model on the desktop<a class="headerlink" href="#run-the-model-on-the-desktop" title="Link to this heading"></a></h3>
+<p>To prepare for running this model, the original data is used, and saved
+as separate <em>Parquet</em> files, one for each road profile.
+Simply run the function <code class="docutils literal notranslate"><span class="pre">createDataSets</span></code>. This will create a local folder
+<code class="docutils literal notranslate"><span class="pre">data</span></code>, with the parquet files.</p>
+<p>To run the model locally, do as follows:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="go">% Read one of the Parquet files</span>
+<span class="gp">&gt;&gt; </span><span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">parquetread</span><span class="p">(</span><span class="s">'data/Road1.parquet'</span><span class="p">)</span>
+<span class="go">T =</span>
+<span class="go">  1024x4 table</span>
+<span class="go">    Time     LeftTire     RightTire      ID   </span>
+<span class="go">    _____    _________    _________    _______</span>
+<span class="go">        0    0.0047321    0.0052805    "Road1"</span>
+<span class="go">      0.1    0.0046744    0.0050971    "Road1"</span>
+<span class="go">      0.2    0.0046441    0.0050645    "Road1"</span>
+<span class="go">      :          :            :           :   </span>
+<span class="go">    102.2    0.0047724    0.0053879    "Road1"</span>
+<span class="go">    102.3     0.004722    0.0053297    "Road1"</span>
+<span class="go">  Display all 1024 rows.</span>
+
+<span class="go">% Run the simulation with this table data</span>
+<span class="gp">&gt;&gt; </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">runModel_spark_with_input</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="mi">1400</span><span class="p">)</span>
+<span class="go">output =</span>
+<span class="go">  1024x5 table</span>
+<span class="go">    Time     LeftTire     RightTire      ID       VerticalDisplacement</span>
+<span class="go">    _____    _________    _________    _______    ____________________</span>
+<span class="go">        0    0.0047321    0.0052805    "Road1"                 0      </span>
+<span class="go">      0.1    0.0046744    0.0050971    "Road1"         0.0013436      </span>
+<span class="go">      0.2    0.0046441    0.0050645    "Road1"         0.0055904      </span>
+<span class="go">      :          :            :           :                :          </span>
+<span class="go">    102.2    0.0047724    0.0053879    "Road1"               NaN      </span>
+<span class="go">    102.3     0.004722    0.0053297    "Road1"               NaN      </span>
+<span class="go">  Display all 1024 rows.</span>
+</pre></div>
+</div>
+<p>In order to run this in a Databricks context, we need to do a few things.</p>
+</section>
+<section id="upload-the-data">
+<h3>Upload the data<a class="headerlink" href="#upload-the-data" title="Link to this heading"></a></h3>
+<p>If the compiled model should run on Databricks, the data must be there too.
+This can be achieved by running the function <code class="docutils literal notranslate"><span class="pre">uploadDatasets(&lt;destinationDirectory&gt;)</span></code>. This assumes
+access is setup correctly, and that the user has write permissions on DBFS.</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">uploadDatasets</span><span class="p">(</span><span class="s">"/Volumes/main/default/myvolume/Examples/suspn_3dof/"</span><span class="p">)</span>
+<span class="go">Uploading to: /Volumes/main/default/myvolume/Examples/suspn_3dof/Road1.parquet</span>
+<span class="go">Uploading to: /Volumes/main/default/myvolume/Examples/suspn_3dof/Road10.parquet</span>
+<span class="go">Uploading to: /Volumes/main/default/myvolume/Examples/suspn_3dof/Road11.parquet</span>
+<span class="go">  .</span>
+<span class="go">  .</span>
+<span class="go">  .</span>
+</pre></div>
+</div>
+</section>
+<section id="compiling-the-function">
+<h3>Compiling the function<a class="headerlink" href="#compiling-the-function" title="Link to this heading"></a></h3>
+<p>To compile the function, there is a build function present in the folder,
+<code class="docutils literal notranslate"><span class="pre">buildLibrary</span></code>.</p>
+<p>If the configuration is setup correctly, with <code class="docutils literal notranslate"><span class="pre">cluster_id</span></code> in
+the file <code class="docutils literal notranslate"><span class="pre">.databrickscfg</span></code> is pointing to a running cluster, the created
+wheel file can be uploaded to Volumes and installed on that cluster automatically
+by calling <code class="docutils literal notranslate"><span class="pre">buildLibrary</span></code> with Name-Value pair <code class="docutils literal notranslate"><span class="pre">'destinationDirectory',</span> <span class="pre">'/Volumes/a/valid/location/where/to/upload/it'</span></code>.</p>
+<p>If this is not possible or desired, the wheel file can also be installed on a cluster
+with the usual methods through Databricks Portal.</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">buildLibrary</span><span class="p">(</span><span class="s">'destinationDirectory'</span><span class="p">,</span><span class="s">'/Volumes/main/default/myvolume/Examples/suspn_3dof/model'</span><span class="p">)</span>
+<span class="go">Output directory: /tmp/tpd0220066_098c_4a54_82b4_6230c9e12398/_build</span>
+<span class="go">Destination directory: /Volumes/main/default/myvolume/Examples/suspn_3dof/model</span>
+<span class="go">### Using schema for datatype info for function runModel_spark_with_input.</span>
+<span class="go">### Testing runModel_spark_with_input: inputNames, outputNames, colsIterator, mapPartitions, pandasToColumns, columnsToPandas, applyInPandas, mapInPandas</span>
+<span class="go">	### Found one, running mapPartitions_PythonMATLABHelper generation for runModel_spark_with_input</span>
+<span class="go">	### Found one, running applyInPandas_PythonMATLABHelper generation for runModel_spark_with_input</span>
+<span class="go">### Searching for referenced models in model 'sldemo_suspn_3dof_with_input'.</span>
+<span class="go">### Total of 1 models to build.</span>
+<span class="go">### Building the rapid accelerator target for model: sldemo_suspn_3dof_with_input</span>
+<span class="go">### Successfully built the rapid accelerator target for model: sldemo_suspn_3dof_with_input</span>
+<span class="go">DEMO Compiler license. </span>
+<span class="go">  The generated application will expire 30 days from today, </span>
+<span class="go">  on Sat Jul 18 14:07:24 2026.</span>
+<span class="go">Created .whl file: /local_disk0/maben/matlab-interface-for-databricks/matlab-databricks/Software/MATLAB/examples/SimulinkSuspension3DoF/_build/dist/demo.suspn3dof_with_input-26.1.0-py3-none-any.whl</span>
+<span class="go">Scanning for incompatible binaries.</span>
+<span class="go">Generating examples for runModel_spark_with_input ...</span>
+<span class="go">Uploading: demo.suspn3dof_with_input-26.1.0-py3-none-any.whl to: /Volumes/main/default/myvolume/Examples/suspn_3dof/model ...</span>
+<span class="go">Installing wheel on cluster: 0618-071916-s3tngo13</span>
+<span class="go">Library installation requested</span>
+
+<span class="go">ans = </span>
+
+<span class="go">  PythonSparkBuilder with properties:</span>
+
+<span class="go">        BuildResults: [1×1 compiler.build.Results]</span>
+<span class="go">           BuildOpts: [1×1 compiler.build.PythonPackageOptions]</span>
+<span class="go">             PkgName: "demo.suspn3dof_with_input"</span>
+<span class="go">           PkgFolder: []</span>
+<span class="go">           OutputDir: '/local_disk0/maben/matlab-interface-for-databricks/matlab-databricks/Software/MATLAB/examples/SimulinkSuspension3DoF/_build'</span>
+<span class="go">              SrcDir: "/local_disk0/maben/matlab-interface-for-databricks/matlab-databricks/Software/MATLAB/examples/SimulinkSuspension3DoF/_build/demo/suspn3dof_with_input"</span>
+<span class="go">               Files: [1×1 compiler.build.spark.PythonFileV2]</span>
+<span class="go">        GenMatlabDir: "/local_disk0/maben/matlab-interface-for-databricks/matlab-databricks/Software/MATLAB/examples/SimulinkSuspension3DoF/_build/matlab_helpers"</span>
+<span class="go">         HelperFiles: [1×2 string]</span>
+<span class="go">        ExampleFiles: [1×2 table]</span>
+<span class="go">     ZipArtifactName: "/local_disk0/maben/matlab-interface-for-databricks/matlab-databricks/Software/MATLAB/examples/SimulinkSuspension3DoF/_build/demo.suspn3dof_with_input_Artifact.zip"</span>
+<span class="go">    WheelDestination: [0×0 string]</span>
+</pre></div>
+</div>
+</section>
+<section id="running-the-model-function-in-a-databricks-notebook">
+<h3>Running the model/function in a Databricks notebook<a class="headerlink" href="#running-the-model-function-in-a-databricks-notebook" title="Link to this heading"></a></h3>
+<p>In the example folder, a Python® notebook is present, <code class="docutils literal notranslate"><span class="pre">3DoF-Profiles.py</span></code>.
+This can be imported into the Databricks Workspace, opened, attached to the
+cluster where the wheel file is installed, and run.</p>
+<p>The notebook will group the dataset by Id, and use the <code class="docutils literal notranslate"><span class="pre">applyInPandas</span></code> method to
+run the simulation for different profiles, save the data on Databricks (in <em>Delta</em> format),
+and display a part of the results.</p>
+<p>As a comparison, after this has run, the results can also be read and visualized
+in MATLAB®. This can be done as follows (the source folder will differ):</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">spark</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">getDefaultDatabricksSession</span>
+<span class="go">spark = </span>
+<span class="go">  SparkSession with properties:</span>
+
+<span class="go">    SparkServer: 'local'</span>
+<span class="go">        AppName: 'matlab_20220908T143357'</span>
+
+<span class="gp">&gt;&gt; </span><span class="n">DS_3DoF</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">"delta"</span><span class="p">).</span><span class="n">load</span><span class="p">(</span><span class="s">"/example/3dof_out/profiles_20241108_085751"</span><span class="p">)</span>
+<span class="go">DS_3DoF = </span>
+<span class="go">  Dataset with no properties.</span>
+
+<span class="gp">&gt;&gt; </span><span class="n">Profile7</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">DS_3DoF</span><span class="p">.</span><span class="n">filter</span><span class="p">(</span><span class="s">"ID LIKE 'Road7'"</span><span class="p">).</span><span class="n">table</span><span class="p">()</span>
+<span class="go">Profile7 =</span>
+<span class="go">  1024x5 table</span>
+<span class="go">    Time     LeftTire     RightTire      ID       VerticalDisplacement</span>
+<span class="go">    _____    _________    _________    _______    ____________________</span>
+<span class="go">        0    0.0046621    0.0042013    "Road7"                  0     </span>
+<span class="go">      0.1    0.0046777     0.004857    "Road7"          0.0012668     </span>
+<span class="go">      0.2    0.0046217    0.0041132    "Road7"          0.0053521     </span>
+<span class="go">      0.3    0.0055514    0.0037509    "Road7"           0.009002     </span>
+<span class="go">      0.4    0.0051312    0.0038643    "Road7"          0.0080492     </span>
+<span class="go">      0.5    0.0061338    0.0047569    "Road7"          0.0021835     </span>
+<span class="go">      0.6    0.0055649    0.0049687    "Road7"         -0.0044923     </span>
+<span class="go">      :          :            :           :                :          </span>
+<span class="go">    102.1    0.0052487    0.0045104    "Road7"                NaN     </span>
+<span class="go">    102.2    0.0045861    0.0044263    "Road7"                NaN     </span>
+<span class="go">    102.3    0.0045008     0.004534    "Road7"                NaN     </span>
+<span class="go">  Display all 1024 rows.</span>
+
+<span class="gp">&gt;&gt; </span><span class="nb">plot</span><span class="p">(</span><span class="n">Profile7</span><span class="p">.</span><span class="n">Time</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="n">Profile7</span><span class="p">.</span><span class="n">LeftTire</span><span class="p">,</span><span class="w"> </span><span class="n">Profile7</span><span class="p">.</span><span class="n">RightTire</span><span class="p">])</span>
+<span class="gp">&gt;&gt; </span><span class="nb">legend</span><span class="p">(</span><span class="s">'Left tire'</span><span class="p">,</span><span class="w"> </span><span class="s">'Right tire'</span><span class="p">)</span>
+<span class="gp">&gt;&gt; </span><span class="nb">title</span><span class="p">(</span><span class="s">'Profile for Road 7'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="Road 7 profile" src="_images/Road7_profile.png" /></p>
+</section>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<p>Please see:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.mathworks.com/products/simulink-compiler.html">https://www.mathworks.com/products/simulink-compiler.html</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="matlab-spark-api/CodeGeneration.html" class="btn btn-neutral float-left" title="Code generation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="JDBCWorkflow.html" class="btn btn-neutral float-right" title="JDBC and Database Toolbox workflow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

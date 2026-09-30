@@ -1,0 +1,383 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Files API &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Jobs API" href="JobsAPI.html" />
+    <link rel="prev" title="DBFS API" href="DBFS.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Files API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-create-a-directory"><code class="docutils literal notranslate"><span class="pre">create</span></code> - Create a directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#directorymetadata-gets-the-metadata-of-a-directory"><code class="docutils literal notranslate"><span class="pre">directoryMetadata</span></code> - Gets the metadata of a directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#download-downloads-a-file"><code class="docutils literal notranslate"><span class="pre">download</span></code> - Downloads a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#filemetadata-get-the-metadata-of-a-file"><code class="docutils literal notranslate"><span class="pre">fileMetadata</span></code> - Get the metadata of a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-list-files"><code class="docutils literal notranslate"><span class="pre">list</span></code> - List files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#listpaginated-list-a-single-page-of-files">listPaginated - List a single 'page' of files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rm-deletes-a-file">rm - Deletes a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rmdir-deletes-an-empty-directory">rmdir - Deletes an empty directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#upload-uploads-a-file">upload - Uploads a file</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Files API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Files.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="files-api">
+<h1>Files API<a class="headerlink" href="#files-api" title="Link to this heading"></a></h1>
+<p>The Files API is a HTTP API that allows reading, writing, listing and deleting of files and directories. The API makes working with file content as raw bytes easier and more efficient than DBFS for example.</p>
+<p>The API supports Unity Catalog volumes, where files and directories to operate on are specified using their volume URI path, which follows the format <code class="docutils literal notranslate"><span class="pre">/Volumes/&lt;catalog_name&gt;/&lt;schema_name&gt;/&lt;volume_name&gt;/&lt;path_to_file&gt;</span></code>.</p>
+<blockquote>
+<div><p>Please note this API is in &quot;Public Preview&quot; with Databricks® and is subject to change without notice.</p>
+</div></blockquote>
+<ul class="simple">
+<li><p>For more details see: <a class="reference external" href="https://docs.databricks.com/api/workspace/files">https://docs.databricks.com/api/workspace/files</a>.</p></li>
+<li><p>For details of working with files on Databricks in other ways from MATLAB® see: <a class="reference internal" href="WorkingWithFiles.html"><span class="std std-doc">WorkingWithFiles</span></a>.</p></li>
+</ul>
+<p>To use the Files API begin by creating a <code class="docutils literal notranslate"><span class="pre">Files</span></code> object, e.g.:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The following methods can then be used to work with files and directories:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">create</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">directoryMetadata</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">download</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fileMetadata</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">list</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">listPaginated</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rm</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rmdir</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">upload</span></code></p></li>
+</ul>
+<section id="create-create-a-directory">
+<h2><code class="docutils literal notranslate"><span class="pre">create</span></code> - Create a directory<a class="headerlink" href="#create-create-a-directory" title="Link to this heading"></a></h2>
+<p>If necessary, also creates any parent directories of the new, empty directory
+(like the UNIX® shell command mkdir -p). On success a logical <code class="docutils literal notranslate"><span class="pre">true</span></code> is returned,
+otherwise <code class="docutils literal notranslate"><span class="pre">false</span></code>. A <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ErrorResponse</span></code> is also returned.
+If called on an existing directory true is returned.</p>
+<p>The required <code class="docutils literal notranslate"><span class="pre">directoryPath</span></code> argument is given as an absolute path,
+as a scalar text value.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+<span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">create</span><span class="p">(</span><span class="s">"/Volumes/main/default/myvolume/myDir"</span><span class="p">)</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span><span class="nb">logical</span>
+<span class="w">   </span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference external" href="https://docs.databricks.com/api/workspace/files/createdirectory">https://docs.databricks.com/api/workspace/files/createdirectory</a>.</p>
+</section>
+<section id="directorymetadata-gets-the-metadata-of-a-directory">
+<h2><code class="docutils literal notranslate"><span class="pre">directoryMetadata</span></code> - Gets the metadata of a directory<a class="headerlink" href="#directorymetadata-gets-the-metadata-of-a-directory" title="Link to this heading"></a></h2>
+<p>On success a <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.DirectoryMetadata</span></code> object is returned.
+On expected error a <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ErrorResponse</span></code> is returned.
+The <code class="docutils literal notranslate"><span class="pre">exists</span></code> property indicates if a directory exists or not.</p>
+<p>The required <code class="docutils literal notranslate"><span class="pre">directoryPath</span></code> argument is given as an absolute path,
+as a scalar text value.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+<span class="n">md</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">directoryMetadata</span><span class="p">(</span><span class="s">"/Volumes/main/default/myvolume/myDir"</span><span class="p">)</span>
+<span class="n">md</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="n">DirectoryMetadata</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+<span class="w">      </span><span class="n">exists</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference external" href="https://docs.databricks.com/api/workspace/files/getdirectorymetadata">https://docs.databricks.com/api/workspace/files/getdirectorymetadata</a>.</p>
+</section>
+<section id="download-downloads-a-file">
+<h2><code class="docutils literal notranslate"><span class="pre">download</span></code> - Downloads a file<a class="headerlink" href="#download-downloads-a-file" title="Link to this heading"></a></h2>
+<p>Files of up to 5 GiB can be downloaded. On success a logical <code class="docutils literal notranslate"><span class="pre">true</span></code> is returned,
+otherwise <code class="docutils literal notranslate"><span class="pre">false</span></code>. A <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ErrorResponse</span></code> is also returned.
+The optional logical <code class="docutils literal notranslate"><span class="pre">overwrite</span></code> flag can be used to prevent overwriting a
+destination file, the default is true i.e. do overwrite the destination.</p>
+<p>If an optional <code class="docutils literal notranslate"><span class="pre">destination</span></code> path named argument is provided it is used as the path
+to download to otherwise the name of the file to be downloaded and the current
+directory are used.</p>
+<p>The required <code class="docutils literal notranslate"><span class="pre">source</span></code> argument is given as an absolute path,
+as a scalar text value.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+<span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">download</span><span class="p">(</span><span class="s">"/Volumes/main/default/myvolume/myDir/hello-world.txt"</span><span class="p">,</span><span class="w"> </span><span class="n">destination</span><span class="p">=</span><span class="s">"hw-downloaded.txt"</span><span class="p">)</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span><span class="nb">logical</span>
+<span class="w">   </span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference external" href="https://docs.databricks.com/api/workspace/files/download">https://docs.databricks.com/api/workspace/files/download</a>.</p>
+</section>
+<section id="filemetadata-get-the-metadata-of-a-file">
+<h2><code class="docutils literal notranslate"><span class="pre">fileMetadata</span></code> - Get the metadata of a file<a class="headerlink" href="#filemetadata-get-the-metadata-of-a-file" title="Link to this heading"></a></h2>
+<p>On success a <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.FileMetadata</span></code> object is returned.
+On expected error a <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ErrorResponse</span></code> is returned.
+The contentLength property is the file size in bytes.</p>
+<p>The required <code class="docutils literal notranslate"><span class="pre">filePath</span></code> argument is given as an absolute path, as a scalar text value.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+<span class="n">md</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">fileMetadata</span><span class="p">(</span><span class="s">"/Volumes/main/default/myvolume/myDir/hello-world.txt"</span><span class="p">)</span>
+<span class="n">md</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="n">FileMetadata</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+<span class="w">        </span><span class="n">contentType</span><span class="p">:</span><span class="w"> </span><span class="s">"application/octet-stream"</span>
+<span class="w">      </span><span class="n">contentLength</span><span class="p">:</span><span class="w"> </span><span class="mi">13</span>
+<span class="w">       </span><span class="n">lastModified</span><span class="p">:</span><span class="w"> </span><span class="mi">08</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">2024</span><span class="w"> </span><span class="mi">10</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">07</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference external" href="https://docs.databricks.com/api/workspace/files/getmetadata">https://docs.databricks.com/api/workspace/files/getmetadata</a>.</p>
+</section>
+<section id="list-list-files">
+<h2><code class="docutils literal notranslate"><span class="pre">list</span></code> - List files<a class="headerlink" href="#list-list-files" title="Link to this heading"></a></h2>
+<p>Return a complete list of files in a directory.
+On success a <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ListResponse</span></code> is returned
+otherwise a <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ErrorResponse</span></code> is returned.
+To return a page at a time use <code class="docutils literal notranslate"><span class="pre">databricks.Files.listPaginated()</span></code></p>
+<p>The required <code class="docutils literal notranslate"><span class="pre">directoryPath</span></code> argument is given as an absolute path,
+as a scalar text value.</p>
+<p>An optional <code class="docutils literal notranslate"><span class="pre">pageSize</span></code> int64 argument can be provided that sets the page size
+used the default value is 1000.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">list</span><span class="p">(</span><span class="s">'/Volumes/main/default/myvolume/myDir'</span><span class="p">)</span>
+<span class="w">  </span><span class="n">ListResponse</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+<span class="w">    </span><span class="n">contents</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x5</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">files</span><span class="p">.</span><span class="n">DirectoryEntry</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This method is not recommended for directories with very large file counts
+as runtime may be excessive, other approaches should be considered.</p>
+<p>See also: <a class="reference external" href="https://docs.databricks.com/api/workspace/files/listdirectorycontents">https://docs.databricks.com/api/workspace/files/listdirectorycontents</a>.</p>
+</section>
+<section id="listpaginated-list-a-single-page-of-files">
+<h2>listPaginated - List a single 'page' of files<a class="headerlink" href="#listpaginated-list-a-single-page-of-files" title="Link to this heading"></a></h2>
+<p>This method list some or all directory contents potentially returning a <code class="docutils literal notranslate"><span class="pre">nextPageToken</span></code>.</p>
+<p>An optional <code class="docutils literal notranslate"><span class="pre">pageSize</span></code> int64 argument can be provided that sets the page size
+used the default value is 1000.</p>
+<p>An optional <code class="docutils literal notranslate"><span class="pre">pageToken</span></code> scalar text argument can be provided.</p>
+<p>The token being the <code class="docutils literal notranslate"><span class="pre">nextPageToken</span></code> in the response of the previous request
+to list the contents of this directory. Provide this token to retrieve the
+next page of directory entries. When providing a <code class="docutils literal notranslate"><span class="pre">pagetoken</span></code>, all other
+parameters provided to the request must match the previous request.</p>
+<p>To list all of the entries in a directory, it is necessary to continue
+requesting pages of entries until the response contains no <code class="docutils literal notranslate"><span class="pre">nextPageToken</span></code>.
+Note that the number of entries returned must not be used to determine
+when the listing is complete.</p>
+<p>To return all pages at one time also see: <code class="docutils literal notranslate"><span class="pre">databricks.Files.list()</span></code></p>
+<p>The required <code class="docutils literal notranslate"><span class="pre">directoryPath</span></code> argument is given as an absolute path,
+as a scalar text value.</p>
+<p>On success a <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ListResponse</span></code> is returned
+otherwise a <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ErrorResponse</span></code> is returned.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">list</span><span class="p">(</span><span class="s">'/Volumes/main/default/myvolume/myDir'</span><span class="p">)</span>
+<span class="w">  </span><span class="n">ListResponse</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+<span class="w">    </span><span class="n">contents</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x5</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">files</span><span class="p">.</span><span class="n">DirectoryEntry</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference external" href="https://docs.databricks.com/api/workspace/files/listdirectorycontents">https://docs.databricks.com/api/workspace/files/listdirectorycontents</a>.</p>
+</section>
+<section id="rm-deletes-a-file">
+<h2>rm - Deletes a file<a class="headerlink" href="#rm-deletes-a-file" title="Link to this heading"></a></h2>
+<p>On success a logical <code class="docutils literal notranslate"><span class="pre">true</span></code> is returned, on failure a <code class="docutils literal notranslate"><span class="pre">false</span></code> is returned along with
+a populated <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ErrorResponse</span></code>.
+The required <code class="docutils literal notranslate"><span class="pre">directoryPath</span></code> argument is given as an absolute path, as a scalar text value.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+<span class="w">  </span><span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">rm</span><span class="p">(</span><span class="s">"/Volumes/main/default/myvolume/myDir/hello-world.txt"</span><span class="p">)</span>
+<span class="w">  </span><span class="n">result</span><span class="w"> </span><span class="p">=</span>
+<span class="w">    </span><span class="nb">logical</span>
+<span class="w">     </span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference external" href="https://docs.databricks.com/api/workspace/files/delete">https://docs.databricks.com/api/workspace/files/delete</a>.</p>
+</section>
+<section id="rmdir-deletes-an-empty-directory">
+<h2>rmdir - Deletes an empty directory<a class="headerlink" href="#rmdir-deletes-an-empty-directory" title="Link to this heading"></a></h2>
+<p>To delete a non-empty directory, first delete all of its contents.
+This can be done by listing the directory contents and deleting each file
+and subdirectory recursively. On success a logical <code class="docutils literal notranslate"><span class="pre">true</span></code> is returned, on failure
+a logical <code class="docutils literal notranslate"><span class="pre">false</span></code> and  a populated <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ErrorResponse</span></code> is returned.</p>
+<p>The required <code class="docutils literal notranslate"><span class="pre">directoryPath</span></code> argument is given as an absolute path,
+as a scalar text value.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+<span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">rmdir</span><span class="p">(</span><span class="s">"/Volumes/main/default/myvolume/myDeleteMeDir"</span><span class="p">)</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span><span class="nb">logical</span>
+<span class="w">   </span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference external" href="https://docs.databricks.com/api/workspace/files/deletedirectory">https://docs.databricks.com/api/workspace/files/deletedirectory</a>.</p>
+</section>
+<section id="upload-uploads-a-file">
+<h2>upload - Uploads a file<a class="headerlink" href="#upload-uploads-a-file" title="Link to this heading"></a></h2>
+<p>A file of up to 5 GiB can be uploaded. On success a logical <code class="docutils literal notranslate"><span class="pre">true</span></code> is returned, on failure a
+<code class="docutils literal notranslate"><span class="pre">false</span></code> is returned along with a populated <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.files.ErrorResponse</span></code>.</p>
+<p>The required <code class="docutils literal notranslate"><span class="pre">source</span></code> and <code class="docutils literal notranslate"><span class="pre">destination</span></code> path arguments are given as absolute paths,
+as scalar text values.</p>
+<p>The optional named <code class="docutils literal notranslate"><span class="pre">overwrite</span></code> argument indicates if the destination file should be overwritten
+if it exists. The default is <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">;</span>
+<span class="w"> </span><span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">upload</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="n">upload</span><span class="p">(</span><span class="s">"hello-world.txt"</span><span class="p">,</span><span class="w"> </span><span class="s">"/Volumes/main/default/myvolume/myDir/hello-world.txt"</span><span class="p">)</span>
+<span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">=</span>
+<span class="w">   </span><span class="nb">logical</span>
+<span class="w">    </span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>See also: <a class="reference external" href="https://docs.databricks.com/api/workspace/files/upload">https://docs.databricks.com/api/workspace/files/upload</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DBFS.html" class="btn btn-neutral float-left" title="DBFS API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="JobsAPI.html" class="btn btn-neutral float-right" title="Jobs API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

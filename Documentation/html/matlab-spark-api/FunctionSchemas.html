@@ -1,0 +1,468 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Function Schemas &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Function signatures" href="FunctionSignatures.html" />
+    <link rel="prev" title="Building Wheel libraries with MATLAB" href="PythonSparkBuilder.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Function Schemas</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#generating-a-schema">Generating a schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-spark-data">Using Spark data</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-spark-schemas">Using Spark schemas</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Function Schemas</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/matlab-spark-api/FunctionSchemas.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="function-schemas">
+<h1>Function Schemas<a class="headerlink" href="#function-schemas" title="Link to this heading"></a></h1>
+<p>This section describes how schemas are used for describing a MATLAB® function's
+signature to <a class="reference internal" href="PythonSparkBuilder.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">PythonSparkBuilder</span></code></span></a>. This is a necessary step, to ensure that the
+data marshalling between Spark, Python® and the MATLAB® Runtime will work correctly.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>MATLAB® is an interpreted language, where values have a type, but variables don't.
+An operation <code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">+</span> <span class="pre">b</span></code>, could equally well work on numbers (<code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">+</span> <span class="pre">2</span> <span class="pre">--&gt;</span> <span class="pre">4</span></code>), as on
+strings (<code class="docutils literal notranslate"><span class="pre">&quot;abc&quot;</span> <span class="pre">+</span> <span class="pre">&quot;def&quot;</span> <span class="pre">--&gt;</span> <span class="pre">&quot;abcdef&quot;</span></code>).</p>
+<p>A DataFrame in Apache® Spark™, however, has a well defined type. The following is
+an example of the type (the schema) of a DataFrame.</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;</span><span class="o">&gt;</span><span class="w"> </span><span class="n">DF</span><span class="p">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="go">root</span>
+<span class="go"> |-- id: long (nullable = true)</span>
+<span class="go"> |-- name: string (nullable = true)</span>
+<span class="go"> |-- info: struct (nullable = true)</span>
+<span class="go"> |    |-- age: double (nullable = true)</span>
+<span class="go"> |    |-- country: string (nullable = true)</span>
+<span class="go"> |    |-- arrI32: array (nullable = true)</span>
+<span class="go"> |    |    |-- element: integer (containsNull = true)</span>
+<span class="go"> |    |-- deep: struct (nullable = true)</span>
+<span class="go"> |    |    |-- flip: timestamp (nullable = true)</span>
+<span class="go"> |    |    |-- flop: boolean (nullable = true)</span>
+</pre></div>
+</div>
+<p>By specifying the types (schema) of the MATLAB® function to be built, the
+marshalling of data can be faster than if it dynamically needs to
+query the type of different parameters.
+It also allows better error checking, to ensure that a MATLAB® function supports the types present in a given DataFrame.</p>
+<p>The schema can also be expressed as its constructor:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s1">'id'</span><span class="p">,</span> <span class="n">LongType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'info'</span><span class="p">,</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s1">'age'</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'country'</span><span class="p">,</span> <span class="n">StringType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'arrI32'</span><span class="p">,</span> <span class="n">ArrayType</span><span class="p">(</span><span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'deep'</span><span class="p">,</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s1">'flip'</span><span class="p">,</span> <span class="n">TimestampType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'flop'</span><span class="p">,</span> <span class="n">BooleanType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)]),</span> <span class="kc">True</span><span class="p">)]),</span> <span class="kc">True</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p>In a serialized form, it's often described using JSON.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"name"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"info"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"age"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"country"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arrI32"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">"containsNull"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"elementType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"integer"</span><span class="p">,</span>
+<span class="w">              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"array"</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"deep"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flip"</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"timestamp"</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                  </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"flop"</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">                  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"boolean"</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">              </span><span class="p">],</span>
+<span class="w">              </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"struct"</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"struct"</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"struct"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> A reference for Apache Spark datatypes can be found here:
+<a class="reference external" href="https://spark.apache.org/docs/latest/api/python/reference/pyspark.sql/data_types.html">Spark Data Types</a></p>
+</div></blockquote>
+<p>To keep a strong correspondence between the data types in MATLAB®, in the context of
+<code class="docutils literal notranslate"><span class="pre">PythonSparkBuilder</span></code>, and the data types in Spark, an extension of this schema
+is used.</p>
+<p>To describe the schema of a MATLAB® function, the schemas of
+input arguments, as well as the schema of the return values must be used.
+An extremely simple example, <code class="docutils literal notranslate"><span class="pre">plusPi</span></code>, show this.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>pp<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">plusPi</span><span class="p">(</span>x<span class="p">)</span>
+<span class="w">    </span><span class="n">pp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">pi</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>This results in the following schema code:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"compiler"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"funcname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plusPi"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"SparkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pp"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"out"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"SparkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Most importantly, we see the arrays of <code class="docutils literal notranslate"><span class="pre">inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">outputs</span></code> here. The entries
+will be of type <code class="docutils literal notranslate"><span class="pre">io</span></code>, and furthermore have some information regarding
+direction (input or output), name, table (<code class="docutils literal notranslate"><span class="pre">true</span></code>/<code class="docutils literal notranslate"><span class="pre">false</span></code>) and the actual Spark type.
+In this example, the Spark type is simply <code class="docutils literal notranslate"><span class="pre">double</span></code>, but it may just as well be the
+complex JSON structure seen in the previous example.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SparkType</span></code> for an IO element corresponds to the Spark Schema.</p>
+</section>
+<section id="generating-a-schema">
+<h2>Generating a schema<a class="headerlink" href="#generating-a-schema" title="Link to this heading"></a></h2>
+<p>To generate a schema, use the function <code class="docutils literal notranslate"><span class="pre">generateFunctionSchema</span></code>. It takes 2 or 3
+arguments. The first is always the name of the function, the second argument is
+a cell array with <em>typical</em> arguments to the function. The third and optional
+argument is a cell array of typical return values. If the third argument is
+omitted, <code class="docutils literal notranslate"><span class="pre">generateFunctionSchema</span></code> will call the function (named in the first argument)
+with the arguments (the contents of the cell array in the second argument) to
+determine the return values.</p>
+<p>The schema of the function showed above can be created like this:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">generateFunctionSchema</span><span class="p">(</span><span class="s">"plusPi"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">})</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">    </span><span class="s">"/some/path/plusPi.schema"</span>
+</pre></div>
+</div>
+<p>If this function were to be called with a different argument type, the results
+would differ:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">generateFunctionSchema</span><span class="p">(</span><span class="s">"plusPi"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="s">"hello"</span><span class="p">});</span>
+</pre></div>
+</div>
+<p>The JSON output would actually look exactly the same, except for the entries of
+<code class="docutils literal notranslate"><span class="pre">SparkType</span></code>, which would change from <code class="docutils literal notranslate"><span class="pre">&quot;double&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;string&quot;</span></code>.</p>
+</section>
+<section id="using-spark-data">
+<h2>Using Spark data<a class="headerlink" href="#using-spark-data" title="Link to this heading"></a></h2>
+<p>The schemas are generated in order to ensure that there is a correspondence
+between the data in MATLAB® and the data in Spark. If an interactive Spark session
+is used, a good way to ensure this is by converting a part of a DataFrame to
+a MATLAB® table, and generate the signature using this table.</p>
+<p>As an example with the DataFrame seen in the introduction, with the following
+schema:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>root
+ |-- id: long (nullable = true)
+ |-- name: string (nullable = true)
+ |-- info: struct (nullable = true)
+ |    |-- age: double (nullable = true)
+ |    |-- country: string (nullable = true)
+ |    |-- arrI32: array (nullable = true)
+ |    |    |-- element: integer (containsNull = true)
+ |    |-- deep: struct (nullable = true)
+ |    |    |-- flip: timestamp (nullable = true)
+ |    |    |-- flop: boolean (nullable = true)
+</pre></div>
+</div>
+<p>In order to ensure that MATLAB® is working with the same kind of data, the data
+can be imported to MATLAB® using a Spark Session. This example is for Databricks®,
+it's similar for Apache Spark.</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">spark</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">getDatabricksSession</span><span class="p">();</span>
+<span class="gp">&gt;&gt; </span><span class="n">DF</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">read</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">"parquet"</span><span class="p">).</span><span class="n">load</span><span class="p">(</span><span class="s">"/tmp/test_deeply"</span><span class="p">);</span>
+<span class="gp">&gt;&gt; </span><span class="n">DF</span><span class="p">.</span><span class="n">show</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
+<span class="go">+---+----+------------------------------------------------------+</span>
+<span class="go">|id |name|info                                                  |</span>
+<span class="go">+---+----+------------------------------------------------------+</span>
+<span class="go">|1  |1   |{2.0, 3, [5, 6, 7, 8, 9], {2020-10-10 05:06:05, true}}|</span>
+<span class="go">|2  |2   |{3.0, 4, [6], {2020-10-10 05:06:15, true}}            |</span>
+<span class="go">|3  |3   |{4.0, 5, [7, 8], {2020-10-10 05:06:25, true}}         |</span>
+<span class="go">+---+----+------------------------------------------------------+</span>
+<span class="go">only showing top 3 rows</span>
+
+<span class="gp">&gt;&gt; </span><span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">DF</span><span class="p">.</span><span class="n">table</span><span class="p">;</span>
+<span class="gp">&gt;&gt; </span><span class="nb">head</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">    id    name       info   </span>
+<span class="go">    __    ____    __________</span>
+<span class="go">    1     "1"     1×1 struct</span>
+<span class="go">    2     "2"     1×1 struct</span>
+<span class="go">    3     "3"     1×1 struct</span>
+<span class="gp">&gt;&gt; </span><span class="n">T</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="go">ans = </span>
+<span class="go">  struct with fields:</span>
+
+<span class="go">        age: 2</span>
+<span class="go">    country: "3"</span>
+<span class="go">     arrI32: [5 6 7 8 9]</span>
+<span class="go">       deep: [1×1 struct]</span>
+<span class="gp">&gt;&gt; </span><span class="n">T</span><span class="p">.</span><span class="n">info</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">deep</span>
+<span class="go">ans = </span>
+<span class="go">  struct with fields:</span>
+
+<span class="go">    flip: 2020-10-10 05:06:05</span>
+<span class="go">    flop: 1</span>
+</pre></div>
+</div>
+</section>
+<section id="using-spark-schemas">
+<h2>Using Spark schemas<a class="headerlink" href="#using-spark-schemas" title="Link to this heading"></a></h2>
+<p>In some circumstances, it may not be possible to extract data from a cluster
+(some organizations have exfiltration policies forbidding this). If it's still
+possible to export the schema, this can be used to create a schema in MATLAB®.
+If not possible, it can be written by hand.</p>
+<p>For the purpose of this example, the schema presented in the introduction
+will be used. This will be saved in a file, <code class="docutils literal notranslate"><span class="pre">/my/project/some_schema.json</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Convert the schema to a structure</span>
+<span class="n">p</span><span class="p">=</span><span class="s">"/my/project/some_schema.json"</span>
+<span class="n">val</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">jsondecode</span><span class="p">(</span><span class="nb">fileread</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+
+<span class="c">% Convert the structure to a MATLAB implementation of the Spark schema</span>
+<span class="n">some_schema</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">compiler</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">spark</span><span class="p">.</span><span class="n">schema</span><span class="p">.</span><span class="n">StructType</span><span class="p">();</span>
+<span class="n">some_schema</span><span class="p">.</span><span class="n">fromVal</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+
+<span class="c">% Create the corresponding Spark data object from this schema</span>
+<span class="n">some_data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">compiler</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">spark</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">fromSchema</span><span class="p">(</span><span class="n">some_schema</span><span class="p">)</span>
+
+<span class="c">% Create example data from this data object</span>
+<span class="n">some_example</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">some_data</span><span class="p">.</span><span class="n">instantiateMATLABExampleValue</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">doEval</span><span class="p">=</span><span class="nb">true</span><span class="p">)</span>
+
+<span class="nb">jsonencode</span><span class="p">(</span><span class="n">some_example</span><span class="p">,</span><span class="w"> </span><span class="s">'PrettyPrint'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The last line would output something like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1001</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Giselle_2001"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"age"</span><span class="p">:</span><span class="w"> </span><span class="mi">4001</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"David_5001"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"arrI32"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">6101</span><span class="p">,</span><span class="w"> </span><span class="mi">6201</span><span class="p">,</span><span class="w"> </span><span class="mi">6301</span><span class="p">,</span><span class="w"> </span><span class="mi">6401</span><span class="p">,</span><span class="w"> </span><span class="mi">6501</span><span class="p">],</span>
+<span class="w">        </span><span class="nt">"deep"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"flip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1970-01-19 13:06:26"</span><span class="p">,</span>
+<span class="w">        </span><span class="nt">"flop"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The data should be correct with respect to data types, though, so it can then be
+used for running the <code class="docutils literal notranslate"><span class="pre">generateFunctionSchema</span></code> function.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="PythonSparkBuilder.html" class="btn btn-neutral float-left" title="Building Wheel libraries with MATLAB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="FunctionSignatures.html" class="btn btn-neutral float-right" title="Function signatures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

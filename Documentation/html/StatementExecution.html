@@ -1,0 +1,267 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Statement Execution API &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Token API" href="TokenAPI.html" />
+    <link rel="prev" title="SQL Warehouses API" href="SQLWarehousesAPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Statement Execution API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-statement-execution-query">Create a Statement Execution query</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#methods-of-interest">Methods of interest</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Statement Execution API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/StatementExecution.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="statement-execution-api">
+<h1>Statement Execution API<a class="headerlink" href="#statement-execution-api" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>The underlying Databricks® REST API is currently in preview.</p>
+</div></blockquote>
+<p>The Databricks SQL Statement Execution API can be used to execute SQL statements
+on a SQL warehouse and fetch the result. A subset of this functionality is supported
+from MATLAB®. This is a preview release only and Statement Execution functionality
+should be expected to change or be removed without notice in future releases. Feature
+support is incomplete.</p>
+<section id="create-a-statement-execution-query">
+<h2>Create a Statement Execution query<a class="headerlink" href="#create-a-statement-execution-query" title="Link to this heading"></a></h2>
+<p>The following code creates a Statement Execution object, configures it with a simple
+SQL query to return the integers from 0 to 99 and to export the results via
+external storage e.g. Azure® blob.</p>
+<p>For details of how to programmatically interact with a SQL Warehouse see: <a class="reference internal" href="WorkspacesAPI.html"><span class="std std-doc">WorkspacesAPI</span></a>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% The StatementExecution object se will be used to run the query</span>
+<span class="n">se</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">statementexecution</span><span class="p">.</span><span class="n">api</span><span class="p">.</span><span class="n">StatementExecution</span><span class="p">;</span>
+
+<span class="c">% Set a warehouse Id</span>
+<span class="n">warehouseId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"02&lt;REDACTEDa4"</span><span class="p">;</span>
+
+<span class="n">esr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">statementexecution</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">ExecuteStatementRequest</span>
+<span class="n">esr</span><span class="p">.</span><span class="n">warehouse_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">warehouseId</span><span class="p">;</span>
+<span class="c">% Set the SQL statement of interest, integers 0-99</span>
+<span class="n">esr</span><span class="p">.</span><span class="n">statement</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"SELECT * FROM range(100)"</span><span class="p">;</span>
+<span class="n">esr</span><span class="p">.</span><span class="n">wait_timeout</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"10s"</span><span class="p">;</span>
+<span class="c">% Export the result to external storage</span>
+<span class="n">esr</span><span class="p">.</span><span class="n">disposition</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">statementexecution</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">Disposition</span><span class="p">.</span><span class="n">EXTERNAL_LINKS</span><span class="p">;</span>
+
+<span class="c">% Execute the query</span>
+<span class="p">[</span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">se</span><span class="p">.</span><span class="n">executeStatement</span><span class="p">(</span><span class="n">esr</span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="n">code</span><span class="w"> </span><span class="o">~=</span><span class="w"> </span><span class="nb">matlab.net.http.StatusCode</span><span class="p">.</span><span class="n">OK</span>
+<span class="w">    </span><span class="nb">error</span><span class="p">(</span><span class="s">"Error executing: %s"</span><span class="p">,</span><span class="w"> </span><span class="n">esr</span><span class="p">.</span><span class="n">statement</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="c">% Download the file from external storage</span>
+<span class="n">resultFile1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">websave</span><span class="p">(</span><span class="s">'seResult.json'</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">result</span><span class="p">.</span><span class="n">external_links</span><span class="p">.</span><span class="n">external_link</span><span class="p">);</span>
+<span class="c">% The default format is JSON, in this case using built in jsondecode to return</span>
+<span class="c">% a cell array</span>
+<span class="n">resultDataCell1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">jsondecode</span><span class="p">(</span><span class="nb">fileread</span><span class="p">(</span><span class="n">resultFile1</span><span class="p">))</span>
+<span class="c">% Convert the cell array to a table</span>
+<span class="n">resultDataTable1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">cell2table</span><span class="p">(</span><span class="n">resultDataCell1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To return data in CSV format, the format can be specified as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">esr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">statementexecution</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">ExecuteStatementRequest</span><span class="p">;</span>
+<span class="n">esr</span><span class="p">.</span><span class="n">warehouse_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">warehouseId</span><span class="p">;</span>
+<span class="n">esr</span><span class="p">.</span><span class="n">statement</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"SELECT * FROM range(100)"</span><span class="p">;</span>
+<span class="n">esr</span><span class="p">.</span><span class="n">wait_timeout</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"10s"</span><span class="p">;</span>
+<span class="n">esr</span><span class="p">.</span><span class="n">disposition</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">statementexecution</span><span class="p">.</span><span class="n">models</span><span class="p">.</span><span class="n">Disposition</span><span class="p">.</span><span class="n">EXTERNAL_LINKS</span><span class="p">;</span>
+<span class="n">esr</span><span class="p">.</span><span class="n">format</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"CSV"</span><span class="p">;</span>
+<span class="p">[</span><span class="n">code</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">response</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">se</span><span class="p">.</span><span class="n">executeStatement</span><span class="p">(</span><span class="n">esr</span><span class="p">);</span>
+
+<span class="n">resultFile1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">websave</span><span class="p">(</span><span class="s">'elresult.csv'</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">result</span><span class="p">.</span><span class="n">external_links</span><span class="p">.</span><span class="n">external_link</span><span class="p">)</span>
+<span class="n">resultDataTable2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">readtable</span><span class="p">(</span><span class="n">resultFile1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>When more than one chunk is returned, subsequent chunks need to also be downloaded
+and the results concatenated. The internal function: <code class="docutils literal notranslate"><span class="pre">databricks.internal.statementexecution.executeStatement</span></code>
+is a more complete higher-level implementation that downloads complete result sets.</p>
+</section>
+<section id="methods-of-interest">
+<h2>Methods of interest<a class="headerlink" href="#methods-of-interest" title="Link to this heading"></a></h2>
+<p>Statement execution specific methods on the <code class="docutils literal notranslate"><span class="pre">databricks.statementexecution.api.StatementExecution</span></code>
+object are as follows, additional methods are inherited from base classes:</p>
+<ul class="simple">
+<li><p>cancelExecution - Cancel statement execution</p></li>
+<li><p>executeStatement - Execute a SQL statement</p></li>
+<li><p>getStatement - Get status, manifest, and result first chunk</p></li>
+<li><p>getStatementResultChunkN - Get result chunk by index</p></li>
+</ul>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<p>For further details of the API see:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.databricks.com/api/workspace/statementexecution">https://docs.databricks.com/api/workspace/statementexecution</a></p></li>
+<li><p><a class="reference external" href="https://docs.databricks.com/en/sql/admin/sql-execution-tutorial.html">https://docs.databricks.com/en/sql/admin/sql-execution-tutorial.html</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SQLWarehousesAPI.html" class="btn btn-neutral float-left" title="SQL Warehouses API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="TokenAPI.html" class="btn btn-neutral float-right" title="Token API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,38 @@
+{
+  "type": "compiler",
+  "funcname": "myArr",
+  "fullFilename": "/matlab-databricks/Software/MATLAB/examples/DatabricksConnect/Artifacts/myArr.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "U",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "double"
+    },
+    {
+      "type": "io",
+      "Name": "A",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "double",
+        "type": "array"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "Y",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "double",
+        "type": "array"
+      }
+    }
+  ]
+}

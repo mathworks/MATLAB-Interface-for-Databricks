@@ -1,0 +1,8 @@
+{
+    "url": "myregistry.azurecr.io/matlab/databricks/desktop:r2025b-dbx16.4",
+    "basic_auth": {
+        "username": "b314b356-dde0-22ac-9765-0c2219785340",
+        "password": "ol_<REDACTED>cqr"
+    },
+    "spark_version": "16.4.x-scala2.12"
+}

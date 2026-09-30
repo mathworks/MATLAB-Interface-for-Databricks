@@ -1,0 +1,797 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clusters API &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Command Execution" href="CommandExecution.html" />
+    <link rel="prev" title="Standalone ODBC database interface" href="StandaloneODBCDatabaseInterface.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Clusters API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#using-the-utility-function">Using the utility function</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-the-name-of-the-cluster">Set the name of the cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-number-of-workers-or-autoscaling">Set number of workers or autoscaling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configure-a-docker-image">Configure a Docker Image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#set-a-policy-id">Set a policy id</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-available-spark-versions">List available Spark Versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-available-machine-node-types">List available machine (node) types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-new-spark-cluster">Create a new Spark Cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#describe-a-cluster-i-e-get-information-about-an-existing-cluster">Describe a cluster (i.e. get information about an existing cluster)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#starting-a-terminated-cluster">Starting a terminated cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#terminating-a-cluster">Terminating a cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#permanently-deleting-a-cluster">Permanently deleting a cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-available-clusters">List available clusters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-initialization-scripts">Configuring initialization scripts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#configuring-log-delivery-location">Configuring log delivery location</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#listing-events-from-a-cluster">Listing events from a cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-single-node-cluster">Creating a Single Node cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#standard-shared-user-isolation-clusters">Standard (Shared/USER_ISOLATION) clusters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mw-runtime-release">MW_RUNTIME_RELEASE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enabling-the-matlab-runtime-on-an-existing-cluster">Enabling the MATLAB Runtime on an existing cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Clusters API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ClusterAPI.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="clusters-api">
+<h1>Clusters API<a class="headerlink" href="#clusters-api" title="Link to this heading"></a></h1>
+<section id="using-the-utility-function">
+<h2>Using the utility function<a class="headerlink" href="#using-the-utility-function" title="Link to this heading"></a></h2>
+<p>The function <code class="docutils literal notranslate"><span class="pre">createDatabricksCluster</span></code> will create a Databricks® cluster.
+It relies on the <code class="docutils literal notranslate"><span class="pre">databricks.Cluster</span></code> class, and its
+methods and helper functions. It is an easy way to create a cluster,
+and it offers a few options. If there is a need for more fine grained
+control of the cluster creation options, please use the underlying
+class and its APIs directly, as described in the next sections.</p>
+<p>Arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>             name : The name of the cluster.
+
+       numWorkers : The number of workers in the cluster. This can be a
+                    single number or an array of lower and upper bound,
+                    e.g. for a cluster between 2 and 10 workers the value
+                    should be [2, 10]. If 0 is used then a single node cluster
+                    will be created, as distinct from a cluster of size 1.
+
+        useMATLAB : Optional argument to install MATLAB runtime on the
+                    cluster. Default is true. If a Docker Image URL is
+                    provided this option is ignored.
+
+           create : Optional argument to set to true if the cluster should
+                    be created immediately. If set to false, the function
+                    will only return an object that can be used for
+                    creating a cluster. This is useful for creating Spark
+                    jobs. Default is true.
+
+   dockerAuthFile : The name of a file containing docker information,
+                    image URL, user name, and password. This can be
+                    used to easily use docker settings when creating a
+                    cluster. The filename can be an absolute path or
+                    relative path. Currently, only no password or
+                    basic_auth is supported.
+                    The "spark_version" field is optional, but is
+                    helpful for determining spark_version. It's
+                    required if the image tag doesn't reflect the
+                    Databricks runtime version.
+
+                     {
+                       "url": "some.repo.com/matlab/databricks/desktop:r2025a-dbx15.4",
+                       "basic_auth": {
+                         "username": "b304&lt;REDACTED&gt;40",
+                         "password": "ol_8&lt;REDACTED&gt;qr"
+                       },
+                       "spark_version": "15.4.x-scala2.12"
+                     }
+
+                    If the repository doesn't need authentication, the
+                    file may consist of only the url.
+
+        dockerURL : Optional argument to specify the URL of a Docker Image.
+                    When using Docker the spark conf
+                    spark.databricks.unityCatalog.volumes.enabled
+                    property will be set to "true".
+
+   dockerUsername : Optional argument to specify the docker registry username.
+
+   dockerPassword : Optional argument to specify the docker registry password.
+
+     sparkVersion : Set this to set a given spark_version otherwise
+                    a version based on the current default Databricks Runtime
+                    will be used. This value is the Databricks Cluster API
+                    spark_version field and is not strictly the version of Spark
+                    used. It has the form: 15.4.x-scala2.12. The specific value
+                    for a given Databricks runtime can be verified in the
+                    Databricks UI.
+
+       nodeTypeId : Set this to pick a different node type than what
+                    is set in the users default settings.
+
+   initScriptPath : Specify a non default initscript path.
+                    If not specified and the default script is not present
+                    the local script will be uploaded to the user's workspace.
+                    % By default the initscript is stored in:
+                    &lt;settings: interfaceDirectory&gt;/runtimes/runtime_install.sh
+
+ interfaceDirectory : /Volumes path under which MathWorks files can be stored.
+
+          release : MATLAB release of the form R2024a for the runtime to install.
+                    By default the release of MATLAB in use is used.
+
+      runtimePath : Specify a path to to a MATLAB runtime .zip file.
+                    /Volumes, DBFS and http paths are supported.
+
+       policyName : Set the name of the cluster policy used to create the cluster.
+
+         policyId : Set the ID of the cluster policy used to create the cluster.
+
+               ML : Selects a Databricks Runtime version with ML functionality
+                    enabled.
+
+              GPU : Selects a Databricks Runtime version with GPU functionality
+                    enabled.
+
+           photon : Selects a Databricks Runtime version with Photon functionality
+                    enabled.
+
+       accessMode : Data security mode decides what data governance model to
+                    use when accessing data from a cluster.
+                    Default: databricks.datastructures.DataSecurityMode.SINGLE_USER
+
+      sparkConfig : Additional Spark Conf pair settings to apply to a cluster
+                    e.g. databricks.SparkConfPair({'mykey', 'myvalue'})
+
+     sparkEnvPair : Additional environment variable(s) to apply to a cluster
+                    e.g. databricks.SparkEnvPair('MyVariable','MyValue')
+                    To set multiple values:
+                    databricks.SparkEnvPair({'SPARK_WORKER_MEMORY','28000m';'SPARK_LOCAL_DIRS','/local_disk0'})
+
+       clusterTag : Additional ClusterTags to apply to a cluster
+                    e.g. databricks.ClusterTag('myKey', 'myValue');
+
+ autoterminationMinutes : Specifies the number of minutes of idle time after
+                          which the cluster will be stopped.
+
+       authMethod : A matlab.databricks.AuthMethod.
+
+      profileName : A configuration file profileName value.
+
+    enableLogging : Enables logging of the initscript and other steps.
+                    The default is false.
+
+           logDir : The location to which logs are written, the default is:
+                    dbfs:/cluster-logs
+                    If using /Volumes (Public Preview) additional restrictions
+                    apply. See: https://docs.databricks.com/aws/en/compute/configure#compute-log-delivery
+
+  updateClusterId : Update the cluster Id value stored in the default
+                    or specified cluster. The default is false.
+
+          verbose : Enable additional feedback. Default is true.
+</pre></div>
+</div>
+<p>Examples:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a cluster with 4 workers that installs the MATLAB runtime</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">'my-cluster'</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a cluster definition without actually creating the cluster. This is</span>
+<span class="c">% useful when defining a cluster to be used in a Job.</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">'my-sl-cluster'</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a cluster without a MATLAB runtime installed. This cluster</span>
+<span class="c">% can still be used for interactively handling a Databricks session</span>
+<span class="c">% from within MATLAB, but no compiled MATLAB code can run on the</span>
+<span class="c">% cluster.</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">'plain-cluster'</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">useMATLAB</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For further docker related information, see also: <a class="reference internal" href="ContainerServices.html"><span class="std std-doc">ContainerServices</span></a>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a cluster based off a Docker image</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">'my-docker-cluster'</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="s">'dockerURL'</span><span class="p">,</span><span class="w"> </span><span class="s">'myrepo.com/mathworks/databricksruntime:17.3-LTS-R2024b'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="s">'dockerUsername'</span><span class="p">,</span><span class="w"> </span><span class="s">'myusername'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="s">'dockerPassword'</span><span class="p">,</span><span class="w"> </span><span class="s">'mypassword'</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a cluster using an init script stored on a Volume</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">"myVolumeCluster"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">sparkVersion</span><span class="p">=</span><span class="s">"16.4.x-scala2.12"</span><span class="p">,</span><span class="k">...</span>
+<span class="w">    </span><span class="n">initScriptPath</span><span class="p">=</span><span class="s">"/Volumes/main/default/myvolume/myDir/runtime_install.sh"</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="set-the-name-of-the-cluster">
+<h2>Set the name of the cluster<a class="headerlink" href="#set-the-name-of-the-cluster" title="Link to this heading"></a></h2>
+<p>The name of the cluster can be set using the property <em>cluster_name</em>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">cluster_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'My Cluster Name'</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="set-number-of-workers-or-autoscaling">
+<h2>Set number of workers or autoscaling<a class="headerlink" href="#set-number-of-workers-or-autoscaling" title="Link to this heading"></a></h2>
+<p>The number of workers in the cluster can be set with one of two methods.
+Either by setting the number of workers through a single scalar number
+or by specifying autoscaling by providing the min/max number of workers.</p>
+<p>If <em>num_workers</em> is the number of worker nodes that a given cluster should have.
+Then the cluster will have one Spark™ Driver and <em>num_workers</em> Executors for a total
+of <em>num_workers + 1</em> Spark nodes. Creating a <em>Single Node</em> cluster is described
+below.</p>
+<p>For example, to specify a fixed number:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">();</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setNumWorkers</span><span class="p">(</span><span class="mi">25</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To specify autoscaling:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">();</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setNumWorkers</span><span class="p">([</span><span class="mi">2</span><span class="w"> </span><span class="mi">10</span><span class="p">]);</span>
+</pre></div>
+</div>
+</section>
+<section id="configure-a-docker-image">
+<h2>Configure a Docker Image<a class="headerlink" href="#configure-a-docker-image" title="Link to this heading"></a></h2>
+<p>As an alternative to providing an init script to configure cluster nodes a Docker®
+image URL may also be configured, using the Cluster API this is done using <code class="docutils literal notranslate"><span class="pre">setDockerImage</span></code>.</p>
+<p>Using string/character vector arguments:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setDockerImage</span><span class="p">(</span><span class="s">'http://mydockerrepourl.example.com'</span><span class="p">,</span><span class="w"> </span><span class="s">'myusername'</span><span class="p">,</span><span class="w"> </span><span class="s">'mypassword'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Using data structures as can be used with REST API return values for example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">dbCredentials</span><span class="p">.</span><span class="n">username</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"myusername"</span><span class="p">;</span>
+<span class="n">dbCredentials</span><span class="p">.</span><span class="n">password</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"mypassword"</span><span class="p">;</span>
+<span class="n">dbAuth</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">DockerBasicAuth</span><span class="p">(</span><span class="n">dbCredentials</span><span class="p">);</span>
+<span class="n">dockerSettings</span><span class="p">.</span><span class="n">url</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"http://mydockerrepourl.example.com"</span><span class="p">;</span>
+<span class="n">dockerSettings</span><span class="p">.</span><span class="n">basic_auth</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">dbAuth</span><span class="p">;</span>
+<span class="w">  </span>
+<span class="n">dockerImage</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">DockerImage</span><span class="p">(</span><span class="n">dockerSettings</span><span class="p">);</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setDockerImage</span><span class="p">(</span><span class="n">dockerImage</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Note, it is not good practice to include passwords in source code, please
+consider reading the value from a file or other external source in real
+world code.</p>
+</section>
+<section id="set-a-policy-id">
+<h2>Set a policy id<a class="headerlink" href="#set-a-policy-id" title="Link to this heading"></a></h2>
+<p>A cluster policy applies rules to the creation of clusters. Only admin users can
+create, edit, and delete policies. The policy rules limit the attributes or
+attribute values available for cluster creation. Setting the <em>policy_id</em> for a
+cluster indicates which policy should be used to validate its creation.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">();</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setPolicyId</span><span class="p">(</span><span class="s">'ABCD000000000000'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If a <em>policy_id</em> value pair is specified in the <em>databricks-settings.json</em> file
+it will be applied to Cluster objects by default. This can be helpful if a given
+policy is always required e.g. for members of a given department.</p>
+</section>
+<section id="list-available-spark-versions">
+<h2>List available Spark Versions<a class="headerlink" href="#list-available-spark-versions" title="Link to this heading"></a></h2>
+<p>Return the list of available Spark versions. These versions can be used when
+launching a cluster.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">();</span>
+<span class="n">versions</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cl</span><span class="p">.</span><span class="n">getSparkVersions</span>
+
+<span class="n">versions</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span>50<span class="n">x2</span><span class="w"> </span><span class="nb">table</span>
+<span class="w">                </span><span class="n">key</span><span class="w">                                               </span><span class="n">name</span><span class="w">                             </span>
+<span class="w">    </span><span class="n">________________________________</span><span class="w">    </span><span class="n">_____________________________________________________________</span>
+<span class="w">    </span><span class="s">"10.4.x-cpu-ml-scala2.12"</span><span class="w">           </span><span class="s">"10.4 LTS ML (includes Apache Spark 3.2.1, Scala 2.12)"</span><span class="w">      </span>
+<span class="w">    </span><span class="s">"10.4.x-gpu-ml-scala2.12"</span><span class="w">           </span><span class="s">"10.4 LTS ML (includes Apache Spark 3.2.1, GPU, Scala 2.12)"</span><span class="w"> </span>
+<span class="w">    </span><span class="s">"10.4.x-photon-scala2.12"</span><span class="w">           </span><span class="s">"10.4 LTS Photon (includes Apache Spark 3.2.1, Scala 2.12)"</span><span class="w">  </span>
+<span class="w">    </span><span class="s">"10.4.x-scala2.12"</span><span class="w">                  </span><span class="s">"10.4 LTS (includes Apache Spark 3.2.1, Scala 2.12)"</span><span class="w">         </span>
+<span class="w">    </span><span class="s">"11.3.x-cpu-ml-scala2.12"</span><span class="w">           </span><span class="s">"11.3 LTS ML (includes Apache Spark 3.3.0, Scala 2.12)"</span><span class="w">      </span>
+<span class="w">    </span><span class="s">"11.3.x-gpu-ml-scala2.12"</span><span class="w">           </span><span class="s">"11.3 LTS ML (includes Apache Spark 3.3.0, GPU, Scala 2.12)"</span><span class="w"> </span>
+<span class="w">    </span><span class="s">"11.3.x-photon-scala2.12"</span><span class="w">           </span><span class="s">"11.3 LTS Photon (includes Apache Spark 3.3.0, Scala 2.12)"</span><span class="w">  </span>
+<span class="w">    </span><span class="s">"11.3.x-scala2.12"</span><span class="w">                  </span><span class="s">"11.3 LTS (includes Apache Spark 3.3.0, Scala 2.12)"</span><span class="w">         </span>
+<span class="w">    </span><span class="s">"12.2.x-cpu-ml-scala2.12"</span><span class="w">           </span><span class="s">"12.2 LTS ML (includes Apache Spark 3.3.2, Scala 2.12)"</span><span class="w">      </span>
+<span class="w">    </span><span class="s">"12.2.x-gpu-ml-scala2.12"</span><span class="w">           </span><span class="s">"12.2 LTS ML (includes Apache Spark 3.3.2, GPU, Scala 2.12)"</span><span class="w"> </span>
+<span class="w">    </span><span class="s">"12.2.x-photon-scala2.12"</span><span class="w">           </span><span class="s">"12.2 LTS Photon (includes Apache Spark 3.3.2, Scala 2.12)"</span><span class="w">  </span>
+<span class="w">    </span><span class="p">[</span><span class="n">TRUNCATED</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="list-available-machine-node-types">
+<h2>List available machine (node) types<a class="headerlink" href="#list-available-machine-node-types" title="Link to this heading"></a></h2>
+<p>List of supported Spark node types. These node types can be used when launching
+a cluster. Note that node types will differ if using AWS® or Azure®.</p>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">();</span>
+<span class="n">nodeList</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">cl</span><span class="p">.</span><span class="n">getNodeTypes</span>
+<span class="n">nodeList</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span>216<span class="n">x22</span><span class="w"> </span><span class="nb">table</span>
+<span class="w">         </span><span class="n">node_type_id</span><span class="w">          </span><span class="n">memory_mb</span><span class="w">     </span><span class="n">num_cores</span><span class="w">          </span><span class="n">description</span><span class="w">             </span><span class="n">instance_type_id</span><span class="w">        </span><span class="n">is_deprecated</span><span class="w">                 </span><span class="n">category</span><span class="w">                  </span><span class="n">support_ebs_volumes</span><span class="w">    </span><span class="n">support_cluster_tags</span><span class="w">    </span><span class="n">num_gpus</span><span class="w">    </span><span class="n">node_instance_type</span><span class="w">    </span><span class="n">is_hidden</span><span class="w">    </span><span class="n">support_port_forwarding</span><span class="w">    </span><span class="n">display_order</span><span class="w">    </span><span class="n">is_io_cache_enabled</span><span class="w">    </span><span class="n">node_info</span><span class="w">     </span><span class="n">photon_worker_capable</span><span class="w">    </span><span class="n">photon_driver_capable</span><span class="w">    </span><span class="n">is_encrypted_in_transit</span><span class="w">    </span><span class="n">is_graviton</span><span class="w">    </span><span class="n">require_fabric_manager</span><span class="w">    </span><span class="n">min_photon_version</span>
+<span class="w">    </span><span class="n">_______________________</span><span class="w">    </span><span class="n">__________</span><span class="w">    </span><span class="n">_________</span><span class="w">    </span><span class="n">_______________________</span><span class="w">    </span><span class="n">_______________________</span><span class="w">    </span><span class="n">_____________</span><span class="w">    </span><span class="n">___________________________________</span><span class="w">    </span><span class="n">___________________</span><span class="w">    </span><span class="n">____________________</span><span class="w">    </span><span class="n">________</span><span class="w">    </span><span class="n">__________________</span><span class="w">    </span><span class="n">_________</span><span class="w">    </span><span class="n">_______________________</span><span class="w">    </span><span class="n">_____________</span><span class="w">    </span><span class="n">___________________</span><span class="w">    </span><span class="n">__________</span><span class="w">    </span><span class="n">_____________________</span><span class="w">    </span><span class="n">_____________________</span><span class="w">    </span><span class="n">_______________________</span><span class="w">    </span><span class="n">___________</span><span class="w">    </span><span class="n">______________________</span><span class="w">    </span><span class="n">__________________</span>
+<span class="w">    </span><span class="p">{</span><span class="s">'Standard_DS3_v2'</span><span class="w">    </span><span class="p">}</span><span class="w">         </span><span class="mi">14336</span><span class="w">        </span><span class="mi">4</span><span class="w">        </span><span class="p">{</span><span class="s">'Standard_DS3_v2'</span><span class="w">    </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'Standard_DS3_v2'</span><span class="w">    </span><span class="p">}</span><span class="w">        </span><span class="nb">false</span><span class="w">        </span><span class="p">{</span><span class="s">'General Purpose'</span><span class="w">                </span><span class="p">}</span><span class="w">           </span><span class="nb">true</span><span class="w">                   </span><span class="nb">true</span><span class="w">                </span><span class="mi">0</span><span class="w">            </span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="w">          </span><span class="nb">false</span><span class="w">               </span><span class="nb">true</span><span class="w">                    </span><span class="mi">0</span><span class="w">                 </span><span class="nb">false</span><span class="w">           </span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="w">            </span><span class="nb">true</span><span class="w">                     </span><span class="nb">true</span><span class="w">                      </span><span class="nb">false</span><span class="w">                </span><span class="nb">false</span><span class="w">               </span><span class="nb">false</span><span class="w">               </span><span class="p">{[</span><span class="o">&lt;</span><span class="nb">missing</span><span class="o">&gt;</span><span class="p">]}</span><span class="w">   </span>
+<span class="w">    </span><span class="p">{</span><span class="s">'Standard_DS4_v2'</span><span class="w">    </span><span class="p">}</span><span class="w">         </span><span class="mi">28672</span><span class="w">        </span><span class="mi">8</span><span class="w">        </span><span class="p">{</span><span class="s">'Standard_DS4_v2'</span><span class="w">    </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'Standard_DS4_v2'</span><span class="w">    </span><span class="p">}</span><span class="w">        </span><span class="nb">false</span><span class="w">        </span><span class="p">{</span><span class="s">'General Purpose'</span><span class="w">                </span><span class="p">}</span><span class="w">           </span><span class="nb">true</span><span class="w">                   </span><span class="nb">true</span><span class="w">                </span><span class="mi">0</span><span class="w">            </span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="w">          </span><span class="nb">false</span><span class="w">               </span><span class="nb">true</span><span class="w">                    </span><span class="mi">0</span><span class="w">                 </span><span class="nb">false</span><span class="w">           </span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="w">            </span><span class="nb">true</span><span class="w">                     </span><span class="nb">true</span><span class="w">                      </span><span class="nb">false</span><span class="w">                </span><span class="nb">false</span><span class="w">               </span><span class="nb">false</span><span class="w">               </span><span class="p">{</span><span class="s">'11.3'</span><span class="w">     </span><span class="p">}</span><span class="w">   </span>
+<span class="w">    </span><span class="p">{</span><span class="s">'Standard_DS5_v2'</span><span class="w">    </span><span class="p">}</span><span class="w">         </span><span class="mi">57344</span><span class="w">       </span><span class="mi">16</span><span class="w">        </span><span class="p">{</span><span class="s">'Standard_DS5_v2'</span><span class="w">    </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'Standard_DS5_v2'</span><span class="w">    </span><span class="p">}</span><span class="w">        </span><span class="nb">false</span><span class="w">        </span><span class="p">{</span><span class="s">'General Purpose'</span><span class="w">                </span><span class="p">}</span><span class="w">           </span><span class="nb">true</span><span class="w">                   </span><span class="nb">true</span><span class="w">                </span><span class="mi">0</span><span class="w">            </span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="w">          </span><span class="nb">false</span><span class="w">               </span><span class="nb">true</span><span class="w">                    </span><span class="mi">0</span><span class="w">                 </span><span class="nb">false</span><span class="w">           </span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="w">            </span><span class="nb">true</span><span class="w">                     </span><span class="nb">true</span><span class="w">                      </span><span class="nb">false</span><span class="w">                </span><span class="nb">false</span><span class="w">               </span><span class="nb">false</span><span class="w">               </span><span class="p">{</span><span class="s">'11.3'</span><span class="w">     </span><span class="p">}</span><span class="w">   </span>
+<span class="w">    </span><span class="p">{</span><span class="s">'Standard_D4s_v3'</span><span class="w">    </span><span class="p">}</span><span class="w">         </span><span class="mi">16384</span><span class="w">        </span><span class="mi">4</span><span class="w">        </span><span class="p">{</span><span class="s">'Standard_D4s_v3'</span><span class="w">    </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'Standard_D4s_v3'</span><span class="w">    </span><span class="p">}</span><span class="w">        </span><span class="nb">false</span><span class="w">        </span><span class="p">{</span><span class="s">'General Purpose'</span><span class="w">                </span><span class="p">}</span><span class="w">           </span><span class="nb">true</span><span class="w">                   </span><span class="nb">true</span><span class="w">                </span><span class="mi">0</span><span class="w">            </span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="w">          </span><span class="nb">false</span><span class="w">               </span><span class="nb">true</span><span class="w">                    </span><span class="mi">0</span><span class="w">                 </span><span class="nb">false</span><span class="w">           </span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="w">            </span><span class="nb">true</span><span class="w">                     </span><span class="nb">true</span><span class="w">                      </span><span class="nb">false</span><span class="w">                </span><span class="nb">false</span><span class="w">               </span><span class="nb">false</span><span class="w">               </span><span class="p">{</span><span class="s">'11.3'</span><span class="w">     </span><span class="p">}</span><span class="w">   </span>
+<span class="w">    </span><span class="p">{</span><span class="s">'Standard_D8s_v3'</span><span class="w">    </span><span class="p">}</span><span class="w">         </span><span class="mi">32768</span><span class="w">        </span><span class="mi">8</span><span class="w">        </span><span class="p">{</span><span class="s">'Standard_D8s_v3'</span><span class="w">    </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'Standard_D8s_v3'</span><span class="w">    </span><span class="p">}</span><span class="w">        </span><span class="nb">false</span><span class="w">        </span><span class="p">{</span><span class="s">'General Purpose'</span><span class="w">                </span><span class="p">}</span><span class="w">           </span><span class="nb">true</span><span class="w">                   </span><span class="nb">true</span><span class="w">                </span><span class="mi">0</span><span class="w">            </span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="w">          </span><span class="nb">false</span><span class="w">               </span><span class="nb">true</span><span class="w">                    </span><span class="mi">0</span><span class="w">                 </span><span class="nb">false</span><span class="w">           </span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="w">            </span><span class="nb">true</span><span class="w">                     </span><span class="nb">true</span><span class="w">                      </span><span class="nb">false</span><span class="w">                </span><span class="nb">false</span><span class="w">               </span><span class="nb">false</span><span class="w">               </span><span class="p">{</span><span class="s">'11.3'</span><span class="w">     </span><span class="p">}</span><span class="w">   </span>
+<span class="w">    </span><span class="p">[</span><span class="n">TRUNCATED</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="create-a-new-spark-cluster">
+<h2>Create a new Spark Cluster<a class="headerlink" href="#create-a-new-spark-cluster" title="Link to this heading"></a></h2>
+<p>Creating a new Spark cluster while acquiring new instances from the cloud provider
+if necessary is possible if the user has specified the number of workers.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Configure a spark cluster</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">cluster_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'Sample Cluster'</span><span class="p">;</span><span class="w">    </span><span class="c">% user specified name</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">spark_version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'17.3.x-scala2.13'</span><span class="p">;</span><span class="w"> </span><span class="c">% key from the getSparkVersions</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setNumWorkers</span><span class="p">([</span><span class="mi">2</span><span class="w"> </span><span class="mi">10</span><span class="p">]);</span><span class="w">              </span><span class="c">% autoscaling cluster min 2, max 10</span>
+
+<span class="c">% Create the cluster</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The output of a successful creation will be the addition of a <code class="docutils literal notranslate"><span class="pre">cluster_id</span></code>
+property to the cluster object.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w"> </span><span class="n">Cluster</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+
+<span class="w">    </span><span class="n">cluster_name</span><span class="p">:</span><span class="w"> </span><span class="s">'Sample Cluster'</span>
+<span class="w">   </span><span class="n">spark_version</span><span class="p">:</span><span class="w"> </span><span class="s">'17.3.x-scala2.13'</span>
+<span class="w">    </span><span class="n">node_type_id</span><span class="p">:</span><span class="w"> </span><span class="s">'i3.xlarge'</span>
+<span class="w">         </span><span class="n">Version</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">       </span><span class="n">autoscale</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">      </span><span class="n">cluster_id</span><span class="p">:</span><span class="w"> </span><span class="s">'0531-031912-trill440'</span>
+</pre></div>
+</div>
+<p>The call to <code class="docutils literal notranslate"><span class="pre">create</span></code> is asynchronous; the returned <code class="docutils literal notranslate"><span class="pre">cluster_id</span></code> can
+be used to poll the cluster state. When this method returns, the cluster is
+in a <em>PENDING</em> state. The cluster is usable once it enters a <em>RUNNING</em> state.</p>
+<p>The use of additional methods will configure the cluster for use with MATLAB®.
+Use the <code class="docutils literal notranslate"><span class="pre">enableMATLABRuntime</span></code> method to automate the installation of the
+MATLAB runtime on the cluster. See <a class="reference internal" href="InitScripts.html"><span class="std std-doc">Init script configuration</span></a>
+for details.</p>
+<p>Similarly, it is possible to create and attach custom tags during the creation
+of the cluster.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">tags</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">ClusterTag</span><span class="p">(</span><span class="s">'owner'</span><span class="p">,</span><span class="s">'JohnSmith'</span><span class="p">)</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setCustomTags</span><span class="p">(</span><span class="n">tags</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="describe-a-cluster-i-e-get-information-about-an-existing-cluster">
+<h2>Describe a cluster (i.e. get information about an existing cluster)<a class="headerlink" href="#describe-a-cluster-i-e-get-information-about-an-existing-cluster" title="Link to this heading"></a></h2>
+<p>Retrieve the information for a cluster given its identifier. Clusters can be
+described while they are running or up to 30 days after they are terminated.</p>
+<p>To see all information about a cluster, please use:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="p">.</span><span class="n">refresh</span><span class="p">();</span>
+<span class="n">cl</span>
+
+<span class="s">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">  </span><span class="n">Cluster</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+
+<span class="w">                    </span><span class="n">cluster_name</span><span class="p">:</span><span class="w"> </span><span class="s">'Sample Cluster'</span>
+<span class="w">                    </span><span class="n">node_type_id</span><span class="p">:</span><span class="w"> </span><span class="s">'Standard_D4ds_v5'</span>
+<span class="w">                   </span><span class="n">spark_version</span><span class="p">:</span><span class="w"> </span><span class="s">'17.3.x-scala2.13'</span>
+<span class="w">                      </span><span class="n">spark_conf</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>3<span class="n">x1</span><span class="w"> </span><span class="nb">containers.Map</span><span class="p">]</span>
+<span class="w">                 </span><span class="n">instance_source</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">                  </span><span class="n">spark_env_vars</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x1</span><span class="w"> </span><span class="nb">containers.Map</span><span class="p">]</span>
+<span class="w">          </span><span class="n">driver_instance_source</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">         </span><span class="n">autotermination_minutes</span><span class="p">:</span><span class="w"> </span><span class="mi">120</span>
+<span class="w">         </span><span class="n">effective_spark_version</span><span class="p">:</span><span class="w"> </span><span class="s">'17.3.x-scala2.13'</span>
+<span class="w">                   </span><span class="n">state_message</span><span class="p">:</span><span class="w"> </span><span class="s">''</span>
+<span class="w">                      </span><span class="n">start_time</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="o">-</span><span class="n">Sep</span><span class="o">-</span><span class="mi">2025</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">29</span>
+<span class="w">             </span><span class="n">driver_node_type_id</span><span class="p">:</span><span class="w"> </span><span class="s">'Standard_D4ds_v5'</span>
+<span class="w">                      </span><span class="n">cluster_id</span><span class="p">:</span><span class="w"> </span><span class="s">'0917-171729-smm2fzjo'</span>
+<span class="w">                 </span><span class="n">terminated_time</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="o">-</span><span class="n">Sep</span><span class="o">-</span><span class="mi">2025</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">49</span>
+<span class="w">            </span><span class="n">last_state_loss_time</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="o">-</span><span class="n">Sep</span><span class="o">-</span><span class="mi">2025</span><span class="w"> </span><span class="mi">22</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">58</span>
+<span class="w">                           </span><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="s">'RUNNING'</span>
+<span class="w">              </span><span class="n">last_activity_time</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="o">-</span><span class="n">Sep</span><span class="o">-</span><span class="mi">2025</span><span class="w"> </span><span class="mi">22</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">04</span>
+<span class="w">                     </span><span class="n">custom_tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">             </span><span class="n">last_restarted_time</span><span class="p">:</span><span class="w"> </span><span class="mi">17</span><span class="o">-</span><span class="n">Sep</span><span class="o">-</span><span class="mi">2025</span><span class="w"> </span><span class="mi">22</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">58</span>
+<span class="w">             </span><span class="n">enable_elastic_disk</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                    </span><span class="n">default_tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">                  </span><span class="n">cluster_source</span><span class="p">:</span><span class="w"> </span><span class="s">'UI'</span>
+<span class="w">              </span><span class="n">termination_reason</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">               </span><span class="n">creator_user_name</span><span class="p">:</span><span class="w"> </span><span class="s">'joe@example.com'</span>
+<span class="w">    </span><span class="n">enable_local_disk_encryption</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">          </span><span class="n">init_scripts_safe_mode</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                </span><span class="n">spark_context_id</span><span class="p">:</span><span class="w"> </span><span class="mi">4393639146836003594</span>
+<span class="w">                  </span><span class="n">driver_healthy</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">                  </span><span class="n">runtime_engine</span><span class="p">:</span><span class="w"> </span><span class="s">'STANDARD'</span>
+<span class="w">                </span><span class="n">azure_attributes</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">                     </span><span class="n">num_workers</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">              </span><span class="n">data_security_mode</span><span class="p">:</span><span class="w"> </span><span class="s">'SINGLE_USER'</span>
+<span class="w">                       </span><span class="n">disk_spec</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x1</span><span class="w"> </span><span class="nb">struct</span><span class="p">]</span>
+<span class="w">                </span><span class="n">single_user_name</span><span class="p">:</span><span class="w"> </span><span class="s">'joe@example.com'</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">state</span></code> property provides information of the state of the cluster.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>State</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PENDING</p></td>
+<td><p>Indicates that a cluster is in the process of being created.</p></td>
+</tr>
+<tr class="row-odd"><td><p>RUNNING</p></td>
+<td><p>Indicates that a cluster has been started and is ready for use.</p></td>
+</tr>
+<tr class="row-even"><td><p>RESTARTING</p></td>
+<td><p>Indicates that a cluster is in the process of restarting.</p></td>
+</tr>
+<tr class="row-odd"><td><p>RESIZING</p></td>
+<td><p>Indicates that a cluster is in the process of adding or removing nodes.</p></td>
+</tr>
+<tr class="row-even"><td><p>TERMINATING</p></td>
+<td><p>Indicates that a cluster is in the process of being destroyed.</p></td>
+</tr>
+<tr class="row-odd"><td><p>TERMINATED</p></td>
+<td><p>Indicates that a cluster has been successfully destroyed.</p></td>
+</tr>
+<tr class="row-even"><td><p>ERROR</p></td>
+<td><p>This state is not used anymore. It was used to indicate a cluster that failed to be created. Terminating and Terminated are used instead.</p></td>
+</tr>
+<tr class="row-odd"><td><p>UNKNOWN</p></td>
+<td><p>Indicates that a cluster is in an unknown state. A cluster should never be in this state.</p></td>
+</tr>
+</tbody>
+</table>
+<p><img alt="ClusterState" src="_images/ClusterState.png" /></p>
+</section>
+<section id="starting-a-terminated-cluster">
+<h2>Starting a terminated cluster<a class="headerlink" href="#starting-a-terminated-cluster" title="Link to this heading"></a></h2>
+<p>Start a terminated Spark cluster given its ID.</p>
+<ul class="simple">
+<li><p>The previous cluster ID and attributes are preserved.</p></li>
+<li><p>The cluster starts with the last specified cluster size. If the previous cluster was an autoscaling cluster, the current cluster starts with the minimum number of nodes.</p></li>
+<li><p>If the cluster is not in a <code class="docutils literal notranslate"><span class="pre">TERMINATED</span></code> state, nothing will happen.</p></li>
+</ul>
+<p>Clusters launched to run a job cannot be started.</p>
+<p>To start a stopped cluster:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="terminating-a-cluster">
+<h2>Terminating a cluster<a class="headerlink" href="#terminating-a-cluster" title="Link to this heading"></a></h2>
+<p>It is possible to terminate a cluster using its <code class="docutils literal notranslate"><span class="pre">cluster_id</span></code>. The cluster
+is removed asynchronously. Once the termination has completed, the cluster will
+be in a <code class="docutils literal notranslate"><span class="pre">TERMINATED</span></code> state. If the cluster is already in a <code class="docutils literal notranslate"><span class="pre">TERMINATING</span></code> or
+<code class="docutils literal notranslate"><span class="pre">TERMINATED</span></code> state, nothing will happen.</p>
+<p>30 days after a cluster is terminated, it is permanently deleted.</p>
+<p>To terminate a cluster:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setClusterId</span><span class="p">(</span><span class="s">'0531-031912-trill440'</span><span class="p">);</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">terminate</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="permanently-deleting-a-cluster">
+<h2>Permanently deleting a cluster<a class="headerlink" href="#permanently-deleting-a-cluster" title="Link to this heading"></a></h2>
+<p>When permanently deleting a running cluster it is terminated and
+its resources are asynchronously removed. If the cluster is terminated, then
+it is immediately removed.</p>
+<p>You cannot perform any action on a permanently deleted cluster.
+Such a cluster is also no longer returned in the cluster list.</p>
+<p>To permanently delete a cluster.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="p">.</span><span class="n">permanentDelete</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="list-available-clusters">
+<h2>List available clusters<a class="headerlink" href="#list-available-clusters" title="Link to this heading"></a></h2>
+<p>To connect to an existing cluster, it is possible to list available Databricks clusters.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">clusterList</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">.</span><span class="n">list</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If the cluster_id is known, it is possible to directly connect to an existing cluster.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setClusterId</span><span class="p">(</span><span class="s">'0531-031912-trill440'</span><span class="p">);</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">refresh</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="configuring-initialization-scripts">
+<h2>Configuring initialization scripts<a class="headerlink" href="#configuring-initialization-scripts" title="Link to this heading"></a></h2>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">enableMATLABRuntime</span></code> method to automate the installation of the
+MATLAB runtime on the cluster. See <a class="reference internal" href="InitScripts.html"><span class="std std-doc">Init script configuration</span></a>
+for details. In general call when creating a cluster:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="p">.</span><span class="n">enableMATLABRuntime</span><span class="p">(</span><span class="s">'enableInitLogging'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This enables the installation of the runtime and logging. The default logging
+directory is <code class="docutils literal notranslate"><span class="pre">dbfs:/logs/cluster_logs</span></code>. Logging is optional and the destination
+can also be configured using <code class="docutils literal notranslate"><span class="pre">enableMATLABRuntime</span></code>.</p>
+</section>
+<section id="configuring-log-delivery-location">
+<h2>Configuring log delivery location<a class="headerlink" href="#configuring-log-delivery-location" title="Link to this heading"></a></h2>
+<p>When a cluster is created it is possible to specify a location to deliver Spark
+driver, worker, and event logs. The location is in part based on the cluster ID.
+This can be useful for viewing init script logs. The base location is specified
+prior to creating a cluster as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">conf</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">ClusterLogConf</span><span class="p">;</span>
+<span class="n">conf</span><span class="p">.</span><span class="n">setDestination</span><span class="p">(</span><span class="s">'dbfs:/logs/cluster_logs'</span><span class="p">);</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setClusterLogConf</span><span class="p">(</span><span class="n">conf</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this case the runtime was not in place so the init script failed. Init script
+logs are stored in a subdirectory of the specified location named in the following
+format (default):
+<code class="docutils literal notranslate"><span class="pre">dbfs:/cluster-logs/init_scripts/&lt;cluster_id&gt;_&lt;container_ip&gt;</span></code>
+Standard out and standard error are stored in separate files.</p>
+</section>
+<section id="listing-events-from-a-cluster">
+<h2>Listing events from a cluster<a class="headerlink" href="#listing-events-from-a-cluster" title="Link to this heading"></a></h2>
+<p>Retrieving a list of events about the activity of a cluster is possible as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">db</span><span class="p">.</span><span class="n">setClusterId</span><span class="p">(</span><span class="s">'0306-145113-sw6tbqnb'</span><span class="p">);</span>
+<span class="n">ev</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">getEvents</span><span class="p">();</span>
+<span class="n">ev</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span>8<span class="n">x3</span><span class="w"> </span><span class="nb">timetable</span>
+<span class="w">         </span><span class="n">timestamp</span><span class="w">                 </span><span class="n">cluster_id</span><span class="w">                  </span><span class="nb">type</span><span class="w">             </span><span class="nb">details</span><span class="w">   </span>
+<span class="w">    </span><span class="n">____________________</span><span class="w">    </span><span class="n">________________________</span><span class="w">    </span><span class="n">__________________</span><span class="w">    </span><span class="n">____________</span>
+<span class="w">    </span><span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span><span class="w"> </span><span class="mi">18</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">02</span><span class="w">    </span><span class="p">{</span><span class="s">'0306-145113-sw6tbqnb'</span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'TERMINATING'</span><span class="w">   </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">}</span>
+<span class="w">    </span><span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">03</span><span class="w">    </span><span class="p">{</span><span class="s">'0306-145113-sw6tbqnb'</span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'DRIVER_HEALTHY'</span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">}</span>
+<span class="w">    </span><span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">57</span><span class="p">:</span><span class="mi">29</span><span class="w">    </span><span class="p">{</span><span class="s">'0306-145113-sw6tbqnb'</span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'RUNNING'</span><span class="w">       </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">}</span>
+<span class="w">    </span><span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">41</span><span class="w">    </span><span class="p">{</span><span class="s">'0306-145113-sw6tbqnb'</span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'STARTING'</span><span class="w">      </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">}</span>
+<span class="w">    </span><span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span><span class="w"> </span><span class="mi">16</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">49</span><span class="w">    </span><span class="p">{</span><span class="s">'0306-145113-sw6tbqnb'</span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'TERMINATING'</span><span class="w">   </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">}</span>
+<span class="w">    </span><span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span><span class="w"> </span><span class="mi">15</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">04</span><span class="w">    </span><span class="p">{</span><span class="s">'0306-145113-sw6tbqnb'</span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'DRIVER_HEALTHY'</span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">}</span>
+<span class="w">    </span><span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span><span class="w"> </span><span class="mi">15</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mi">46</span><span class="w">    </span><span class="p">{</span><span class="s">'0306-145113-sw6tbqnb'</span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'RUNNING'</span><span class="w">       </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">}</span>
+<span class="w">    </span><span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span><span class="w"> </span><span class="mi">14</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">14</span><span class="w">    </span><span class="p">{</span><span class="s">'0306-145113-sw6tbqnb'</span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="s">'CREATING'</span><span class="w">      </span><span class="p">}</span><span class="w">    </span><span class="p">{</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="nb">struct</span><span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="creating-a-single-node-cluster">
+<h2>Creating a Single Node cluster<a class="headerlink" href="#creating-a-single-node-cluster" title="Link to this heading"></a></h2>
+<p>A single node cluster combines the role of a driver node and worker node on a
+single node, rather than having a separate driver and worker nodes. This can be
+useful for reducing execution costs for small scale workloads e.g. during testing
+or development or when running an application like desktop MATLAB which typically
+runs on a single system.</p>
+<p>The process for starting a single node cluster is similar to that of a regular
+cluster as previously described with the addition of configuring a <code class="docutils literal notranslate"><span class="pre">ClusterTag</span></code>
+and a <code class="docutils literal notranslate"><span class="pre">SparkConfPair</span></code> as shown. The number of workers should be set to 0,
+the driver node will fullfil the role of the worker also.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">cluster_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'mySingleNodeClusterName'</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">spark_version</span><span class="w"> </span><span class="p">=</span><span class="s">'17.3.x-scala2.13'</span><span class="p">;</span>
+
+<span class="c">% Configure a tag to denote a single node cluster</span>
+<span class="n">tagSingleNode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="s">'ResourceClass'</span><span class="p">,</span><span class="s">'SingleNode'</span><span class="p">};</span>
+<span class="n">tags</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">ClusterTag</span><span class="p">(</span><span class="n">tagSingleNode</span><span class="p">);</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setCustomTags</span><span class="p">(</span><span class="n">tags</span><span class="p">);</span>
+
+<span class="c">% Configure a SparkConfPair to denote a single node cluster</span>
+<span class="n">scpSingleNode</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">{</span><span class="s">'spark.master'</span><span class="p">,</span><span class="s">'local[*,4]'</span><span class="p">;</span><span class="s">'spark.databricks.cluster.profile'</span><span class="p">,</span><span class="s">'singleNode'</span><span class="p">};</span>
+<span class="n">scps</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SparkConfPair</span><span class="p">(</span><span class="n">scpSingleNode</span><span class="p">);</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setSparkConf</span><span class="p">(</span><span class="n">scps</span><span class="p">);</span>
+
+<span class="c">% Set number of workers to 0</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setNumWorkers</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="c">% Configure other properties as required and start the cluster as normal</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">enableMATLABRuntime</span><span class="p">(</span><span class="s">'enableInitLogging'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="s">'enableRuntimeInstall'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Alternatively a convenience method <code class="docutils literal notranslate"><span class="pre">setSingleNode()</span></code> is provided to set
+the required number of workers, custom tag and Spark Conf pair in a single operation.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">cluster_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'mySingleNodeClusterName'</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">spark_version</span><span class="w"> </span><span class="p">=</span><span class="s">'17.3.x-scala2.13'</span><span class="p">;</span>
+
+<span class="c">% Configure a single node cluster</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setSingleNode</span><span class="p">();</span>
+
+<span class="c">% Configure other properties as required and start the cluster as normal</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">enableMATLABRuntime</span><span class="p">(</span><span class="s">'enableInitLogging'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="s">'enableRuntimeInstall'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="standard-shared-user-isolation-clusters">
+<h2>Standard (Shared/USER_ISOLATION) clusters<a class="headerlink" href="#standard-shared-user-isolation-clusters" title="Link to this heading"></a></h2>
+<p>There are a number of compatibility and capability considerations that arise when
+creating Standard (formerly USER_ISOLATION/Shared) clusters. This is discussed in
+detail in: <a class="reference internal" href="Isolation.html"><span class="std std-doc">User Isolation clusters</span></a>. MATLAB is not supported on
+Dedicated clusters and not Standard clusters.</p>
+</section>
+<section id="mw-runtime-release">
+<h2>MW_RUNTIME_RELEASE<a class="headerlink" href="#mw-runtime-release" title="Link to this heading"></a></h2>
+<p>If creating a MATLAB runtime enabled cluster setting a Spark environment variable
+<code class="docutils literal notranslate"><span class="pre">MW_RUNTIME_RELEASE</span></code> to indicate the MATLAB Runtime release used is recommended.
+The <code class="docutils literal notranslate"><span class="pre">enableMATLABRuntime</span></code> method does this automatically.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">SEP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SparkEnvPair</span><span class="p">({</span><span class="s">"MW_RUNTIME_RELEASE"</span><span class="p">,</span><span class="w"> </span><span class="s">"R2025b"</span><span class="p">});</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setSparkEnvVars</span><span class="p">(</span><span class="n">SEP</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This can be queried using <code class="docutils literal notranslate"><span class="pre">release</span> <span class="pre">=</span> <span class="pre">matlab.databricks.cluster.getClusterMATLABRelease(cluster=clusterId)</span></code>.</p>
+</section>
+<section id="enabling-the-matlab-runtime-on-an-existing-cluster">
+<h2>Enabling the MATLAB Runtime on an existing cluster<a class="headerlink" href="#enabling-the-matlab-runtime-on-an-existing-cluster" title="Link to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">databricks.Cluster.edit()</span></code> method can be used to update the configuration of
+an existing cluster. To simplify applying all of the required updates to use the
+MATLAB runtime the function <code class="docutils literal notranslate"><span class="pre">matlab.databricks.cluster.MATLABEnableExistingCluster()</span></code>
+is provided and supports limited configurability.
+Editing a cluster requires that it be restarted. Clusters can also be edited via
+the Databricks GUI which can be more convenient for occasional use.</p>
+<p>Example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">existingCluster</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">.</span><span class="n">findById</span><span class="p">(</span><span class="s">"0708-093802-38njgrhw"</span><span class="p">);</span>
+<span class="c">% Or use findByName()</span>
+<span class="n">updatedCluster</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">matlab</span><span class="p">.</span><span class="n">databricks</span><span class="p">.</span><span class="n">cluster</span><span class="p">.</span><span class="n">MATLABEnableExistingCluster</span><span class="p">(</span><span class="n">existingCluster</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>For more details see <a class="reference external" href="https://docs.databricks.com/api/latest/clusters.html">https://docs.databricks.com/api/latest/clusters.html</a></p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="StandaloneODBCDatabaseInterface.html" class="btn btn-neutral float-left" title="Standalone ODBC database interface" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="CommandExecution.html" class="btn btn-neutral float-right" title="Command Execution" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

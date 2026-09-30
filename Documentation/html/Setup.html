@@ -1,0 +1,467 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setup &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Authentication" href="Authentication.html" />
+    <link rel="prev" title="Overview" href="Overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Setup</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup-when-working-remotely">Setup when working remotely</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#client-side-setup">Client side setup</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#settings-and-configuration">Settings and configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#databricks-jdbc-driver">Databricks JDBC driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#databricks-connect">Databricks Connect</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#note">Note</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-runtime-license">MATLAB runtime license</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-runtime">MATLAB runtime</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#runtime-zip-files">Runtime .zip files</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#init-script">Init script</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#policy-provision">Policy provision</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-and-settings-files-further-details">Configuration and Settings files further details</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#manually-configuring-databricks-settings-json">Manually configuring <code class="docutils literal notranslate"><span class="pre">databricks-settings.json</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuring-databricks-http-json">Configuring <code class="docutils literal notranslate"><span class="pre">databricks-http.json</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Setup</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Setup.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setup">
+<h1>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>This setup process formerly offered an admin mode.
+This has now been replaced with GitHub® hosted admin centric content:
+<a class="reference external" href="https://github.com/mathworks-ref-arch/matlab-on-databricks">https://github.com/mathworks-ref-arch/matlab-on-databricks</a></p>
+</div></blockquote>
+<p>If using MATLAB on Databricks®, setup is usu­ally performed automatically when MATLAB
+starts if installation of the MATLAB interface for Databricks is enabled.
+No further action is required.</p>
+<section id="setup-when-working-remotely">
+<h2>Setup when working remotely<a class="headerlink" href="#setup-when-working-remotely" title="Link to this heading"></a></h2>
+<p>To begin setting up the MATLAB interface for Databricks change directory to the
+<code class="docutils literal notranslate"><span class="pre">Software/MATLAB</span></code> directory and run <code class="docutils literal notranslate"><span class="pre">setup</span></code>.</p>
+<p>Some steps will require Databricks admin permissions and the help of a
+Databricks administrator who has already performed required steps in the
+Github hosted Reference Architecture setup process.</p>
+<p>Detailed information about supported releases of MATLAB, this package, Databricks
+runtimes and Python® can be found in: <a class="reference internal" href="SupportMatrix.html"><span class="std std-doc">SupportMatrix</span></a>.</p>
+<blockquote>
+<div><p>If migrating from a version prior to 5.0.0, then configuration file changes
+require that old files are replaced. Archive existing settings files using
+<code class="docutils literal notranslate"><span class="pre">setup(archiveSettings=true)</span></code>. Alternatively backup: <code class="docutils literal notranslate"><span class="pre">[home</span> <span class="pre">directory]/.databricks-connect</span></code>,
+<code class="docutils literal notranslate"><span class="pre">[home</span> <span class="pre">directory]/.databrickscfg</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">[prefdir]/.databricks-settings.json</span></code> if desired.</p>
+</div></blockquote>
+<blockquote>
+<div><p>Tip: The <code class="docutils literal notranslate"><span class="pre">prefdir</span></code> command in MATLAB returns the preferences directory, see:
+<code class="docutils literal notranslate"><span class="pre">doc</span> <span class="pre">prefdir</span></code>, for details.</p>
+</div></blockquote>
+</section>
+<section id="client-side-setup">
+<h2>Client side setup<a class="headerlink" href="#client-side-setup" title="Link to this heading"></a></h2>
+<p>If installing from a <code class="docutils literal notranslate"><span class="pre">.zip</span></code>, file paths for the package and its submodules must be
+added to the MATLAB path. <em>After</em> running <code class="docutils literal notranslate"><span class="pre">setup</span></code> these paths can be added to the
+permanent MATLAB path if desired. Alternatively run the package's <code class="docutils literal notranslate"><span class="pre">Software/MATLAB/startup</span></code>
+command to set the paths and optionally perform other checks before using the package.</p>
+<blockquote>
+<div><p>Tip: Default or existing values are show in square brackets. Just press enter to select them.</p>
+</div></blockquote>
+<p><img alt="Begin setup" src="_images/setup1.png" /></p>
+<blockquote>
+<div><p>Tip: Use the mouse <em>only</em> to <em>select</em>, <em>copy</em> and <em>paste</em> any links presented,
+clicking the links while MATLAB is busy or waiting on input can result in browser
+windows opening only when MATLAB finishes processing.</p>
+</div></blockquote>
+<p><img alt="Setup command" src="_images/setup2.png" /></p>
+<section id="settings-and-configuration">
+<h3>Settings and configuration<a class="headerlink" href="#settings-and-configuration" title="Link to this heading"></a></h3>
+<p>Based on responses to the questions, several text files are used to record settings
+and configuration values, for further details if required see <em>Configuration
+and Settings file details</em> below.</p>
+<blockquote>
+<div><p>Tip: If rerunning setup for some reason and settings values have not changed this
+step can be skipped by choosing &quot;N&quot;.</p>
+</div></blockquote>
+<p><img alt="Settings and configuration" src="_images/setup2c.png" /></p>
+<blockquote>
+<div><p>Tip: If you copy and paste the complete Workspace URL, this often includes the
+required ?o=[org_id] parameter so it does not have to be provided separately.</p>
+</div></blockquote>
+<p><img alt="Databricks Workspace URL address bar" src="_images/setup3.png" /></p>
+<p>The simplest way to get the Databricks Workspace URL is to log into databricks and copy and
+paste the value from the browser's address bar.</p>
+<p><img alt="Provide org_id" src="_images/setup5.png" /></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">org_id</span></code> or Workspace Id is a numeric value that follows the <code class="docutils literal notranslate"><span class="pre">o=</span></code> parameter in the
+Databricks Workspace URL, if unsure the Databricks admin will be able to provide this value.
+It may also appear in the Workspace hostname itself.</p>
+<p><img alt="Provide org_id" src="_images/setup6.png" /></p>
+<p>Select an authentication type, in this case <code class="docutils literal notranslate"><span class="pre">PAT</span></code> or Personal Access Token is selected.
+Often this form of authentication will be disabled and another form must be used, typically
+OauthU2M. The Databricks admin can advise on the preferred option.
+See <a class="reference internal" href="Authentication.html"><span class="std std-doc">Authentication</span></a> for details on the supported authentication
+mechanisms.</p>
+<p><img alt="Provide org_id" src="_images/setup7.png" /></p>
+<p><code class="docutils literal notranslate"><span class="pre">PAT</span></code> requires a token which, if enabled, can be obtained from the Databricks Workspace.
+<em>The token value is sensitive and should not be shared or exposed.</em></p>
+<p><img alt="SCIM test" src="_images/setup8.png" /></p>
+<p>The credentials can be tested. To do so a call is made using the
+<code class="docutils literal notranslate"><span class="pre">databricks.SCIM.me</span></code> method. This REST API method returns the Databricks username
+(typically an email address) and the notification email address, allowing manual
+entry of these values to be skipped if successful.</p>
+<p>At this point the client side setup process intersects with the server side process
+discussed below. A <code class="docutils literal notranslate"><span class="pre">/Volumes</span></code> path is required, this is the location where
+the MATLAB runtime and associated files are stored. If this is not known or has
+not yet been decided, use a temporary place holder value e.g. <code class="docutils literal notranslate"><span class="pre">/Volumes/main/default/myvolume/MathWorks</span></code>
+and rerun <code class="docutils literal notranslate"><span class="pre">setup</span></code> to update the value later. This location is referred to as the
+&quot;Interface Directory&quot;. This is a central location that can be shared by MATLAB
+users and it is good practice for the Databricks admin to make the location read-only
+for robustness and security reasons.</p>
+</section>
+<section id="databricks-jdbc-driver">
+<h3>Databricks JDBC driver<a class="headerlink" href="#databricks-jdbc-driver" title="Link to this heading"></a></h3>
+<p>The Databricks JDBC driver can be used along with Database Toolbox™ to access data in Databricks.
+The driver is not included in this package and must be downloaded from
+<a class="reference external" href="https://www.databricks.com/spark/jdbc-drivers-archive">Databricks</a>.
+The associated license from Databricks must be accepted. This
+license can be found here: <a class="reference external" href="https://www.databricks.com/legal/jdbc-odbc-driver-license">https://www.databricks.com/legal/jdbc-odbc-driver-license</a>.</p>
+<p>For usage details see: <a class="reference internal" href="JDBCWorkflow.html"><span class="std std-doc">JDBCWorkflow</span></a>.</p>
+<p><img alt="Databricks JDBC driver setup" src="_images/setup9.png" /></p>
+<p>The Databricks ODBC driver is also supported and can be downloaded from: <a class="reference external" href="https://www.databricks.com/spark/odbc-drivers-download">https://www.databricks.com/spark/odbc-drivers-download</a>.</p>
+</section>
+<section id="databricks-connect">
+<h3>Databricks Connect<a class="headerlink" href="#databricks-connect" title="Link to this heading"></a></h3>
+<p>Databricks Connect can be used to make interactive Spark™ API calls from MATLAB.
+The Databricks Connect libraries are Python based and require a local Python installation.
+Python 3.10, 3.11 &amp; 3.12 are supported for Databricks runtimes 13.3, 14.3, 15.4, 16.4 &amp; 17.3.</p>
+<p>In this example the 13.3 and 14.3 versions of the libraries are setup. 15.4 is skipped
+as this requires Python 3.11 which is not configured for use with MATLAB in this case.
+See <a class="reference internal" href="DBConnect.html"><span class="std std-doc">Databricks Connect</span></a> for details of how to manually configure
+alternate versions at a later stage.</p>
+<p><img alt="Databricks Connect setup" src="_images/setup10.png" /></p>
+<p>For usage details see: <a class="reference internal" href="DBConnectWorkflow.html"><span class="std std-doc">DBConnectWorkflow</span></a>.</p>
+<section id="note">
+<h4>Note<a class="headerlink" href="#note" title="Link to this heading"></a></h4>
+<ul class="simple">
+<li><p>Setup may terminate a Python environment that is currently being used within MATLAB, requiring it to be restarted.</p></li>
+<li><p>A <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file is included for manual python environment configuration if preferred.</p></li>
+</ul>
+</section>
+</section>
+<section id="matlab-runtime-license">
+<h3>MATLAB runtime license<a class="headerlink" href="#matlab-runtime-license" title="Link to this heading"></a></h3>
+<p>The final step is to accept the MATLAB runtime license. This updates the local
+copy of the <code class="docutils literal notranslate"><span class="pre">init</span> <span class="pre">script</span></code> used to deploy the MATLAB runtimes. It is expected that
+a copy of this script has already been provisioned on the server side using the
+server side workflow below.</p>
+<p><img alt="MATLAB runtime license" src="_images/setup11.png" /></p>
+<p>Use of the MATLAB runtime does not require connectivity to a license manager.</p>
+<p>Setup of many aspects of the package is now complete.
+A link to the top-level documentation in either HTML or Markdown is displayed.</p>
+<p><em>This concludes the client side setup process.</em></p>
+</section>
+<section id="matlab-runtime">
+<h3>MATLAB runtime<a class="headerlink" href="#matlab-runtime" title="Link to this heading"></a></h3>
+<p>As in the client only setup it is necessary to provide an <em>interface directory</em>, i.e.
+a path in <code class="docutils literal notranslate"><span class="pre">/Volumes</span></code> to which MATLAB runtimes and associated files can be written.
+Regular users can be restricted to having read only access to this directory.</p>
+<p><img alt="MATLAB runtime license" src="_images/setup12.png" /></p>
+<p>As new releases of this package are relatively frequent, see <code class="docutils literal notranslate"><span class="pre">[RELEASENOTES.md](../RELEASENOTES.md)</span></code>,
+only two releases of the MATLAB runtime are produced each year the, <em>a</em> and <em>b</em>
+releases. Interim update releases are produced to provide on going bug fixes.
+These may be relevant and the latest release is always recommended but in general
+there is no strict need to update the runtimes more frequently than the major releases.
+The runtime releases must match the release of MATLAB used to compile
+libraries being deployed to a given cluster.</p>
+<section id="runtime-zip-files">
+<h4>Runtime .zip files<a class="headerlink" href="#runtime-zip-files" title="Link to this heading"></a></h4>
+<p>If the MATLAB runtime license is accepted then the next step is to select which
+releases of the MATLAB runtime to support.
+For more details on supported releases see: <a class="reference internal" href="SupportMatrix.html"><span class="std std-doc">SupportMatrix</span></a>.</p>
+<p><img alt="MATLAB release selection" src="_images/setup13.png" /></p>
+<p>The MATLAB runtimes are large .zip files, c. 4.5GB. The most effective way to provision
+them inside a Databricks environment is to create a notebook and use <code class="docutils literal notranslate"><span class="pre">%%sh</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">wget</span></code>
+to download them directly from MathWorks.
+The package dynamically generates the required command to copy and paste in a notebook.
+As in this case if a file is already found the command is still generated as useful
+reference but is commented out. If internet access from the cluster is prohibited then
+the recommended approach is to use the links provided to download the zip files
+elsewhere and upload them via the Databricks portal using the generated destination
+link, this will take some time. In initial testing consider using just one runtime
+to begin with.</p>
+<p><img alt="MATLAB runtime download/upload" src="_images/setup14.png" /></p>
+</section>
+<section id="init-script">
+<h4>Init script<a class="headerlink" href="#init-script" title="Link to this heading"></a></h4>
+<blockquote>
+<div><p>From v7.0.0 the use of init scripts not supported on MATLAB runtime clusters that
+do not have internet access or that require Databricks runtime v17 or greater.</p>
+</div></blockquote>
+<blockquote>
+<div><p>From v6.0.0 the use of init scripts is deprecated and Docker® is now the preferred,
+and in some cases required, way to deploy the MATLAB runtime to a databricks cluster.
+See: <a class="reference internal" href="ContainerServices.html"><span class="std std-doc">Container Services</span></a> &amp; <a class="reference external" href="https://github.com/mathworks-ref-arch/matlab-on-databricks/tree/main/resources/dockerfiles/runtime">https://github.com/mathworks-ref-arch/matlab-on-databricks/tree/main/resources/dockerfiles/runtime</a></p>
+</div></blockquote>
+<p>If not using a <a class="reference internal" href="ContainerServices.html"><span class="std std-doc">docker based</span></a> cluster provisioning approach,
+so called <a class="reference external" href="https://docs.databricks.com/en/init-scripts/index.html"><code class="docutils literal notranslate"><span class="pre">init</span> <span class="pre">scripts</span></code></a>
+are used to install MATLAB runtime on cluster nodes as the nodes boot.</p>
+<p>A template init script is distributed with the package and if the runtime license
+is accepted this can be uploaded to the <code class="docutils literal notranslate"><span class="pre">/[Interface</span> <span class="pre">Directory]/runtimes</span></code>. Alternatively it can
+be manually uploaded via the Workspace GUI, the relevant link is generated.</p>
+<p><img alt="Init script upload" src="_images/setup15.png" /></p>
+</section>
+</section>
+<section id="policy-provision">
+<h3>Policy provision<a class="headerlink" href="#policy-provision" title="Link to this heading"></a></h3>
+<p>Policies can be used to add preconfigured MATLAB entries to the Databricks Compute
+interface. This step will typically require administrative privileges.
+For details of policy configurations see: <a class="reference external" href="https://github.com/mathworks-ref-arch/matlab-on-databricks/blob/main/guides/admin/create-cluster-policy-for-matlab-on-databricks.md">https://github.com/mathworks-ref-arch/matlab-on-databricks/blob/main/guides/admin/create-cluster-policy-for-matlab-on-databricks.md</a></p>
+<blockquote>
+<div><p>With sufficient privileges the package can create the polices directly using the REST API.</p>
+</div></blockquote>
+<p>See also: <a class="reference external" href="https://docs.databricks.com/en/admin/clusters/policies.html#libraries.">https://docs.databricks.com/en/admin/clusters/policies.html#libraries</a></p>
+</section>
+</section>
+<section id="configuration-and-settings-files-further-details">
+<h2>Configuration and Settings files further details<a class="headerlink" href="#configuration-and-settings-files-further-details" title="Link to this heading"></a></h2>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>File name</p></th>
+<th class="head"><p>Type</p></th>
+<th class="head"><p>Format</p></th>
+<th class="head"><p>Default location</p></th>
+<th class="head"><p>More details</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">.databrickscfg</span></code></p></td>
+<td><p>Configuration</p></td>
+<td><p>INI</p></td>
+<td><p>Home directory</p></td>
+<td><p><a class="reference internal" href="Authentication.html"><span class="std std-doc">Authentication.md</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">databricks-settings.json</span></code></p></td>
+<td><p>Settings</p></td>
+<td><p>JSON</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">prefdir</span></code></p></td>
+<td><p>See below</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">databricks-http.json</span></code></p></td>
+<td><p>Settings</p></td>
+<td><p>JSON</p></td>
+<td><p>Software/MATLAB/config</p></td>
+<td><p>See below</p></td>
+</tr>
+</tbody>
+</table>
+<p>The files are divided into two types, <em>settings</em> and <em>configuration</em>. The distinction is
+simply that <em>settings</em> files are only used by this package and the <em>configuration</em> file
+is also used by Databricks tools and libraries e.g. the Databricks CLI and Databricks Connect.
+These files can be customized using a text editor e.g. the MATLAB® editor.
+Typically only <code class="docutils literal notranslate"><span class="pre">.databrickscfg</span></code> and <code class="docutils literal notranslate"><span class="pre">databricks-settings.json</span></code> are customized.</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">databricks-settings.json</span></code> full path is given first by the <code class="docutils literal notranslate"><span class="pre">DATABRICKS_SETTINGS_FILE</span></code>
+environment variable, if set. If not, the default directory is the user's MATLAB <code class="docutils literal notranslate"><span class="pre">prefdir</span></code>
+directory and otherwise the MATLAB path. Note this makes it specific to MATLAB releases which
+must be considered if using multiple releases.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">.databrickscfg</span></code> full path is given first by <code class="docutils literal notranslate"><span class="pre">DATABRICKS_CONFIG_FILE</span></code> environment
+variable, if set. If not the default directory is the user's home directory and
+otherwise the MATLAB path. This file may also be used by Databricks packages such as the <a class="reference external" href="https://docs.databricks.com/en/dev-tools/cli/index.html">CLI</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">databricks-http.json</span></code> controls HTTP connection properties and is rarely changed, it is located
+in the the package's <code class="docutils literal notranslate"><span class="pre">Software/MATLAB/config</span></code> directory. It can be moved if required but should
+remain on the MATLAB path.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">runtimes.json</span></code>, <code class="docutils literal notranslate"><span class="pre">.databricks-connect</span></code> and <code class="docutils literal notranslate"><span class="pre">javaclasspath.txt</span></code> files used by versions prior
+to v5.0 are no longer required.</p></li>
+</ul>
+<section id="manually-configuring-databricks-settings-json">
+<h3>Manually configuring <code class="docutils literal notranslate"><span class="pre">databricks-settings.json</span></code><a class="headerlink" href="#manually-configuring-databricks-settings-json" title="Link to this heading"></a></h3>
+<p>The template settings file <code class="docutils literal notranslate"><span class="pre">Software/MATLAB/config/databricks-settings.json.template</span></code>,
+when populated is stored in <code class="docutils literal notranslate"><span class="pre">fullfile(prefdir,</span> <span class="pre">'databricks-settings.json')</span></code> by default.
+For a typical Windows® user this is <code class="docutils literal notranslate"><span class="pre">C:\Users\someuser\.matlab\R2024a\databricks-settings.json</span></code>.</p>
+<p>If necessary change the vendor value to <em>aws</em> or <em>azure</em> depending on the cloud
+environment in use. Change the default node machine type if desired. Configure a
+notification email address that can optionally be used for job status notifications.</p>
+<p>The default Databricks runtime version used when creating a cluster can be changed
+by updating the <code class="docutils literal notranslate"><span class="pre">defaultDatabricksRuntime</span></code> value.</p>
+</section>
+<section id="configuring-databricks-http-json">
+<h3>Configuring <code class="docutils literal notranslate"><span class="pre">databricks-http.json</span></code><a class="headerlink" href="#configuring-databricks-http-json" title="Link to this heading"></a></h3>
+<p>If necessary change the <code class="docutils literal notranslate"><span class="pre">databricks-http.json</span></code> file to override the settings that the package
+uses for REST based communication. In general the default values should suffice. In this case
+a template and a preconfigured file are provided. For details see: <a class="reference external" href="https://www.mathworks.com/help/matlab/ref/matlab.net.http.httpoptions-class.html">https://www.mathworks.com/help/matlab/ref/matlab.net.http.httpoptions-class.html</a>.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Overview.html" class="btn btn-neutral float-left" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Authentication.html" class="btn btn-neutral float-right" title="Authentication" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+{
+  "InTypes": [["int16", [1, 1], "in"]],
+  "OutTypes": [["int16", [1, 1], "out"]]
+}

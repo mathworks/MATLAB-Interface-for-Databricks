@@ -1,0 +1,305 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Init script customization &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Databricks Connect Setup" href="DBConnect.html" />
+    <link rel="prev" title="Installing the MATLAB Runtime" href="InstallingMATLABRuntime.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Init script customization</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#when-must-docker-be-used-when-can-init-scripts-not-be-used">When must Docker be used? / When can init scripts not be used?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#init-script-configuration-used-if-docker-is-not-an-option">Init script configuration, used if Docker is not an option</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#manual-init-script-configuration">Manual init script configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#validation-of-the-runtime-installation">Validation of the runtime installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-custom-container-services">Using Custom Container services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#mw-runtime-release">MW_RUNTIME_RELEASE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Init script customization</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/InitScripts.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="init-script-customization">
+<h1>Init script customization<a class="headerlink" href="#init-script-customization" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>From v6.0.0 the use of init scripts is deprecated and Docker® is now the preferred,
+and in some cases required, way to deploy the MATLAB® runtime to a databricks cluster.
+See: <a class="reference internal" href="ContainerServices.html"><span class="std std-doc">Container Services</span></a> &amp; <a class="reference external" href="https://github.com/mathworks-ref-arch/matlab-on-databricks/tree/main/resources/dockerfiles/runtime">https://github.com/mathworks-ref-arch/matlab-on-databricks/tree/main/resources/dockerfiles/runtime</a></p>
+</div></blockquote>
+<p><em>A future release will remove support for init scripts.</em></p>
+<section id="when-must-docker-be-used-when-can-init-scripts-not-be-used">
+<h2>When must Docker be used? / When can init scripts not be used?<a class="headerlink" href="#when-must-docker-be-used-when-can-init-scripts-not-be-used" title="Link to this heading"></a></h2>
+<p>From version 7.0.0 init scripts cannot be used on clusters without internet access
+and docker images must be used.</p>
+<p>For Databricks® Runtime 17.x and later Docker images must be used.</p>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<p>A template init script file can be found here: <code class="docutils literal notranslate"><span class="pre">Software/MATLAB/script/runtime_install.sh</span></code>.
+At setup put the init script in the <code class="docutils literal notranslate"><span class="pre">*interface</span> <span class="pre">directory*/runtimes/</span></code>
+directory e.g. <code class="docutils literal notranslate"><span class="pre">/Volumes/main/default/myvolume/MathWorks/runtimes/runtime_install.sh</span></code>.</p>
+<p>Init scripts can still be stored in Workspaces, however Databricks recommends using
+<code class="docutils literal notranslate"><span class="pre">/Volumes</span></code>. An init script is a bash script.</p>
+</section>
+<section id="init-script-configuration-used-if-docker-is-not-an-option">
+<h2>Init script configuration, used if Docker is not an option<a class="headerlink" href="#init-script-configuration-used-if-docker-is-not-an-option" title="Link to this heading"></a></h2>
+<p>If working from within MATLAB <code class="docutils literal notranslate"><span class="pre">createDatabricksCluster()</span></code> can be used to configure
+init scripts for a <code class="docutils literal notranslate"><span class="pre">databricks.Cluster</span></code> object.</p>
+<blockquote>
+<div><p>useMATLAB=true currently uses init scripts, this will change in the future
+to adopt a docker based approach by default.</p>
+</div></blockquote>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">"myClusterName"</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">useMATLAB</span><span class="p">=</span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="n">updateClusterId</span><span class="p">=</span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">enableLogging=true</span></code> argument enables logging. From v5.0.0 the default
+logging directory is <code class="docutils literal notranslate"><span class="pre">dbfs:/cluster-logs</span></code>. Logging is optional.
+<code class="docutils literal notranslate"><span class="pre">/Volumes</span></code> paths are also supported with some restrictions and recommended.</p>
+</section>
+<section id="manual-init-script-configuration">
+<h2>Manual init script configuration<a class="headerlink" href="#manual-init-script-configuration" title="Link to this heading"></a></h2>
+<p>This is generally not necessary.
+An init script can be uploaded to a Workspace manually as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Workspace</span><span class="p">;</span>
+<span class="c">% If a directory does not exist provide one, default shown</span>
+<span class="n">ws</span><span class="p">.</span><span class="n">mkdirs</span><span class="p">(</span><span class="s">'/Users/username@example.com/MathWorks/&lt;version&gt;/runtime/'</span><span class="p">)</span>
+<span class="n">ws</span><span class="p">.</span><span class="n">import</span><span class="p">(</span><span class="s">'path'</span><span class="p">,</span><span class="w"> </span><span class="s">'/Users/username@example.com/MathWorks/&lt;version&gt;/runtime/runtime_install_custom.sh'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">          </span><span class="s">'format'</span><span class="p">,</span><span class="w"> </span><span class="s">'AUTO'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">          </span><span class="s">'file'</span><span class="p">,</span><span class="w"> </span><span class="s">'/mylocaldir/runtime_install_custom.sh'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">          </span><span class="s">'overwrite'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use the Files API to upload to <code class="docutils literal notranslate"><span class="pre">/Volumes</span></code>.</p>
+<p>To trigger the installation of the runtime on initialization, this script is
+attached to the <code class="docutils literal notranslate"><span class="pre">init_script</span></code> request parameter of the cluster object.</p>
+<blockquote>
+<div><p>Init scripts run on Linux®, therefore the line endings are pertinent.
+Failure to use the proper line endings (LF) instead of (CRLF) will result in the
+init script failing. This is particularly important if the script is being edited
+on a Windows® machine.</p>
+</div></blockquote>
+<p>The init scripts are be automatically executed at cluster creation time. When a
+cluster with an InitScriptInfo object is created, Databricks will run the commands
+in the initialization script. The status of the initialization scripts can be
+seen in the event log for the cluster. For the detailed output of the scripts
+themselves configure a log delivery location. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a new cluster and handle to DBFS</span>
+<span class="n">ws</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Workspace</span><span class="p">;</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+
+<span class="c">% Specify an init script</span>
+<span class="n">is</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">InitScriptInfo</span><span class="p">;</span>
+<span class="n">wsi</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">WorkspaceStorageInfo</span><span class="p">(</span><span class="s">'/Users/username@example.com/MathWorks/&lt;version&gt;/runtime/runtime_install_custom.sh'</span><span class="p">);</span>
+<span class="n">is</span><span class="p">.</span><span class="n">setDestination</span><span class="p">(</span><span class="n">wsi</span><span class="p">);</span>
+
+<span class="c">% Check if the file exists</span>
+<span class="n">status</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ws</span><span class="p">.</span><span class="n">getStatus</span><span class="p">(</span><span class="s">'/Users/username@example.com/MathWorks/&lt;version&gt;/runtime/runtime_install_custom.sh'</span><span class="p">);</span>
+
+<span class="c">% Configure it</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">cluster_name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">'TestCluster'</span><span class="p">,</span><span class="w"> </span><span class="nb">datestr</span><span class="p">(</span><span class="nb">now</span><span class="p">)];</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setNumWorkers</span><span class="p">([</span><span class="mi">2</span><span class="w"> </span><span class="mi">10</span><span class="p">]);</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setInitScriptInfo</span><span class="p">(</span><span class="n">is</span><span class="p">);</span>
+
+<span class="c">% Create a cluster</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="validation-of-the-runtime-installation">
+<h2>Validation of the runtime installation<a class="headerlink" href="#validation-of-the-runtime-installation" title="Link to this heading"></a></h2>
+<p>A completed installation can be checked from a notebook. To do so, attach a notebook
+to the cluster and use the <em>language magic command</em> feature of the notebook to query the runtime state.</p>
+<p>For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>%sh<span class="w"> </span>cat<span class="w"> </span>/MATLAB_Runtime/VersionInfo.xml
+</pre></div>
+</div>
+<p><img alt="RuntimeVer" src="_images/RuntimeVer.png" /></p>
+</section>
+<section id="using-custom-container-services">
+<h2>Using Custom Container services<a class="headerlink" href="#using-custom-container-services" title="Link to this heading"></a></h2>
+<p>The MATLAB Runtime can be installed using the custom container services, see [Docker Runtimes](Docker Runtimes.md).</p>
+</section>
+<section id="mw-runtime-release">
+<h2>MW_RUNTIME_RELEASE<a class="headerlink" href="#mw-runtime-release" title="Link to this heading"></a></h2>
+<p>If creating a custom cluster setting a Spark™ environment variable <code class="docutils literal notranslate"><span class="pre">MW_RUNTIME_RELEASE</span></code> to indicate the MATLAB Runtime release version supported by a give cluster is recommended. The <code class="docutils literal notranslate"><span class="pre">enableMATLABRuntime</span></code> method does this automatically.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">SEP</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SparkEnvPair</span><span class="p">({</span><span class="s">"MW_RUNTIME_RELEASE"</span><span class="p">,</span><span class="w"> </span><span class="s">"R2024b"</span><span class="p">});</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setSparkEnvVars</span><span class="p">(</span><span class="n">SEP</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This can be queried using <code class="docutils literal notranslate"><span class="pre">release</span> <span class="pre">=</span> <span class="pre">matlab.databricks.cluster.getClusterMATLABRelease(clusterId)</span></code>.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.databricks.com/en/_extras/documents/aws-init-volumes.pdf">https://docs.databricks.com/en/_extras/documents/aws-init-volumes.pdf</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="InstallingMATLABRuntime.html" class="btn btn-neutral float-left" title="Installing the MATLAB Runtime" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DBConnect.html" class="btn btn-neutral float-right" title="Databricks Connect Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

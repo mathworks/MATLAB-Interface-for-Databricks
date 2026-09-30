@@ -1,0 +1,37 @@
+{
+  "type": "compiler",
+  "funcname": "fValues_Arrays5",
+  "fullFilename": "/matlab-databricks/Modules/matlab-spark-api/Software/MATLAB/test/fixtures/fValues_Arrays5.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "in1",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "string"
+    },
+    {
+      "type": "io",
+      "Name": "in2",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "string"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "out1",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "string"
+    },
+    {
+      "type": "io",
+      "Name": "out2",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "string"
+    }
+  ]
+}

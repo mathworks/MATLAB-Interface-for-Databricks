@@ -1,0 +1,23 @@
+{
+  "type": "compiler",
+  "funcname": "fSISO",
+  "fullFilename": "/matlab-databricks/Modules/matlab-spark-api/Software/MATLAB/test/fixtures/fSISO.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "in",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "short"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "out",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "short"
+    }
+  ]
+}

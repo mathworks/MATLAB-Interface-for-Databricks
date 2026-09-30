@@ -1,0 +1,92 @@
+{
+  "type": "compiler",
+  "funcname": "runModel_spark_with_input",
+  "fullFilename": "/matlab-databricks/Software/MATLAB/examples/SimulinkSuspension3DoF/runModel_spark_with_input.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "data",
+      "Direction": "in",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "metadata": {},
+            "name": "Time",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "LeftTire",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "RightTire",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "ID",
+            "nullable": true,
+            "type": "string"
+          }
+        ],
+        "type": "struct"
+      }
+    },
+    {
+      "type": "io",
+      "Name": "mass",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "double"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "data",
+      "Direction": "out",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "metadata": {},
+            "name": "Time",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "LeftTire",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "RightTire",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "ID",
+            "nullable": true,
+            "type": "string"
+          },
+          {
+            "metadata": {},
+            "name": "VerticalDisplacement",
+            "nullable": true,
+            "type": "double"
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ]
+}

@@ -1,0 +1,396 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workspaces API &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Genie - Public Preview" href="Genie.html" />
+    <link rel="prev" title="Unity Catalog API" href="UnityCatalogAPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Workspaces API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sample-usage">Sample usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-workspace-object">Create a workspace object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-existing-objects-and-directories-in-a-workspace">List existing objects and directories in a workspace</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#examine-objects-in-this-case-a-notebook">Examine objects (in this case a notebook)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#fetch-the-status-of-an-object-directory">Fetch the status of an object/directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#export-the-content-of-the-notebook-to-examine-it">Export the content of the notebook to examine it</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#import-a-notebook-from-a-string">Import a notebook from a string</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#importing-a-notebook-from-a-file">Importing a notebook from a file</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-job-to-run-a-notebook">Create a job to run a notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#retrieve-the-job-result-view-the-notebook">Retrieve the job result &amp; view the notebook</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Workspaces API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/WorkspacesAPI.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="workspaces-api">
+<h1>Workspaces API<a class="headerlink" href="#workspaces-api" title="Link to this heading"></a></h1>
+<p>The Workspace API allows the listing, importing, exporting, and deletion of
+notebooks and directories. The maximum allowed size of a request to the
+Workspace API is 500MB. For further details see <a class="reference external" href="https://docs.databricks.com/dev-tools/api/latest/workspace.html.">https://docs.databricks.com/dev-tools/api/latest/workspace.html</a></p>
+<p>Note that notebooks can be executed using the <code class="docutils literal notranslate"><span class="pre">NotebookTask</span></code> class.</p>
+<p>Workspaces to be imported or exported can have the following formats:</p>
+<ul class="simple">
+<li><p>SOURCE</p></li>
+<li><p>HTML</p></li>
+<li><p>JUPYTER</p></li>
+<li><p>DBC</p></li>
+</ul>
+<p>Where the format is SOURCE then the language value can one of the following:</p>
+<ul class="simple">
+<li><p>SCALA</p></li>
+<li><p>PYTHON</p></li>
+<li><p>SQL</p></li>
+<li><p>R</p></li>
+</ul>
+<blockquote>
+<div><blockquote>
+<div><p>See <a class="reference internal" href="LibraryAPI.html"><span class="std std-doc">Libraries</span></a> for information on installing notebook scoped libraries using <code class="docutils literal notranslate"><span class="pre">%pip</span></code>.</p>
+</div></blockquote>
+</div></blockquote>
+<section id="sample-usage">
+<h2>Sample usage<a class="headerlink" href="#sample-usage" title="Link to this heading"></a></h2>
+<p>The following example shows sample usage of the Workspace API.</p>
+</section>
+<section id="create-a-workspace-object">
+<h2>Create a workspace object<a class="headerlink" href="#create-a-workspace-object" title="Link to this heading"></a></h2>
+<p>Create a Databricks® Workspace object</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">ws</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Workspace</span><span class="p">()</span>
+
+<span class="go">ws = </span>
+
+<span class="go">  Workspace with properties:</span>
+
+<span class="go">    username: 'user@example.com'</span>
+</pre></div>
+</div>
+</section>
+<section id="list-existing-objects-and-directories-in-a-workspace">
+<h2>List existing objects and directories in a workspace<a class="headerlink" href="#list-existing-objects-and-directories-in-a-workspace" title="Link to this heading"></a></h2>
+<p>Use the object to list existing objects and directories</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">wsArray</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ws</span><span class="p">.</span><span class="n">list</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s">'/Users/%s'</span><span class="p">,</span><span class="n">ws</span><span class="p">.</span><span class="n">username</span><span class="p">))</span>
+
+<span class="go">wsArray = </span>
+
+<span class="go">  1x42 ObjectInfo array with properties:</span>
+
+<span class="go">    object_type</span>
+<span class="go">    object_id</span>
+<span class="go">    path</span>
+<span class="go">    language</span>
+</pre></div>
+</div>
+</section>
+<section id="examine-objects-in-this-case-a-notebook">
+<h2>Examine objects (in this case a notebook)<a class="headerlink" href="#examine-objects-in-this-case-a-notebook" title="Link to this heading"></a></h2>
+<p>Examining the output:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">wsArray</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="go">ans = </span>
+
+<span class="go">  ObjectInfo with properties:</span>
+
+<span class="go">    object_type: NOTEBOOK</span>
+<span class="go">      object_id: 2181061688109446</span>
+<span class="go">           path: "/Users/user@example.com/foo"</span>
+<span class="go">       language: "PYTHON"</span>
+</pre></div>
+</div>
+</section>
+<section id="fetch-the-status-of-an-object-directory">
+<h2>Fetch the status of an object/directory<a class="headerlink" href="#fetch-the-status-of-an-object-directory" title="Link to this heading"></a></h2>
+<p>The getStatus method will return the status of the object</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="go">% Use getStatus to check on the same entry</span>
+<span class="gp">&gt;&gt; </span><span class="n">ws</span><span class="p">.</span><span class="n">getStatus</span><span class="p">(</span><span class="s">'/Users/user@example.com/foo'</span><span class="p">)</span>
+
+<span class="go">ans = </span>
+
+<span class="go">  struct with fields:</span>
+
+<span class="go">    object_type: 'NOTEBOOK'</span>
+<span class="go">           path: '/Users/user@example.com/foo'</span>
+<span class="go">       language: 'PYTHON'</span>
+<span class="go">      object_id: 2181061688109446</span>
+</pre></div>
+</div>
+</section>
+<section id="export-the-content-of-the-notebook-to-examine-it">
+<h2>Export the content of the notebook to examine it<a class="headerlink" href="#export-the-content-of-the-notebook-to-examine-it" title="Link to this heading"></a></h2>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">ws</span><span class="p">.</span><span class="n">export</span><span class="p">(</span><span class="s">'/Users/user@example.com/myScript'</span><span class="p">,</span><span class="w"> </span><span class="s">'SOURCE'</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
+
+<span class="go">result =</span>
+<span class="go">  struct with fields:</span>
+<span class="go">      content: '# Databricks notebook source print("Hello World")'</span>
+<span class="go">    file_type: 'py'</span>
+</pre></div>
+</div>
+</section>
+<section id="import-a-notebook-from-a-string">
+<h2>Import a notebook from a string<a class="headerlink" href="#import-a-notebook-from-a-string" title="Link to this heading"></a></h2>
+<p>Create a new Python® notebook using uppercase HELLO WORLD
+Confirm its creation using the Databricks Workspace</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span><span class="p">.</span><span class="n">import</span><span class="p">(</span><span class="s">'path'</span><span class="p">,</span><span class="w"> </span><span class="s">'/Users/joe@example.com/MYSCRIPT'</span><span class="p">,</span><span class="w"> </span><span class="s">'format'</span><span class="p">,</span><span class="w"> </span><span class="s">'SOURCE'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">          </span><span class="s">'language'</span><span class="p">,</span><span class="w"> </span><span class="s">'PYTHON'</span><span class="p">,</span><span class="w"> </span><span class="s">'content'</span><span class="p">,</span><span class="w"> </span><span class="s">'print("HELLO WORLD")'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">          </span><span class="s">'overwrite'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+
+<span class="c">% Delete the initial notebook</span>
+<span class="n">recurse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span><span class="p">;</span>
+<span class="n">ws</span><span class="p">.</span><span class="n">delete</span><span class="p">(</span><span class="s">'/Users/joe@example.com/MYSCRIPT'</span><span class="p">,</span><span class="w"> </span><span class="n">recurse</span><span class="p">)</span>
+<span class="n">Deleted</span><span class="w"> </span><span class="s">object</span><span class="w"> </span><span class="s">or</span><span class="w"> </span><span class="s">directory:</span><span class="w"> </span><span class="o">/</span><span class="n">Users</span><span class="o">/</span><span class="n">joe</span><span class="p">@</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">MYSCRIPT</span>
+</pre></div>
+</div>
+</section>
+<section id="importing-a-notebook-from-a-file">
+<h2>Importing a notebook from a file<a class="headerlink" href="#importing-a-notebook-from-a-file" title="Link to this heading"></a></h2>
+<p>The above example shows how to import a Workspace using a <em>content</em> argument to
+specify the commands as a scalar string or character vector. For short examples as
+above or programmatically generated content this may be useful however more typically
+a Workspace will be imported from an existing file. The import command to do so is
+similar as shown:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">ws</span><span class="p">.</span><span class="n">import</span><span class="p">(</span><span class="s">'path'</span><span class="p">,</span><span class="w"> </span><span class="s">'/Users/joe@example.com/MYSCRIPT'</span><span class="p">,</span><span class="w"> </span><span class="s">'format'</span><span class="p">,</span><span class="w"> </span><span class="s">'SOURCE'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">          </span><span class="s">'language'</span><span class="p">,</span><span class="w"> </span><span class="s">'PYTHON'</span><span class="p">,</span><span class="w"> </span><span class="s">'file'</span><span class="p">,</span><span class="w"> </span><span class="s">'/myPath/myFile.py'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">          </span><span class="s">'overwrite'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="create-a-job-to-run-a-notebook">
+<h2>Create a job to run a notebook<a class="headerlink" href="#create-a-job-to-run-a-notebook" title="Link to this heading"></a></h2>
+<p>See <a class="reference internal" href="JobsAPI.html"><span class="std std-doc">Jobs API</span></a> for full details of how to submit a job to Databricks.
+When running the key difference is setting the task to type <code class="docutils literal notranslate"><span class="pre">databricks.NotebookTask</span></code>
+and adding the <code class="docutils literal notranslate"><span class="pre">notebook_path</span></code> argument.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Find the cluster on which the job is to be run, e.g.</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">.</span><span class="n">findByName</span><span class="p">(</span><span class="s">'myCluster'</span><span class="p">);</span>
+
+<span class="c">% Create the job</span>
+<span class="n">job</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">;</span>
+<span class="c">% Assign an uniquely identifiable semi-random name</span>
+<span class="n">job</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">'job-'</span><span class="p">,</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="n">java</span><span class="p">.</span><span class="n">util</span><span class="p">.</span><span class="n">UUID</span><span class="p">.</span><span class="n">randomUUID</span><span class="p">)];</span>
+<span class="c">% Specify to run the job on the existing cluster</span>
+<span class="n">job</span><span class="p">.</span><span class="n">setCluster</span><span class="p">(</span><span class="n">cl</span><span class="p">.</span><span class="n">cluster_id</span><span class="p">);</span>
+
+<span class="c">% Optionally configure notifications</span>
+<span class="n">job</span><span class="p">.</span><span class="n">setJobEmailNotifications</span><span class="p">(</span><span class="s">'joe@example.com'</span><span class="p">);</span>
+
+<span class="c">% Add the notebook as a task to the job</span>
+<span class="n">task</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">NotebookTask</span><span class="p">;</span>
+<span class="n">task</span><span class="p">.</span><span class="n">notebook_path</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'/Users/joe@example.com/MYSCRIPT'</span><span class="p">;</span>
+<span class="n">job</span><span class="p">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+
+<span class="c">% Run the job</span>
+<span class="n">job</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+<span class="nb">run</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">job</span><span class="p">.</span><span class="n">runNow</span><span class="p">();</span>
+<span class="n">job</span><span class="p">.</span><span class="n">refresh</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="retrieve-the-job-result-view-the-notebook">
+<h2>Retrieve the job result &amp; view the notebook<a class="headerlink" href="#retrieve-the-job-result-view-the-notebook" title="Link to this heading"></a></h2>
+<p>Wait for the job to enter a terminated state, i.e. the job has completed. This uses
+the <code class="docutils literal notranslate"><span class="pre">run</span></code> returned by <code class="docutils literal notranslate"><span class="pre">runNow()</span></code> and calls <code class="docutils literal notranslate"><span class="pre">get()</span></code> on it to refresh its state. When terminated <code class="docutils literal notranslate"><span class="pre">run.state.life_cycle_state</span></code> will equal <code class="docutils literal notranslate"><span class="pre">'TERMINATED'</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% As long as state is not TERMINATED yet</span>
+<span class="k">while</span><span class="w"> </span><span class="o">~</span><span class="nb">strcmp</span><span class="p">(</span><span class="nb">run</span><span class="p">.</span><span class="n">state</span><span class="p">.</span><span class="n">life_cycle_state</span><span class="p">,</span><span class="s">'TERMINATED'</span><span class="p">)</span>
+<span class="w">    </span><span class="c">% Wait for a second</span>
+<span class="w">    </span><span class="nb">pause</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="c">% And refresh the run to get an updated state</span>
+<span class="w">    </span><span class="nb">run</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">run</span><span class="p">.</span><span class="n">get</span><span class="p">();</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>If the notebook has a return value it can be retrieved by:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">returnVal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">run</span><span class="p">.</span><span class="n">getOutput</span><span class="p">();</span>
+<span class="nb">disp</span><span class="p">(</span><span class="n">returnVal</span><span class="p">.</span><span class="n">notebook_output</span><span class="p">.</span><span class="n">result</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If the result field is not present, update the notebook, at the end use <code class="docutils literal notranslate"><span class="pre">dbutils.notebook.exit</span></code> to return a value, e.g.:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dbutils</span><span class="o">.</span><span class="n">notebook</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="s2">"myReturnValue"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The notebook itself can be viewed by exporting the run to HTML, writing it to a file and then viewing the file:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Export the run result</span>
+<span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">run</span><span class="p">.</span><span class="n">export</span><span class="p">()</span>
+<span class="c">% Create a temporary HTML file and write the HTML content to it</span>
+<span class="n">tmpName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">tempname</span><span class="p">,</span><span class="s">'.html'</span><span class="p">];</span>
+<span class="n">fileID</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fopen</span><span class="p">(</span><span class="n">tmpName</span><span class="p">,</span><span class="s">'w'</span><span class="p">);</span>
+<span class="c">% Write the HTML</span>
+<span class="n">nbytes</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">fprintf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="s">'%s'</span><span class="p">,</span><span class="n">result</span><span class="p">.</span><span class="n">views</span><span class="p">.</span><span class="n">content</span><span class="p">);</span>
+<span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span>
+<span class="c">% Open the file in the system web browser</span>
+<span class="nb">web</span><span class="p">(</span><span class="n">tmpName</span><span class="p">,</span><span class="w"> </span><span class="s">'-browser'</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<p>Please see:</p>
+<ul class="simple">
+<li><p>https://docs.databricks.com/dev-tools/api/latest/workspace.html</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="UnityCatalogAPI.html" class="btn btn-neutral float-left" title="Unity Catalog API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Genie.html" class="btn btn-neutral float-right" title="Genie - Public Preview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

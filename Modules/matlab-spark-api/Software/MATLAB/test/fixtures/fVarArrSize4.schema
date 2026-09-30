@@ -1,0 +1,103 @@
+{
+  "type": "compiler",
+  "funcname": "fVarArrSize4",
+  "fullFilename": "/matlab-databricks/Modules/matlab-spark-api/Software/MATLAB/test/fixtures/fVarArrSize4.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "TIN",
+      "Direction": "in",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "name": "ts",
+            "nullable": false,
+            "type": "timestamp",
+            "metadata": {}
+          },
+          {
+            "name": "a",
+            "nullable": false,
+            "type": {
+              "containsNull": true,
+              "elementType": "string",
+              "type": "array"
+            },
+            "metadata": {}
+          },
+          {
+            "name": "b",
+            "nullable": false,
+            "type": {
+              "containsNull": true,
+              "elementType": "integer",
+              "type": "array"
+            },
+            "metadata": {}
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "TOUT",
+      "Direction": "out",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "name": "ts",
+            "nullable": false,
+            "type": "timestamp",
+            "metadata": {}
+          },
+          {
+            "name": "a",
+            "nullable": false,
+            "type": {
+              "containsNull": true,
+              "elementType": "string",
+              "type": "array"
+            },
+            "metadata": {}
+          },
+          {
+            "name": "b",
+            "nullable": false,
+            "type": {
+              "containsNull": true,
+              "elementType": "integer",
+              "type": "array"
+            },
+            "metadata": {}
+          },
+          {
+            "name": "x",
+            "nullable": false,
+            "type": {
+              "containsNull": true,
+              "elementType": "string",
+              "type": "array"
+            },
+            "metadata": {}
+          },
+          {
+            "name": "y",
+            "nullable": false,
+            "type": {
+              "containsNull": true,
+              "elementType": "integer",
+              "type": "array"
+            },
+            "metadata": {}
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ]
+}

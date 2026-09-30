@@ -1,0 +1,29 @@
+{
+    "host":"https://adb-1234567890123456.1.azuredatabricks.net",
+    "port": "443",
+    "orgId": "1234567890123456",
+    "clusterId": "0912-173539-zf4ob0md",
+    "schema": "myschema",
+    "catalog": "mycatalog",
+
+    "authMethod": "OauthU2M",
+    "token":"",
+    "clientId": "",
+    "clientSecret": "",
+    "passthroughAccessToken": "",
+    "tokenCachePassPhrase": "",
+    
+    "scope": "",
+    "oauthService": "Databricks",
+    "oauth2ClientId":"databricks-sql-odbc",
+
+    "dsnless": "",
+    "driver": "",
+    "dsnlessAppend": "",
+    "httpPath": "",
+    "ssl": "1",
+    "thriftTransport": "2",
+    
+    "logLevel": "0",
+    "verbose": "1"
+}

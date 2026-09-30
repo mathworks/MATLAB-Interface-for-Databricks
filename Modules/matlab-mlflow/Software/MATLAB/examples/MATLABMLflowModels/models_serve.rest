@@ -1,0 +1,157 @@
+# This file shows how to make RESTful calls to the example models served using:
+#   mlflow models serve -m <model>
+#
+# The file is readable with any text editor but mainly designed to be used in
+# Visual Studio Code with the "REST Client" extension:
+#   https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+# Which allows the requests to be invoked from within Visual Studio Code.
+
+# Copyright 2023 MathWorks, Inc.
+
+###########################
+# singleInAndOutput
+###########################
+### scalar
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "inputs": {"x":[[1.0]]}
+}
+### vector
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "inputs": {"x":[[1.0,20.0]]}
+}
+
+###########################
+# multipleInAndOutputs
+###########################
+### scalar
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "inputs": 
+    {
+        "a": [[1.0]],
+        "b": [[2.0]]
+    }
+}
+### vector
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "inputs": 
+    {
+        "a": [[1.0,2.0]],
+        "b": [[30.0,40.0]]
+    }
+}
+
+###########################
+# tableInAndOutput
+###########################
+### single row - split
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "dataframe_split": {
+        "columns": ["a","b"],
+        "data":
+        [
+            [1.0,2.0]
+        ]
+    }
+}
+### single row - - records
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "dataframe_records": 
+    [
+        {"a": 1.0, "b": 2.0}
+    ]
+}
+### multi row - split
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "dataframe_split": {
+        "columns": ["a","b"],
+        "data":
+        [
+            [1.0,2.0],
+            [10.0,20.0]
+        ]
+    }
+}
+### multi row  - records
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "dataframe_records": 
+    [
+        {"a": 1.0, "b": 2.0},
+        {"a": 10.0, "b": 20.0}
+    ]
+}
+
+###########################
+# withDatetimeTable
+###########################
+### single row - split
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "dataframe_split": {
+        "columns": ["dt","a","b"],
+        "data":
+        [
+            ["2023-06-01T11:18:00",1.0,2.0]
+        ]
+    }
+}
+### single row - - records
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "dataframe_records": 
+    [
+        {"dt": "2023-06-01T11:18:00", "a": 1.0, "b": 2.0}
+    ]
+}
+### multi row - split
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "dataframe_split": {
+        "columns": ["dt","a","b"],
+        "data":
+        [
+            ["2023-06-01T11:18:00",1.0,2.0],
+            ["1983-09-30T20:00:00",10.0,20.0]
+        ]
+    }
+}
+### multi row  - records
+POST http://localhost:5000/invocations
+Content-Type: application/json
+
+{
+    "dataframe_records": 
+    [
+        {"dt": "2023-06-01T11:18:00", "a": 1.0, "b": 2.0},
+        {"dt": "1983-09-30T20:00:00", "a": 10.0, "b": 20.0}
+    ]
+}

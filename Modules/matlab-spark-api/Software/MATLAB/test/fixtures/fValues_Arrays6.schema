@@ -1,0 +1,49 @@
+{
+  "type": "compiler",
+  "funcname": "fValues_Arrays6",
+  "fullFilename": "/matlab-databricks/Modules/matlab-spark-api/Software/MATLAB/test/fixtures/fValues_Arrays6.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "ts",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "timestamp",
+        "type": "array"
+      }
+    },
+    {
+      "type": "io",
+      "Name": "suffix",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "string"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "ts_strings",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "string",
+        "type": "array"
+      }
+    },
+    {
+      "type": "io",
+      "Name": "backintime",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "timestamp",
+        "type": "array"
+      }
+    }
+  ]
+}

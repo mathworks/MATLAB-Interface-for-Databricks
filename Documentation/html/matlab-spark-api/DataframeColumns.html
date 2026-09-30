@@ -1,0 +1,524 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dataframes and columns &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Job Workflows" href="../JobWorkflow.html" />
+    <link rel="prev" title="Using Databricks-Connect from MATLAB" href="../DBConnectWorkflow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Dataframes and columns</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#general-usage">General usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pyspark">PySpark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab">MATLAB</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#considerations">Considerations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#column-indexing">Column indexing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#chaining-dots">Chaining dots</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#non-named-columns">Non-named columns</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#unsupported-column-names">Unsupported column names</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#other-fields-or-methods-of-dataframe">Other fields or methods of Dataframe</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Dataframes and columns</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/matlab-spark-api/DataframeColumns.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dataframes-and-columns">
+<h1>Dataframes and columns<a class="headerlink" href="#dataframes-and-columns" title="Link to this heading"></a></h1>
+<p>Apache® Spark™ provides different methods on <code class="docutils literal notranslate"><span class="pre">Dataframe</span></code> and <code class="docutils literal notranslate"><span class="pre">Column</span></code> classes for
+retrieving columns, filtering, etc.</p>
+<section id="general-usage">
+<h2>General usage<a class="headerlink" href="#general-usage" title="Link to this heading"></a></h2>
+<section id="pyspark">
+<h3>PySpark<a class="headerlink" href="#pyspark" title="Link to this heading"></a></h3>
+<p>When working in Python® using PySpark, one might use the following syntax.</p>
+<p>Load a Dataframe:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"SELECT * FROM main.default.outages"</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="c1"># root</span>
+<span class="c1">#  |-- Region: string (nullable = true)</span>
+<span class="c1">#  |-- OutageTime: timestamp (nullable = true)</span>
+<span class="c1">#  |-- Loss: double (nullable = true)</span>
+<span class="c1">#  |-- Customers: double (nullable = true)</span>
+<span class="c1">#  |-- RestorationTime: timestamp (nullable = true)</span>
+<span class="c1">#  |-- Cause: string (nullable = true)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Rows: </span><span class="si">{</span><span class="n">df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="c1"># Rows: 1468</span>
+</pre></div>
+</div>
+<p>Pick a column:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c1</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Region'</span><span class="p">]</span>
+<span class="c1"># Column&lt;'Region'&gt;</span>
+
+<span class="c1"># Alternatively</span>
+<span class="n">c1_</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Region</span>
+</pre></div>
+</div>
+<p>Pick a few columns of a Dataframe:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df2</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">'Region'</span><span class="p">,</span> <span class="s1">'Loss'</span><span class="p">]]</span>
+<span class="n">df2</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="c1"># root</span>
+<span class="c1">#  |-- Region: string (nullable = true)</span>
+<span class="c1">#  |-- Loss: double (nullable = true) </span>
+</pre></div>
+</div>
+<p>Filter a dataframe according to columns:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filter_column</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">'Cause'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="s2">"winter storm"</span><span class="p">,</span> <span class="s2">"attack"</span><span class="p">)</span>
+<span class="c1"># Column&lt;'(Cause IN (winter storm, attack))'&gt;</span>
+
+<span class="c1"># Alternatively</span>
+<span class="n">filter_column_</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Cause</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="s2">"winter storm"</span><span class="p">,</span> <span class="s2">"attack"</span><span class="p">)</span>
+<span class="c1"># Column&lt;'(Cause IN (winter storm, attack))'&gt;</span>
+
+<span class="n">filtered_df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">filter_column</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Rows: </span><span class="si">{</span><span class="n">filtered_df</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="c1"># Rows: 439</span>
+
+<span class="c1"># Alternative, all in one:</span>
+<span class="n">filtered_df_</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">'Cause'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="s2">"winter storm"</span><span class="p">,</span> <span class="s2">"attack"</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Rows: </span><span class="si">{</span><span class="n">filtered_df_</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="c1"># Rows: 439</span>
+</pre></div>
+</div>
+</section>
+<section id="matlab">
+<h3>MATLAB<a class="headerlink" href="#matlab" title="Link to this heading"></a></h3>
+<p>In MATLAB®, it looks similar to the dot-notation variant. The actual usage of the
+Python bracket (<code class="docutils literal notranslate"><span class="pre">[]</span></code>) syntax is supported by a hidden <code class="docutils literal notranslate"><span class="pre">bracket</span></code> function. This
+is not intended to be called directly by the user, but may explain some of the
+code better. It will also be shown in the examples.</p>
+<p>Load a Dataframe (exactly the same):</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">df</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="s">"SELECT * FROM main.default.outages"</span><span class="p">);</span>
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.</span><span class="n">printSchema</span><span class="p">()</span>
+
+<span class="go">df = </span>
+<span class="go">  Dataframe with no properties.</span>
+<span class="go">root</span>
+<span class="go"> |-- Region: string (nullable = true)</span>
+<span class="go"> |-- OutageTime: timestamp (nullable = true)</span>
+<span class="go"> |-- Loss: double (nullable = true)</span>
+<span class="go"> |-- Customers: double (nullable = true)</span>
+<span class="go"> |-- RestorationTime: timestamp (nullable = true)</span>
+<span class="go"> |-- Cause: string (nullable = true)</span>
+
+
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">ans =</span>
+<span class="go">  int64</span>
+<span class="go">   1468</span>
+</pre></div>
+</div>
+<p>Pick a column</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">c1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">Region</span>
+<span class="go">c1 = </span>
+<span class="go">  Column with properties:</span>
+
+<span class="go">    Label: "Column&lt;'Region'&gt;"</span>
+<span class="go">    </span>
+<span class="go">% Alternatively</span>
+<span class="gp">&gt;&gt; </span><span class="n">c1_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">bracket</span><span class="p">(</span><span class="s">"Region"</span><span class="p">)</span>
+<span class="go">c1_ = </span>
+<span class="go">  Column with properties:</span>
+
+<span class="go">    Label: "Column&lt;'Region'&gt;"</span>
+</pre></div>
+</div>
+<p>Pick a few columns of a Dataframe</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">df2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.([</span><span class="s">"Region"</span><span class="p">,</span><span class="w"> </span><span class="s">"Loss"</span><span class="p">])</span>
+<span class="go">df2 = </span>
+<span class="go">  Dataframe with no properties.</span>
+<span class="gp">&gt;&gt; </span><span class="n">df2</span><span class="p">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="go">root</span>
+<span class="go"> |-- Region: string (nullable = true)</span>
+<span class="go"> |-- Loss: double (nullable = true)</span>
+
+<span class="go">% Alternative 1</span>
+<span class="gp">&gt;&gt; </span><span class="n">df2_1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.({</span><span class="s">'Region'</span><span class="p">,</span><span class="w"> </span><span class="s">'Loss'</span><span class="p">})</span>
+<span class="go">df2_1 = </span>
+<span class="go">  Dataframe with no properties.</span>
+<span class="gp">&gt;&gt; </span><span class="n">df2_1</span><span class="p">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="go">root</span>
+<span class="go"> |-- Region: string (nullable = true)</span>
+<span class="go"> |-- Loss: double (nullable = true)</span>
+
+<span class="go">% Alternative 2</span>
+<span class="gp">&gt;&gt; </span><span class="n">df2_2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">bracket</span><span class="p">({</span><span class="s">'Region'</span><span class="p">,</span><span class="w"> </span><span class="s">'Loss'</span><span class="p">})</span>
+<span class="go">df2_2 = </span>
+<span class="go">  Dataframe with no properties.</span>
+<span class="gp">&gt;&gt; </span><span class="n">df2_2</span><span class="p">.</span><span class="n">printSchema</span>
+<span class="go">root</span>
+<span class="go"> |-- Region: string (nullable = true)</span>
+<span class="go"> |-- Loss: double (nullable = true)</span>
+</pre></div>
+</div>
+<p>Filter a dataframe according to columns</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">filter_column</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">Cause</span><span class="p">.</span><span class="n">isin</span><span class="p">(</span><span class="s">"winter storm"</span><span class="p">,</span><span class="w"> </span><span class="s">"attack"</span><span class="p">)</span>
+<span class="go">filter_column = </span>
+<span class="go">  Column with properties:</span>
+
+<span class="go">    Label: "Column&lt;'in(Cause, winter storm, attack)'&gt;"</span>
+<span class="go">    </span>
+<span class="go">% Alternatively</span>
+<span class="gp">&gt;&gt; </span><span class="n">filter_column</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">bracket</span><span class="p">(</span><span class="s">'Cause'</span><span class="p">).</span><span class="n">isin</span><span class="p">(</span><span class="s">"winter storm"</span><span class="p">,</span><span class="w"> </span><span class="s">"attack"</span><span class="p">)</span>
+<span class="go">filter_column = </span>
+<span class="go">  Column with properties:</span>
+
+<span class="go">    Label: "Column&lt;'in(Cause, winter storm, attack)'&gt;"</span>
+
+<span class="gp">&gt;&gt; </span><span class="n">filtered_df</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.(</span><span class="n">filter_column</span><span class="p">)</span>
+<span class="go">filtered_df = </span>
+<span class="go">  Dataframe with no properties.</span>
+<span class="gp">&gt;&gt; </span><span class="n">filtered_df</span><span class="p">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">ans =</span>
+<span class="go">  int64</span>
+<span class="go">   439</span>
+
+<span class="go">% Alternative, all in one</span>
+<span class="gp">&gt;&gt; </span><span class="n">filtered_df</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.(</span><span class="n">df</span><span class="p">.</span><span class="n">Cause</span><span class="p">.</span><span class="n">isin</span><span class="p">(</span><span class="s">"winter storm"</span><span class="p">,</span><span class="w"> </span><span class="s">"attack"</span><span class="p">))</span>
+<span class="go">filtered_df = </span>
+<span class="go">  Dataframe with no properties.</span>
+<span class="gp">&gt;&gt; </span><span class="n">filtered_df</span><span class="p">.</span><span class="n">count</span><span class="p">()</span>
+<span class="go">ans =</span>
+<span class="go">  int64</span>
+<span class="go">   439</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="considerations">
+<h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading"></a></h2>
+<p>The fact that the <code class="docutils literal notranslate"><span class="pre">.</span></code> can be overloaded relies on the mixin class
+<code class="docutils literal notranslate"><span class="pre">matlab.mixin.indexing.RedefinesDot</span></code>. The <code class="docutils literal notranslate"><span class="pre">Dataframe</span></code> class inherits from this
+class.</p>
+<p>It will use the arguments after the dot, and try to apply them with the <code class="docutils literal notranslate"><span class="pre">bracket</span></code>
+method, enabling a streamlined workflow. There are some things to consider, though.</p>
+<section id="column-indexing">
+<h3>Column indexing<a class="headerlink" href="#column-indexing" title="Link to this heading"></a></h3>
+<p>Column indexing in Apache Spark is zero-based, so this is used here too, although
+not typical for MATLAB®. The aim being to be more interoperable with Spark syntax
+in other languages.</p>
+<p>In Python:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">"SELECT * FROM main.default.outages"</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">printSchema</span><span class="p">()</span>
+<span class="c1"># root</span>
+<span class="c1">#  |-- Region: string (nullable = true)</span>
+<span class="c1">#  |-- OutageTime: timestamp (nullable = true)</span>
+<span class="c1">#  |-- Loss: double (nullable = true)</span>
+<span class="c1">#  |-- Customers: double (nullable = true)</span>
+<span class="c1">#  |-- RestorationTime: timestamp (nullable = true)</span>
+<span class="c1">#  |-- Cause: string (nullable = true)</span>
+
+<span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Column&lt;'Region'&gt;</span>
+
+<span class="n">df</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="c1"># Column&lt;'Loss'&gt;</span>
+</pre></div>
+</div>
+<p>In MATLAB®:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">df</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">sql</span><span class="p">(</span><span class="s">"SELECT * FROM main.default.outages"</span><span class="p">);</span>
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.</span><span class="n">printSchema</span><span class="p">()</span>
+
+<span class="go">df = </span>
+<span class="go">  Dataframe with no properties.</span>
+<span class="go">root</span>
+<span class="go"> |-- Region: string (nullable = true)</span>
+<span class="go"> |-- OutageTime: timestamp (nullable = true)</span>
+<span class="go"> |-- Loss: double (nullable = true)</span>
+<span class="go"> |-- Customers: double (nullable = true)</span>
+<span class="go"> |-- RestorationTime: timestamp (nullable = true)</span>
+<span class="go"> |-- Cause: string (nullable = true)</span>
+
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.(</span><span class="mi">0</span><span class="p">)</span>
+<span class="go">ans = </span>
+<span class="go">  Column with properties:</span>
+
+<span class="go">    Label: "Column&lt;'Region'&gt;"</span>
+
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.(</span><span class="mi">2</span><span class="p">)</span>
+<span class="go">ans = </span>
+<span class="go">  Column with properties:</span>
+
+<span class="go">    Label: "Column&lt;'Loss'&gt;"</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> Please be aware that a numbered column cannot be used with plain
+dot-notation, i.e. df.0 will fail, whereas df.(0) will work.</p>
+</div></blockquote>
+</section>
+<section id="chaining-dots">
+<h3>Chaining dots<a class="headerlink" href="#chaining-dots" title="Link to this heading"></a></h3>
+<p>In the example above, we chained several operations:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">filter_col</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">Cause</span><span class="p">.</span><span class="n">isin</span><span class="p">(</span><span class="s">"winter storm"</span><span class="p">,</span><span class="w"> </span><span class="s">"attack"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first part, <code class="docutils literal notranslate"><span class="pre">df.Cause</span></code>, will return a <code class="docutils literal notranslate"><span class="pre">Column</span></code> object. For this operation,
+so the rest of second operation will be on a different class of objects.</p>
+<p>We can view the operations like this:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">tmp_col</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">Cause</span>
+<span class="n">filter_col</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tmp_col</span><span class="p">.</span><span class="n">isin</span><span class="p">(</span><span class="s">"winter storm"</span><span class="p">,</span><span class="w"> </span><span class="s">"attack"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The second part, <code class="docutils literal notranslate"><span class="pre">isin</span></code>, is calling a method on the resulting <code class="docutils literal notranslate"><span class="pre">Column</span></code> object.
+This works in this code, by relying on syntactic sugar to call a method or
+retrieve a field, if possible.</p>
+<p>Another example that demonstrates this is:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.</span><span class="n">Region</span><span class="p">.</span><span class="n">string</span>
+<span class="go">ans = </span>
+<span class="go">    "Column&lt;'Region'&gt;"</span>
+</pre></div>
+</div>
+<p>There may, however, be other combinations that don't work. Be aware of this.
+An alternative to the first example could be either the splitting up, as shown
+above, or explicitly using the <code class="docutils literal notranslate"><span class="pre">bracket</span></code> method.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">filter_col</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.</span><span class="n">bracket</span><span class="p">(</span><span class="s">'Cause'</span><span class="p">).</span><span class="n">isin</span><span class="p">(</span><span class="s">"winter storm"</span><span class="p">,</span><span class="w"> </span><span class="s">"attack"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>In this example, the first part, <code class="docutils literal notranslate"><span class="pre">df.bracket('Cause')</span></code>, will simply return a column,
+and the next operation is applied on that.</p>
+</section>
+<section id="non-named-columns">
+<h3>Non-named columns<a class="headerlink" href="#non-named-columns" title="Link to this heading"></a></h3>
+<p>As seen in the example, something like <code class="docutils literal notranslate"><span class="pre">df.Region</span></code> will be similar to Python's
+<code class="docutils literal notranslate"><span class="pre">df['region']</span></code>. When the column referred to is not simply a name, the dynamic
+field name should be used. Similarly to how variable can be used with a field name
+to retrieve a field from a struct:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">myField</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'Age'</span><span class="p">;</span>
+<span class="n">age</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">myStruct</span><span class="p">.(</span><span class="n">myField</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>In this case, as with the filtered <code class="docutils literal notranslate"><span class="pre">Dataframe</span></code>, a dynamic field name must be used.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">filtered_df</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df</span><span class="p">.(</span><span class="n">filter_column</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="unsupported-column-names">
+<h3>Unsupported column names<a class="headerlink" href="#unsupported-column-names" title="Link to this heading"></a></h3>
+<p>All column names can be retrieved, but not all column names can be retrieved with
+the dot notation.</p>
+<section id="other-fields-or-methods-of-dataframe">
+<h4>Other fields or methods of Dataframe<a class="headerlink" href="#other-fields-or-methods-of-dataframe" title="Link to this heading"></a></h4>
+<p>If there is a dataset with a name <code class="docutils literal notranslate"><span class="pre">col</span></code>, this cannot be retrieved with <code class="docutils literal notranslate"><span class="pre">df.col</span></code>,
+as <code class="docutils literal notranslate"><span class="pre">col</span></code> is already a method, which takes precedence.</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">df_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">range</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">df_</span><span class="p">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s">'col'</span><span class="p">,</span><span class="w"> </span><span class="n">df_</span><span class="p">.</span><span class="n">id</span><span class="p">).</span><span class="n">withColumn</span><span class="p">(</span><span class="s">'columns'</span><span class="p">,</span><span class="w"> </span><span class="n">df_</span><span class="p">.</span><span class="n">id</span><span class="p">)</span>
+<span class="go">df = </span>
+<span class="go">  Dataframe with no properties.</span>
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.</span><span class="n">show</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="go">+---+---+-------+</span>
+<span class="go">| id|col|columns|</span>
+<span class="go">+---+---+-------+</span>
+<span class="go">|  0|  0|      0|</span>
+<span class="go">|  1|  1|      1|</span>
+<span class="go">|  2|  2|      2|</span>
+<span class="go">+---+---+-------+</span>
+<span class="go">only showing top 3 rows</span>
+</pre></div>
+</div>
+<p>Different options can be evaluated:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.</span><span class="n">col</span>
+<span class="go">Error using matlab.pyspark.sql.dataframe.Dataframe/col (line 27)</span>
+<span class="go">Invalid argument list. Function requires 1 more input(s). </span>
+
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.(</span><span class="s">'col'</span><span class="p">)</span>
+<span class="go">Error using matlab.pyspark.sql.dataframe.Dataframe/col (line 27)</span>
+<span class="go">Invalid argument list. Function requires 1 more input(s). </span>
+
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.</span><span class="n">bracket</span><span class="p">(</span><span class="s">'col'</span><span class="p">)</span>
+<span class="go">ans = </span>
+<span class="go">  Column with no properties.</span>
+</pre></div>
+</div>
+<p>Only the last function will work in this case.</p>
+<p>For <code class="docutils literal notranslate"><span class="pre">columns</span></code>, it is a bit different. This will not error out, as it does not
+need arguments. However, it will not return a column object as one might expect.</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.</span><span class="n">columns</span>
+<span class="go">ans = </span>
+<span class="go">  1×3 string array</span>
+<span class="go">    "id"    "col"    "columns"</span>
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.(</span><span class="s">'columns'</span><span class="p">)</span>
+<span class="go">ans = </span>
+<span class="go">  1×3 string array</span>
+<span class="go">    "id"    "col"    "columns"</span>
+<span class="gp">&gt;&gt; </span><span class="n">df</span><span class="p">.</span><span class="n">bracket</span><span class="p">(</span><span class="s">'columns'</span><span class="p">)</span>
+<span class="go">ans = </span>
+<span class="go">  Column with no properties.</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../DBConnectWorkflow.html" class="btn btn-neutral float-left" title="Using Databricks-Connect from MATLAB" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../JobWorkflow.html" class="btn btn-neutral float-right" title="Job Workflows" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

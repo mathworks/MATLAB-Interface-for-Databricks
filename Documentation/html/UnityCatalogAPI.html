@@ -1,0 +1,759 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Unity Catalog API &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Workspaces API" href="WorkspacesAPI.html" />
+    <link rel="prev" title="Token API" href="TokenAPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Unity Catalog API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#data-access-in-matlab-interface-for-databricks">Data Access in MATLAB Interface <em>for Databricks</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#management-in-matlab-interface-for-databricks">Management in MATLAB Interface <em>for Databricks</em></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#unitycatalog-class">UnityCatalog class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#methods">Methods</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#authentication-and-authorization">Authentication and Authorization</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#data-structure-classes">Data Structure Classes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frominputs-method">fromInputs method</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example-usage">Example Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#catalog-example">Catalog example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#permissions-example">Permissions example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#artifact-allowlists">Artifact Allowlists</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Unity Catalog API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/UnityCatalogAPI.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="unity-catalog-api">
+<h1>Unity Catalog API<a class="headerlink" href="#unity-catalog-api" title="Link to this heading"></a></h1>
+<p>To learn more about Unity Catalog in general, refer to its product page on the
+Databricks® website: <a class="reference external" href="https://www.databricks.com/product/unity-catalog">https://www.databricks.com/product/unity-catalog</a></p>
+<section id="data-access-in-matlab-interface-for-databricks">
+<h2>Data Access in MATLAB Interface <em>for Databricks</em><a class="headerlink" href="#data-access-in-matlab-interface-for-databricks" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Data managed by Unity Catalog can be accessed when working through the <a class="reference internal" href="JDBCWorkflow.html"><span class="std std-doc">JDBC</span></a>
+and <a class="reference internal" href="ODBCWorkflow.html"><span class="std std-doc">ODBC</span></a> and Database Toolbox™ workflows or Databricks Connect v2.</p></li>
+</ul>
+</section>
+<section id="management-in-matlab-interface-for-databricks">
+<h2>Management in MATLAB Interface <em>for Databricks</em><a class="headerlink" href="#management-in-matlab-interface-for-databricks" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Unity Catalog can be managed through the API, see below.</p></li>
+<li><p>Unity Catalog can also be managed by executing the correct manually written SQL
+queries through <a class="reference internal" href="JDBCWorkflow.html"><span class="std std-doc">JDBC</span></a> and <a class="reference internal" href="ODBCWorkflow.html"><span class="std std-doc">ODBC</span></a> workflows.</p></li>
+</ul>
+<p>The Unity Catalog Management interface in this package consists of one class <code class="docutils literal notranslate"><span class="pre">databricks.UnityCatalog</span></code>, which contains all API methods and a number of data structure classes in the <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.unitycatalog</span></code> package.</p>
+<p>The methods and data structure classes follow the methods and objects described in the Unity Catalog API 2.1 Specification as documented by Databricks:</p>
+<p><a class="reference external" href="https://api-docs.databricks.com/rest/latest/unity-catalog-api-specification-2-1.html">https://api-docs.databricks.com/rest/latest/unity-catalog-api-specification-2-1.html</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The API on the Databricks end does not appear to behave <em>exactly</em> as documented by Databricks. Some of the <code class="docutils literal notranslate"><span class="pre">force</span></code> options of the <code class="docutils literal notranslate"><span class="pre">delete*</span></code> methods do not appear to have an actual effect. Also, updating shared objects does not appear to actually be possible through the <code class="docutils literal notranslate"><span class="pre">updateShare</span></code> operation therefore a separate <code class="docutils literal notranslate"><span class="pre">updateShareObjects</span></code> method has been implemented.</p>
+</div>
+<p>Some of the API methods return data structure classes as outputs, some take such data structure classes as inputs. The data structure classes do <em>not</em> have methods like <code class="docutils literal notranslate"><span class="pre">list</span></code>, <code class="docutils literal notranslate"><span class="pre">create</span></code> or <code class="docutils literal notranslate"><span class="pre">update</span></code> (the only method the data structure classes have is the static <a class="reference internal" href="#frominputs-method"><code class="docutils literal notranslate"><span class="pre">fromInputs</span></code></a> helper method). Methods like <code class="docutils literal notranslate"><span class="pre">listCatalogs</span></code>, <code class="docutils literal notranslate"><span class="pre">createCatalog</span></code> and <code class="docutils literal notranslate"><span class="pre">updateCatalog</span></code> are part of the <code class="docutils literal notranslate"><span class="pre">databricks.UnityCatalog</span></code> class.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This is a slightly different architecture than the other Databricks REST API interfaces in the package.</p>
+<p>For example in the <a class="reference internal" href="ClusterAPI.html"><span class="std std-doc">Clusters API</span></a>, to get Cluster information:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% First create a Cluster instance</span>
+<span class="n">cluster</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">();</span>
+<span class="c">% Then set the ID on this object</span>
+<span class="n">cluster</span><span class="p">.</span><span class="n">cluster_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'abc-def-ghi'</span><span class="p">;</span>
+<span class="c">% Then refresh to get its details</span>
+<span class="n">cluster</span><span class="p">.</span><span class="n">refresh</span><span class="p">;</span>
+
+<span class="c">% Or to list the clusters, call list method of Cluster class</span>
+<span class="n">clusterList</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">.</span><span class="n">list</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>But in the Unity Catalog API:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create the Unity Catalog client instance</span>
+<span class="n">uc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">UnityCatalog</span><span class="p">;</span>
+
+<span class="c">% Get catalog details by calling getCatalog on the client object with catalog</span>
+<span class="c">% name as input</span>
+<span class="n">catalog</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">uc</span><span class="p">.</span><span class="n">getCatalog</span><span class="p">(</span><span class="s">'main'</span><span class="p">);</span>
+
+<span class="c">% Or to list catalogs, call listCatalogs on the client object rather than list</span>
+<span class="c">% on some Catalog object</span>
+<span class="n">catalogList</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">uc</span><span class="p">.</span><span class="n">listCatalogs</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="unitycatalog-class">
+<h2>UnityCatalog class<a class="headerlink" href="#unitycatalog-class" title="Link to this heading"></a></h2>
+<p>To work with the UnityCatalog class, create an instance:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">uc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">UnityCatalog</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>and call the desired methods:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">metastores</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">uc</span><span class="p">.</span><span class="n">listMetastores</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>All methods contain help text which can be accessed through the <code class="docutils literal notranslate"><span class="pre">help</span></code> function, for example:</p>
+<blockquote>
+<div><p>If running MATLAB® on Databricks use the <code class="docutils literal notranslate"><span class="pre">doc</span></code> command instead of <code class="docutils literal notranslate"><span class="pre">help</span></code>.</p>
+</div></blockquote>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="nb">help</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">UnityCatalog</span><span class="p">.</span><span class="n">createCatalog</span>
+<span class="go">  createCatalog creates a new catalog.</span>
+
+<span class="go">  Example:</span>
+
+<span class="go">    result = uc.createCatalog(cataloginfo);</span>
+
+<span class="go">  Required Inputs:</span>
+<span class="go">    cataloginfo</span>
+<span class="go">        Description:</span>
+<span class="go">            settings/configuration for the new catalog</span>
+<span class="go">        Type:</span>
+<span class="go">            databricks.datastructures.unitycatalog.CatalogInfo</span>
+<span class="go">        Required Properties in the data structure which must be set:</span>
+<span class="go">            name</span>
+<span class="go">        Optional Properties in the data structure which can be set:</span>
+<span class="go">            comment</span>
+<span class="go">            ucproperties</span>
+<span class="go">            provider_name</span>
+<span class="go">            share_name</span>
+
+<span class="go">  Outputs:</span>
+<span class="go">    result</span>
+<span class="go">        Description:</span>
+<span class="go">            settings/configuration of the created catalog</span>
+<span class="go">        Type:</span>
+<span class="go">            databricks.datastructures.unitycatalog.CatalogInfo</span>
+
+<span class="go">  See Also: databricks.datastructures.unitycatalog.CatalogInfo</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This can also be called on an object instance, e.g. <code class="docutils literal notranslate"><span class="pre">&gt;&gt;</span> <span class="pre">help</span> <span class="pre">uc.createCatalog</span></code>.</p>
+</div>
+<p>The help text shows exactly what inputs the methods expects and if the input is a data structure object which properties must and can be set. It also shows what output the method returns.</p>
+<p>An overview of the methods is listed below. For further details on how to call each method exactly use the <code class="docutils literal notranslate"><span class="pre">help</span></code> function or refer to the full <a class="reference internal" href="DatabricksAPI.html#databricks-unitycatalog"><span class="std std-ref">API Reference</span></a> in the documentation.</p>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Link to this heading"></a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">createCatalog<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Creates a new catalog.</p>
+</dd>
+<dt class="field-even">createExternalLocation<span class="colon">:</span></dt>
+<dd class="field-even"><p>Creates a new external location.</p>
+</dd>
+<dt class="field-odd">createMetastore<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Creates a new metastore.</p>
+</dd>
+<dt class="field-even">createMetastoreAssignment<span class="colon">:</span></dt>
+<dd class="field-even"><p>Creates meta store assignments.</p>
+</dd>
+<dt class="field-odd">createProvider<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Creates a delta sharing provider.</p>
+</dd>
+<dt class="field-even">createRecipient<span class="colon">:</span></dt>
+<dd class="field-even"><p>Creates a new delta sharing recipient.</p>
+</dd>
+<dt class="field-odd">createSchema<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Creates a new schema.</p>
+</dd>
+<dt class="field-even">createShare<span class="colon">:</span></dt>
+<dd class="field-even"><p>Creates new delta sharing share.</p>
+</dd>
+<dt class="field-odd">createStorageCredential<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Creates a new storage credential.</p>
+</dd>
+<dt class="field-even">deleteCatalog<span class="colon">:</span></dt>
+<dd class="field-even"><p>Deletes a catalog.</p>
+</dd>
+<dt class="field-odd">deleteExternalLocation<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Deletes an external location.</p>
+</dd>
+<dt class="field-even">deleteMetastore<span class="colon">:</span></dt>
+<dd class="field-even"><p>Deletes a metastore.</p>
+</dd>
+<dt class="field-odd">deleteMetastoreAssignment<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Deletes a metastore assignment.</p>
+</dd>
+<dt class="field-even">deleteProvider<span class="colon">:</span></dt>
+<dd class="field-even"><p>Deletes a delta sharing provider.</p>
+</dd>
+<dt class="field-odd">deleteRecipient<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Deletes a delta sharing recipient.</p>
+</dd>
+<dt class="field-even">deleteSchema<span class="colon">:</span></dt>
+<dd class="field-even"><p>Deletes a schema.</p>
+</dd>
+<dt class="field-odd">deleteShare<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Deletes delta sharing share.</p>
+</dd>
+<dt class="field-even">deleteStorageCredential<span class="colon">:</span></dt>
+<dd class="field-even"><p>Deletes a storage credential.</p>
+</dd>
+<dt class="field-odd">deleteTable<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Deletes a table.</p>
+</dd>
+<dt class="field-even">getArtifactAllowlists<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gets the artifact allowlist of a certain artifact type.</p>
+</dd>
+<dt class="field-odd">getCatalog<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gets catalog information.</p>
+</dd>
+<dt class="field-even">getExternalLocation<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gets external location information.</p>
+</dd>
+<dt class="field-odd">getMetastore<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gets metastore information.</p>
+</dd>
+<dt class="field-even">getMyGroups<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gets group membership information of the user.</p>
+</dd>
+<dt class="field-odd">getMyInfo<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Retrieves current user information as it relates to Unity Catalog.</p>
+</dd>
+<dt class="field-even">getPermissions<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gets permissions as set for a given object.</p>
+</dd>
+<dt class="field-odd">getProvider<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gets delta sharing provider information.</p>
+</dd>
+<dt class="field-even">getRecipient<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gets delta sharing recipient information.</p>
+</dd>
+<dt class="field-odd">getRecipientSharePermissions<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gets permissions for the given delta.</p>
+</dd>
+<dt class="field-even">getSchema<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gets schema information.</p>
+</dd>
+<dt class="field-odd">getShare<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gets delta sharing share information.</p>
+</dd>
+<dt class="field-even">getSharePermissions<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gets permissions of specified delta sharing share.</p>
+</dd>
+<dt class="field-odd">getStorageCredential<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gets storage credential information.</p>
+</dd>
+<dt class="field-even">getTable<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gets table information.</p>
+</dd>
+<dt class="field-odd">listCatalogs<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Gets list of catalogs.</p>
+</dd>
+<dt class="field-even">listExternalLocations<span class="colon">:</span></dt>
+<dd class="field-even"><p>Gets list of external locations.</p>
+</dd>
+<dt class="field-odd">listFiles<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List files in an external URL.</p>
+</dd>
+<dt class="field-even">listMetastores<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lists metastores.</p>
+</dd>
+<dt class="field-odd">listProviders<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Lists delta sharing providers.</p>
+</dd>
+<dt class="field-even">listProviderShares<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lists delta sharing shares for a given provider.</p>
+</dd>
+<dt class="field-odd">listRecipients<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Lists delta sharing recipients.</p>
+</dd>
+<dt class="field-even">listSchemas<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lists schemas in a given catalog.</p>
+</dd>
+<dt class="field-odd">listShares<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Lists delta sharing shares.</p>
+</dd>
+<dt class="field-even">listStorageCredentials<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lists storage credentials.</p>
+</dd>
+<dt class="field-odd">listTables<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Lists tables in a given catalog and schema.</p>
+</dd>
+<dt class="field-even">listTableSummaries<span class="colon">:</span></dt>
+<dd class="field-even"><p>Lists high level table information for tables in a given catalog.</p>
+</dd>
+<dt class="field-odd">rotateRecipientToken<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Rotates the token for an external recipient.</p>
+</dd>
+<dt class="field-even">setArtifactAllowlist<span class="colon">:</span></dt>
+<dd class="field-even"><p>Set the artifact allowlist of a certain artifact type.</p>
+</dd>
+<dt class="field-odd">updateCatalog<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Updates catalog settings.</p>
+</dd>
+<dt class="field-even">updateExternalLocation<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updates external location settings.</p>
+</dd>
+<dt class="field-odd">updateMetastore<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Updates metastore settings.</p>
+</dd>
+<dt class="field-even">updateMetastoreAssignment<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updates metastore assignment on a given workspace.</p>
+</dd>
+<dt class="field-odd">updatePermissions<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Updates permissions on a given object.</p>
+</dd>
+<dt class="field-even">updateProvider<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updates delta sharing provider settings.</p>
+</dd>
+<dt class="field-odd">updateRecipient<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Updates delta sharing recipient settings.</p>
+</dd>
+<dt class="field-even">updateSchema<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updates schema settings.</p>
+</dd>
+<dt class="field-odd">updateShare<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Updates delta sharing share settings.</p>
+</dd>
+<dt class="field-even">updateShareObjects<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updates objects on a given delta sharing share.</p>
+</dd>
+<dt class="field-odd">updateSharePermissions<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Updates permissions on a delta sharing share.</p>
+</dd>
+<dt class="field-even">updateStorageCredential<span class="colon">:</span></dt>
+<dd class="field-even"><p>Updates store credential settings.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As can be seen, <code class="docutils literal notranslate"><span class="pre">listTables</span></code>, <code class="docutils literal notranslate"><span class="pre">getTable</span></code> and <code class="docutils literal notranslate"><span class="pre">deleteTable</span></code> methods exist but there is no <code class="docutils literal notranslate"><span class="pre">createTable</span></code> method. This is a limitation from the Databricks end. Use the Databricks Web Interface or SQL queries through the <a class="reference internal" href="JDBCWorkflow.html"><span class="std std-doc">JDBC and Database Toolbox workflows</span></a> for creating tables.</p>
+</div>
+</section>
+<section id="authentication-and-authorization">
+<h3>Authentication and Authorization<a class="headerlink" href="#authentication-and-authorization" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">UnityCatalog</span></code> class uses the same <a class="reference internal" href="Authentication.html"><span class="std std-doc">authentication</span></a> as all other API interfaces in the package meaning it can be configured through <code class="docutils literal notranslate"><span class="pre">databricks.json</span></code>, <code class="docutils literal notranslate"><span class="pre">.databricks-connect</span></code> or by setting the <code class="docutils literal notranslate"><span class="pre">Token</span></code> property.</p>
+<p>Which methods can be called and/or what exactly certain methods will return, depends on the user's authorization. For example some methods can only be called by Databricks Account Administrators or Workspace Administrators. Also, some of the <code class="docutils literal notranslate"><span class="pre">list*</span></code> methods may only return the objects owned by the user when working as a normal user, and <em>all</em> objects when authorized as Account Administrator. For exact details, see the Unity Catalog API specification documentation as provided by Databricks:</p>
+<p><a class="reference external" href="https://api-docs.databricks.com/rest/latest/unity-catalog-api-specification-2-1.html">https://api-docs.databricks.com/rest/latest/unity-catalog-api-specification-2-1.html</a></p>
+</section>
+</section>
+<section id="data-structure-classes">
+<h2>Data Structure Classes<a class="headerlink" href="#data-structure-classes" title="Link to this heading"></a></h2>
+<p>The data structure classes implemented in the <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.unitycatalog</span></code> package are used to return information about Unity Catalog objects to the user when querying or listing object and/or allow the user to configure properties of Unity Catalog objects when creating or updating them.</p>
+<p>When a data structure object is required as input to a <code class="docutils literal notranslate"><span class="pre">create*</span></code> or <code class="docutils literal notranslate"><span class="pre">update*</span></code> methods, some of the properties <em>must</em> be set, some may be <em>optional</em> and some may be ignored by a specific operation, for example:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="nb">help</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">UnityCatalog</span><span class="p">.</span><span class="n">createCatalog</span>
+<span class="go">  createCatalog creates a new catalog.</span>
+
+<span class="go">  Example:</span>
+
+<span class="go">    result = uc.createCatalog(cataloginfo);</span>
+
+<span class="go">  Required Inputs:</span>
+<span class="hll"><span class="go">    cataloginfo</span>
+</span><span class="hll"><span class="go">        Description:</span>
+</span><span class="hll"><span class="go">            settings/configuration for the new catalog</span>
+</span><span class="hll"><span class="go">        Type:</span>
+</span><span class="hll"><span class="go">            databricks.datastructures.unitycatalog.CatalogInfo</span>
+</span><span class="hll"><span class="go">        Required Properties in the data structure which must be set:</span>
+</span><span class="hll"><span class="go">            name</span>
+</span><span class="hll"><span class="go">        Optional Properties in the data structure which can be set:</span>
+</span><span class="hll"><span class="go">            comment</span>
+</span><span class="hll"><span class="go">            ucproperties</span>
+</span><span class="hll"><span class="go">            provider_name</span>
+</span><span class="hll"><span class="go">            share_name</span>
+</span>
+<span class="go">  Outputs:</span>
+<span class="go">    result</span>
+<span class="go">        Description:</span>
+<span class="go">            settings/configuration of the created catalog</span>
+<span class="go">        Type:</span>
+<span class="go">            databricks.datastructures.unitycatalog.CatalogInfo</span>
+
+<span class="go">  See Also: databricks.datastructures.unitycatalog.CatalogInfo</span>
+</pre></div>
+</div>
+<p>Shows that when working with the <code class="docutils literal notranslate"><span class="pre">createCatalog</span></code> method a <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.unitycatalog.CatalogInfo</span></code> data structure must be supplied as input. Its <code class="docutils literal notranslate"><span class="pre">name</span></code> property <em>must</em> be set and <code class="docutils literal notranslate"><span class="pre">comment</span></code>, <code class="docutils literal notranslate"><span class="pre">ucproperties</span></code>, <code class="docutils literal notranslate"><span class="pre">provider_name</span></code> and <code class="docutils literal notranslate"><span class="pre">share_name</span></code> are <em>optional</em>, other properties like <code class="docutils literal notranslate"><span class="pre">created_by</span></code> <em>cannot</em> be set by the user. To see all properties of the <code class="docutils literal notranslate"><span class="pre">CatalogInfo</span></code> class, use:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="nb">help</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="p">.</span><span class="n">CatalogInfo</span>
+<span class="go">  CatalogInfo Databricks Data Structure</span>
+<span class="go"> </span>
+<span class="go">  databricks.datastructures.unitycatalog.CatalogInfo Properties:</span>
+<span class="go">    name - of Catalog relative to parent metastore</span>
+<span class="go">    comment - User-supplied free-form text</span>
+<span class="go">    ucproperties - Extensible Catalog properties</span>
+<span class="go">    owner - Username/groupname of Catalog owner</span>
+<span class="go">    provider_name - For Delta Sharing Catalogs: the name of the delta sharing</span>
+<span class="go">       provider</span>
+<span class="go">    share_name - For Delta Sharing Catalogs: the name of the share under the share</span>
+<span class="go">       provider</span>
+<span class="go">    metastore_id - Unique identifier of the parent Metastore</span>
+<span class="go">    created_at - Date of Catalog creation</span>
+<span class="go">    created_by - Username of Catalog creator</span>
+<span class="go">    updated_at - Date of last update to Catalog</span>
+<span class="go">    updated_by - Username of user who last updated Catalog</span>
+</pre></div>
+</div>
+<p>For a full overview of all data structure classes, refer to the <a class="reference internal" href="DatabricksAPI.html"><span class="std std-doc">API Reference</span></a>.</p>
+<section id="usage">
+<h3>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h3>
+<p>In MATLAB to create a data structure instance, simply instantiate an object of the right class:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">catalog</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="p">.</span><span class="n">CatalogInfo</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>And then set the properties to the desired values, for example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">catalog</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"MyNewCatalog"</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Data structures can also be nested, for example <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.unitycatalog.StorageCredentialInfo</span></code> has a property <code class="docutils literal notranslate"><span class="pre">azure_service_principal</span></code> which is of type <code class="docutils literal notranslate"><span class="pre">databricks.datastructures.unitycatalog.AzureServicePrincipal</span></code>. The easiest way to fill-out properties of such nested properties is to work with subscripted assignment:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="go">% Create the outer object</span>
+<span class="gp">&gt;&gt; </span><span class="n">sci</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="p">.</span><span class="n">StorageCredentialInfo</span><span class="p">;</span>
+<span class="go">% Index into the property which holds another object and set one of its properties</span>
+<span class="gp">&gt;&gt; </span><span class="n">sci</span><span class="p">.</span><span class="n">azure_service_principal</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">application_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"72330b4c-f020-4736-a588-66168c2360de"</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Note the <code class="docutils literal notranslate"><span class="pre">(1)</span></code> subscript which will first create the object instance, and it is then immediately possible to set one of its properties, <code class="docutils literal notranslate"><span class="pre">application_id</span></code> in this example, to some value.</p>
+<p>Alternatively it is of course also possible to first create an instance of the nested data structure class and then assign it to the property in the outer object:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% First create the nested object and set its properties</span>
+<span class="n">asp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="p">.</span><span class="n">AzureServicePrincipal</span><span class="p">;</span>
+<span class="n">asp</span><span class="p">.</span><span class="n">application_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"72330b4c-f020-4736-a588-66168c2360de"</span><span class="p">;</span>
+<span class="c">% Create the outer object</span>
+<span class="n">sci</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="p">.</span><span class="n">StorageCredentialInfo</span><span class="p">;</span>
+<span class="c">% Assign the entire nested object to the property</span>
+<span class="n">sci</span><span class="p">.</span><span class="n">azure_service_principal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">asp</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="frominputs-method">
+<h3>fromInputs method<a class="headerlink" href="#frominputs-method" title="Link to this heading"></a></h3>
+<p>All data structures which may be used as inputs, have a static <code class="docutils literal notranslate"><span class="pre">fromInputs</span></code> method which allows immediately setting properties using Name-Value pairs upon construction. For example, the following one-liner can be used to immediately create a <code class="docutils literal notranslate"><span class="pre">CatalogInfo</span></code> instance with properties <code class="docutils literal notranslate"><span class="pre">name</span></code> and <code class="docutils literal notranslate"><span class="pre">comment</span></code> set to some values:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">catalog</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="p">.</span><span class="n">CatalogInfo</span><span class="p">.</span><span class="n">fromInputs</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span><span class="s">"MyNewCatalog"</span><span class="p">,</span><span class="s">"comment"</span><span class="p">,</span><span class="s">"My Comment"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>And this can also be used in a nested way:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Importing the package is not required but allows writing shorter code</span>
+<span class="nb">import</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="o">.*</span>
+<span class="c">% Use fromInputs in a nested way</span>
+<span class="n">sci</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">StorageCredentialInfo</span><span class="p">.</span><span class="n">fromInputs</span><span class="p">(</span><span class="s">"azure_service_principal"</span><span class="p">,</span><span class="k">...</span>
+<span class="w">    </span><span class="n">AzureServicePrincipal</span><span class="p">.</span><span class="n">fromInputs</span><span class="p">(</span><span class="s">"application_id"</span><span class="p">,</span><span class="s">"72330b4c-f020-4736-a588-66168c2360de"</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="example-usage">
+<h2>Example Usage<a class="headerlink" href="#example-usage" title="Link to this heading"></a></h2>
+<section id="catalog-example">
+<h3>Catalog example<a class="headerlink" href="#catalog-example" title="Link to this heading"></a></h3>
+<p>This example shows how to list, create, update and delete catalogs. Working with other objects (e.g. schemas) will be very similar.</p>
+<p>Import package for shorter code:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="nb">import</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="o">.*</span>
+</pre></div>
+</div>
+<p>Create the client instance</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">uc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">UnityCatalog</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>List all catalogs</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">catalogs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">uc</span><span class="p">.</span><span class="n">listCatalogs</span><span class="p">()</span>
+
+<span class="go">catalogs = </span>
+
+<span class="go">  CatalogInfoList with properties:</span>
+
+<span class="go">    catalogs: [1×2 databricks.datastructures.unitycatalog.CatalogInfo]</span>
+</pre></div>
+</div>
+<p>Show the details of one the catalogs in the list</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">catalogs</span><span class="p">.</span><span class="n">catalogs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="go">ans = </span>
+
+<span class="go">  CatalogInfo with properties:</span>
+
+<span class="go">             name: "main"</span>
+<span class="go">          comment: "Main catalog (auto-created)"</span>
+<span class="go">     ucproperties: [0×0 JSONMapperMap]</span>
+<span class="go">            owner: "user@example.com"</span>
+<span class="go">    provider_name: [0×0 string]</span>
+<span class="go">       share_name: [0×0 string]</span>
+<span class="go">     metastore_id: "27a49677-ca3a-44f6-934f-090c7d14f232"</span>
+<span class="go">       created_at: 11-Jan-2023 15:52:37</span>
+<span class="go">       created_by: "user@example.com"</span>
+<span class="go">       updated_at: 11-Jan-2023 15:52:37</span>
+<span class="go">       updated_by: "user@example.com"</span>
+</pre></div>
+</div>
+<p>Create a new catalog</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">newCatalogName</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"myNewCatalog"</span><span class="p">;</span>
+<span class="gp">&gt;&gt; </span><span class="n">newCatalogInfo</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">uc</span><span class="p">.</span><span class="n">createCatalog</span><span class="p">(</span><span class="n">CatalogInfo</span><span class="p">.</span><span class="n">fromInputs</span><span class="p">(</span><span class="s">"name"</span><span class="p">,</span><span class="n">newCatalogName</span><span class="p">))</span>
+
+<span class="go">newCatalogInfo = </span>
+
+<span class="go">  CatalogInfo with properties:</span>
+
+<span class="go">             name: "mynewcatalog"</span>
+<span class="go">          comment: [0×0 string]</span>
+<span class="go">     ucproperties: [0×0 JSONMapperMap]</span>
+<span class="go">            owner: "user@example.com"</span>
+<span class="go">    provider_name: [0×0 string]</span>
+<span class="go">       share_name: [0×0 string]</span>
+<span class="go">     metastore_id: "1472f26e-6c88-4d67-9712-d1000cd7e2e9"</span>
+<span class="go">       created_at: 26-Jan-2023 11:08:32</span>
+<span class="go">       created_by: "user@example.com"</span>
+<span class="go">       updated_at: 26-Jan-2023 11:08:32</span>
+<span class="go">       updated_by: "user@example.com"</span>
+</pre></div>
+</div>
+<p>Update the comment property of this catalog</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">updatedCatalogInfo</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">uc</span><span class="p">.</span><span class="n">updateCatalog</span><span class="p">(</span><span class="n">newCatalogName</span><span class="p">,</span><span class="w"> </span><span class="n">CatalogInfo</span><span class="p">.</span><span class="n">fromInputs</span><span class="p">(</span><span class="s">"comment"</span><span class="p">,</span><span class="s">"My Comment"</span><span class="p">))</span>
+
+<span class="go">updatedCatalogInfo = </span>
+
+<span class="go">  CatalogInfo with properties:</span>
+
+<span class="go">             name: "mynewcatalog"</span>
+<span class="go">          comment: "My Comment"</span>
+<span class="go">     ucproperties: [0×0 JSONMapperMap]</span>
+<span class="go">            owner: "user@example.com"</span>
+<span class="go">    provider_name: [0×0 string]</span>
+<span class="go">       share_name: [0×0 string]</span>
+<span class="go">     metastore_id: "1472f26e-6c88-4d67-9712-d1000cd7e2e9"</span>
+<span class="go">       created_at: 26-Jan-2023 11:08:32</span>
+<span class="go">       created_by: "user@example.com"</span>
+<span class="go">       updated_at: 26-Jan-2023 11:09:47</span>
+<span class="go">       updated_by: "user@example.com"</span>
+</pre></div>
+</div>
+<p>Delete the catalog. To be able to delete, first the catalog must be empty, so first actually delete the automatically created <code class="docutils literal notranslate"><span class="pre">default</span></code> schema</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">uc</span><span class="p">.</span><span class="n">deleteSchema</span><span class="p">(</span><span class="n">newCatalogName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">".default"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>and then delete the empty catalog</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">uc</span><span class="p">.</span><span class="n">deleteCatalog</span><span class="p">(</span><span class="n">newCatalogName</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="permissions-example">
+<h2>Permissions example<a class="headerlink" href="#permissions-example" title="Link to this heading"></a></h2>
+<p>The following example shows how to work with <code class="docutils literal notranslate"><span class="pre">updatePermissions</span></code>. To update permissions do not directly update some <code class="docutils literal notranslate"><span class="pre">permissions</span></code> property of some existing object. It is required to provide a list of <em>changes</em> to make to the existing permissions of an existing object. Specify <em>which permissions</em> to <em>add</em> or <em>remove</em> for <em>which principal</em>.</p>
+<p>In the example below it is assumed a specific user <code class="docutils literal notranslate"><span class="pre">someuser&#64;example.com</span></code> already has <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> permissions on table <code class="docutils literal notranslate"><span class="pre">main.default.mytable</span></code>. First remove that specific permission, and instead add <code class="docutils literal notranslate"><span class="pre">SELECT</span></code> permissions for the user's whole group named <code class="docutils literal notranslate"><span class="pre">somegroup</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Import the package for shorter code</span>
+<span class="nb">import</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="o">.*</span>
+<span class="c">% Instantiate a PermissionsDiff</span>
+<span class="n">pd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">PermissionsDiff</span><span class="p">;</span>
+<span class="c">% Add the changes</span>
+<span class="c">% Remove SELECT permissions for the specific user</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">changes</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">principal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"someuser@example.com"</span><span class="p">;</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">changes</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">remove</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"SELECT"</span><span class="p">;</span>
+<span class="c">% Add SELECT permissions for the group</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">changes</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">principal</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"somegroup"</span><span class="p">;</span>
+<span class="n">pd</span><span class="p">.</span><span class="n">changes</span><span class="p">(</span><span class="mi">2</span><span class="p">).</span><span class="n">add</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"SELECT"</span><span class="p">;</span>
+<span class="c">% Call updatePermissions</span>
+<span class="n">uc</span><span class="p">.</span><span class="n">updatePermissions</span><span class="p">(</span><span class="s">"table"</span><span class="p">,</span><span class="s">"main.default.mytable"</span><span class="p">,</span><span class="n">pd</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="artifact-allowlists">
+<h2>Artifact Allowlists<a class="headerlink" href="#artifact-allowlists" title="Link to this heading"></a></h2>
+<p>This feature is a public preview on the Databricks platfrom, The associated APIs may change without notice. In Databricks Runtime 13.3 and above it allows the addition libraries and init scripts to the allowlist in Unity Catalog so that users can use these artifacts on compute configured with shared access mode.</p>
+<p>The relevant methods are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">setArtifactAllowlist</span></code> - Set the artifact allowlist of a certain artifact type.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">getArtifactAllowlists</span></code> - Gets the artifact allowlist of a certain artifact type.</p></li>
+</ul>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">uc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">UnityCatalog</span><span class="p">;</span>
+<span class="gp">&gt;&gt; </span><span class="n">matcher</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="p">.</span><span class="n">ArtifactMatchers</span><span class="p">;</span>
+<span class="gp">&gt;&gt; </span><span class="n">matcher</span><span class="p">.</span><span class="n">artifact</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"/Volumes/main/default/myvolume/myDir/runtime_install_r2023b.sh"</span><span class="p">;</span>
+<span class="gp">&gt;&gt; </span><span class="n">matcher</span><span class="p">.</span><span class="n">match_type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"PREFIX_MATCH"</span><span class="p">;</span>
+<span class="gp">&gt;&gt; </span><span class="n">alr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="p">.</span><span class="n">AllowlistRequest</span><span class="p">;</span>
+<span class="gp">&gt;&gt; </span><span class="n">alr</span><span class="p">.</span><span class="n">artifact_matchers</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">matcher</span>
+<span class="gp">&gt;&gt; </span><span class="n">artifact_type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="p">.</span><span class="n">ArtifactType</span><span class="p">.</span><span class="n">INIT_SCRIPT</span><span class="p">;</span>
+<span class="gp">&gt;&gt; </span><span class="n">setResult</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">uc</span><span class="p">.</span><span class="n">setArtifactAllowlist</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">,</span><span class="w"> </span><span class="n">alr</span><span class="p">)</span>
+<span class="go">setResult = </span>
+<span class="go">  SetArtifactAllowlistResp with properties:</span>
+
+<span class="go">    artifact_matchers: [1×1 databricks.datastructures.unitycatalog.ArtifactMatchers]</span>
+<span class="go">         metastore_id: "3ce438d4-321c-49ec-9ac1-123123123123"</span>
+<span class="go">           created_by: "joe@example.com"</span>
+<span class="go">           created_at: 04-Dec-2023 13:50:23</span>
+</pre></div>
+</div>
+<p>List init script allow list:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">uc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">UnityCatalog</span><span class="p">();</span>
+<span class="gp">&gt;&gt; </span><span class="n">artifact_type</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">unitycatalog</span><span class="p">.</span><span class="n">ArtifactType</span><span class="p">.</span><span class="n">INIT_SCRIPT</span>
+<span class="gp">&gt;&gt; </span><span class="n">getResult</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">uc</span><span class="p">.</span><span class="n">getArtifactAllowlists</span><span class="p">(</span><span class="n">artifact_type</span><span class="p">)</span>
+<span class="go">getResult = </span>
+<span class="go">  GetArtifactAllowlistsResp with properties:</span>
+
+<span class="go">    artifact_matchers: [1×1 databricks.datastructures.unitycatalog.ArtifactMatchers]</span>
+<span class="go">         metastore_id: "3ce438d4-321c-49ec-9ac1-123123123123"</span>
+<span class="go">           created_by: "joe@example.com"</span>
+<span class="go">           created_at: 04-Dec-2023 13:50:23</span>
+<span class="gp">&gt;&gt;</span>
+</pre></div>
+</div>
+<p>For further information see: <a class="reference external" href="https://docs.databricks.com/api/workspace/artifactallowlists">https://docs.databricks.com/api/workspace/artifactallowlists</a></p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="TokenAPI.html" class="btn btn-neutral float-left" title="Token API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="WorkspacesAPI.html" class="btn btn-neutral float-right" title="Workspaces API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

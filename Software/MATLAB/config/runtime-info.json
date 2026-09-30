@@ -1,0 +1,93 @@
+{
+  "R2022b": {
+    "runtime": "https://ssd.mathworks.com/supportfiles/downloads/R2022b/Release/10/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2022b_Update_10_glnxa64.zip",
+    "deps": {
+      "dbx13_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2022b/ubuntu22.04/base-dependencies.txt",
+      "dbx14_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2022b/ubuntu22.04/base-dependencies.txt",
+      "dbx15_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2022b/ubuntu22.04/base-dependencies.txt",
+      "dbx16_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2022b/ubuntu24.04/base-dependencies.txt"
+    }
+  },
+  "R2023a": {
+    "runtime": "https://ssd.mathworks.com/supportfiles/downloads/R2023a/Release/8/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2023a_Update_8_glnxa64.zip",
+    "deps": {
+      "dbx13_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2023a/ubuntu22.04/base-dependencies.txt",
+      "dbx14_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2023a/ubuntu22.04/base-dependencies.txt",
+      "dbx15_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2023a/ubuntu22.04/base-dependencies.txt",
+      "dbx16_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2023a/ubuntu24.04/base-dependencies.txt"
+    }
+  },
+  "R2023b": {
+    "runtime": "https://ssd.mathworks.com/supportfiles/downloads/R2023b/Release/11/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2023b_Update_11_glnxa64.zip",
+    "deps": {
+      "dbx13_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2023b/ubuntu22.04/base-dependencies.txt",
+      "dbx14_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2023b/ubuntu22.04/base-dependencies.txt",
+      "dbx15_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2023b/ubuntu22.04/base-dependencies.txt",
+      "dbx16_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2023b/ubuntu24.04/base-dependencies.txt"
+    }
+  },
+  "R2024a": {
+    "runtime": "https://ssd.mathworks.com/supportfiles/downloads/R2024a/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2024a_Update_9_glnxa64.zip",
+    "deps": {
+      "dbx13_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2024a/ubuntu22.04/base-dependencies.txt",
+      "dbx14_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2024a/ubuntu22.04/base-dependencies.txt",
+      "dbx15_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2024a/ubuntu22.04/base-dependencies.txt",
+      "dbx16_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2024a/ubuntu24.04/base-dependencies.txt"
+    }
+  },
+  "R2024b": {
+    "runtime": "https://ssd.mathworks.com/supportfiles/downloads/R2024b/Release/9/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2024b_Update_9_glnxa64.zip",
+    "deps": {
+      "dbx13_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2024b/ubuntu22.04/base-dependencies.txt",
+      "dbx14_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2024b/ubuntu22.04/base-dependencies.txt",
+      "dbx15_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2024b/ubuntu22.04/base-dependencies.txt",
+      "dbx16_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2024b/ubuntu24.04/base-dependencies.txt",
+      "dbx17_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2024b/ubuntu24.04/base-dependencies.txt",
+      "dbx18_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2024b/ubuntu24.04/base-dependencies.txt"
+    }
+  },
+  "R2025a": {
+    "runtime": "https://ssd.mathworks.com/supportfiles/downloads/R2025a/Release/1/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2025a_Update_1_glnxa64.zip",
+    "deps": {
+      "dbx13_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2025a/ubuntu22.04/base-dependencies.txt",
+      "dbx14_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2025a/ubuntu22.04/base-dependencies.txt",
+      "dbx15_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2025a/ubuntu22.04/base-dependencies.txt",
+      "dbx16_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2025a/ubuntu24.04/base-dependencies.txt",
+      "dbx17_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2025a/ubuntu24.04/base-dependencies.txt",
+      "dbx18_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2025a/ubuntu24.04/base-dependencies.txt"
+    }
+  },
+  "R2025b": {
+    "runtime": "https://ssd.mathworks.com/supportfiles/downloads/R2025b/Release/6/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2025b_Update_6_glnxa64.zip",
+    "deps": {
+      "dbx13_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2025b/ubuntu22.04/base-dependencies.txt",
+      "dbx14_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2025b/ubuntu22.04/base-dependencies.txt",
+      "dbx15_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2025b/ubuntu22.04/base-dependencies.txt",
+      "dbx16_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2025b/ubuntu24.04/base-dependencies.txt",
+      "dbx17_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2025b/ubuntu24.04/base-dependencies.txt",
+      "dbx18_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2025b/ubuntu24.04/base-dependencies.txt"
+    }
+  },
+  "R2026a": {
+    "runtime": "https://ssd.mathworks.com/supportfiles/downloads/R2026a/Release/5/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2026a_Update_5_glnxa64.zip",
+    "deps": {
+      "dbx13_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2026a/ubuntu22.04/base-dependencies-amd64.txt",
+      "dbx14_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2026a/ubuntu22.04/base-dependencies-amd64.txt",
+      "dbx15_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2026a/ubuntu22.04/base-dependencies-amd64.txt",
+      "dbx16_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2026a/ubuntu24.04/base-dependencies.txt",
+      "dbx17_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2026a/ubuntu24.04/base-dependencies.txt",
+      "dbx18_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2026a/ubuntu24.04/base-dependencies.txt"
+    }
+  },
+  "R2026b": {
+    "runtime": "https://ssd.mathworks.com/supportfiles/downloads/R2026b/Prerelease/3/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2026b_Prerelease_Update_3_glnxa64.zip",
+    "deps": {
+      "dbx13_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2026b/ubuntu22.04/base-dependencies-amd64.txt",
+      "dbx14_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2026b/ubuntu22.04/base-dependencies-amd64.txt",
+      "dbx15_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2026b/ubuntu22.04/base-dependencies-amd64.txt",
+      "dbx16_4": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2026b/ubuntu24.04/base-dependencies-amd64.txt",
+      "dbx17_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2026b/ubuntu24.04/base-dependencies-amd64.txt",
+      "dbx18_3": "https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-deps/r2026b/ubuntu24.04/base-dependencies-amd64.txt"
+    }
+  }
+}

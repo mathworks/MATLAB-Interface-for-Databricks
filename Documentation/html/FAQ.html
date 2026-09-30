@@ -1,0 +1,685 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frequently Asked Questions (FAQ) &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="MATLAB Interface for Databricks - API Reference" href="DatabricksAPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Frequently Asked Questions (FAQ)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#long-path-support">Long Path support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#databricks-arm-support">Databricks ARM support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#enable-matlab-startup-diagnostics">Enable MATLAB startup diagnostics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-simulink-features-are-supported-in-matlab-on-databricks">What Simulink features are supported in MATLAB <em>on</em> Databricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#illegal-parquet-type-int64-time-micros">Illegal Parquet type: INT64 (TIME_MICROS)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#did-not-start-the-server-desired-port-was-31515">Did not start the server. Desired port was 31515</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#invalid-shard-address-certificate-chain-validation-error">Invalid shard address / Certificate chain validation error</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#saving-a-mat-file-to-dbfs-fails">Saving a .mat file to /dbfs fails</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spark-submit-fails-to-find-jar-on-dbfs">Spark Submit fails to find jar on dbfs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#checking-if-the-matlab-runtime-is-configured-on-a-cluster">Checking if the MATLAB Runtime is configured on a cluster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cluster-startup-fails-with-java-lang-noclassdeffounderror">Cluster startup fails with java.lang.NoClassDefFoundError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-connectivity-test">Basic connectivity test</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-an-exception-in-thread-main-java-lang-nosuchmethoderror">Getting an Exception in thread &quot;main&quot; java.lang.NoSuchMethodError</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-version-of-db-connect-should-i-use">What version of DB Connect should I use?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#jars-do-not-exist">Jars do not exist</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#spark-reports-a-bind-exception">Spark reports a bind exception</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#what-is-dbc-format">What is DBC format?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployed-simulink-simulation-fails-to-run-with-error-referring-libmwdastudio-so">Deployed Simulink simulation fails to run with error referring <code class="docutils literal notranslate"><span class="pre">libmwdastudio.so</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#deployed-simulink-simulation-fails-to-run-with-lib-x86-64-linux-gnu-libc-so-6-version-glibc-2-34-not-found">Deployed Simulink simulation fails to run with &quot;/lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found&quot;</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#name-change-sql-endpoints-to-sql-warehouses">Name change SQL Endpoints to SQL Warehouses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#error-creating-directory-users-defaultname-example-com-mathworks">Error Creating directory /Users/defaultname&#64;example.com/MathWorks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#base64-encoding-decoding-mex-files">Base64 encoding/decoding mex files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#problem-when-build-a-wheel-file-on-a-network-drive">Problem when build a wheel file on a network drive</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Frequently Asked Questions (FAQ)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/FAQ.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="frequently-asked-questions-faq">
+<h1>Frequently Asked Questions (FAQ)<a class="headerlink" href="#frequently-asked-questions-faq" title="Link to this heading"></a></h1>
+<section id="long-path-support">
+<h2>Long Path support<a class="headerlink" href="#long-path-support" title="Link to this heading"></a></h2>
+<p>If using Windows® and parts of the package appear to be &quot;missing&quot;, this may be due
+to Windows path length limitations. Windows has a maximum path length of 260
+(256 usable) characters. This can be increased to 32,767 characters by enabling
+long path support.</p>
+<p>For more information see: <a class="reference external" href="https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry">https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry</a></p>
+<p>Once enabled the partial copy of the package should be deleted and the package
+should be reinstalled from the original download file.</p>
+</section>
+<section id="databricks-arm-support">
+<h2>Databricks ARM support<a class="headerlink" href="#databricks-arm-support" title="Link to this heading"></a></h2>
+<p>Clusters used to run MATLAB on Databricks® must be x86-64 based. ARM-based clusters
+(such as AWS® Graviton-based instances) are not supported. The error message below
+indicates an attempt to install MATLAB on an ARM-based cluster:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/tmp/MATLAB_installer/install: 1: exec: /tmp/MATLAB_installer/bin/linux-arm-64/install_unix_legacy: not found
+Install of MATLAB runtime failed, returned: 127
+</pre></div>
+</div>
+<p>Apple® silicon ARM based systems are supported as desktop clients.</p>
+</section>
+<section id="enable-matlab-startup-diagnostics">
+<h2>Enable MATLAB startup diagnostics<a class="headerlink" href="#enable-matlab-startup-diagnostics" title="Link to this heading"></a></h2>
+<p>When running MATLAB on Databricks, the startup process is more complex.
+I.e. starting the MATLAB Web Proxy and desktop MATLAB from a custom Docker® image.
+It can be difficult to determine a point of failure especially if introducing
+custom startup code. For example, to install in-house toolboxes prior to the end
+user getting access to the MATLAB IDE.</p>
+<p>This can be addressed by setting the following environment variables at cluster
+creation time:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>MW_DIAGNOSTIC_SPEC<span class="s1">' = ".*=fatal,critical,error,warning;connector::worker.*=all;connector::container::http=all;connector::lifecycle=all;connector::http::server=all"</span>
+
+<span class="s1">'</span>MW_DIAGNOSTIC_DEST<span class="err">'</span><span class="o">=</span><span class="s2">"file=/tmp/myLog.txt"</span>
+</pre></div>
+</div>
+<p>Once MATLAB has started, or attempted to start, the log file can be retrieved from
+the cluster by using a notebook to copy it to a workspace location from which
+it can be downloaded via the Databricks UI.</p>
+</section>
+<section id="what-simulink-features-are-supported-in-matlab-on-databricks">
+<h2>What Simulink features are supported in MATLAB <em>on</em> Databricks<a class="headerlink" href="#what-simulink-features-are-supported-in-matlab-on-databricks" title="Link to this heading"></a></h2>
+<p>When running the MATLAB/Simulink® desktop environment on Databricks some limitations
+apply, e.g. hardware in-the-loop scenarios are not possible as hardware cannot be
+directly connected.</p>
+<p>The following high-level guidance aimed at MATLAB® Online™ is broadly applicable
+as the underlying browser based desktop approaches are very similar:
+<a class="reference external" href="https://www.mathworks.com/products/matlab-online/limitations.html">https://www.mathworks.com/products/matlab-online/limitations.html</a>
+For clarification on specific use cases contact: <a class="reference external" href="mailto:databricks&#37;&#52;&#48;mathworks&#46;com">databricks<span>&#64;</span>mathworks<span>&#46;</span>com</a>.</p>
+</section>
+<section id="illegal-parquet-type-int64-time-micros">
+<h2>Illegal Parquet type: INT64 (TIME_MICROS)<a class="headerlink" href="#illegal-parquet-type-int64-time-micros" title="Link to this heading"></a></h2>
+<p>The following error can indicate a current incompatibility between Spark™ and <code class="docutils literal notranslate"><span class="pre">.parquet</span></code> files
+written by MATLAB, using <code class="docutils literal notranslate"><span class="pre">parquetwrite()</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>...java.io.IOException: Could not read or convert schema for file: dbfs:/myData/myDurationData.parquet
+...
+Caused by: org.apache.spark.sql.AnalysisException: Illegal Parquet type: INT64 (TIME_MICROS);
+ at org.apache.spark.sql.execution.datasources.parquet.
+</pre></div>
+</div>
+<p>The issue arises if the MATLAB data contains a duration data type. Current workarounds are:</p>
+<ul class="simple">
+<li><p>Write a numeric value e.g. an <code class="docutils literal notranslate"><span class="pre">int64</span></code> as an alternative to represent a number of milliseconds etc.</p></li>
+<li><p>Write two datetimes in the parquet, e.g. a start and stop time and compute the difference in Spark.</p></li>
+<li><p>Write and import data in another format e.g. <code class="docutils literal notranslate"><span class="pre">.csv</span></code>.</p></li>
+</ul>
+</section>
+<section id="did-not-start-the-server-desired-port-was-31515">
+<h2>Did not start the server. Desired port was 31515<a class="headerlink" href="#did-not-start-the-server-desired-port-was-31515" title="Link to this heading"></a></h2>
+<p>This error can be caused by security restriction on the cluster that prevent the MATLAB runtime from opening a given port.</p>
+<p>In version of the package &gt; 2.0.2 this should be addressed by the automatic addition of:
+<code class="docutils literal notranslate"><span class="pre">MW_CONNECTOR_CONNECTION_PROFILES=&quot;noop&quot;</span></code> as a Spark environment variable when the cluster is configured.
+However is cluster is started by other means then this value should be set in addition to the MATLAB runtime's required LD_LIBRARY_PATH settings as Spark environment variables.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MatlabRuntimeError: An Error occurred when evaluating the result from a function. Details: Dynamic exception type: std::runtime_error
+std::exception::what: Did not start the server. Desired port was 31515. Last error was: Failed to start server: 127.0.0.1:31614
+</pre></div>
+</div>
+</section>
+<section id="invalid-shard-address-certificate-chain-validation-error">
+<h2>Invalid shard address / Certificate chain validation error<a class="headerlink" href="#invalid-shard-address-certificate-chain-validation-error" title="Link to this heading"></a></h2>
+<p>An error similar to the following most simply may indicate an invalid host value being used.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ds = spark.range(10)
+15:59:41.804 [main] ERROR com.databricks.service.SparkClientManager - Fail to get the SparkClient
+java.util.concurrent.ExecutionException: com.databricks.service.SparkServiceConnectionException: Invalid shard address: "https://adb-1122334455667788.19.azuredatabricks.net"
+
+To connect to a Databricks cluster, you must specify the URL of your Databricks shard.
+Shard address: The URL of your shard (e.g., "https://dbc-01234567-89ab.cloud.databricks.com")
+  - Get current value: spark.conf.get("spark.databricks.service.address")
+  - Set via conf: spark.conf.set("spark.databricks.service.address", &lt;your shard address&gt;)
+  - Set via environment variable: export DATABRICKS_ADDRESS=&lt;your shard address&gt;
+.
+.
+.
+Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target
+                at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:141)
+                at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:126)
+                at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:280)
+                at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:392)
+</pre></div>
+</div>
+<p>To rule this out double check the value used by Databricks Connect in the .databricks-connect file.
+Test the REST API connectivity with the same host value e.g. using a basic DBFS call.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">DBFS</span><span class="p">;</span>
+<span class="n">l</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">ls</span><span class="p">(</span><span class="s">'/'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A more problematic cause can be a failed SSL hand shake in the Databricks Connect
+communication between MATLAB and the cluster.
+Check the error log for reports similar to:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path
+to requested target
+</pre></div>
+</div>
+<p>This may be caused by a proxy between the MATLAB client and the Databricks cluster
+for which MATLAB does not have a trusted certificate chain. This can be addressed
+by adding an additional certificate to the MATLAB Java® trust store using the
+<code class="docutils literal notranslate"><span class="pre">keytool</span></code> program, which is part of the the Java Runtime Environment (JRE™).</p>
+<p><strong>Warning</strong>: Only trust a certificate that you know to be trustworthy, having
+checked with IT security. An invalid SSL handshake may indicate a serious security
+issue and trusting a malicious certificate risks exposing data and credentials.</p>
+<p>MATLAB JRE's copy of <code class="docutils literal notranslate"><span class="pre">keytool</span></code> by default is stored in:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Linux: /usr/local/MATLAB/R2025b/sys/java/jre/glnxa64/jre/bin
+or
+Windows: c:\Program Files\MATLAB\R2022a\sys\java\jre\win64\jre\bin
+</pre></div>
+</div>
+<p>From the command line in the JRE directory:</p>
+<p>Linux®:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>keytool<span class="w"> </span>-importcert<span class="w"> </span>-trustcacerts<span class="w"> </span>-file<span class="w"> </span>newCert.pem<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>-alias<span class="w"> </span>myalias1<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>-keystore<span class="w"> </span>../lib/security/cacerts<span class="w"> </span><span class="se">\</span>
+<span class="w"> </span>-storepass<span class="w"> </span>changeit
+</pre></div>
+</div>
+<p>Windows:</p>
+<div class="highlight-bat notranslate"><div class="highlight"><pre><span></span>keytool.exe -importcert -trustcacerts -file <span class="s2">"c:\newCert.cer"</span> -keystore lib\security\cacerts -alias myalias1 -storepass changeit
+</pre></div>
+</div>
+<p>Then restart MATLAB and attempt to create a Spark session and invoke a
+Spark API call. Simply creating a Spark session is not sufficient to
+verify the fix.</p>
+<p>To get more detailed SSL logs create a file call java.opts in a given
+directory containing:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-Djavax.net.debug<span class="o">=</span>ssl:handshake
+</pre></div>
+</div>
+<p>Start MATLAB in that directory to observe increased logging <code class="docutils literal notranslate"><span class="pre">javax.net.debug</span></code>
+accepts a number of other options.
+See: <a class="reference external" href="https://www.mathworks.com/help/matlab/matlab_env/java-opts-file.html">https://www.mathworks.com/help/matlab/matlab_env/java-opts-file.html</a>
+A large amount of output can be expected, using the <code class="docutils literal notranslate"><span class="pre">diary</span> <span class="pre">on/off</span></code> feature
+can be helpful to easily capture output to a file, e.g.:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">diary</span><span class="w"> </span><span class="n">on</span>
+</pre></div>
+</div>
+</section>
+<section id="saving-a-mat-file-to-dbfs-fails">
+<h2>Saving a .mat file to /dbfs fails<a class="headerlink" href="#saving-a-mat-file-to-dbfs-fails" title="Link to this heading"></a></h2>
+<p>Due to a limitation in the FUSE mount used for <code class="docutils literal notranslate"><span class="pre">/dbfs</span></code> certain IO operations
+are not possible, see <a class="reference internal" href="DBFS.html"><span class="std std-doc">DBFS</span></a> for more details.
+Consider using the <a class="reference internal" href="Files.html"><span class="std std-doc">Files</span></a> API instead of DBFS.</p>
+</section>
+<section id="spark-submit-fails-to-find-jar-on-dbfs">
+<h2>Spark Submit fails to find jar on dbfs<a class="headerlink" href="#spark-submit-fails-to-find-jar-on-dbfs" title="Link to this heading"></a></h2>
+<p>An Spark submit task failing with the following error could be due to missing
+<code class="docutils literal notranslate"><span class="pre">/dbfs</span></code> in the path defined for <code class="docutils literal notranslate"><span class="pre">inputLocation</span></code> and <code class="docutils literal notranslate"><span class="pre">SparkJar</span></code>. The output
+location on the other hand does not require <code class="docutils literal notranslate"><span class="pre">/dbfs</span></code>.</p>
+<p>This is an error Log for spark-submit task on databricks cluster.
+The log clearly states that the <code class="docutils literal notranslate"><span class="pre">Local</span> <span class="pre">jar</span> <span class="pre">/example/flightsByCarrierDemo_21a.jar</span> <span class="pre">does</span> <span class="pre">not</span> <span class="pre">exist</span></code>.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>21/04/09 17:26:37 WARN SparkConf: The configuration key 'spark.akka.frameSize' has been deprecated as of Spark 1.6 and may be removed in the future. Please use the new key 'spark.rpc.message.maxSize' instead.
+21/04/09 17:26:39 WARN DependencyUtils: Local jar /example/flightsByCarrierDemo_21a.jar does not exist, skipping.
+21/04/09 17:26:39 WARN SparkSubmit$$anon$2: Failed to load com.mathworks.mlspark.mlsubmit.MatlabSubmit.
+java.lang.ClassNotFoundException: com.mathworks.mlspark.mlsubmit.MatlabSubmit
+  at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+  at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+  at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+  at java.lang.Class.forName0(Native Method)
+  at java.lang.Class.forName(Class.java:348)
+  at org.apache.spark.util.Utils$.classForName(Utils.scala:257)
+  at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:806)
+  at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:161)
+  at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:184)
+  at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:86)
+  at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:920)
+  at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:929)
+  at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+21/04/09 17:26:39 INFO ShutdownHookManager: Shutdown hook called
+21/04/09 17:26:39 INFO ShutdownHookManager: Deleting directory /local_disk0/tmp/spark-1253f705-6769-41bd-a25e-77114ead1a21
+</pre></div>
+</div>
+<p>If the jar actually exists at <code class="docutils literal notranslate"><span class="pre">/example</span></code> on dbfs, the reason could be
+<code class="docutils literal notranslate"><span class="pre">defining</span> <span class="pre">the</span> <span class="pre">Job</span> <span class="pre">has</span> <span class="pre">missing</span> <span class="pre">/dbfs</span> <span class="pre">in</span> <span class="pre">path</span></code> while providing
+input data location and SparkJar location as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Defining path for input, output and application</span>
+
+<span class="n">inputLocation</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"/data/airlinedelay/*.csv"</span><span class="p">;</span>
+<span class="n">sparkApp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"/example/flightsByCarrierDemo_21a.jar"</span><span class="p">;</span>
+<span class="n">outputLocation</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">'/output/output'</span><span class="p">,</span><span class="nb">datestr</span><span class="p">(</span><span class="nb">now</span><span class="p">,</span><span class="mi">30</span><span class="p">)];</span>
+
+<span class="c">% Creating a Job and a Task </span>
+<span class="c">% Assigning the above paths before running a Spark Submit Job on a new cluster</span>
+<span class="n">job</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">;</span>
+<span class="n">job</span><span class="p">.</span><span class="n">setCluster</span><span class="p">(</span><span class="n">cl</span><span class="p">);</span><span class="w"> </span><span class="c">% given cl is a valid cluster definition</span>
+
+<span class="n">task</span><span class="p">.</span><span class="n">Application</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">sparkApp</span><span class="p">;</span>
+<span class="n">task</span><span class="p">.</span><span class="n">Arguments</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="n">task</span><span class="p">.</span><span class="n">MCRROOT</span><span class="p">,</span><span class="k">...</span>
+<span class="w">    </span><span class="n">inputLocation</span><span class="p">,</span><span class="k">...</span>
+<span class="w">    </span><span class="n">outputLocation</span><span class="p">];</span>
+
+<span class="n">job</span><span class="p">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="n">job</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+<span class="n">job</span><span class="p">.</span><span class="n">runNow</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The above translates to the following <code class="docutils literal notranslate"><span class="pre">spark-submit</span></code> task:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Task: spark-submit
+Arguments: ["--class","com.mathworks.mlspark.mlsubmit.MatlabSubmit","--driver-library-path","/usr/local/MATLAB/MATLAB_Runtime/v910/runtime/glnxa64:/usr/local/MATLAB/MATLAB_Runtime/v910/bin/glnxa64:/usr/local/MATLAB/MATLAB_Runtime/v910/sys/os/glnxa64:/usr/local/MATLAB/MATLAB_Runtime/v910/extern/bin/glnxa64","--jars","/usr/local/MATLAB/MATLAB_Runtime/v910/toolbox/mlhadoop/jar/a2.2.0/mwmapreduce.jar,/usr/local/MATLAB/MATLAB_Runtime/v910/toolbox/shared/bigdata/jar/hadoop.2.jar,/usr/local/MATLAB/MATLAB_Runtime/v910/toolbox/compiler/mlspark/jars/2.x/mlspark.jar,","/example/flightsByCarrierDemo_21a.jar","/usr/local/MATLAB/MATLAB_Runtime/v910","/data/airlinedelay/*.csv","/output/output20210409T131006"]
+</pre></div>
+</div>
+<p>The solution in this case would be to change the path to inputLocation and SparkJar as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">inputLocation</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"/dbfs/data/airlinedelay/*.csv"</span><span class="p">;</span>
+<span class="n">sparkApp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"/dbfs/example/flightsByCarrierDemo_21a.jar"</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="checking-if-the-matlab-runtime-is-configured-on-a-cluster">
+<h2>Checking if the MATLAB Runtime is configured on a cluster<a class="headerlink" href="#checking-if-the-matlab-runtime-is-configured-on-a-cluster" title="Link to this heading"></a></h2>
+<p>If the MATLAB Runtime is configured on a given cluster then the LD_LIBRARY_PATH should
+be configured to point to it. This is easily checked by starting a notebook and typing
+the following shell command, note the use of the leading <em>%</em> to pass the command to a
+shell:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>%sh<span class="w"> </span>env<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>MATLAB
+
+<span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/MATLAB_Runtime/runtime/glnxa64:/MATLAB_Runtime/bin/glnxa64:/MATLAB_Runtime/sys/os/glnxa64:/MATLAB_Runtime/extern/bin/glnxa64
+</pre></div>
+</div>
+<p>(Paths will differ slightly in versions prior to v5.0.0)</p>
+<p>The result returns the LD_LIBRARY_PATH variable, To verify that the corresponding
+files exist the following command can be used, again in a notebook, taking the path
+from the LD_LIBRARY_PATH. In this case R2024a is configured.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span>%sh<span class="w"> </span>cat<span class="w"> </span>/MATLAB_Runtime/VersionInfo.xml
+
+<span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="cm">&lt;!-- Version information for MathWorks R2024a Release --&gt;</span>
+<span class="nt">&lt;MathWorks_version_info&gt;</span>
+<span class="w">  </span><span class="nt">&lt;version&gt;</span>24.1.0.2603908<span class="nt">&lt;/version&gt;</span>
+<span class="w">  </span><span class="nt">&lt;release&gt;</span>R2024a<span class="nt">&lt;/release&gt;</span>
+<span class="w">  </span><span class="nt">&lt;description&gt;</span>Update<span class="w"> </span>3<span class="nt">&lt;/description&gt;</span>
+<span class="w">  </span><span class="nt">&lt;date&gt;</span>May<span class="w"> </span>02<span class="w"> </span>2024<span class="nt">&lt;/date&gt;</span>
+<span class="w">  </span><span class="nt">&lt;checksum&gt;</span>803194358<span class="nt">&lt;/checksum&gt;</span>
+<span class="nt">&lt;/MathWorks_version_info&gt;</span>
+</pre></div>
+</div>
+<p>This indicates the runtime is installed and gives some detailed release information.</p>
+</section>
+<section id="cluster-startup-fails-with-java-lang-noclassdeffounderror">
+<h2>Cluster startup fails with java.lang.NoClassDefFoundError<a class="headerlink" href="#cluster-startup-fails-with-java-lang-noclassdeffounderror" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>In release 5.0.0 and greater, while the error may still be indicative of a similar problem,
+<code class="docutils literal notranslate"><span class="pre">runtimes.json</span></code> is no longer used, see <a class="reference internal" href="InstallingMATLABRuntime.html"><span class="std std-doc">InstallingMATLABRuntime.md</span></a></p>
+</div></blockquote>
+<p>If cluster startup fails with java.lang.NoClassDefFoundError:com/mathworks/toolbox/javabuilder/MWApplication
+this error denotes that the MATLAB Runtime was not installed on an on-demand cluster.
+Make sure that /databricks-v0.4.9/Software/MATLAB/config/runtimes.json includes the correct block for your MATLAB version and that the runtime used is the <em>Linux</em> version, one that ends with _glnxa64.zip.</p>
+<p>In addition, include the following call in your cluster setup to ensure that the MATLAB Runtime is enabled on the cluster nodes.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="p">.</span><span class="n">enableMATLABRuntime</span><span class="p">(</span><span class="s">'enableInitLogging'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                       </span><span class="s">'enableRuntimeInstall'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="basic-connectivity-test">
+<h2>Basic connectivity test<a class="headerlink" href="#basic-connectivity-test" title="Link to this heading"></a></h2>
+<p>A simple test for basic connectivity using only curl is as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>--location<span class="w"> </span>--request<span class="w"> </span>GET<span class="w"> </span><span class="s2">"https://&lt;REDACTED ENDPOINT&gt;.azuredatabricks.net/api/2.0/clusters/list"</span><span class="w"> </span>--header<span class="w"> </span><span class="s2">"Authorization: Bearer dap&lt;REDACTED TOKEN&gt;573"</span>
+</pre></div>
+</div>
+<p>The JSON response will include details of clusters. If this request does not succeed then it is unlikely that REST API requests from within MATLAB will succeed and underlying connectivity issues should be considered.</p>
+</section>
+<section id="getting-an-exception-in-thread-main-java-lang-nosuchmethoderror">
+<h2>Getting an Exception in thread &quot;main&quot; java.lang.NoSuchMethodError<a class="headerlink" href="#getting-an-exception-in-thread-main-java-lang-nosuchmethoderror" title="Link to this heading"></a></h2>
+<p>If an Exception in thread &quot;main&quot;
+<code class="docutils literal notranslate"><span class="pre">java.lang.NoSuchMethodError:</span> <span class="pre">scala.Predef$.refArrayOps</span></code> arises.
+This means that the version of Scala® requested on the on-demand cluster is too
+new for the MATLAB Spark implementation.
+The error is caused by Scala 2.12 being installed where the requested method
+was deprecated on Scala versions newer than 2.11.
+Solution: request a cluster with Scala version 2.11.</p>
+</section>
+<section id="what-version-of-db-connect-should-i-use">
+<h2>What version of DB Connect should I use?<a class="headerlink" href="#what-version-of-db-connect-should-i-use" title="Link to this heading"></a></h2>
+<p>Databricks advises that the version of Databricks Connect used should match the version of the Databricks used on the cluster in question.</p>
+</section>
+<section id="jars-do-not-exist">
+<h2>Jars do not exist<a class="headerlink" href="#jars-do-not-exist" title="Link to this heading"></a></h2>
+<p>The following error indicates that the <code class="docutils literal notranslate"><span class="pre">runtime_install.sh</span></code> script has not be executed when a node(s) were initialized.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>20/04/21 17:48:34 WARN SparkConf: The configuration key 'spark.akka.frameSize' has been deprecated as of Spark 1.6 and may be removed in the future. Please use the new key 'spark.rpc.message.maxSize' instead.
+20/04/21 17:48:36 WARN DependencyUtils: Local jar /usr/local/MATLAB/MATLAB_Runtime/v97/toolbox/mlhadoop/jar/a2.2.0/mwmapreduce.jar does not exist, skipping.
+20/04/21 17:48:36 WARN DependencyUtils: Local jar /usr/local/MATLAB/MATLAB_Runtime/v97/toolbox/shared/bigdata/jar/hadoop.2.jar does not exist, skipping.
+20/04/21 17:48:36 WARN DependencyUtils: Local jar /usr/local/MATLAB/MATLAB_Runtime/v97/toolbox/compiler/mlspark/jars/2.x/mlspark.jar does not exist, skipping.
+20/04/21 17:48:36 WARN SparkSubmit$$anon$2: Failed to load com.mathworks.mlspark.mlsubmit.MatlabSubmit.
+java.lang.ClassNotFoundException: com.mathworks.mlspark.mlsubmit.MatlabSubmit
+                at java.net.URLClassLoader.findClass(URLClassLoader.java:382)
+                at java.lang.ClassLoader.loadClass(ClassLoader.java:418)
+                at java.lang.ClassLoader.loadClass(ClassLoader.java:351)
+                at java.lang.Class.forName0(Native Method)
+                at java.lang.Class.forName(Class.java:348)
+                at org.apache.spark.util.Utils$.classForName(Utils.scala:257)
+                at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:806)
+                at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:161)
+                at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:184)
+                at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:86)
+                at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:920)
+                at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:929)
+                at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)
+20/04/21 17:48:36 INFO ShutdownHookManager: Shutdown hook called
+20/04/21 17:48:36 INFO ShutdownHookManager: Deleting directory /local_disk0/tmp/spark-3cf75386-147b-4989-a776-58c3f9e416dc
+</pre></div>
+</div>
+</section>
+<section id="spark-reports-a-bind-exception">
+<h2>Spark reports a bind exception<a class="headerlink" href="#spark-reports-a-bind-exception" title="Link to this heading"></a></h2>
+<p>The error looks like:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Error using matlab.compiler.mlspark.SparkSession (line 62)
+    Java exception occurred:
+    java.net.BindException: Cannot assign requested address: bind: Service
+    'sparkDriver' failed after 16 retries (on a random free port)! Consider
+    explicitly setting the appropriate binding address for the service
+    'sparkDriver' (for example spark.driver.bindAddress for SparkDriver) to the
+    correct binding address.
+        at sun.nio.ch.Net.bind0(Native Method)
+        at sun.nio.ch.Net.bind(Net.java:433)
+        at sun.nio.ch.Net.bind(Net.java:425)
+        at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)
+        at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:132)
+        at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:551)
+        at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1346)
+        at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:503)
+        at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:488)
+        at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:985)
+        at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:247)
+        at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:344)
+        at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)
+        at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:510)
+        at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:518)
+        at io.netty.util.concurrent.SingleThreadEventExecutor$6.run(SingleThreadEventExecutor.java:1044)
+        at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)
+        at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)
+        at java.lang.Thread.run(Thread.java:748)
+</pre></div>
+</div>
+<p>This is usually caused due to a change in the computer's network configuration
+typically due to a VPN connection or similar changes. The simplest way to fix
+this is to restart MATLAB.</p>
+</section>
+<section id="what-is-dbc-format">
+<h2>What is DBC format?<a class="headerlink" href="#what-is-dbc-format" title="Link to this heading"></a></h2>
+<p>A Databricks archive is a JAR file with additional metadata and .dbc extension. It is used to exchange notebooks and can be imported and exported See:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="WorkspacesAPI.html"><span class="std std-doc">Workspaces API</span></a></p></li>
+<li><p><a class="reference external" href="https://docs.databricks.com/notebooks/notebooks-manage.html#databricks-archive">https://docs.databricks.com/notebooks/notebooks-manage.html#databricks-archive</a></p></li>
+</ul>
+</section>
+<section id="deployed-simulink-simulation-fails-to-run-with-error-referring-libmwdastudio-so">
+<h2>Deployed Simulink simulation fails to run with error referring <code class="docutils literal notranslate"><span class="pre">libmwdastudio.so</span></code><a class="headerlink" href="#deployed-simulink-simulation-fails-to-run-with-error-referring-libmwdastudio-so" title="Link to this heading"></a></h2>
+<p>(Not applicable from v5.0.0)</p>
+<p>Deployed Simulink R2022a models may fail to run with Databricks Runtime 10.4-LTS throwing a long error stack including:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab_pysdk.runtime.MatlabRuntimeError: An error occurred when evaluating the result from a function. Details: Failed to load bundle #198: /usr/local/MATLAB/MATLAB_Runtime/v912/bin/glnxa64/libmwdastudio.so
+</pre></div>
+</div>
+<p>This error is caused by a missing native library (libnss3). This issue is fixed in an updated <code class="docutils literal notranslate"><span class="pre">runtime_install.sh.template</span></code> in release 0.6.16. This init scripts should automatically get updated when installing the new package version, see <a class="reference internal" href="Upgrade.html#init-scripts"><span class="std std-ref">upgrading</span></a>.</p>
+<p>If a quick fix is needed and upgrading the entire package is not directly possible, <code class="docutils literal notranslate"><span class="pre">Software/MATLAB/script/runtime_install.sh.template</span></code> can be updated manually. Find the line:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>-q<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libgbm1
+</pre></div>
+</div>
+<p>and update it to:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>apt-get<span class="w"> </span>-q<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>libgbm1<span class="w"> </span>libnss3
+</pre></div>
+</div>
+<p>then use <a class="reference internal" href="InitScripts.html#manual-init-script-configuration"><span class="std std-ref"><code class="docutils literal notranslate"><span class="pre">matlab.utils.generateInitScript</span></code></span></a> to (re)generate the shell script. Finally, upload the new script to Databricks and (re)start the cluster.</p>
+</section>
+<section id="deployed-simulink-simulation-fails-to-run-with-lib-x86-64-linux-gnu-libc-so-6-version-glibc-2-34-not-found">
+<h2>Deployed Simulink simulation fails to run with &quot;/lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found&quot;<a class="headerlink" href="#deployed-simulink-simulation-fails-to-run-with-lib-x86-64-linux-gnu-libc-so-6-version-glibc-2-34-not-found" title="Link to this heading"></a></h2>
+<p>Deployed Simulink models may fail to run throwing a long error stack including:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Error occurred while simulating the model 'mymodel' in rapid accelerator mode. Rerun the simulation in normal mode to diagnose this error. /root/.mcrCache9.12/mypack0/mymodel/slprj/raccel_deploy/mymodel/mymodel: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /root/.mcrCache9.12/mypack0/mymodel/slprj/raccel_deploy/mymodel/mymodel)
+</pre></div>
+</div>
+<p>The exact version mentioned in the error <code class="docutils literal notranslate"><span class="pre">GLIBC_2.34</span></code> may differ, e.g. <code class="docutils literal notranslate"><span class="pre">GLIBC_2.35</span></code> could be seen as well.</p>
+<p>This error occurs if the native model binary was built on a system with a newer <code class="docutils literal notranslate"><span class="pre">glibc</span></code> library version than in the runtime image, making it incompatible Databricks runtime images. Rebuild the package on an older Linux system which is compatible with the operating system used in the Databricks runtime image that is used. Typically the best option is to use the same OS distribution and version as used by the Databricks runtime which is used. Check the <a class="reference external" href="https://docs.databricks.com/release-notes/runtime/releases.html">Databricks runtime releases</a> documentation to see which exact base OS is used by the different Databricks runtime versions.</p>
+</section>
+<section id="name-change-sql-endpoints-to-sql-warehouses">
+<h2>Name change SQL Endpoints to SQL Warehouses<a class="headerlink" href="#name-change-sql-endpoints-to-sql-warehouses" title="Link to this heading"></a></h2>
+<p>Databricks has <a class="reference external" href="https://docs.databricks.com/sql/admin/sql-endpoints.html#sql-endpoints-name-changed-to-sql-warehouses">changed the name from SQL endpoints to SQL warehouses</a>. Due to this change the class names in the MATLAB package have changed as well and code making use of the old class names must be updated:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Old class name</p></th>
+<th class="head"><p>New class name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">databricks.SQLEndpoint</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.EndpointHealth</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.WarehouseHealth</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.EndpointTagPair</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.WarehouseTagPair</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.EndpointTags</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.WarehouseTags</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.EnpointSpotInstancePolicy</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.WarehousepotInstancePolicy</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.EndpointState</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.WarehouseState</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.EndpointStatus</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">databricks.datastructures.WarehouseStatus</span></code></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="error-creating-directory-users-defaultname-example-com-mathworks">
+<h2>Error Creating directory /Users/defaultname&#64;example.com/MathWorks<a class="headerlink" href="#error-creating-directory-users-defaultname-example-com-mathworks" title="Link to this heading"></a></h2>
+<p>During a cluster based installed the following error can arise:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Importing notebooks to perform cluster based tasks:
+Creating directory: /Users/defaultname@example.com/MathWorks
+Error using matlab.databricks.internal.responseError
+Failed to create directory: /Users/defaultname@example.com/MathWorks  error_code: DIRECTORY_PROTECTED  message: Folder Users is protected
+</pre></div>
+</div>
+<p>This indicates that Databricks is preventing the creation of a directory and notebook for the user &quot;defaultname&#64;example.com&quot;.
+This reflects a missed configuration step for the <code class="docutils literal notranslate"><span class="pre">databricks-settings.json</span></code> file, whereby the default username and probably notification email address have not been updated. For further details see <a class="reference internal" href="Setup.html"><span class="std std-doc">Setup.md</span></a>.
+The path to the file is returned by: <code class="docutils literal notranslate"><span class="pre">fullfile(prefdir,</span> <span class="pre">'databricks-settings.json')</span></code>. If the file is not present a template version can be found in: <code class="docutils literal notranslate"><span class="pre">/Software/MATLAB/config/databricks-settings.json.template</span></code>.</p>
+</section>
+<section id="base64-encoding-decoding-mex-files">
+<h2>Base64 encoding/decoding mex files<a class="headerlink" href="#base64-encoding-decoding-mex-files" title="Link to this heading"></a></h2>
+<p>Where possible platform specific mex files are used to improve the performance of base64 encoding and decoding. This is used heavily in DBFS upload and download operations.
+Security measures intended to prevent the execution of unsigned binaries, e.g. macOS® Gatekeeper, can prevent the execution of mex files.
+If there is an issue executing the mex files the preference set at install time can be controlled using the following commands after running the <code class="docutils literal notranslate"><span class="pre">startup</span></code> command:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Use optimized mex file</span>
+<span class="n">matlab</span><span class="p">.</span><span class="n">net</span><span class="p">.</span><span class="n">base64</span><span class="p">(</span><span class="s">'setconfig'</span><span class="p">,</span><span class="w"> </span><span class="s">'mex'</span><span class="p">)</span>
+
+<span class="c">% Use MATLAB's standard base64 support</span>
+<span class="n">matlab</span><span class="p">.</span><span class="n">net</span><span class="p">.</span><span class="n">base64</span><span class="p">(</span><span class="s">'setconfig'</span><span class="p">,</span><span class="w"> </span><span class="s">'shipping'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>Note:</em> Restart MATLAB to allow a change to take effect.</p>
+<p>The current mode can be returned using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">matlab</span><span class="p">.</span><span class="n">net</span><span class="p">.</span><span class="n">base64</span><span class="p">(</span><span class="s">'getconfig'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The startup command will report the current mode as <code class="docutils literal notranslate"><span class="pre">DBFS</span> <span class="pre">transfer</span> <span class="pre">mode:</span> <span class="pre">Optimized</span></code> or <code class="docutils literal notranslate"><span class="pre">DBFS</span> <span class="pre">transfer</span> <span class="pre">mode:</span> <span class="pre">Standard</span></code>.
+For example, <code class="docutils literal notranslate"><span class="pre">shipping</span></code> mode can be used while an issue with mex execution is investigated.</p>
+</section>
+<section id="problem-when-build-a-wheel-file-on-a-network-drive">
+<h2>Problem when build a wheel file on a network drive<a class="headerlink" href="#problem-when-build-a-wheel-file-on-a-network-drive" title="Link to this heading"></a></h2>
+<p>Occasionally an issue may be seen when building a wheel file on a network drive.</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Error using compiler.build.spark.PythonSparkBuilder/createWheel (line 42)
+Error building .whl file: * Getting build dependencies for wheel...
+running egg_info
+creating demo_nyc_164.egg-info
+writing demo_nyc_164.egg-info\PKG-INFO
+   ... Many error lines
+
+error: [WinError 145] The directory is not empty: 'build\\bdist.win-amd64\\wheel\\.\\demo_nyc_164-26.2.0-py3.12.egg-info'
+
+ERROR Backend subprocess exited when trying to invoke build_wheel 
+</pre></div>
+</div>
+<p>A workaround is to try the build on a local disk instead, by setting the <code class="docutils literal notranslate"><span class="pre">OutputDir</span></code>
+argument for <code class="docutils literal notranslate"><span class="pre">compiler.build.PythonPackageOptions</span></code> to a local directory as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">opts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">compiler</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">PythonPackageOptions</span><span class="p">(</span><span class="k">...</span>
+<span class="w">    </span><span class="p">[</span><span class="s">"foo.m"</span><span class="p">,</span><span class="w"> </span><span class="s">"baz.m"</span><span class="p">],</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="n">OutputDir</span><span class="p">=</span><span class="s">"C:\Temp\_build"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="n">PackageName</span><span class="p">=</span><span class="s">"foo.bar"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The problem relates to the underlying Python® command that packages the resulting
+wheel file and is being investigated.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DatabricksAPI.html" class="btn btn-neutral float-left" title="MATLAB Interface for Databricks - API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

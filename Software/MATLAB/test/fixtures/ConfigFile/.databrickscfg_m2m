@@ -1,0 +1,10 @@
+[DEFAULT]
+host  = https://dbc-m2m-workspace.cloud.databricks.com
+client_id = test-client-id-123
+client_secret = test-client-secret-456
+
+[ACCOUNT_LEVEL]
+host  = https://accounts.cloud.databricks.com
+client_id = account-client-id
+client_secret = account-client-secret
+account_id = acc-12345

@@ -1,0 +1,536 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="none sub flavor" href="subflavors/none.html" />
+    <link rel="prev" title="Introduction" href="Introduction.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATLAB Interface <em>for MLflow</em></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../InstallationPython.html">Installation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Fluent.html">Fluent MATLAB Interface for Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FluentAPI.html">MLflow MATLAB Fluent API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InstallationPython.html">Installation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Introduction.html">Introduction</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#module-mlflow.matlab">MATLAB Functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mlflow.matlab.save_model"><code class="docutils literal notranslate"><span class="pre">save_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlflow.matlab.log_model"><code class="docutils literal notranslate"><span class="pre">log_model()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mlflow.matlab.load_model"><code class="docutils literal notranslate"><span class="pre">load_model()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-function">MATLAB Function</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-mlflow-model">MATLAB MLflow Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pyfunc-compatible-mlflow-model">Pyfunc compatible MLflow Model</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="subflavors/none.html">none sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subflavors/compiler_sdk_python.html">compiler_sdk_python sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subflavors/onnx.html">onnx sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QuickStart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Authentication.html">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MLflowAPI.html">MATLAB Interface <em>for MLflow</em> - API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">MATLAB Interface <em>for MLflow</em></a></li>
+      <li class="breadcrumb-item active">Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/matlab-mlflow/matlab_flavor/Usage.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
+<p>When working with MATLAB flavor models there are three main MATLAB functions to work with:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#mlflow.matlab.save_model" title="mlflow.matlab.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.matlab.save_model()</span></code></a> to save a model in MLflow format to disk</p></li>
+<li><p><a class="reference internal" href="#mlflow.matlab.log_model" title="mlflow.matlab.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.matlab.log_model()</span></code></a> to log a model in MLflow model format to an MLflow (compatible) server</p></li>
+<li><p><a class="reference internal" href="#mlflow.matlab.load_model" title="mlflow.matlab.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.matlab.load_model()</span></code></a> to load a model from disk or an MLflow (compatible) server</p></li>
+</ul>
+<section id="module-mlflow.matlab">
+<span id="matlab-functions"></span><h2>MATLAB Functions<a class="headerlink" href="#module-mlflow.matlab" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="mlflow.matlab.save_model">
+<span class="sig-prename descclassname"><span class="pre">mlflow.matlab.</span></span><span class="sig-name descname"><span class="pre">save_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name=value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.matlab.save_model" title="Link to this definition"></a></dt>
+<dd><p>Save a MATLAB model to disk in MLflow format. The function can be called with various <code class="docutils literal notranslate"><span class="pre">name=value</span></code> pairs documented below.</p>
+<p><strong>General Name-Value pairs</strong></p>
+<p>:param Path: output path where the model should be saved.</p>
+<p><strong><a class="reference internal" href="subflavors/none.html"><span class="std std-doc">none sub flavor</span></a> sub flavor specific Name-Value pairs</strong></p>
+<p>:param MATLABFiles: if set, includes the specified files and directories in the model as-is, this adds those files using the <a class="reference internal" href="subflavors/none.html"><span class="std std-doc">none sub flavor</span></a> sub flavor.</p>
+<p><strong><a class="reference internal" href="subflavors/onnx.html"><span class="std std-doc">onnx sub flavor</span></a> sub flavor specific Name-Value pairs</strong></p>
+<p>:param Network: if set, saves the model with <a class="reference internal" href="subflavors/onnx.html"><span class="std std-doc">onnx sub flavor</span></a> sub flavor. <code class="docutils literal notranslate"><span class="pre">Network</span></code> must be a Deep Learning Toolbox model which is compatible with the <a class="reference external" href="https://www.mathworks.com/help/deeplearning/ref/exportonnxnetwork.html"><code class="docutils literal notranslate"><span class="pre">exportONNXNetwork</span></code> function</a>.</p>
+<p><strong><a class="reference internal" href="subflavors/compiler_sdk_python.html"><span class="std std-doc">compiler_sdk_python sub flavor</span></a> sub flavor specific Name-Value pairs</strong></p>
+<p>:param FunctionFile: if set, saves the model with <a class="reference internal" href="subflavors/compiler_sdk_python.html"><span class="std std-doc">compiler_sdk_python sub flavor</span></a> sub flavor. <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code> then specifies the main MATLAB entrypoint function of the model.</p>
+<p>:param NParams: specifies the number of parameters in the function signature of <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p>:param AdditionalFiles: additional MATLAB files and directories to include in the Python package. This is essentially the same option as <a class="reference external" href="https://www.mathworks.com/help/releases/R2025b/compiler_sdk/python/compiler.build.pythonpackageoptions.html#mw_0f0e9319-7f78-4934-894f-88b41ab027c8_sep_mw_b0ce0bfc-4349-4175-8c8b-b9dda6c08830"><code class="docutils literal notranslate"><span class="pre">AdditionalFiles</span></code> of <code class="docutils literal notranslate"><span class="pre">PythonPackageOptions</span></code></a>.</p>
+<p>:param ExampleInputs: cell array of example inputs. When provided this is used to first automatically generate the <a class="reference internal" href="subflavors/compiler_sdk_python.html#workflow-overview"><span class="std std-ref">function signature definition</span></a> for the specified <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code>. Can be omitted if a signature YAML-file for the function already exists.</p>
+<p>:param ExampleOutputs: cell array of example outputs. Can be used in combination with <code class="docutils literal notranslate"><span class="pre">ExampleInputs</span></code>. If only <code class="docutils literal notranslate"><span class="pre">ExampleInputs</span></code> is set, the function will actually be run with the provided inputs to obtain outputs and then determine the output types. If providing <code class="docutils literal notranslate"><span class="pre">ExampleOutputs</span></code> as well, the function will not be run and the output types will be directly derived from the provided examples.  Can be omitted if a signature YAML-file for the function already exists or if you indeed want the outputs to be determined by running the function.</p>
+<p>:param PackageName: sets the package name of the Python module which will be generated when working with the <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code> option. If unset this default to the filename of <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code>.</p>
+<p>:param ExactDimensions: whether or not to include the exact dimension sizes of the provided example in- and outputs. When set to false, the correct number of dimensions is included with the model but their sizes are all set to <code class="docutils literal notranslate"><span class="pre">-1</span></code>, indicating variable size. Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> if the exact dimension sizes should be derived from the example in- and outputs. Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>:param IncludeMPSCTF: if set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, apart from the MATLAB Compiler SDK Python module, also build and include a MATLAB Production Server CTF-archive in the saved model. This can only be used in combination with <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>:param SaveExample: include the provided example input as actual MLflow model example input with the model. Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>:param: IncludeMATLABMLflowModule: whether or not to include the <code class="docutils literal notranslate"><span class="pre">matlab_mlflow</span></code> Python module inside the model. If the module is included, other MLflow tooling will not have to download the module at runtime. Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p><strong>Advanced Name-Value pairs</strong></p>
+<p>:param SubFlavor: can be specified to explicitly override which sub flavor to use for saving the model. Setting this is not recommended. Normally the sub flavors are automatically derived from which of the name value pairs above were used. Valid values are: <code class="docutils literal notranslate"><span class="pre">&quot;none&quot;</span></code>,<code class="docutils literal notranslate"><span class="pre">&quot;onnx&quot;</span></code>, or <code class="docutils literal notranslate"><span class="pre">&quot;compiler_sdk_python&quot;</span></code>.</p>
+<p>:param MLflowOptions: cell array with additional keyword arguments to pass to the underlying Python functions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mlflow.matlab.log_model">
+<span class="sig-prename descclassname"><span class="pre">mlflow.matlab.</span></span><span class="sig-name descname"><span class="pre">log_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name=value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">...</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.matlab.log_model" title="Link to this definition"></a></dt>
+<dd><p>Logs a MATLAB model to an MLflow (compatible) server. The function can be called with various <code class="docutils literal notranslate"><span class="pre">name=value</span></code> pairs documented below.</p>
+<p>See <a class="reference internal" href="../InstallationPython.html#mlflow-tracking-servers"><span class="std std-ref">MLflow Tracking servers</span></a> to learn more about configuring the tracking URI before logging to a remote server,</p>
+<p><strong>General Name-Value pairs</strong></p>
+<p>:param Path: output path inside the MLflow model inside which the model artifact should be saved. Defaults to <code class="docutils literal notranslate"><span class="pre">&quot;model&quot;</span></code>.</p>
+<p><strong><a class="reference internal" href="subflavors/none.html"><span class="std std-doc">none sub flavor</span></a> sub flavor specific Name-Value pairs</strong></p>
+<p>:param MATLABFiles: if set, includes the specified files and directories in the model as-is, this adds those files using the <a class="reference internal" href="subflavors/none.html"><span class="std std-doc">none sub flavor</span></a> sub flavor.</p>
+<p><strong><a class="reference internal" href="subflavors/onnx.html"><span class="std std-doc">onnx sub flavor</span></a> sub flavor specific Name-Value pairs</strong></p>
+<p>:param Network: if set, logs the model with <a class="reference internal" href="subflavors/onnx.html"><span class="std std-doc">onnx sub flavor</span></a> sub flavor. <code class="docutils literal notranslate"><span class="pre">Network</span></code> must be a Deep Learning Toolbox model which is compatible with the <a class="reference external" href="https://www.mathworks.com/help/deeplearning/ref/exportonnxnetwork.html"><code class="docutils literal notranslate"><span class="pre">exportONNXNetwork</span></code> function</a>.</p>
+<p><strong><a class="reference internal" href="subflavors/compiler_sdk_python.html"><span class="std std-doc">compiler_sdk_python sub flavor</span></a> sub flavor specific Name-Value pairs</strong></p>
+<p>:param FunctionFile: if set, logs the model with <a class="reference internal" href="subflavors/compiler_sdk_python.html"><span class="std std-doc">compiler_sdk_python sub flavor</span></a> sub flavor. <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code> then specifies the main MATLAB entrypoint function of the model.</p>
+<p>:param NParams: specifies the number of parameters in the function signature of <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p>
+<p>:param AdditionalFiles: additional MATLAB files and directories to include in the Python package. This is essentially the same option as <a class="reference external" href="https://www.mathworks.com/help/releases/R2025b/compiler_sdk/python/compiler.build.pythonpackageoptions.html#mw_0f0e9319-7f78-4934-894f-88b41ab027c8_sep_mw_b0ce0bfc-4349-4175-8c8b-b9dda6c08830"><code class="docutils literal notranslate"><span class="pre">AdditionalFiles</span></code> of <code class="docutils literal notranslate"><span class="pre">PythonPackageOptions</span></code></a>.</p>
+<p>:param ExampleInputs: cell array of example inputs. When provided this is used to first automatically generate the <a class="reference internal" href="subflavors/compiler_sdk_python.html#workflow-overview"><span class="std std-ref">function signature definition</span></a> for the specified <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code>. Can be omitted if a signature YAML-file for the function already exists.</p>
+<p>:param ExampleOutputs: cell array of example outputs. Can be used in combination with <code class="docutils literal notranslate"><span class="pre">ExampleInputs</span></code>. If only <code class="docutils literal notranslate"><span class="pre">ExampleInputs</span></code> is set, the function will actually be run with the provided inputs to obtain outputs and then determine the output types. If providing <code class="docutils literal notranslate"><span class="pre">ExampleOutputs</span></code> as well, the function will not be run and the output types will be directly derived from the provided examples.  Can be omitted if a signature YAML-file for the function already exists or if you indeed want the outputs to be determined by running the function.</p>
+<p>:param PackageName: sets the package name of the Python module which will be generated when working with the <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code> option. If unset this default to the filename of <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code>.</p>
+<p>:param ExactDimensions: whether or not to include the exact dimension sizes of the provided example in- and outputs. When set to false, the correct number of dimensions is included with the model but their sizes are all set to <code class="docutils literal notranslate"><span class="pre">-1</span></code>, indicating variable size. Set to <code class="docutils literal notranslate"><span class="pre">true</span></code> if the exact dimension sizes should be derived from the example in- and outputs. Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>:param IncludeMPSCTF: if set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, apart from the MATLAB Compiler SDK Python module, also build and include a MATLAB Production Server CTF-archive in the logged model. This can only be used in combination with <code class="docutils literal notranslate"><span class="pre">FunctionFile</span></code>. Defaults to <code class="docutils literal notranslate"><span class="pre">false</span></code>.</p>
+<p>:param SaveExample: include the provided example input as actual MLflow model example input with the model. Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>:param: IncludeMATLABMLflowModule: whether or not to include the <code class="docutils literal notranslate"><span class="pre">matlab_mlflow</span></code> Python module inside the model. If the module is included, other MLflow tooling will not have to download the module at runtime. Defaults to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+<p>:param RegisteredModelName: when set also immediately registers the model as registered model under the specified name.</p>
+<p><strong>Advanced Name-Value pairs</strong></p>
+<p>:param SubFlavor: can be specified to explicitly override which sub flavor to use for logging the model. Setting this is not recommended. Normally the sub flavors are automatically derived from which of the name value pairs above were used. Valid values are: <code class="docutils literal notranslate"><span class="pre">&quot;none&quot;</span></code>,<code class="docutils literal notranslate"><span class="pre">&quot;onnx&quot;</span></code>,or <code class="docutils literal notranslate"><span class="pre">&quot;compiler_sdk_python&quot;</span></code>.</p>
+<p>:param MLflowOptions: cell array with additional keyword arguments to pass to the underlying Python functions.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="mlflow.matlab.load_model">
+<span class="sig-prename descclassname"><span class="pre">mlflow.matlab.</span></span><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">source</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">destination</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mlflow.matlab.load_model" title="Link to this definition"></a></dt>
+<dd><p>Returns the location of (a local copy of) the specified MATLAB flavor MLflow model. Since MATLAB (MLflow) models are typically simply just a collection of files this does not involve and real loading (into memory), instead the function simply returns the location on local disk such that you can then <code class="docutils literal notranslate"><span class="pre">cd</span></code> to this location or <code class="docutils literal notranslate"><span class="pre">addpath</span></code> the directories to the MATLABPATH. Nevertheless the function is called <code class="docutils literal notranslate"><span class="pre">load_model</span></code> to be in line with other MLflow flavors.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">source</span></code> is a model which is already located on local disk, by default the original location is simply returned, no copies are made. If you do wish a copy to be made, also specify <code class="docutils literal notranslate"><span class="pre">destination</span></code>.</p>
+<p>When <code class="docutils literal notranslate"><span class="pre">source</span></code> is a remote model on an MLflow (compatible) server, the model is first downloaded to a local location. Specify <code class="docutils literal notranslate"><span class="pre">destination</span></code> if you wish to specify where the local copy should be located. If <code class="docutils literal notranslate"><span class="pre">destination</span></code> is omitted a temporary location is
+automatically generated.</p>
+<p>See <a class="reference internal" href="../InstallationPython.html#mlflow-tracking-servers"><span class="std std-ref">MLflow Tracking servers</span></a> to learn more about configuring the tracking URI before loading from a remote server,</p>
+<p>:param source: location of the model to load. This can be a local path on disk or refer to MLflow server style <code class="docutils literal notranslate"><span class="pre">model:</span></code> or <code class="docutils literal notranslate"><span class="pre">run:</span></code> URIs or even custom URI schemes provided by MLflow custom storage plugins e.g. <code class="docutils literal notranslate"><span class="pre">azureml:</span></code> (if the relevant plugin is installed in the <a class="reference internal" href="../InstallationPython.html#python-environment"><span class="std std-ref">MATLAB Python environment</span></a>).</p>
+<p>:param destination: for local models, specifies in which location a copy of the model should be made first. For remote models specifies to which location the model should be downloaded first. If omitted for local models, no copy is made and simply the original location is returned. If omitted for remote models, the model is downloaded to a automatically generated temporary location first.</p>
+<p>:returns: the location of the local (copy) of the model.</p>
+</dd></dl>
+
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<section id="matlab-function">
+<h3>MATLAB Function<a class="headerlink" href="#matlab-function" title="Link to this heading"></a></h3>
+<p>In this example we use a MATLAB function as the model which we want to work with in MLflow:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>tOut<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">myClustering</span><span class="p">(</span>tIn,replicates<span class="p">)</span>
+<span class="c">% CLUSTER clusters the data from the input table into two clusters.</span>
+<span class="c">%</span>
+<span class="c">%  Input table tIn is expected to have two columns: X and Y. The output</span>
+<span class="c">%  table is a copy of the input table with an additional column "index"</span>
+<span class="c">%  appended which indicates the cluster which the data row belongs to.</span>
+<span class="c">%</span>
+<span class="c">%  Parameter replicates configures how many replicates kmeans will use.</span>
+
+<span class="c">% Copy the input to the output</span>
+<span class="n">tOut</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">tIn</span><span class="p">;</span>
+
+<span class="c">% Perform the clustering and append the result as additional column</span>
+<span class="n">tOut</span><span class="p">.</span><span class="n">index</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">kmeans</span><span class="p">(</span><span class="n">tIn</span><span class="p">{:,[</span><span class="s">"X"</span><span class="p">,</span><span class="s">"Y"</span><span class="p">]},</span><span class="mi">2</span><span class="p">,</span><span class="s">'Distance'</span><span class="p">,</span><span class="s">'cityblock'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">    </span><span class="s">'Replicates'</span><span class="p">,</span><span class="n">replicates</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>This function can cluster data from an input table into two clusters. And in MATLAB it can for example be used as follows:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="go">% Generate example input data</span>
+<span class="gp">&gt;&gt; </span><span class="n">tIn</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">;</span>
+<span class="gp">&gt;&gt; </span><span class="n">tIn</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.75</span><span class="o">+</span><span class="nb">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="nb">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">-</span><span class="nb">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)];</span>
+<span class="gp">&gt;&gt; </span><span class="n">tIn</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.75</span><span class="o">+</span><span class="nb">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="nb">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">-</span><span class="nb">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)];</span>
+
+<span class="go">% Call the function</span>
+<span class="gp">&gt;&gt; </span><span class="n">tOut</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">myClustering</span><span class="p">(</span><span class="n">tIn</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="go">tOut =</span>
+
+<span class="go">  200×3 table</span>
+
+<span class="go">       X            Y        index</span>
+<span class="go">    ________    _________    _____</span>
+
+<span class="go">      1.2491      0.73961      2  </span>
+<span class="go">     -0.3184       1.2484      2  </span>
+<span class="go">      1.3544      0.36121      2  </span>
+<span class="go">      1.5996      0.54201      2  </span>
+<span class="go">     0.40121      0.53412      2  </span>
+
+<span class="go">       :            :          :  </span>
+
+<span class="go">     -1.4744      -1.1326      1  </span>
+<span class="go">     -1.1056     -0.57115      1  </span>
+<span class="go">     -1.4302     -0.72716      1  </span>
+<span class="go">    -0.59563    -0.073124      1  </span>
+<span class="go">    -0.75538     -0.50195      1  </span>
+</pre></div>
+</div>
+<p>Further, you could then visualize the results using:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="nb">scatter</span><span class="p">(</span><span class="n">tOut</span><span class="p">.</span><span class="n">X</span><span class="p">,</span><span class="n">tOut</span><span class="p">.</span><span class="n">Y</span><span class="p">,</span><span class="mi">50</span><span class="p">,</span><span class="n">tOut</span><span class="p">.</span><span class="n">index</span><span class="p">,</span><span class="s">"filled"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="" src="../../_images/scatterplot.png" /></p>
+</section>
+<section id="matlab-mlflow-model">
+<h3>MATLAB MLflow Model<a class="headerlink" href="#matlab-mlflow-model" title="Link to this heading"></a></h3>
+<p>Now one of the things we can do with this function is log it on our MLflow server as MATLAB code that can later be used in MATLAB again. In this example we use a local server running at <code class="docutils literal notranslate"><span class="pre">http://localhost:5000</span></code>. To instruct MATLAB to work with this we can use:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">mlflow</span><span class="p">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s">"http://localhost:5000"</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><em>Or alternatively this can also be configured using environment variable <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code>.</em></p>
+</div></blockquote>
+<p>Further, when you want to log a model you do that as part of a run in a particular experiment. This is especially useful if your model needs to be trained, you can then track how the model was trained exactly (e.g. with which parameters and which data). Now that is not the case for our model here, but we will still want to follow this MLflow convention. So we first set an experiment and start a run using the <a class="reference internal" href="../Fluent.html"><span class="std std-doc">Fluent Interface</span></a>:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">mlflow</span><span class="p">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s">"My MATLAB Clustering Model"</span><span class="p">)</span>
+<span class="gp">&gt;&gt; </span><span class="n">mlflow</span><span class="p">.</span><span class="n">start_run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>And then we can use <code class="docutils literal notranslate"><span class="pre">mlflow.matlab.log_model</span></code> to log the model. Since we already know we want to be able to easily re-use this model we will also immediately register it as a registered model:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">mlflow</span><span class="p">.</span><span class="n">matlab</span><span class="p">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">MATLABFiles</span><span class="p">=</span><span class="s">"myClustering.m"</span><span class="p">,</span><span class="n">RegisteredModelName</span><span class="p">=</span><span class="s">"myMATLABClustering"</span><span class="p">);</span>
+<span class="go">Successfully registered model 'myMATLABClustering'.</span>
+<span class="go">2026/03/13 11:40:17 INFO mlflow.store.model_registry.abstract_store: Waiting up to 300 seconds for model version to finish creation. Model name: myMATLABClustering, version 1</span>
+<span class="go">Created version '1' of model 'myMATLABClustering'.</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you are not sure yet whether your model in question should really become a registered model, you can simply omit the entire <code class="docutils literal notranslate"><span class="pre">RegisteredModelName</span></code> option. You can then still later register the model, you do not have to &quot;re-log&quot; the model for this.</p>
+</div>
+<p>After that we end the run:</p>
+<div class="highlight-matlabsession notranslate" id="endrun"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">mlflow</span><span class="p">.</span><span class="n">end_run</span><span class="p">()</span>
+<span class="go">🏃 View run delicate-mink-467 at: http://localhost:5000/#/experiments/1/runs/11c3fb2acf1a489c8727f905a1b42c87</span>
+<span class="go">🧪 View experiment at: http://localhost:5000/#/experiments/1</span>
+</pre></div>
+</div>
+<p>Now let's say that some time later, you want to re-use this model in MATLAB. Then, since we registered the model, we can easily get to it using a <code class="docutils literal notranslate"><span class="pre">models:/</span></code> MLflow URI:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">loc</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">mlflow</span><span class="p">.</span><span class="n">matlab</span><span class="p">.</span><span class="n">load_model</span><span class="p">(</span><span class="s">"models:/myMATLABClustering/1"</span><span class="p">)</span>
+
+<span class="go">loc = </span>
+
+<span class="go">    "/tmp/tmpa7swg9y_/matlab"</span>
+</pre></div>
+</div>
+<p>As we can see this returned a (temporary) location on disk which the model got downloaded to, and if we look at that location we indeed see our MATLAB function there:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="nb">ls</span><span class="p">(</span><span class="n">loc</span><span class="p">)</span>
+<span class="go">myClustering.m</span>
+</pre></div>
+</div>
+<p>We can now copy this elsewhere, use <code class="docutils literal notranslate"><span class="pre">addpath</span></code> to add this location to the MATLABPATH, or just <code class="docutils literal notranslate"><span class="pre">cd</span></code> to the location and work with the function there. Alternatively we could also have provided a second input to <code class="docutils literal notranslate"><span class="pre">load_model</span></code> to specify the location which the model should be downloaded to.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If we would not have registered the model as a registered model, we could not have easily accessed it by its name but it can still be accessed by its ID (<code class="docutils literal notranslate"><span class="pre">models:/EnterModelIdHere</span></code>). Where this model ID could for example be found through the MLflow server web interface or programmatically by querying the run:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">r</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">mlflow</span><span class="p">.</span><span class="n">get_run</span><span class="p">(</span><span class="s">'11c3fb2acf1a489c8727f905a1b42c87'</span><span class="p">);</span>
+<span class="gp">&gt;&gt; </span><span class="n">r</span><span class="p">.</span><span class="n">outputs</span><span class="p">.</span><span class="n">model_outputs</span><span class="p">{</span><span class="mi">1</span><span class="p">}.</span><span class="n">model_id</span>
+
+<span class="go">ans = </span>
+
+<span class="go">  Python str with no properties.</span>
+
+<span class="go">    m-8e8937c7c57a4099ad0605d619b1d9e4</span>
+</pre></div>
+</div>
+<p>Where the run ID <code class="docutils literal notranslate"><span class="pre">11c3fb2acf1a489c8727f905a1b42c87</span></code> was returned when we called <code class="docutils literal notranslate"><span class="pre">mlflow.end_run()</span></code>, <a class="reference internal" href="#endrun">see above</a>. If you no longer have the run ID either, you could try searching for it:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">runs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">mlflow</span><span class="p">.</span><span class="n">search_runs</span><span class="p">(</span><span class="n">experiment_names</span><span class="p">={</span><span class="s">"My MATLAB Clustering Model"</span><span class="p">});</span>
+<span class="gp">&gt;&gt; </span><span class="n">runs</span><span class="p">.</span><span class="n">table</span>
+
+<span class="go">ans =</span>
+
+<span class="go">  1×10 table</span>
+
+<span class="go">                  run_id                  experiment_id      status                                artifact_uri                                   start_time               end_time          tags.mlflow.source.type    tags.mlflow.user    tags.mlflow.source.name    tags.mlflow.runName </span>
+<span class="go">    __________________________________    _____________    __________    ________________________________________________________________    ____________________    ____________________    _______________________    ________________    _______________________    ____________________</span>
+
+<span class="go">    "11c3fb2acf1a489c8727f905a1b42c87"         "1"         "FINISHED"    "mlflow-artifacts:/1/11c3fb2acf1a489c8727f905a1b42c87/artifacts"    13-Mar-2026 14:48:32    13-Mar-2026 14:48:43            "LOCAL"                "user"                   ""               "delicate-mink-467"</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="pyfunc-compatible-mlflow-model">
+<h3>Pyfunc compatible MLflow Model<a class="headerlink" href="#pyfunc-compatible-mlflow-model" title="Link to this heading"></a></h3>
+<p>But what if we want this model to also be useable outside of MATLAB? For example in Python or by hosting it as RESTful endpoint using <a class="reference external" href="https://mlflow.org/docs/latest/api_reference/cli.html#mlflow-models-serve">MLflow model serving</a>. In that case we can log our model with the <a class="reference internal" href="subflavors/compiler_sdk_python.html"><span class="std std-doc">compiler_sdk_python sub flavor</span></a> by using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Start a run</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s">"My MATLAB Clustering Model"</span><span class="p">);</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">start_run</span><span class="p">();</span>
+
+<span class="c">% Generate an example input</span>
+<span class="n">tIn</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">;</span>
+<span class="n">tIn</span><span class="p">.</span><span class="n">X</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.75</span><span class="o">+</span><span class="nb">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="nb">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">-</span><span class="nb">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)];</span>
+<span class="n">tIn</span><span class="p">.</span><span class="n">Y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="nb">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.75</span><span class="o">+</span><span class="nb">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">);</span><span class="w"> </span><span class="nb">randn</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span><span class="o">-</span><span class="nb">ones</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">1</span><span class="p">)];</span>
+
+<span class="c">% Use mlflow.matlab.log_model to log the model</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">matlab</span><span class="p">.</span><span class="n">log_model</span><span class="p">(</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="k">...</span><span class="c"> This time we use FunctionFile to indicate that we want to create a</span>
+<span class="w">    </span><span class="k">...</span><span class="c"> compiler_sdk_python sub flavor model with this function as main </span>
+<span class="w">    </span><span class="k">...</span><span class="c"> entry point</span>
+<span class="w">    </span><span class="n">FunctionFile</span><span class="p">=</span><span class="s">"myClustering.m"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="k">...</span><span class="c"> To be able to create such kind of models, the in- and output data</span>
+<span class="w">    </span><span class="k">...</span><span class="c"> types must be known. The easiest way to specify this is by</span>
+<span class="w">    </span><span class="k">...</span><span class="c"> providing example inputs, we provide the example table as input</span>
+<span class="w">    </span><span class="k">...</span><span class="c"> as well as a value for the "replicates" parameter</span>
+<span class="w">    </span><span class="n">ExampleInputs</span><span class="p">={</span><span class="n">tIn</span><span class="p">,</span><span class="mi">5</span><span class="p">},</span><span class="k">...</span>
+<span class="w">    </span><span class="k">...</span><span class="c"> Further we need to specify how many of such parameters there are</span>
+<span class="w">    </span><span class="n">NParams</span><span class="p">=</span><span class="mi">1</span><span class="p">,</span><span class="k">...</span>
+<span class="w">    </span><span class="k">...</span><span class="c"> Finally we also register this model as registered model</span>
+<span class="w">    </span><span class="n">RegisteredModelName</span><span class="p">=</span><span class="s">"myClustering"</span><span class="p">)</span>
+
+<span class="c">% end the run</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">end_run</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Now this model is not really reusable inside MATLAB, it only contains the generated Python package and we chose not to include the original MATLAB code as well. So let's switch to Python to call the model. Before we can do that though; it is important to note that <a class="reference internal" href="subflavors/compiler_sdk_python.html#matlab-runtime-requirements"><span class="std std-ref">the MATLAB Runtime is required at runtime</span></a>, so make sure it is installed and <code class="docutils literal notranslate"><span class="pre">PATH</span></code> or <code class="docutils literal notranslate"><span class="pre">LD_LIBRARY_PATH</span></code> are configured correctly before starting Python. Once we have done that, we can run the following inside Python:</p>
+<div class="highlight-python-console notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Import the MLflow module</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span><span class="w"> </span><span class="nn">mlflow</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Configure the tracking URI</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mlflow</span><span class="o">.</span><span class="n">set_tracking_uri</span><span class="p">(</span><span class="s2">"http://localhost:5000"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Load the model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span> <span class="o">=</span> <span class="n">mlflow</span><span class="o">.</span><span class="n">pyfunc</span><span class="o">.</span><span class="n">load_model</span><span class="p">(</span><span class="s2">"models:/myClustering/1"</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Since the input example is also saved with the model, see:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">model</span><span class="o">.</span><span class="n">input_example</span>
+<span class="go">            X         Y</span>
+<span class="go">0    0.713541  0.945551</span>
+<span class="go">1   -0.028403  1.569334</span>
+<span class="go">2    1.007731  0.938752</span>
+<span class="go">3    1.153099  0.881145</span>
+<span class="go">4    0.691731  1.004874</span>
+<span class="go">..        ...       ...</span>
+<span class="go">195 -1.690718 -0.887948</span>
+<span class="go">196 -0.435860 -1.233068</span>
+<span class="go">197  0.232720 -1.166043</span>
+<span class="go">198 -1.778959 -0.537593</span>
+<span class="go">199 -2.033324 -0.276487</span>
+
+<span class="go">[200 rows x 2 columns]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># We can easily reuse it to quickly call the model</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">input_example</span><span class="p">,</span><span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s1">'replicates'</span><span class="p">:</span><span class="mf">5.0</span><span class="p">})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># And see the result</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span>
+<span class="go">            X         Y  index</span>
+<span class="go">0    0.713541  0.945551    1.0</span>
+<span class="go">1   -0.028403  1.569334    1.0</span>
+<span class="go">2    1.007731  0.938752    1.0</span>
+<span class="go">3    1.153099  0.881145    1.0</span>
+<span class="go">4    0.691731  1.004874    1.0</span>
+<span class="go">..        ...       ...    ...</span>
+<span class="go">195 -1.690718 -0.887948    2.0</span>
+<span class="go">196 -0.435860 -1.233068    2.0</span>
+<span class="go">197  0.232720 -1.166043    2.0</span>
+<span class="go">198 -1.778959 -0.537593    2.0</span>
+<span class="go">199 -2.033324 -0.276487    2.0</span>
+
+<span class="go">[200 rows x 3 columns]</span>
+</pre></div>
+</div>
+<p>Or instead of calling the model from Python, we can also use the MLflow model serving feature to host the model. Again this requires a MATLAB Runtime to be available, make sure it is configured before running the following to serve the model:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">export</span><span class="w"> </span><span class="nv">MLFLOW_TRACKING_URI</span><span class="o">=</span>http://localhost:5000
+<span class="gp">$ </span>mlflow<span class="w"> </span>models<span class="w"> </span>serve<span class="w"> </span>-m<span class="w"> </span><span class="s1">'models:/myClustering/1'</span><span class="w"> </span>--port<span class="w"> </span><span class="m">5001</span><span class="w"> </span>--env-manager<span class="w"> </span>uv
+</pre></div>
+</div>
+<blockquote>
+<div><p><em>Where you can replace <code class="docutils literal notranslate"><span class="pre">uv</span></code> with the <a class="reference external" href="https://mlflow.org/docs/latest/api_reference/cli.html#cmdoption-mlflow-models-build-docker-env-manager">environment manager</a> of your choice.</em></p>
+</div></blockquote>
+<p>After which we can for example use <code class="docutils literal notranslate"><span class="pre">curl</span></code> to call the <code class="docutils literal notranslate"><span class="pre">/invocations</span></code> endpoint. This requires an <a class="reference external" href="https://mlflow.org/docs/latest/ml/deployment/deploy-model-locally/#accepted-input-formats">input body in the correct format</a> and for our model here, this will look something like:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"dataframe_split"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"columns"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="s2">"X"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"Y"</span>
+<span class="w">    </span><span class="p">],</span>
+<span class="w">    </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">      </span><span class="p">[</span>
+<span class="w">        </span><span class="mf">0.7135410595364997</span><span class="p">,</span>
+<span class="w">        </span><span class="mf">0.9455510008911132</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="p">[</span>
+<span class="w">        </span><span class="mf">-0.028403127622235624</span><span class="p">,</span>
+<span class="w">        </span><span class="mf">1.5693335801546189</span>
+<span class="w">      </span><span class="p">],</span>
+<span class="w">      </span><span class="err">…</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"params"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"replicates"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Luckily the package generated such an input based on the example MATLAB input which we provided. It will have created a file named <code class="docutils literal notranslate"><span class="pre">serving_input_example.json</span></code> next to the MATLAB code. We can use that file as an input to <code class="docutils literal notranslate"><span class="pre">curl</span></code> to invoke the model:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>curl<span class="w"> </span>http://localhost:5001/invocations<span class="w"> </span>-H<span class="w"> </span><span class="s2">"Content-Type: application/json"</span><span class="w"> </span>--data<span class="w"> </span>@serving_input_example.json
+<span class="go">{"predictions": [{"X": 0.7135410595364997, "Y": 0.9455510008911132, "index": 1.0}, …</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Introduction.html" class="btn btn-neutral float-left" title="Introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="subflavors/none.html" class="btn btn-neutral float-right" title="none sub flavor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,2836 @@
+{
+    "_schemaVersion": "1.0.0",
+    "mlflow.get_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"}
+        ]
+    },
+    "mlflow.get_run": {
+        "inputs": [
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.register_model": {
+        "inputs": [
+            {"name":"model_uri","kind":"positional"},
+            {"name":"name","kind":"positional"},
+            {"name":"await_registration_for","kind":"positional"}
+        ]
+    },
+    "mlflow.register_model": {
+        "inputs": [
+            {"name":"model_uri","kind":"positional"},
+            {"name":"name","kind":"positional"},
+            {"name":"await_registration_for","kind":"namevalue"}
+        ]
+    },
+    "mlflow.register_model": {
+        "inputs": [
+            {"name":"model_uri","kind":"positional"},
+            {"name":"name","kind":"namevalue"},
+            {"name":"await_registration_for","kind":"namevalue"}
+        ]
+    },
+    "mlflow.register_model": {
+        "inputs": [
+            {"name":"model_uri","kind":"namevalue"},
+            {"name":"name","kind":"namevalue"},
+            {"name":"await_registration_for","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_registry_uri": {
+        "inputs": [
+            {"name":"uri","kind":"positional"}
+        ]
+    },
+    "mlflow.set_registry_uri": {
+        "inputs": [
+            {"name":"uri","kind":"namevalue"}
+        ]
+    },
+    "mlflow.enable_system_metrics_logging": {
+        "inputs": [
+        ]
+    },
+    "mlflow.add_trace": {
+        "inputs": [
+            {"name":"trace","kind":"positional"},
+            {"name":"target","kind":"positional"}
+        ]
+    },
+    "mlflow.add_trace": {
+        "inputs": [
+            {"name":"trace","kind":"positional"},
+            {"name":"target","kind":"namevalue"}
+        ]
+    },
+    "mlflow.add_trace": {
+        "inputs": [
+            {"name":"trace","kind":"namevalue"},
+            {"name":"target","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_expectation": {
+        "inputs": [
+        ]
+    },
+    "mlflow.end_run": {
+        "inputs": [
+            {"name":"status","kind":"positional"}
+        ]
+    },
+    "mlflow.end_run": {
+        "inputs": [
+            {"name":"status","kind":"namevalue"}
+        ]
+    },
+    "mlflow.clear_active_model": {
+        "inputs": [
+        ]
+    },
+    "mlflow.register_prompt": {
+        "inputs": [
+        ]
+    },
+    "mlflow.set_system_metrics_node_id": {
+        "inputs": [
+            {"name":"node_id","kind":"positional"}
+        ]
+    },
+    "mlflow.set_system_metrics_node_id": {
+        "inputs": [
+            {"name":"node_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_trace": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"silent","kind":"positional"}
+        ]
+    },
+    "mlflow.get_trace": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"silent","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_trace": {
+        "inputs": [
+            {"name":"trace_id","kind":"namevalue"},
+            {"name":"silent","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_feedback": {
+        "inputs": [
+        ]
+    },
+    "mlflow.search_experiments": {
+        "inputs": [
+            {"name":"view_type","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"order_by","kind":"positional"}
+        ]
+    },
+    "mlflow.search_experiments": {
+        "inputs": [
+            {"name":"view_type","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"order_by","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_experiments": {
+        "inputs": [
+            {"name":"view_type","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_experiments": {
+        "inputs": [
+            {"name":"view_type","kind":"positional"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_experiments": {
+        "inputs": [
+            {"name":"view_type","kind":"namevalue"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_figure": {
+        "inputs": [
+            {"name":"figure","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"}
+        ]
+    },
+    "mlflow.log_figure": {
+        "inputs": [
+            {"name":"figure","kind":"positional"},
+            {"name":"artifact_file","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_figure": {
+        "inputs": [
+            {"name":"figure","kind":"namevalue"},
+            {"name":"artifact_file","kind":"namevalue"}
+        ]
+    },
+    "mlflow.finalize_logged_model": {
+        "inputs": [
+            {"name":"model_id","kind":"positional"},
+            {"name":"status","kind":"positional"}
+        ]
+    },
+    "mlflow.finalize_logged_model": {
+        "inputs": [
+            {"name":"model_id","kind":"positional"},
+            {"name":"status","kind":"namevalue"}
+        ]
+    },
+    "mlflow.finalize_logged_model": {
+        "inputs": [
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"status","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_system_metrics_samples_before_logging": {
+        "inputs": [
+            {"name":"samples","kind":"positional"}
+        ]
+    },
+    "mlflow.set_system_metrics_samples_before_logging": {
+        "inputs": [
+            {"name":"samples","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_tracking_uri": {
+        "inputs": [
+        ]
+    },
+    "mlflow.search_logged_models": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"datasets","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"output_format","kind":"positional"}
+        ]
+    },
+    "mlflow.search_logged_models": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"datasets","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"output_format","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_logged_models": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"datasets","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"output_format","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_logged_models": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"datasets","kind":"positional"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"output_format","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_logged_models": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"datasets","kind":"namevalue"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"output_format","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_logged_models": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"datasets","kind":"namevalue"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"output_format","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_logged_models": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"namevalue"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"datasets","kind":"namevalue"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"output_format","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_image": {
+        "inputs": [
+            {"name":"image","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"key","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"timestamp","kind":"positional"},
+            {"name":"synchronous","kind":"positional"}
+        ]
+    },
+    "mlflow.log_image": {
+        "inputs": [
+            {"name":"image","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"key","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"timestamp","kind":"positional"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_image": {
+        "inputs": [
+            {"name":"image","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"key","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_image": {
+        "inputs": [
+            {"name":"image","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"key","kind":"positional"},
+            {"name":"step","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_image": {
+        "inputs": [
+            {"name":"image","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"key","kind":"namevalue"},
+            {"name":"step","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_image": {
+        "inputs": [
+            {"name":"image","kind":"positional"},
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"key","kind":"namevalue"},
+            {"name":"step","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_image": {
+        "inputs": [
+            {"name":"image","kind":"namevalue"},
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"key","kind":"namevalue"},
+            {"name":"step","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.flush_artifact_async_logging": {
+        "inputs": [
+        ]
+    },
+    "mlflow.create_experiment": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"artifact_location","kind":"positional"},
+            {"name":"tags","kind":"positional"}
+        ]
+    },
+    "mlflow.create_experiment": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"artifact_location","kind":"positional"},
+            {"name":"tags","kind":"namevalue"}
+        ]
+    },
+    "mlflow.create_experiment": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"artifact_location","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"}
+        ]
+    },
+    "mlflow.create_experiment": {
+        "inputs": [
+            {"name":"name","kind":"namevalue"},
+            {"name":"artifact_location","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_workspace": {
+        "inputs": [
+            {"name":"name","kind":"positional"}
+        ]
+    },
+    "mlflow.get_workspace": {
+        "inputs": [
+            {"name":"name","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_system_metrics_sampling_interval": {
+        "inputs": [
+            {"name":"interval","kind":"positional"}
+        ]
+    },
+    "mlflow.set_system_metrics_sampling_interval": {
+        "inputs": [
+            {"name":"interval","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_tag": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"synchronous","kind":"positional"}
+        ]
+    },
+    "mlflow.set_tag": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_tag": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_tag": {
+        "inputs": [
+            {"name":"key","kind":"namevalue"},
+            {"name":"value","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_input": {
+        "inputs": [
+            {"name":"dataset","kind":"positional"},
+            {"name":"context","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"model","kind":"positional"}
+        ]
+    },
+    "mlflow.log_input": {
+        "inputs": [
+            {"name":"dataset","kind":"positional"},
+            {"name":"context","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"model","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_input": {
+        "inputs": [
+            {"name":"dataset","kind":"positional"},
+            {"name":"context","kind":"positional"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"model","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_input": {
+        "inputs": [
+            {"name":"dataset","kind":"positional"},
+            {"name":"context","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"model","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_input": {
+        "inputs": [
+            {"name":"dataset","kind":"namevalue"},
+            {"name":"context","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"model","kind":"namevalue"}
+        ]
+    },
+    "mlflow.flush_async_logging": {
+        "inputs": [
+        ]
+    },
+    "mlflow.create_external_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"params","kind":"positional"},
+            {"name":"model_type","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"}
+        ]
+    },
+    "mlflow.create_external_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"params","kind":"positional"},
+            {"name":"model_type","kind":"positional"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.create_external_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"params","kind":"positional"},
+            {"name":"model_type","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.create_external_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"params","kind":"namevalue"},
+            {"name":"model_type","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.create_external_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"params","kind":"namevalue"},
+            {"name":"model_type","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.create_external_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"params","kind":"namevalue"},
+            {"name":"model_type","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.create_external_model": {
+        "inputs": [
+            {"name":"name","kind":"namevalue"},
+            {"name":"source_run_id","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"params","kind":"namevalue"},
+            {"name":"model_type","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_model_versions": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"order_by","kind":"positional"}
+        ]
+    },
+    "mlflow.search_model_versions": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"order_by","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_model_versions": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_model_versions": {
+        "inputs": [
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_tags": {
+        "inputs": [
+            {"name":"tags","kind":"positional"},
+            {"name":"synchronous","kind":"positional"}
+        ]
+    },
+    "mlflow.set_tags": {
+        "inputs": [
+            {"name":"tags","kind":"positional"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_tags": {
+        "inputs": [
+            {"name":"tags","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_inputs": {
+        "inputs": [
+            {"name":"datasets","kind":"positional"},
+            {"name":"contexts","kind":"positional"},
+            {"name":"tags_list","kind":"positional"},
+            {"name":"models","kind":"positional"}
+        ]
+    },
+    "mlflow.log_inputs": {
+        "inputs": [
+            {"name":"datasets","kind":"positional"},
+            {"name":"contexts","kind":"positional"},
+            {"name":"tags_list","kind":"positional"},
+            {"name":"models","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_inputs": {
+        "inputs": [
+            {"name":"datasets","kind":"positional"},
+            {"name":"contexts","kind":"positional"},
+            {"name":"tags_list","kind":"namevalue"},
+            {"name":"models","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_inputs": {
+        "inputs": [
+            {"name":"datasets","kind":"positional"},
+            {"name":"contexts","kind":"namevalue"},
+            {"name":"tags_list","kind":"namevalue"},
+            {"name":"models","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_inputs": {
+        "inputs": [
+            {"name":"datasets","kind":"namevalue"},
+            {"name":"contexts","kind":"namevalue"},
+            {"name":"tags_list","kind":"namevalue"},
+            {"name":"models","kind":"namevalue"}
+        ]
+    },
+    "mlflow.import_checkpoints": {
+        "inputs": [
+            {"name":"checkpoint_path","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"model_prefix","kind":"positional"},
+            {"name":"overwrite_checkpoints","kind":"positional"}
+        ]
+    },
+    "mlflow.import_checkpoints": {
+        "inputs": [
+            {"name":"checkpoint_path","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"model_prefix","kind":"positional"},
+            {"name":"overwrite_checkpoints","kind":"namevalue"}
+        ]
+    },
+    "mlflow.import_checkpoints": {
+        "inputs": [
+            {"name":"checkpoint_path","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"model_prefix","kind":"namevalue"},
+            {"name":"overwrite_checkpoints","kind":"namevalue"}
+        ]
+    },
+    "mlflow.import_checkpoints": {
+        "inputs": [
+            {"name":"checkpoint_path","kind":"positional"},
+            {"name":"source_run_id","kind":"namevalue"},
+            {"name":"model_prefix","kind":"namevalue"},
+            {"name":"overwrite_checkpoints","kind":"namevalue"}
+        ]
+    },
+    "mlflow.import_checkpoints": {
+        "inputs": [
+            {"name":"checkpoint_path","kind":"namevalue"},
+            {"name":"source_run_id","kind":"namevalue"},
+            {"name":"model_prefix","kind":"namevalue"},
+            {"name":"overwrite_checkpoints","kind":"namevalue"}
+        ]
+    },
+    "mlflow.create_workspace": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"description","kind":"positional"},
+            {"name":"default_artifact_root","kind":"positional"}
+        ]
+    },
+    "mlflow.create_workspace": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"description","kind":"positional"},
+            {"name":"default_artifact_root","kind":"namevalue"}
+        ]
+    },
+    "mlflow.create_workspace": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"default_artifact_root","kind":"namevalue"}
+        ]
+    },
+    "mlflow.create_workspace": {
+        "inputs": [
+            {"name":"name","kind":"namevalue"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"default_artifact_root","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_prompts": {
+        "inputs": [
+        ]
+    },
+    "mlflow.flush_trace_async_logging": {
+        "inputs": [
+            {"name":"terminate","kind":"positional"}
+        ]
+    },
+    "mlflow.flush_trace_async_logging": {
+        "inputs": [
+            {"name":"terminate","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_telemetry_client": {
+        "inputs": [
+        ]
+    },
+    "mlflow.log_metric": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"timestamp","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"dataset","kind":"positional"}
+        ]
+    },
+    "mlflow.log_metric": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"timestamp","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metric": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"timestamp","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metric": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"timestamp","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metric": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metric": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metric": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"step","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metric": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"namevalue"},
+            {"name":"step","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metric": {
+        "inputs": [
+            {"name":"key","kind":"namevalue"},
+            {"name":"value","kind":"namevalue"},
+            {"name":"step","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.initialize_logged_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"params","kind":"positional"},
+            {"name":"model_type","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"}
+        ]
+    },
+    "mlflow.initialize_logged_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"params","kind":"positional"},
+            {"name":"model_type","kind":"positional"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.initialize_logged_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"params","kind":"positional"},
+            {"name":"model_type","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.initialize_logged_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"params","kind":"namevalue"},
+            {"name":"model_type","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.initialize_logged_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"positional"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"params","kind":"namevalue"},
+            {"name":"model_type","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.initialize_logged_model": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"source_run_id","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"params","kind":"namevalue"},
+            {"name":"model_type","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.initialize_logged_model": {
+        "inputs": [
+            {"name":"name","kind":"namevalue"},
+            {"name":"source_run_id","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"params","kind":"namevalue"},
+            {"name":"model_type","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_active_model_id": {
+        "inputs": [
+        ]
+    },
+    "mlflow.search_registered_models": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"order_by","kind":"positional"}
+        ]
+    },
+    "mlflow.search_registered_models": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"order_by","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_registered_models": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_registered_models": {
+        "inputs": [
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"}
+        ]
+    },
+    "mlflow.delete_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"assessment_id","kind":"positional"}
+        ]
+    },
+    "mlflow.delete_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"assessment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.delete_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"namevalue"},
+            {"name":"assessment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"backend","kind":"positional"},
+            {"name":"backend_config","kind":"positional"},
+            {"name":"storage_dir","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"run_name","kind":"positional"},
+            {"name":"env_manager","kind":"positional"},
+            {"name":"build_image","kind":"positional"},
+            {"name":"docker_auth","kind":"positional"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"backend","kind":"positional"},
+            {"name":"backend_config","kind":"positional"},
+            {"name":"storage_dir","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"run_name","kind":"positional"},
+            {"name":"env_manager","kind":"positional"},
+            {"name":"build_image","kind":"positional"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"backend","kind":"positional"},
+            {"name":"backend_config","kind":"positional"},
+            {"name":"storage_dir","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"run_name","kind":"positional"},
+            {"name":"env_manager","kind":"positional"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"backend","kind":"positional"},
+            {"name":"backend_config","kind":"positional"},
+            {"name":"storage_dir","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"run_name","kind":"positional"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"backend","kind":"positional"},
+            {"name":"backend_config","kind":"positional"},
+            {"name":"storage_dir","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"backend","kind":"positional"},
+            {"name":"backend_config","kind":"positional"},
+            {"name":"storage_dir","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"backend","kind":"positional"},
+            {"name":"backend_config","kind":"positional"},
+            {"name":"storage_dir","kind":"positional"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"backend","kind":"positional"},
+            {"name":"backend_config","kind":"positional"},
+            {"name":"storage_dir","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"backend","kind":"positional"},
+            {"name":"backend_config","kind":"namevalue"},
+            {"name":"storage_dir","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"backend","kind":"namevalue"},
+            {"name":"backend_config","kind":"namevalue"},
+            {"name":"storage_dir","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"backend","kind":"namevalue"},
+            {"name":"backend_config","kind":"namevalue"},
+            {"name":"storage_dir","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"positional"},
+            {"name":"experiment_name","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"backend","kind":"namevalue"},
+            {"name":"backend_config","kind":"namevalue"},
+            {"name":"storage_dir","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"positional"},
+            {"name":"docker_args","kind":"namevalue"},
+            {"name":"experiment_name","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"backend","kind":"namevalue"},
+            {"name":"backend_config","kind":"namevalue"},
+            {"name":"storage_dir","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"parameters","kind":"namevalue"},
+            {"name":"docker_args","kind":"namevalue"},
+            {"name":"experiment_name","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"backend","kind":"namevalue"},
+            {"name":"backend_config","kind":"namevalue"},
+            {"name":"storage_dir","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"positional"},
+            {"name":"version","kind":"namevalue"},
+            {"name":"parameters","kind":"namevalue"},
+            {"name":"docker_args","kind":"namevalue"},
+            {"name":"experiment_name","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"backend","kind":"namevalue"},
+            {"name":"backend_config","kind":"namevalue"},
+            {"name":"storage_dir","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"positional"},
+            {"name":"entry_point","kind":"namevalue"},
+            {"name":"version","kind":"namevalue"},
+            {"name":"parameters","kind":"namevalue"},
+            {"name":"docker_args","kind":"namevalue"},
+            {"name":"experiment_name","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"backend","kind":"namevalue"},
+            {"name":"backend_config","kind":"namevalue"},
+            {"name":"storage_dir","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.run": {
+        "inputs": [
+            {"name":"uri","kind":"namevalue"},
+            {"name":"entry_point","kind":"namevalue"},
+            {"name":"version","kind":"namevalue"},
+            {"name":"parameters","kind":"namevalue"},
+            {"name":"docker_args","kind":"namevalue"},
+            {"name":"experiment_name","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"backend","kind":"namevalue"},
+            {"name":"backend_config","kind":"namevalue"},
+            {"name":"storage_dir","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"env_manager","kind":"namevalue"},
+            {"name":"build_image","kind":"namevalue"},
+            {"name":"docker_auth","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_runs": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"run_view_type","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"output_format","kind":"positional"},
+            {"name":"search_all_experiments","kind":"positional"},
+            {"name":"experiment_names","kind":"positional"}
+        ]
+    },
+    "mlflow.search_runs": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"run_view_type","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"output_format","kind":"positional"},
+            {"name":"search_all_experiments","kind":"positional"},
+            {"name":"experiment_names","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_runs": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"run_view_type","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"output_format","kind":"positional"},
+            {"name":"search_all_experiments","kind":"namevalue"},
+            {"name":"experiment_names","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_runs": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"run_view_type","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"output_format","kind":"namevalue"},
+            {"name":"search_all_experiments","kind":"namevalue"},
+            {"name":"experiment_names","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_runs": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"run_view_type","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"output_format","kind":"namevalue"},
+            {"name":"search_all_experiments","kind":"namevalue"},
+            {"name":"experiment_names","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_runs": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"run_view_type","kind":"positional"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"output_format","kind":"namevalue"},
+            {"name":"search_all_experiments","kind":"namevalue"},
+            {"name":"experiment_names","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_runs": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"run_view_type","kind":"namevalue"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"output_format","kind":"namevalue"},
+            {"name":"search_all_experiments","kind":"namevalue"},
+            {"name":"experiment_names","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_runs": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"run_view_type","kind":"namevalue"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"output_format","kind":"namevalue"},
+            {"name":"search_all_experiments","kind":"namevalue"},
+            {"name":"experiment_names","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_runs": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"namevalue"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"run_view_type","kind":"namevalue"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"output_format","kind":"namevalue"},
+            {"name":"search_all_experiments","kind":"namevalue"},
+            {"name":"experiment_names","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metrics": {
+        "inputs": [
+            {"name":"metrics","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"timestamp","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"dataset","kind":"positional"}
+        ]
+    },
+    "mlflow.log_metrics": {
+        "inputs": [
+            {"name":"metrics","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"timestamp","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metrics": {
+        "inputs": [
+            {"name":"metrics","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"timestamp","kind":"positional"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metrics": {
+        "inputs": [
+            {"name":"metrics","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metrics": {
+        "inputs": [
+            {"name":"metrics","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metrics": {
+        "inputs": [
+            {"name":"metrics","kind":"positional"},
+            {"name":"step","kind":"positional"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metrics": {
+        "inputs": [
+            {"name":"metrics","kind":"positional"},
+            {"name":"step","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_metrics": {
+        "inputs": [
+            {"name":"metrics","kind":"namevalue"},
+            {"name":"step","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"timestamp","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"dataset","kind":"namevalue"}
+        ]
+    },
+    "mlflow.delete_experiment": {
+        "inputs": [
+            {"name":"experiment_id","kind":"positional"}
+        ]
+    },
+    "mlflow.delete_experiment": {
+        "inputs": [
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.is_tracking_uri_set": {
+        "inputs": [
+        ]
+    },
+    "mlflow.set_trace_tag": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"}
+        ]
+    },
+    "mlflow.set_trace_tag": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_trace_tag": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"key","kind":"namevalue"},
+            {"name":"value","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_trace_tag": {
+        "inputs": [
+            {"name":"trace_id","kind":"namevalue"},
+            {"name":"key","kind":"namevalue"},
+            {"name":"value","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_active_trace_id": {
+        "inputs": [
+        ]
+    },
+    "mlflow.log_model_params": {
+        "inputs": [
+            {"name":"params","kind":"positional"},
+            {"name":"model_id","kind":"positional"}
+        ]
+    },
+    "mlflow.log_model_params": {
+        "inputs": [
+            {"name":"params","kind":"positional"},
+            {"name":"model_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_model_params": {
+        "inputs": [
+            {"name":"params","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.last_active_run": {
+        "inputs": [
+        ]
+    },
+    "mlflow.get_artifact_uri": {
+        "inputs": [
+            {"name":"artifact_path","kind":"positional"}
+        ]
+    },
+    "mlflow.get_artifact_uri": {
+        "inputs": [
+            {"name":"artifact_path","kind":"namevalue"}
+        ]
+    },
+    "mlflow.delete_experiment_tag": {
+        "inputs": [
+            {"name":"key","kind":"positional"}
+        ]
+    },
+    "mlflow.delete_experiment_tag": {
+        "inputs": [
+            {"name":"key","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_tracking_uri": {
+        "inputs": [
+            {"name":"uri","kind":"positional"}
+        ]
+    },
+    "mlflow.set_tracking_uri": {
+        "inputs": [
+            {"name":"uri","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_sessions": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"include_spans","kind":"positional"},
+            {"name":"locations","kind":"positional"}
+        ]
+    },
+    "mlflow.search_sessions": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"include_spans","kind":"positional"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_sessions": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_sessions": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_sessions": {
+        "inputs": [
+            {"name":"max_results","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_sessions": {
+        "inputs": [
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_outputs": {
+        "inputs": [
+            {"name":"models","kind":"positional"}
+        ]
+    },
+    "mlflow.log_outputs": {
+        "inputs": [
+            {"name":"models","kind":"namevalue"}
+        ]
+    },
+    "mlflow.last_logged_model": {
+        "inputs": [
+        ]
+    },
+    "mlflow.delete_logged_model_tag": {
+        "inputs": [
+            {"name":"model_id","kind":"positional"},
+            {"name":"key","kind":"positional"}
+        ]
+    },
+    "mlflow.delete_logged_model_tag": {
+        "inputs": [
+            {"name":"model_id","kind":"positional"},
+            {"name":"key","kind":"namevalue"}
+        ]
+    },
+    "mlflow.delete_logged_model_tag": {
+        "inputs": [
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"key","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_workspace": {
+        "inputs": [
+            {"name":"workspace","kind":"positional"}
+        ]
+    },
+    "mlflow.set_workspace": {
+        "inputs": [
+            {"name":"workspace","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"extract_fields","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"return_type","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"sql_warehouse_id","kind":"positional"},
+            {"name":"include_spans","kind":"positional"},
+            {"name":"locations","kind":"positional"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"extract_fields","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"return_type","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"sql_warehouse_id","kind":"positional"},
+            {"name":"include_spans","kind":"positional"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"extract_fields","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"return_type","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"sql_warehouse_id","kind":"positional"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"extract_fields","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"return_type","kind":"positional"},
+            {"name":"model_id","kind":"positional"},
+            {"name":"sql_warehouse_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"extract_fields","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"return_type","kind":"positional"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"sql_warehouse_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"extract_fields","kind":"positional"},
+            {"name":"run_id","kind":"positional"},
+            {"name":"return_type","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"sql_warehouse_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"extract_fields","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"return_type","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"sql_warehouse_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"positional"},
+            {"name":"extract_fields","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"return_type","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"sql_warehouse_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"max_results","kind":"positional"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"extract_fields","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"return_type","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"sql_warehouse_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"positional"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"extract_fields","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"return_type","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"sql_warehouse_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"positional"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"extract_fields","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"return_type","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"sql_warehouse_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.search_traces": {
+        "inputs": [
+            {"name":"experiment_ids","kind":"namevalue"},
+            {"name":"filter_string","kind":"namevalue"},
+            {"name":"max_results","kind":"namevalue"},
+            {"name":"order_by","kind":"namevalue"},
+            {"name":"extract_fields","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"return_type","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"sql_warehouse_id","kind":"namevalue"},
+            {"name":"include_spans","kind":"namevalue"},
+            {"name":"locations","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"assessment_id","kind":"positional"}
+        ]
+    },
+    "mlflow.get_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"assessment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"namevalue"},
+            {"name":"assessment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"run_name","kind":"positional"},
+            {"name":"nested","kind":"positional"},
+            {"name":"parent_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"description","kind":"positional"},
+            {"name":"log_system_metrics","kind":"positional"}
+        ]
+    },
+    "mlflow.start_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"run_name","kind":"positional"},
+            {"name":"nested","kind":"positional"},
+            {"name":"parent_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"description","kind":"positional"},
+            {"name":"log_system_metrics","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"run_name","kind":"positional"},
+            {"name":"nested","kind":"positional"},
+            {"name":"parent_run_id","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"log_system_metrics","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"run_name","kind":"positional"},
+            {"name":"nested","kind":"positional"},
+            {"name":"parent_run_id","kind":"positional"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"log_system_metrics","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"run_name","kind":"positional"},
+            {"name":"nested","kind":"positional"},
+            {"name":"parent_run_id","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"log_system_metrics","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"run_name","kind":"positional"},
+            {"name":"nested","kind":"namevalue"},
+            {"name":"parent_run_id","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"log_system_metrics","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"nested","kind":"namevalue"},
+            {"name":"parent_run_id","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"log_system_metrics","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"nested","kind":"namevalue"},
+            {"name":"parent_run_id","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"log_system_metrics","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_run": {
+        "inputs": [
+            {"name":"run_id","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"run_name","kind":"namevalue"},
+            {"name":"nested","kind":"namevalue"},
+            {"name":"parent_run_id","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"log_system_metrics","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_active_model": {
+        "inputs": [
+        ]
+    },
+    "mlflow.log_param": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"synchronous","kind":"positional"}
+        ]
+    },
+    "mlflow.log_param": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_param": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_param": {
+        "inputs": [
+            {"name":"key","kind":"namevalue"},
+            {"name":"value","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"}
+        ]
+    },
+    "mlflow.list_workspaces": {
+        "inputs": [
+        ]
+    },
+    "mlflow.delete_prompt_alias": {
+        "inputs": [
+        ]
+    },
+    "mlflow.get_current_active_span": {
+        "inputs": [
+        ]
+    },
+    "mlflow.log_params": {
+        "inputs": [
+            {"name":"params","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"positional"}
+        ]
+    },
+    "mlflow.log_params": {
+        "inputs": [
+            {"name":"params","kind":"positional"},
+            {"name":"synchronous","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_params": {
+        "inputs": [
+            {"name":"params","kind":"positional"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_params": {
+        "inputs": [
+            {"name":"params","kind":"namevalue"},
+            {"name":"synchronous","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_experiment": {
+        "inputs": [
+            {"name":"experiment_id","kind":"positional"}
+        ]
+    },
+    "mlflow.get_experiment": {
+        "inputs": [
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.delete_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"}
+        ]
+    },
+    "mlflow.delete_run": {
+        "inputs": [
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.load_prompt": {
+        "inputs": [
+        ]
+    },
+    "mlflow.set_experiment": {
+        "inputs": [
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"}
+        ]
+    },
+    "mlflow.set_experiment": {
+        "inputs": [
+            {"name":"experiment_name","kind":"positional"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_experiment": {
+        "inputs": [
+            {"name":"experiment_name","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_span": {
+        "inputs": [
+        ]
+    },
+    "mlflow.login": {
+        "inputs": [
+            {"name":"backend","kind":"positional"},
+            {"name":"interactive","kind":"positional"}
+        ]
+    },
+    "mlflow.login": {
+        "inputs": [
+            {"name":"backend","kind":"positional"},
+            {"name":"interactive","kind":"namevalue"}
+        ]
+    },
+    "mlflow.login": {
+        "inputs": [
+            {"name":"backend","kind":"namevalue"},
+            {"name":"interactive","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_experiment_tag": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"}
+        ]
+    },
+    "mlflow.set_experiment_tag": {
+        "inputs": [
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_experiment_tag": {
+        "inputs": [
+            {"name":"key","kind":"namevalue"},
+            {"name":"value","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_stream": {
+        "inputs": [
+            {"name":"stream","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_id","kind":"positional"}
+        ]
+    },
+    "mlflow.log_stream": {
+        "inputs": [
+            {"name":"stream","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_stream": {
+        "inputs": [
+            {"name":"stream","kind":"positional"},
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_stream": {
+        "inputs": [
+            {"name":"stream","kind":"namevalue"},
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.load_table": {
+        "inputs": [
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_ids","kind":"positional"},
+            {"name":"extra_columns","kind":"positional"}
+        ]
+    },
+    "mlflow.load_table": {
+        "inputs": [
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_ids","kind":"positional"},
+            {"name":"extra_columns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.load_table": {
+        "inputs": [
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_ids","kind":"namevalue"},
+            {"name":"extra_columns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.load_table": {
+        "inputs": [
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"run_ids","kind":"namevalue"},
+            {"name":"extra_columns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_experiment_by_name": {
+        "inputs": [
+            {"name":"name","kind":"positional"}
+        ]
+    },
+    "mlflow.get_experiment_by_name": {
+        "inputs": [
+            {"name":"name","kind":"namevalue"}
+        ]
+    },
+    "mlflow.delete_tag": {
+        "inputs": [
+            {"name":"key","kind":"positional"}
+        ]
+    },
+    "mlflow.delete_tag": {
+        "inputs": [
+            {"name":"key","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_span_no_context": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"span_type","kind":"positional"},
+            {"name":"parent_span","kind":"positional"},
+            {"name":"inputs","kind":"positional"},
+            {"name":"attributes","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"start_time_ns","kind":"positional"}
+        ]
+    },
+    "mlflow.start_span_no_context": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"span_type","kind":"positional"},
+            {"name":"parent_span","kind":"positional"},
+            {"name":"inputs","kind":"positional"},
+            {"name":"attributes","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"positional"},
+            {"name":"experiment_id","kind":"positional"},
+            {"name":"start_time_ns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_span_no_context": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"span_type","kind":"positional"},
+            {"name":"parent_span","kind":"positional"},
+            {"name":"inputs","kind":"positional"},
+            {"name":"attributes","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"positional"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"start_time_ns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_span_no_context": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"span_type","kind":"positional"},
+            {"name":"parent_span","kind":"positional"},
+            {"name":"inputs","kind":"positional"},
+            {"name":"attributes","kind":"positional"},
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"start_time_ns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_span_no_context": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"span_type","kind":"positional"},
+            {"name":"parent_span","kind":"positional"},
+            {"name":"inputs","kind":"positional"},
+            {"name":"attributes","kind":"positional"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"metadata","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"start_time_ns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_span_no_context": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"span_type","kind":"positional"},
+            {"name":"parent_span","kind":"positional"},
+            {"name":"inputs","kind":"positional"},
+            {"name":"attributes","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"metadata","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"start_time_ns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_span_no_context": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"span_type","kind":"positional"},
+            {"name":"parent_span","kind":"positional"},
+            {"name":"inputs","kind":"namevalue"},
+            {"name":"attributes","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"metadata","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"start_time_ns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_span_no_context": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"span_type","kind":"positional"},
+            {"name":"parent_span","kind":"namevalue"},
+            {"name":"inputs","kind":"namevalue"},
+            {"name":"attributes","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"metadata","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"start_time_ns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_span_no_context": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"span_type","kind":"namevalue"},
+            {"name":"parent_span","kind":"namevalue"},
+            {"name":"inputs","kind":"namevalue"},
+            {"name":"attributes","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"metadata","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"start_time_ns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.start_span_no_context": {
+        "inputs": [
+            {"name":"name","kind":"namevalue"},
+            {"name":"span_type","kind":"namevalue"},
+            {"name":"parent_span","kind":"namevalue"},
+            {"name":"inputs","kind":"namevalue"},
+            {"name":"attributes","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"},
+            {"name":"metadata","kind":"namevalue"},
+            {"name":"experiment_id","kind":"namevalue"},
+            {"name":"start_time_ns","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_experiment_tags": {
+        "inputs": [
+            {"name":"tags","kind":"positional"}
+        ]
+    },
+    "mlflow.set_experiment_tags": {
+        "inputs": [
+            {"name":"tags","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_table": {
+        "inputs": [
+            {"name":"data","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_id","kind":"positional"}
+        ]
+    },
+    "mlflow.log_table": {
+        "inputs": [
+            {"name":"data","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_table": {
+        "inputs": [
+            {"name":"data","kind":"positional"},
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_table": {
+        "inputs": [
+            {"name":"data","kind":"namevalue"},
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_artifact": {
+        "inputs": [
+            {"name":"local_path","kind":"positional"},
+            {"name":"artifact_path","kind":"positional"},
+            {"name":"run_id","kind":"positional"}
+        ]
+    },
+    "mlflow.log_artifact": {
+        "inputs": [
+            {"name":"local_path","kind":"positional"},
+            {"name":"artifact_path","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_artifact": {
+        "inputs": [
+            {"name":"local_path","kind":"positional"},
+            {"name":"artifact_path","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_artifact": {
+        "inputs": [
+            {"name":"local_path","kind":"namevalue"},
+            {"name":"artifact_path","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_last_active_trace_id": {
+        "inputs": [
+            {"name":"thread_local","kind":"positional"}
+        ]
+    },
+    "mlflow.get_last_active_trace_id": {
+        "inputs": [
+            {"name":"thread_local","kind":"namevalue"}
+        ]
+    },
+    "mlflow.delete_trace_tag": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"key","kind":"positional"}
+        ]
+    },
+    "mlflow.delete_trace_tag": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"key","kind":"namevalue"}
+        ]
+    },
+    "mlflow.delete_trace_tag": {
+        "inputs": [
+            {"name":"trace_id","kind":"namevalue"},
+            {"name":"key","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"assessment_id","kind":"positional"},
+            {"name":"assessment","kind":"positional"}
+        ]
+    },
+    "mlflow.update_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"assessment_id","kind":"positional"},
+            {"name":"assessment","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"assessment_id","kind":"namevalue"},
+            {"name":"assessment","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"namevalue"},
+            {"name":"assessment_id","kind":"namevalue"},
+            {"name":"assessment","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_logged_model_tags": {
+        "inputs": [
+            {"name":"model_id","kind":"positional"},
+            {"name":"tags","kind":"positional"}
+        ]
+    },
+    "mlflow.set_logged_model_tags": {
+        "inputs": [
+            {"name":"model_id","kind":"positional"},
+            {"name":"tags","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_logged_model_tags": {
+        "inputs": [
+            {"name":"model_id","kind":"namevalue"},
+            {"name":"tags","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_text": {
+        "inputs": [
+            {"name":"text","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_id","kind":"positional"}
+        ]
+    },
+    "mlflow.log_text": {
+        "inputs": [
+            {"name":"text","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_text": {
+        "inputs": [
+            {"name":"text","kind":"positional"},
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_text": {
+        "inputs": [
+            {"name":"text","kind":"namevalue"},
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_artifacts": {
+        "inputs": [
+            {"name":"local_dir","kind":"positional"},
+            {"name":"artifact_path","kind":"positional"},
+            {"name":"run_id","kind":"positional"}
+        ]
+    },
+    "mlflow.log_artifacts": {
+        "inputs": [
+            {"name":"local_dir","kind":"positional"},
+            {"name":"artifact_path","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_artifacts": {
+        "inputs": [
+            {"name":"local_dir","kind":"positional"},
+            {"name":"artifact_path","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_artifacts": {
+        "inputs": [
+            {"name":"local_dir","kind":"namevalue"},
+            {"name":"artifact_path","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_logged_model": {
+        "inputs": [
+            {"name":"model_id","kind":"positional"}
+        ]
+    },
+    "mlflow.get_logged_model": {
+        "inputs": [
+            {"name":"model_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.delete_workspace": {
+        "inputs": [
+            {"name":"name","kind":"positional"}
+        ]
+    },
+    "mlflow.delete_workspace": {
+        "inputs": [
+            {"name":"name","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_current_trace": {
+        "inputs": [
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"positional"},
+            {"name":"client_request_id","kind":"positional"},
+            {"name":"request_preview","kind":"positional"},
+            {"name":"response_preview","kind":"positional"},
+            {"name":"state","kind":"positional"},
+            {"name":"model_id","kind":"positional"}
+        ]
+    },
+    "mlflow.update_current_trace": {
+        "inputs": [
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"positional"},
+            {"name":"client_request_id","kind":"positional"},
+            {"name":"request_preview","kind":"positional"},
+            {"name":"response_preview","kind":"positional"},
+            {"name":"state","kind":"positional"},
+            {"name":"model_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_current_trace": {
+        "inputs": [
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"positional"},
+            {"name":"client_request_id","kind":"positional"},
+            {"name":"request_preview","kind":"positional"},
+            {"name":"response_preview","kind":"positional"},
+            {"name":"state","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_current_trace": {
+        "inputs": [
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"positional"},
+            {"name":"client_request_id","kind":"positional"},
+            {"name":"request_preview","kind":"positional"},
+            {"name":"response_preview","kind":"namevalue"},
+            {"name":"state","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_current_trace": {
+        "inputs": [
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"positional"},
+            {"name":"client_request_id","kind":"positional"},
+            {"name":"request_preview","kind":"namevalue"},
+            {"name":"response_preview","kind":"namevalue"},
+            {"name":"state","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_current_trace": {
+        "inputs": [
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"positional"},
+            {"name":"client_request_id","kind":"namevalue"},
+            {"name":"request_preview","kind":"namevalue"},
+            {"name":"response_preview","kind":"namevalue"},
+            {"name":"state","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_current_trace": {
+        "inputs": [
+            {"name":"tags","kind":"positional"},
+            {"name":"metadata","kind":"namevalue"},
+            {"name":"client_request_id","kind":"namevalue"},
+            {"name":"request_preview","kind":"namevalue"},
+            {"name":"response_preview","kind":"namevalue"},
+            {"name":"state","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_current_trace": {
+        "inputs": [
+            {"name":"tags","kind":"namevalue"},
+            {"name":"metadata","kind":"namevalue"},
+            {"name":"client_request_id","kind":"namevalue"},
+            {"name":"request_preview","kind":"namevalue"},
+            {"name":"response_preview","kind":"namevalue"},
+            {"name":"state","kind":"namevalue"},
+            {"name":"model_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_parent_run": {
+        "inputs": [
+            {"name":"run_id","kind":"positional"}
+        ]
+    },
+    "mlflow.get_parent_run": {
+        "inputs": [
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_workspace": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"description","kind":"positional"},
+            {"name":"default_artifact_root","kind":"positional"}
+        ]
+    },
+    "mlflow.update_workspace": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"description","kind":"positional"},
+            {"name":"default_artifact_root","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_workspace": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"default_artifact_root","kind":"namevalue"}
+        ]
+    },
+    "mlflow.update_workspace": {
+        "inputs": [
+            {"name":"name","kind":"namevalue"},
+            {"name":"description","kind":"namevalue"},
+            {"name":"default_artifact_root","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_model_version_tag": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"positional"}
+        ]
+    },
+    "mlflow.set_model_version_tag": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"key","kind":"positional"},
+            {"name":"value","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_model_version_tag": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"version","kind":"positional"},
+            {"name":"key","kind":"namevalue"},
+            {"name":"value","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_model_version_tag": {
+        "inputs": [
+            {"name":"name","kind":"positional"},
+            {"name":"version","kind":"namevalue"},
+            {"name":"key","kind":"namevalue"},
+            {"name":"value","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_model_version_tag": {
+        "inputs": [
+            {"name":"name","kind":"namevalue"},
+            {"name":"version","kind":"namevalue"},
+            {"name":"key","kind":"namevalue"},
+            {"name":"value","kind":"namevalue"}
+        ]
+    },
+    "mlflow.disable_system_metrics_logging": {
+        "inputs": [
+        ]
+    },
+    "mlflow.log_trace": {
+        "inputs": [
+        ]
+    },
+    "mlflow.log_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"assessment","kind":"positional"}
+        ]
+    },
+    "mlflow.log_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"positional"},
+            {"name":"assessment","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_assessment": {
+        "inputs": [
+            {"name":"trace_id","kind":"namevalue"},
+            {"name":"assessment","kind":"namevalue"}
+        ]
+    },
+    "mlflow.doctor": {
+        "inputs": [
+            {"name":"mask_envs","kind":"positional"}
+        ]
+    },
+    "mlflow.doctor": {
+        "inputs": [
+            {"name":"mask_envs","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_dict": {
+        "inputs": [
+            {"name":"dictionary","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_id","kind":"positional"}
+        ]
+    },
+    "mlflow.log_dict": {
+        "inputs": [
+            {"name":"dictionary","kind":"positional"},
+            {"name":"artifact_file","kind":"positional"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_dict": {
+        "inputs": [
+            {"name":"dictionary","kind":"positional"},
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.log_dict": {
+        "inputs": [
+            {"name":"dictionary","kind":"namevalue"},
+            {"name":"artifact_file","kind":"namevalue"},
+            {"name":"run_id","kind":"namevalue"}
+        ]
+    },
+    "mlflow.set_prompt_alias": {
+        "inputs": [
+        ]
+    },
+    "mlflow.validate_evaluation_results": {
+        "inputs": [
+            {"name":"validation_thresholds","kind":"positional"},
+            {"name":"candidate_result","kind":"positional"},
+            {"name":"baseline_result","kind":"positional"}
+        ]
+    },
+    "mlflow.validate_evaluation_results": {
+        "inputs": [
+            {"name":"validation_thresholds","kind":"positional"},
+            {"name":"candidate_result","kind":"positional"},
+            {"name":"baseline_result","kind":"namevalue"}
+        ]
+    },
+    "mlflow.validate_evaluation_results": {
+        "inputs": [
+            {"name":"validation_thresholds","kind":"positional"},
+            {"name":"candidate_result","kind":"namevalue"},
+            {"name":"baseline_result","kind":"namevalue"}
+        ]
+    },
+    "mlflow.validate_evaluation_results": {
+        "inputs": [
+            {"name":"validation_thresholds","kind":"namevalue"},
+            {"name":"candidate_result","kind":"namevalue"},
+            {"name":"baseline_result","kind":"namevalue"}
+        ]
+    },
+    "mlflow.get_registry_uri": {
+        "inputs": [
+        ]
+    },
+    "mlflow.active_run": {
+        "inputs": [
+        ]
+    },
+    "mlflow.override_feedback": {
+        "inputs": [
+        ]
+    }}

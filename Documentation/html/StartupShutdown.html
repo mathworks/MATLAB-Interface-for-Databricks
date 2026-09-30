@@ -1,0 +1,351 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Startup and Shutdown &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Startup and Shutdown</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/StartupShutdown.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="startup-and-shutdown">
+<h1>Startup and Shutdown<a class="headerlink" href="#startup-and-shutdown" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p><strong>Note:</strong> This feature is currently being developed. It may be changed or
+removed without further notice.</p>
+</div></blockquote>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>When MATLAB® Desktop is started on Databricks®, it's in a fresh state. The user
+may need to change settings to get the environment they're used to and prefer.
+They may also want or need particular libraries, tools, configurations, etc.
+to be able to work as efficiently.</p>
+<p>The feature is based on the concepts of <strong>startup</strong> and <strong>shutdown</strong>, i.e. that
+something should be done during or prior to <strong>startup</strong>, and something should
+be done during or prior to <strong>shutdown</strong>.</p>
+<p>This feature makes it possible to choose certain files or folders on Databricks
+that should be compressed (<code class="docutils literal notranslate"><span class="pre">tar.gz</span></code>) when MATLAB exits, and decompressed when
+starting a new MATLAB Desktop (on Databricks). It also enables installing
+user defined MATLAB Toolboxes (<code class="docutils literal notranslate"><span class="pre">.mltbx</span></code> format).</p>
+</section>
+<section id="basic-usage">
+<h2>Basic usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h2>
+<p>This feature is configured through a JSON file that must reside on Databricks,
+preferably in the user's own Workspace.</p>
+<p>This is a very simple example:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Context"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a_user"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MLTbx"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"tbx_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Volumes/main/default/myvolume/Examples/MATLABToolboxes/foobar.mltbx"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"agree_to_license"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="s2">"matlab"</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Copy"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"src_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/home/a_user/.matlab"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"zip_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Workspace/Users/a_user@example.com/MathWorks/Context/R2025b"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"exclude_list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"MWI"</span><span class="p">,</span><span class="w"> </span><span class="s2">"__mw_resources_mw__"</span><span class="p">],</span>
+<span class="w">            </span><span class="nt">"context"</span><span class="p">:</span><span class="w"> </span><span class="s2">"python"</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>There is currently no MATLAB tool to create this file automatically. Each element
+(on different levels) has the field <code class="docutils literal notranslate"><span class="pre">type</span></code>, which is used for serialization
+and deserialization.</p>
+<p><code class="docutils literal notranslate"><span class="pre">operations</span></code> is a list of different operations. There are currently two types,
+<code class="docutils literal notranslate"><span class="pre">Copy</span></code> and <code class="docutils literal notranslate"><span class="pre">MLTbx</span></code>, with the following functinoality:</p>
+<p><code class="docutils literal notranslate"><span class="pre">Copy</span></code> will package a file or a directory on shutdown, and save it in the form
+of a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> archive somewhere on the path. If this has been done, the next
+startup it will be loaded. This is a simple way to have different working
+folders that reappear in a new MATLAB session. The fields are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code> this must be set to <code class="docutils literal notranslate"><span class="pre">Copy</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">src_location</span></code> which is the directory or file to save</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">zip_location</span></code> which is the directory where to save the package</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">exclude_list</span></code> enable excluding certain elements from the compressed archive.
+This can be done to exclude confidential material, or to reduce the size of
+the archive. In the example with <code class="docutils literal notranslate"><span class="pre">.matlab</span></code>, it will remove the <code class="docutils literal notranslate"><span class="pre">MWI</span></code> folder,
+which is not needed, and also the  <code class="docutils literal notranslate"><span class="pre">__mw_resources_mw__</span></code> folder. The exclude
+algorithm will exclude any file containing one of the strings in the <code class="docutils literal notranslate"><span class="pre">exclude_list</span></code>.
+is a list of files or folders to potentially exclude. Typical candidates here
+would be build folders or temporary files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code> this must be set to <code class="docutils literal notranslate"><span class="pre">python</span></code></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">MLTbx</span></code> will install a MATLAB toolbox at startup.
+No effort is made to uninstall it at shutdown.
+The fields are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code> this must be set to <code class="docutils literal notranslate"><span class="pre">MLTbx</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">tbx_location</span></code> the location of the <code class="docutils literal notranslate"><span class="pre">.mltbx</span></code> file to install from</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">agree_to_license</span></code> a boolean value, that when set to <code class="docutils literal notranslate"><span class="pre">true</span></code> will accept the
+license, if any. Not setting this to <code class="docutils literal notranslate"><span class="pre">true</span></code> for a <code class="docutils literal notranslate"><span class="pre">.mltbx</span></code> that needs a license
+may freeze the startup process.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">context</span></code> this must be <code class="docutils literal notranslate"><span class="pre">matlab</span></code></p></li>
+</ul>
+<section id="release-dependency">
+<h3>Release dependency<a class="headerlink" href="#release-dependency" title="Link to this heading"></a></h3>
+<p>Please note that certain saved data may be release dependent. For that reason,
+we chose to save the MATLAB preference directory (<code class="docutils literal notranslate"><span class="pre">prefdir</span></code>) in a specific
+directory (only readable by the user):</p>
+<p><code class="docutils literal notranslate"><span class="pre">&quot;zip_location&quot;:</span> <span class="pre">&quot;/Workspace/Users/a_user&#64;example.com/MathWorks/Context/R2025b&quot;,</span></code></p>
+<p>See section <a class="reference internal" href="#configuration">Configuration</a> about this too.</p>
+</section>
+</section>
+<section id="size-and-security-considerations">
+<h2>Size and security considerations<a class="headerlink" href="#size-and-security-considerations" title="Link to this heading"></a></h2>
+<p>Files can be saved to any persistent file system on Databricks. We recommend
+using either <code class="docutils literal notranslate"><span class="pre">/Volumes</span></code> or <code class="docutils literal notranslate"><span class="pre">/Workspace</span></code>.</p>
+<p>The Databricks workspace currently has a size limit per file of 500 MB, so if
+larger files or directories must be compressed, it may be necessary to put them
+on <code class="docutils literal notranslate"><span class="pre">/Volumes</span></code>.</p>
+<p>If a directory should be copied, using the <code class="docutils literal notranslate"><span class="pre">exclude_list</span></code> can be a way of
+ensuring that</p>
+<ul class="simple">
+<li><p>Size is reduced</p></li>
+<li><p>Personal files are not part of the compressed archive</p></li>
+</ul>
+<p>If the compressed file contains any confidential information (like ssh keys),
+it's the responsibility of the user to decide if the storage location is secure
+enough for the data that is stored.</p>
+<p>It should be avoided to have common locations for compressed files. The
+<code class="docutils literal notranslate"><span class="pre">tar</span> <span class="pre">gzip</span></code> process will preserve <code class="docutils literal notranslate"><span class="pre">user</span></code> and <code class="docutils literal notranslate"><span class="pre">group</span></code> information, so if
+<code class="docutils literal notranslate"><span class="pre">alice</span></code> saves a folder, and <code class="docutils literal notranslate"><span class="pre">bob</span></code> tries to unpack it, he may not be able
+to read the files.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Having a common compressed file (that is maybe not changed, just
+used), may clearly be a use case. This may be added later as a setting or as
+a separate operation type.</p>
+</div></blockquote>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p><strong>Note:</strong> This configuration is going to change, as there is now an official
+reference architecture for running a MATLAB Desktop on Databricks, see
+<a class="reference external" href="https://github.com/mathworks-ref-arch/matlab-on-databricks">matlab-on-databricks</a>.
+The startup/shutdown feature is not directly supported with the reference
+architecture at the time of writing.</p>
+</div></blockquote>
+<p>The default location for the <code class="docutils literal notranslate"><span class="pre">json</span></code> file is in the users private workspace,
+with a directory added for the corresponding MATLAB Release. In this example
+<strong>R2026a</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">/Workspace/Users/a_user&#64;example.com/MathWorks/Context/R2026a/mw_prefs.json</span></code>.</p>
+<blockquote>
+<div><p><strong>Note:</strong> See section <a class="reference internal" href="#release-dependency">Release dependency</a> above too.</p>
+</div></blockquote>
+<p>If the user wants to use a different location, this is possible by setting the
+environment variable <code class="docutils literal notranslate"><span class="pre">MW_STARTUP_SHUTDOWN_CONFIG</span></code> correspondingly.</p>
+<p>This can also be used to have different setups for different tasks, e.g.
+<code class="docutils literal notranslate"><span class="pre">/Workspace/Users/a_user&#64;example.com/project_x.json</span></code> and
+<code class="docutils literal notranslate"><span class="pre">/Workspace/Users/a_user&#64;example.com/project_y.json</span></code>.</p>
+</section>
+<section id="missing-compressed-files">
+<h2>Missing compressed files<a class="headerlink" href="#missing-compressed-files" title="Link to this heading"></a></h2>
+<p>If a <code class="docutils literal notranslate"><span class="pre">.tar.gz</span></code> file is missing from the <code class="docutils literal notranslate"><span class="pre">zip_location</span></code>, it's just ignored during
+the <code class="docutils literal notranslate"><span class="pre">startup</span></code> phase. Consider the example saving git configurations above, i.e.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="nt">"src_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/home/a_user/.gitconfig"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"zip_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Workspace/Users/a_user@example.com/MathWorks/Context"</span><span class="p">,</span>
+</pre></div>
+</div>
+<p>If the file
+<code class="docutils literal notranslate"><span class="pre">/Workspace/Users/a_user&#64;example.com/MathWorks/Context/.gitconfig.tar.gz</span></code>
+is missing, MATLAB simply starts without this file.</p>
+<p>In the current MATLAB (on Databricks), the user can add some configurations, e.g.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="sx">!git config --global user.name "My Name"</span>
+<span class="sx">!git config --global user.email "USERNAME@example.com"</span>
+<span class="sx">!git config --global alias.st status</span>
+<span class="sx">!git config --global alias.co checkout</span>
+</pre></div>
+</div>
+<p>When the <code class="docutils literal notranslate"><span class="pre">shutdown</span></code> procedure is invoked, this file will be found, and the
+data will be compressed and saved. The next time when the user starts
+MATLAB Desktop on Databricks, the <code class="docutils literal notranslate"><span class="pre">.gitconfig</span></code> file will be unpacked prior to
+starting MATLAB, and the user will have his or her <em>usual environment</em>.</p>
+<p>The user can use either command line git, as above, or the built-in support
+from the MATLAB Desktop.</p>
+</section>
+<section id="startup-and-shutdown-methods">
+<h2>Startup and Shutdown methods<a class="headerlink" href="#startup-and-shutdown-methods" title="Link to this heading"></a></h2>
+<p>The <strong>startup</strong> methods are executed automatically, if configured, but when are
+the <strong>shutdown</strong> methods executed? It turns out that they may or may not be executed.</p>
+<p>There are a few ways of ensuring that the <strong>shutdown</strong> methods will run.</p>
+<ul class="simple">
+<li><p>When leaving MATLAB, run <code class="docutils literal notranslate"><span class="pre">exit</span></code> in MATLAB, as you might on a Desktop MATLAB
+on your computer. When it has finished (there is some output during <strong>shutdown</strong>),
+the cluster can be terminated/deleted.</p></li>
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">finish</span></code>. The Databricks package contains a <code class="docutils literal notranslate"><span class="pre">finish</span></code> function, which is called
+when the user executes <code class="docutils literal notranslate"><span class="pre">exit</span></code>. It is, however, possible to simply call <code class="docutils literal notranslate"><span class="pre">finish</span></code>
+without exiting MATLAB. The user may want to do this to
+<em>save the data at regular intervals</em>.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

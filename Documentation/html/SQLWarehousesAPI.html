@@ -1,0 +1,507 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SQL Warehouses API &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Statement Execution API" href="StatementExecution.html" />
+    <link rel="prev" title="Secrets API" href="SecretsAPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">SQL Warehouses API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#sql-warehouses-rest-api-version-2-0">SQL warehouses REST API (version 2.0)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#list">List</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create">Create</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#refresh">Refresh</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#edit">Edit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#start">Start</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stop">Stop</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#delete">Delete</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#connecting-to-a-sql-warehouse-with-database-toolbox">Connecting to a SQL warehouse with Database Toolbox</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#using-a-sql-warehouse-with-database-explorer">Using a SQL Warehouse with Database Explorer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#oauth-authentication">Oauth authentication</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#oauthu2m-jdbc-driver-bug-under-investigation">OauthU2M - JDBC Driver bug under investigation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">SQL Warehouses API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/SQLWarehousesAPI.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="sql-warehouses-api">
+<h1>SQL Warehouses API<a class="headerlink" href="#sql-warehouses-api" title="Link to this heading"></a></h1>
+<p>A SQL warehouse is a managed computation resource that allows one to run SQL
+commands on data objects within Databricks® SQL, see the
+<a class="reference external" href="https://docs.databricks.com/en/compute/sql-warehouse/index.html">Databricks documentation</a>
+for more information.</p>
+<p>At the time of writing, SQL warehouses are only available on Databricks
+Enterprise workspaces. Trying to use the feature on workspaces which do not
+support it will lead to errors being thrown like:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Error</span><span class="w"> </span><span class="s">using</span><span class="w"> </span><span class="s">databricks.SQLWarehouse.list</span>
+<span class="n">Failed</span><span class="w"> </span><span class="s">to</span><span class="w"> </span><span class="s">list</span><span class="w"> </span><span class="s">SQL</span><span class="w"> </span><span class="s">warehouses</span>
+<span class="w">  </span><span class="n">error_code</span><span class="p">:</span><span class="w"> </span><span class="n">FEATURE_DISABLED</span>
+<span class="w">  </span><span class="n">message</span><span class="p">:</span><span class="w"> </span><span class="n">DBSQL</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">not</span><span class="w"> </span><span class="n">supported</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">workspace</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">Standard</span><span class="w"> </span><span class="n">feature</span><span class="w"> </span><span class="n">tier</span><span class="p">.</span><span class="w"> </span><span class="n">Please</span><span class="w"> </span><span class="n">contact</span><span class="w"> </span><span class="n">Databricks</span><span class="w"> </span><span class="n">support</span><span class="p">.</span>
+</pre></div>
+</div>
+<p>Even with no SQL warehouses available it may still be possible to connect to
+Databricks using Database Toolbox™ and the Databricks JDBC driver by connecting
+to specific clusters instead of a SQL warehouse, see <a class="reference internal" href="JDBCWorkflow.html"><span class="std std-doc">JDBCWorkflow.md</span></a>.</p>
+<p>The MATLAB® Interface for Databricks package offers an interface to the
+<a class="reference external" href="https://docs.databricks.com/sql/api/sql-endpoints.html">SQL Warehouses REST API</a>
+as well as an option to connect to these SQL warehouses using
+<a class="reference external" href="https://www.mathworks.com/products/database.html">Database Toolbox</a> and the
+<a class="reference internal" href="InstallingJDBCDriver.html"><span class="std std-doc">Databricks JDBC driver</span></a> using the <code class="docutils literal notranslate"><span class="pre">connect</span></code> method.</p>
+<p>Interaction with the REST API takes place through the <code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code>
+class in MATLAB. The class has the same properties as an warehouse in the REST
+API, see the
+<a class="reference external" href="https://docs.databricks.com/sql/api/sql-endpoints.html#get">Databricks documentation on the Get operation</a>
+for a full overview of the properties and their meaning.</p>
+<section id="sql-warehouses-rest-api-version-2-0">
+<h2>SQL warehouses REST API (version 2.0)<a class="headerlink" href="#sql-warehouses-rest-api-version-2-0" title="Link to this heading"></a></h2>
+<section id="list">
+<h3>List<a class="headerlink" href="#list" title="Link to this heading"></a></h3>
+<p>To list all available SQL warehouses in the <a class="reference internal" href="Setup.html"><span class="std std-doc">configured</span></a>
+Databricks workspace, call the static <code class="docutils literal notranslate"><span class="pre">list</span></code> method:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">warehouses</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouse</span><span class="p">.</span><span class="n">list</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This will return an array of <code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code> objects. If no warehouses have been
+configured an empty <code class="docutils literal notranslate"><span class="pre">0x0</span></code> array of <code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code> objects is returned.</p>
+</section>
+<section id="create">
+<h3>Create<a class="headerlink" href="#create" title="Link to this heading"></a></h3>
+<p>Creating a SQL warehouse <em>requires</em> a number of options to be set and some
+<em>optional</em> options can be configured as well, see the <a class="reference external" href="https://docs.databricks.com/sql/api/sql-endpoints.html#create">Databricks
+documentation</a>
+for exact details and descriptions of these options.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create an empty SQLWarehouse instance</span>
+<span class="n">warehouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouse</span><span class="p">;</span>
+<span class="c">% Configure all required options - the actual values are just an example here</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"myNewInstance"</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">cluster_size</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Small"</span><span class="p">;</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">min_num_clusters</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">max_num_clusters</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="c">% Create the SQL warehouse on Databricks</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>If successful <code class="docutils literal notranslate"><span class="pre">warehouse</span></code>'s <code class="docutils literal notranslate"><span class="pre">id</span></code> property is updated with the id of the newly
+created warehouse and is then <a class="reference internal" href="#refresh">refreshed</a> such that other properties
+like <code class="docutils literal notranslate"><span class="pre">state</span></code> will also be updated (and the <code class="docutils literal notranslate"><span class="pre">state</span></code> would typically then be
+<code class="docutils literal notranslate"><span class="pre">'STARTING'</span></code> for a newly created warehouse).</p>
+</section>
+<section id="refresh">
+<h3>Refresh<a class="headerlink" href="#refresh" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><em>NOTE:</em> This method in the Databricks API is called <code class="docutils literal notranslate"><span class="pre">Get</span></code>. It's called
+<code class="docutils literal notranslate"><span class="pre">refresh</span></code> here, to avoid confusion with the built-in MATLAB <code class="docutils literal notranslate"><span class="pre">get</span></code>/<code class="docutils literal notranslate"><span class="pre">set</span></code> methods.</p>
+</div></blockquote>
+<p>Refresh can be used to update the properties of a SQLWarehouse obtained before
+(e.g. through <code class="docutils literal notranslate"><span class="pre">list</span></code>), for example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">%% Initial inspection of the warehouses</span>
+<span class="c">% List all warehouses</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">warehouses</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouse</span><span class="p">.</span><span class="n">list</span><span class="p">();</span>
+<span class="c">% As an example select the second one</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">warehouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">warehouses</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="c">% Check the state</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">warehouse</span><span class="p">.</span><span class="n">state</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">WarehouseState</span><span class="w"> </span><span class="nb">enumeration</span>
+
+<span class="w">    </span><span class="n">STARTING</span>
+
+<span class="c">%% At some later point in time, check whether the state is still the same</span>
+<span class="c">% First refresh</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">warehouse</span><span class="p">.</span><span class="n">refresh</span><span class="p">()</span>
+<span class="c">% And display the current state</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">warehouse</span><span class="p">.</span><span class="n">state</span>
+
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+
+<span class="w">  </span><span class="n">WarehouseState</span><span class="w"> </span><span class="nb">enumeration</span>
+
+<span class="w">    </span><span class="n">RUNNING</span>
+</pre></div>
+</div>
+<p>Or this can be used to query the information of an warehouse with some known ID,
+for example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a SQLWarehouse instance - all its properties will be empty</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">warehouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouse</span><span class="p">;</span>
+<span class="c">% Specify a specific known ID - id is then set, but all other properties are still empty</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">warehouse</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"qfufxboufejuuibuxbz"</span><span class="p">;</span>
+<span class="c">% Call refresh - this queries the REST API and all other properties will be filled out</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">warehouse</span><span class="p">.</span><span class="n">refresh</span><span class="p">()</span>
+<span class="c">% Show the object</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">warehouse</span>
+
+<span class="w">    </span><span class="n">warehouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">      </span>
+<span class="w">        </span><span class="n">SQLWarehouse</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+<span class="w">      </span>
+<span class="w">                             </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="s">"qfufxboufejuuibuxbz"</span>
+<span class="w">                           </span><span class="n">name</span><span class="p">:</span><span class="w"> </span><span class="s">"myWarehouse"</span>
+<span class="w">                   </span><span class="n">cluster_size</span><span class="p">:</span><span class="w"> </span><span class="s">"2X-Small"</span>
+<span class="w">                 </span><span class="n">auto_stop_mins</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span>
+<span class="w">           </span><span class="n">spot_instance_policy</span><span class="p">:</span><span class="w"> </span><span class="n">COST_OPTIMIZED</span>
+<span class="w">                   </span><span class="n">num_clusters</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">               </span><span class="n">min_num_clusters</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">               </span><span class="n">max_num_clusters</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="n">num_active_sessions</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                          </span><span class="n">state</span><span class="p">:</span><span class="w"> </span><span class="n">RUNNING</span>
+<span class="w">                   </span><span class="n">creator_name</span><span class="p">:</span><span class="w"> </span><span class="s">"username@example.com"</span>
+<span class="w">                     </span><span class="n">creator_id</span><span class="p">:</span><span class="w"> </span><span class="s">"3141592653589793"</span>
+<span class="w">                       </span><span class="n">jdbc_url</span><span class="p">:</span><span class="w"> </span><span class="s">"jdbc:spark://adb-42424242424242.1.azuredatabricks.net:443/default;transportMode=http;ssl=1;AuthMech=3;httpPath=/sql/1.0/warehouses/qfufxboufejuuibuxbz;"</span>
+<span class="w">                    </span><span class="n">odbc_params</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">ODBCParams</span><span class="p">]</span>
+<span class="w">                           </span><span class="n">tags</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">WarehouseTags</span><span class="p">]</span>
+<span class="w">                         </span><span class="n">health</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">WarehouseHealth</span><span class="p">]</span>
+<span class="w">                  </span><span class="n">enable_photon</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">      </span><span class="n">enable_serverless_compute</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">                        </span><span class="n">channel</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">Channel</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">refresh</span></code> can also be used to refresh multiple warehouses at once, for example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the list of warehouses, if there are more than one this will be an array</span>
+<span class="n">warehouses</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouses</span><span class="p">.</span><span class="n">list</span><span class="p">()</span>
+<span class="c">% Update all of those warehouses in one call</span>
+<span class="n">warehouses</span><span class="p">.</span><span class="n">refresh</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="edit">
+<h3>Edit<a class="headerlink" href="#edit" title="Link to this heading"></a></h3>
+<p>Edit can be used to change the settings of an existing cluster. See the <a class="reference external" href="https://docs.databricks.com/sql/api/sql-endpoints.html#edit">REST
+API documentation</a>
+for more information about what can be changed exactly. To be able to use the
+<code class="docutils literal notranslate"><span class="pre">edit</span></code> method, the <code class="docutils literal notranslate"><span class="pre">id</span></code> property <em>must</em> be set, as well as any settings that are
+to be changed, for example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create an SQLWarehouse Instance</span>
+<span class="n">warehouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouse</span><span class="p">;</span>
+<span class="c">% Specify which instance is to be updated</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"qfufxboufejuuibuxbz"</span><span class="p">;</span>
+<span class="c">% Set a modified value</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"My New Name"</span><span class="p">;</span>
+<span class="c">% Apply the edit</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">edit</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>It is for example also possible to first obtain an warehouse through <code class="docutils literal notranslate"><span class="pre">list</span></code>,
+modify one or more properties and then apply the edit:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Get the list</span>
+<span class="n">warehouses</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouse</span><span class="p">.</span><span class="n">list</span><span class="p">();</span>
+<span class="c">% Select the first warehouse</span>
+<span class="n">warehouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">warehouses</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="c">% Modify two of its settings</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"My New Name"</span><span class="p">;</span>
+<span class="n">warehouses</span><span class="p">.</span><span class="n">max_num_clusters</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="c">% Apply the edit</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">edit</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">edit</span></code> method can only be used on <code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code> scalars and does
+<em>not</em> work on arrays.</p>
+</section>
+<section id="start">
+<h3>Start<a class="headerlink" href="#start" title="Link to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">start</span></code> method starts existing but stopped SQL warehouses. This can again
+operate on an existing <code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code> instance obtained earlier:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% List all warehouses</span>
+<span class="n">warehouses</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouse</span><span class="p">.</span><span class="n">list</span><span class="p">();</span>
+<span class="c">% As an example select the second one</span>
+<span class="n">warehouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">warehouses</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>or if a specific id is known, a <code class="docutils literal notranslate"><span class="pre">SQLWarehouse</span></code> instance can be created and its id
+can then be set:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a SQLWarehouse instance </span>
+<span class="n">warehouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouse</span><span class="p">;</span>
+<span class="c">% And specify a specific id</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"qfufxboufejuuibuxbz"</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Then call the <code class="docutils literal notranslate"><span class="pre">start</span></code> method to actually start the warehouse:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">warehouse</span><span class="p">.</span><span class="n">start</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This methods <em>can</em> be used on arrays of <code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code> to start
+multiple SQL warehouses in one call.</p>
+</section>
+<section id="stop">
+<h3>Stop<a class="headerlink" href="#stop" title="Link to this heading"></a></h3>
+<p>Similar to starting SQL warehouses they can be stopped:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">warehouse</span><span class="p">.</span><span class="n">stop</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This methods <em>can</em> be used on arrays of <code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code> to stop
+multiple SQL warehouses in one call.</p>
+</section>
+<section id="delete">
+<h3>Delete<a class="headerlink" href="#delete" title="Link to this heading"></a></h3>
+<blockquote>
+<div><p><em>NOTE:</em> This method is called delete in the Databricks API. It is called remove
+here, to avoid confusion with the built-in MATLAB delete method. This works
+similarly to start and stop, a previously obtained <code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code> can
+be used or a new instance with <code class="docutils literal notranslate"><span class="pre">id</span></code> set, can be used:</p>
+</div></blockquote>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">warehouse</span><span class="p">.</span><span class="n">remove</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This methods <em>can</em> be used on arrays of <code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code> to delete
+multiple SQL warehouses in one call.</p>
+</section>
+</section>
+<section id="connecting-to-a-sql-warehouse-with-database-toolbox">
+<h2>Connecting to a SQL warehouse with Database Toolbox<a class="headerlink" href="#connecting-to-a-sql-warehouse-with-database-toolbox" title="Link to this heading"></a></h2>
+<p>To connect to a SQL warehouse using Database Toolbox, Database Toolbox
+must be installed, this can be quickly checked using the <code class="docutils literal notranslate"><span class="pre">ver</span></code> command.
+Furthermore, the Databricks JDBC driver must be downloaded from
+<a class="reference external" href="https://www.databricks.com/spark/jdbc-drivers-archive">Databricks</a>. The <code class="docutils literal notranslate"><span class="pre">jarFilePath</span></code>
+argument can be used to specify the path to the driver.
+See <a class="reference internal" href="InstallingJDBCDriver.html"><span class="std std-doc">JDBC driver installation</span></a> for details.</p>
+<p>Similar to most of the other operations listed above, to connect to a SQL
+warehouse, one can first either list the warehouses and then &quot;select&quot; one:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% List all warehouses</span>
+<span class="n">warehouses</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouse</span><span class="p">.</span><span class="n">list</span><span class="p">();</span>
+<span class="c">% As an example select the second one</span>
+<span class="n">warehouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">warehouses</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>or if a specific id is known up-front, create a <code class="docutils literal notranslate"><span class="pre">SQLWarehouse</span></code> instance and set
+that id:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a SQLWarehouse instance </span>
+<span class="n">warehouse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SQLWarehouse</span><span class="p">;</span>
+<span class="c">% And specify a specific id</span>
+<span class="n">warehouse</span><span class="p">.</span><span class="n">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"qfufxboufejuuibuxbz"</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>And then to connect using Database Toolbox and the Databricks JDBC Driver,
+simply call connect:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">conn</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">warehouse</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This uses Database Toolbox' <code class="docutils literal notranslate"><span class="pre">database</span></code> function and the connection
+object is the same kind of object as returned by <code class="docutils literal notranslate"><span class="pre">database</span></code>. As always in
+Database Toolbox, check the <code class="docutils literal notranslate"><span class="pre">Message</span></code> field of the object to ensure the
+connection was successful in which case <code class="docutils literal notranslate"><span class="pre">Message</span></code> will be empty, if there was an
+error <code class="docutils literal notranslate"><span class="pre">Message</span></code> will contain the error message.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">connect</span></code> method can only be used on <code class="docutils literal notranslate"><span class="pre">databricks.SQLWarehouse</span></code> scalars and
+does not work on arrays.</p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">doc</span> <span class="pre">databricks.SQLWarehouse.connect</span></code> for further argument details.
+The <code class="docutils literal notranslate"><span class="pre">connect</span></code> method uses a <code class="docutils literal notranslate"><span class="pre">databricks.JDBCConnection</span></code> or a <code class="docutils literal notranslate"><span class="pre">databricks.ODBCConnection</span></code>
+object to create the returned connection, see: <a class="reference internal" href="JDBCWorkflow.html"><span class="std std-doc">JDBCWorkflow.md</span></a>
+or <a class="reference internal" href="ODBCWorkflow.html"><span class="std std-doc">ODBCWorkflow.md</span></a> for additional details. A JDBC connection is
+used by default, use the <code class="docutils literal notranslate"><span class="pre">mode</span></code> argument to select ODBC if preferred.</p>
+<section id="using-a-sql-warehouse-with-database-explorer">
+<h3>Using a SQL Warehouse with Database Explorer<a class="headerlink" href="#using-a-sql-warehouse-with-database-explorer" title="Link to this heading"></a></h3>
+<p>Create a warehouse as above but return the xDBCConnection result also.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">conn</span><span class="p">,</span><span class="w"> </span><span class="n">xDBCConnection</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">warehouse</span><span class="p">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Save the connection as a source, by default the source name will be: <code class="docutils literal notranslate"><span class="pre">Databricks-&lt;Warehouse</span> <span class="pre">Id&gt;</span></code>.
+By default a source is created when a connection is created but it is not saved
+unless <code class="docutils literal notranslate"><span class="pre">saveSource</span></code> is called.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">xDBCConnection</span><span class="p">.</span><span class="n">saveSource</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Copy the connection's token to the clipboard for use in the GUI.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">j</span><span class="p">.</span><span class="n">copyToken</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Then in the Database Explorer app select the newly created data source. When the
+username and password are requested enter &quot;token&quot; as the username and paste the
+token value from the clipboard as the password. Once created the app will ask for the
+catalog and schema to connect to before displaying a list of tables. One can then
+proceed to explore the data and build up queries that can be easily imported into
+MATLAB code.</p>
+<blockquote>
+<div><p>Currently JDBC is supported. Support for saving ODBC data sources will be enabled
+in a later release.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="oauth-authentication">
+<h2>Oauth authentication<a class="headerlink" href="#oauth-authentication" title="Link to this heading"></a></h2>
+<section id="oauthu2m-jdbc-driver-bug-under-investigation">
+<h3>OauthU2M - JDBC Driver bug under investigation<a class="headerlink" href="#oauthu2m-jdbc-driver-bug-under-investigation" title="Link to this heading"></a></h3>
+<p>Currently the Databricks JDBC driver v2.6.36 produces an incorrect scope value
+in certain circumstances when using Oauth, thus preventing the return of a valid
+redirect URL. This issue is under investigation with Databricks. While this
+interface attempts to use the correct value despite this it may be necessary to
+override the scope or other oauth argument fields until the issue is resolved.</p>
+<p>Not that if the token value is overridden in Oauth flows the JDBC driver will not
+refresh the token which will expire in 1 hour typically, and it must be refreshed
+manually. Creating a new connection is the simplest approach, pending a resolution
+of the driver issue.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SecretsAPI.html" class="btn btn-neutral float-left" title="Secrets API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="StatementExecution.html" class="btn btn-neutral float-right" title="Statement Execution API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

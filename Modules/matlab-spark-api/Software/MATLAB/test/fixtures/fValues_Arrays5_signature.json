@@ -1,0 +1,10 @@
+{
+  "InTypes": [
+    ["string", [1, 1], "in1"],
+    ["string", [1, 1], "in2"]
+  ],
+  "OutTypes": [
+    ["string", [1, 1], "out1"],
+    ["string", [1, 1], "out2"]
+  ]
+}

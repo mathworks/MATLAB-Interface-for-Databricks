@@ -1,0 +1,481 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Authentication &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Supported Workflows &amp; Releases" href="SupportMatrix.html" />
+    <link rel="prev" title="Setup" href="Setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Authentication</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#configuration-settings-files">Configuration &amp; Settings files</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#databrickscfg-file">.databrickscfg file</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#account-level-operations">Account-level operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#org-id">org_id</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#token-cache">Token cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#related-settings">Related settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#profile-selection">Profile selection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#oauth-client-id">Oauth client_id</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#docker-authentication">Docker authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Authentication</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Authentication.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="authentication">
+<h1>Authentication<a class="headerlink" href="#authentication" title="Link to this heading"></a></h1>
+<p>Authentication between MATLAB® and Databricks® can be accomplished through several
+mechanisms using the Databricks Unified Authentication provider chain.
+It supports the following authentication mechanisms:</p>
+<ul class="simple">
+<li><p>Chain - Evaluate methods in the following order until a working methods is found, this option is rarely necessary.</p></li>
+<li><p>OauthU2M - OAuth user-to-machine (U2M) authentication, (default).</p></li>
+<li><p>OauthM2M - OAuth machine-to-machine (M2M) authentication.</p></li>
+<li><p>PAT - Personal Access Token authentication.</p></li>
+</ul>
+<p>Support for the unified authentication provider enables MATLAB and other Databricks
+related tools to share authentication configuration details.</p>
+<p>OauthU2M is used as the default authentication mechanism. Oauth mechanisms enable
+capabilities such as short lived tokens and the use of service principals.
+OauthM2M is more appropriate for use with software services and OauthU2M is used
+for individual access.</p>
+<p>PAT based authentication while simple to use may not be enabled in favour of OauthU2M.
+The personal access token can be created either using the Databricks Workspace
+UI or from MATLAB via the <a class="reference internal" href="TokenAPI.html"><span class="std std-doc">Token API</span></a>, the latter requires that authentication
+of some form is already in place.</p>
+<section id="configuration-settings-files">
+<h2>Configuration &amp; Settings files<a class="headerlink" href="#configuration-settings-files" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>If using MATLAB on Databricks typically the configuration and settings files are prepopulated.</p>
+</div></blockquote>
+<section id="databrickscfg-file">
+<h3>.databrickscfg file<a class="headerlink" href="#databrickscfg-file" title="Link to this heading"></a></h3>
+<p>Authentication configuration details are stored in <code class="docutils literal notranslate"><span class="pre">HomeDirectory/.databrickscfg</span></code>.
+This file enables multiple profiles using <em>profile names</em>, typically a profile named
+<code class="docutils literal notranslate"><span class="pre">[DEFAULT]</span></code> is used as the <a class="reference internal" href="#profile-selection">default</a>.</p>
+<blockquote>
+<div><p>Setting the <code class="docutils literal notranslate"><span class="pre">DATABRICKS_CONFIG_FILE</span></code> environment variable allows an alternative file to be used.</p>
+</div></blockquote>
+<p>Sample file structure:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="k">[DEFAULT]</span>
+<span class="na">token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">dap&lt;REDACTED&gt;2</span>
+<span class="na">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://adb-12345678.azuredatabricks.net</span>
+<span class="na">cluster_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">0521-002819-eit9opfk</span>
+<span class="na">org_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">123456789</span>
+
+<span class="k">[U2M]</span>
+<span class="na">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://adb-12345678.azuredatabricks.net</span>
+
+<span class="k">[M2M]</span>
+<span class="na">host</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">https://adb-12345678.azuredatabricks.net</span>
+<span class="na">client_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;REDACTED&gt;</span>
+<span class="na">client_secret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&lt;REDACTED&gt;</span>
+</pre></div>
+</div>
+<p>Commonly used profile fields:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Authentication Method</p></th>
+<th class="head"><p>Field Name</p></th>
+<th class="head"><p>Required</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>PAT</p></td>
+<td><p>host</p></td>
+<td><p>Yes</p></td>
+<td><p>https://adb-12345678.azuredatabricks.net</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>token</p></td>
+<td><p>Yes</p></td>
+<td><p>dap-REDACTED-2</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>cluster_id</p></td>
+<td><p>Optional</p></td>
+<td><p>0521-002819-eit9opfk</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>org_id</p></td>
+<td><p>Optional</p></td>
+<td><p>123456789455407</p></td>
+</tr>
+<tr class="row-even"><td><p>OauthU2M</p></td>
+<td><p>host</p></td>
+<td><p>Yes</p></td>
+<td><p>https://adb-12345678.azuredatabricks.net</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>cluster_id</p></td>
+<td><p>Optional</p></td>
+<td><p>0521-002819-eit9opfk</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>org_id</p></td>
+<td><p>Optional</p></td>
+<td><p>123456789455407</p></td>
+</tr>
+<tr class="row-odd"><td><p>OauthM2M</p></td>
+<td><p>host</p></td>
+<td><p>Yes</p></td>
+<td><p>https://adb-12345678.azuredatabricks.net</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>client_id</p></td>
+<td><p>Yes</p></td>
+<td><p>fa0-REDACTED-cd1</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>client_secret</p></td>
+<td><p>Yes</p></td>
+<td><p>bc0-REDACTED-cd1</p></td>
+</tr>
+<tr class="row-even"><td><p></p></td>
+<td><p>cluster_id</p></td>
+<td><p>Optional</p></td>
+<td><p>0521-002819-eit9opfk</p></td>
+</tr>
+<tr class="row-odd"><td><p></p></td>
+<td><p>org_id</p></td>
+<td><p>Optional</p></td>
+<td><p>123456789455407</p></td>
+</tr>
+</tbody>
+</table>
+<p>If the following environment variables are set they take precedence over the
+<code class="docutils literal notranslate"><span class="pre">.databrickscfg</span></code> file values.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Environment Variable</p></th>
+<th class="head"><p>Profile field</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>DATABRICKS_HOST</p></td>
+<td><p>host</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATABRICKS_TOKEN</p></td>
+<td><p>token</p></td>
+</tr>
+<tr class="row-even"><td><p>DATABRICKS_USERNAME</p></td>
+<td><p>username</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATABRICKS_PASSWORD</p></td>
+<td><p>password</p></td>
+</tr>
+<tr class="row-even"><td><p>DATABRICKS_CLIENT_ID</p></td>
+<td><p>client_id</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATABRICKS_CLIENT_SECRET</p></td>
+<td><p>client_secret</p></td>
+</tr>
+<tr class="row-even"><td><p>DATABRICKS_ACCOUNT_ID</p></td>
+<td><p>account_id</p></td>
+</tr>
+<tr class="row-odd"><td><p>DATABRICKS_CLUSTER_ID</p></td>
+<td><p>cluster_id</p></td>
+</tr>
+<tr class="row-even"><td><p>DATABRICKS_ORG_ID</p></td>
+<td><p>org_id</p></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p>The <code class="docutils literal notranslate"><span class="pre">DATABRICKS_AUTH_TYPE</span></code> environment variable is not yet supported, see:
+settings file based <code class="docutils literal notranslate"><span class="pre">authMethod</span></code> below.</p>
+</div></blockquote>
+<p>The Databricks JDBC driver supports the following additional environment variables:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">DATABRICKS_SERVER_HOSTNAME</span></code> this will be used in preference to <code class="docutils literal notranslate"><span class="pre">DATABRICKS_HOST</span></code> if also set.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DATABRICKS_HTTP_PATH</span></code></p></li>
+</ul>
+<blockquote>
+<div><p>For JDBC &amp; ODBC JWT assertions are not currently supported.</p>
+</div></blockquote>
+<blockquote>
+<div><p>Comments indicated with a &quot;;&quot;  character are used but currently may be automatically
+removed in certain circumstances and so are discouraged.</p>
+</div></blockquote>
+<section id="account-level-operations">
+<h4>Account-level operations<a class="headerlink" href="#account-level-operations" title="Link to this heading"></a></h4>
+<p>For account-level operations the <code class="docutils literal notranslate"><span class="pre">host</span></code> value should typically be <code class="docutils literal notranslate"><span class="pre">https://accounts.cloud.databricks.com</span></code>
+rather than a workspace URL of the form <code class="docutils literal notranslate"><span class="pre">https://dbc-a1b2345c-d6e7.cloud.databricks.com</span></code>.
+The <code class="docutils literal notranslate"><span class="pre">account_id</span></code> value should also be specified and is only used when using an account host.
+To locate the account ID see: <a class="reference external" href="https://learn.microsoft.com/en-us/azure/databricks/admin/account-settings/#account-id">https://learn.microsoft.com/en-us/azure/databricks/admin/account-settings/#account-id</a>.</p>
+</section>
+<section id="org-id">
+<h4>org_id<a class="headerlink" href="#org-id" title="Link to this heading"></a></h4>
+<p>The creation of a Databricks JDBC/ODBC connection URL requires an <em>ORG ID</em>
+value. This is not used by REST interface or Databricks Connect authentication.
+For more details see <a class="reference internal" href="ODBCWorkflow.html"><span class="std std-doc">ODBCWorkflow.md</span></a>
+or <a class="reference internal" href="JDBCWorkflow.html"><span class="std std-doc">JDBCWorkflow.md</span></a>.</p>
+</section>
+<section id="token-cache">
+<h4>Token cache<a class="headerlink" href="#token-cache" title="Link to this heading"></a></h4>
+<p>When using Oauth authentication the token is not stored in the profile.
+The short lived access token is cached in a plain text file named:
+<code class="docutils literal notranslate"><span class="pre">HomeDirectory/.databricksOauthTokenCache</span></code>. When the token expires,
+it is automatically refreshed.</p>
+<ul class="simple">
+<li><p>An alternative cache file location can be specified using the <code class="docutils literal notranslate"><span class="pre">DATABRICKS_TOKEN_CACHE_FILE</span></code>
+environment variable.</p></li>
+<li><p>To disable the local caching of tokens set the <code class="docutils literal notranslate"><span class="pre">DISABLE_DATABRICKS_TOKEN_CACHE</span></code>
+environment variable to <code class="docutils literal notranslate"><span class="pre">true</span></code>. This will result in additional authentication requests.</p></li>
+<li><p>The setup process deletes any existing cached tokens.</p></li>
+</ul>
+</section>
+<section id="related-settings">
+<h4>Related settings<a class="headerlink" href="#related-settings" title="Link to this heading"></a></h4>
+<p>The settings file <code class="docutils literal notranslate"><span class="pre">databricks-settings.json</span></code> stored in the MATLAB <code class="docutils literal notranslate"><span class="pre">prefdir</span></code> has
+the following related fields:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">authMethod</span></code> - Set to Chain, PAT, OauthM2M or OauthU2M (default) to indicate the preferred authentication method.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">profileName</span></code> - To indicate the preferred profile to use in the <code class="docutils literal notranslate"><span class="pre">.databrickscfg</span></code> file.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vendor</span></code> - Indicates which cloud platform is in use, required for cluster creation.</p></li>
+</ul>
+<p>For more details on the settings file see: <a class="reference internal" href="Setup.html"><span class="std std-doc">Setup.md</span></a>.</p>
+</section>
+</section>
+<section id="profile-selection">
+<h3>Profile selection<a class="headerlink" href="#profile-selection" title="Link to this heading"></a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">.databrickscfg</span></code> file supports multiple profiles, which profile to use is selected
+based on the following priority:</p>
+<ol class="arabic simple">
+<li><p>Many functions support an argument or optional argument typically called <code class="docutils literal notranslate"><span class="pre">profileName</span></code>.</p></li>
+<li><p>The value of the <code class="docutils literal notranslate"><span class="pre">DATABRICKS_CONFIG_PROFILE</span></code> if set.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">profileName</span></code> field in the <a class="reference internal" href="Setup.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">databricks-settings.json</span></code></span></a> file.</p></li>
+<li><p>The profile named <code class="docutils literal notranslate"><span class="pre">DEFAULT</span></code> if present.</p></li>
+<li><p>Otherwise The first profile in the file.</p></li>
+</ol>
+<p>If a profile cannot be determined an empty <code class="docutils literal notranslate"><span class="pre">databricks.internal.configurationprofile.Profile</span></code>
+object may result. Profile names are case sensitive.</p>
+</section>
+<section id="oauth-client-id">
+<h3>Oauth client_id<a class="headerlink" href="#oauth-client-id" title="Link to this heading"></a></h3>
+<p>MATLAB uses the value &quot;databricks-cli&quot; as the Oauth <code class="docutils literal notranslate"><span class="pre">client_id</span></code> value, not to be
+confused with the OauthM2M <code class="docutils literal notranslate"><span class="pre">client_id</span></code> field set in the <code class="docutils literal notranslate"><span class="pre">.databrickscfg</span></code>.
+In general this is not a concern for end users but if required an organization can
+register an alternative value and update the <code class="docutils literal notranslate"><span class="pre">databricks.internal.unifiedauthentication.Oauth</span></code>
+class accordingly.</p>
+</section>
+</section>
+<section id="docker-authentication">
+<h2>Docker authentication<a class="headerlink" href="#docker-authentication" title="Link to this heading"></a></h2>
+<p>When using Databricks Container Services to create clusters using custom Docker®
+images access to those images requires authentication credentials for the docker
+registry. The image <code class="docutils literal notranslate"><span class="pre">url</span></code> is always necessary, and typically a username and password
+are also required. For example if using <code class="docutils literal notranslate"><span class="pre">createDatabricksCluster</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">'myClusterName'</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="n">dockerURL</span><span class="p">=</span><span class="s">"myrepo.io/matlab/databricks/runtime:r2025b-dbx17.3"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="n">dockerUsername</span><span class="p">=</span><span class="w"> </span><span class="s">"someuser"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="n">dockerPassword</span><span class="p">=</span><span class="w"> </span><span class="s">"secretpassword"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="n">sparkVersion</span><span class="p">=</span><span class="s">"17.3.x-scala2.13"</span><span class="p">);</span>
+
+<span class="c">% Or if using a publicly available image</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">'myClusterName'</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="n">dockerURL</span><span class="p">=</span><span class="s">"myrepo.io/matlab/databricks/runtime:r2025b-dbx17.3"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="n">sparkVersion</span><span class="p">=</span><span class="s">"17.3.x-scala2.13"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>It is also possible to save this information in a JSON-file for easier use.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">'Test'</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">dockerAuthFile</span><span class="p">=</span><span class="s">"dk_runtime_25b_17.3.json"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>with the file <code class="docutils literal notranslate"><span class="pre">dk_runtime_25b_17.3.json</span></code> containing:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myrepo.io/matlab/databricks/runtime:r2025b-dbx17.3"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"basic_auth"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"someuser"</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secretpassword"</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">"spark_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.3.x-scala2.13"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> The <code class="docutils literal notranslate"><span class="pre">spark_version</span></code>, is not used for authentication, but is required
+to configure the cluster correctly and should correspond to the Databricks runtime
+version used when the docker image was built.</p>
+</div></blockquote>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>AWS® - <a class="reference external" href="https://docs.databricks.com/en/dev-tools/auth/index.html">https://docs.databricks.com/en/dev-tools/auth/index.html</a></p></li>
+<li><p>Azure® - <a class="reference external" href="https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/">https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Setup.html" class="btn btn-neutral float-left" title="Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="SupportMatrix.html" class="btn btn-neutral float-right" title="Supported Workflows &amp; Releases" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

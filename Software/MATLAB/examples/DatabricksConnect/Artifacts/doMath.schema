@@ -1,0 +1,37 @@
+{
+  "type": "compiler",
+  "funcname": "doMath",
+  "fullFilename": "/matlab-databricks/Software/MATLAB/examples/DatabricksConnect/Artifacts/doMath.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "a",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "double"
+    },
+    {
+      "type": "io",
+      "Name": "b",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "double"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "x",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "double"
+    },
+    {
+      "type": "io",
+      "Name": "y",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "long"
+    }
+  ]
+}

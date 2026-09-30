@@ -1,0 +1,355 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DBFS API &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Files API" href="Files.html" />
+    <link rel="prev" title="Command Execution" href="CommandExecution.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DBFS API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#upload-a-file-to-dbfs">Upload a file to DBFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#list-contents-of-a-file-or-folder">List contents of a file or folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-information-about-a-file-or-directory">Get information about a file or directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#create-a-folder">Create a folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#delete-a-file-or-folder">Delete a file or folder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#moving-a-file-in-dbfs">Moving a file in DBFS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#dbfs-limitations">DBFS limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">DBFS API</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/DBFS.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="dbfs-api">
+<h1>DBFS API<a class="headerlink" href="#dbfs-api" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>Both DBFS root and DBFS mounts are deprecated and not recommended by Databricks®.
+New accounts are provisioned without access to these features. Databricks recommends
+using Unity Catalog volumes, external locations, or workspace files instead.
+See: <a class="reference external" href="https://docs.databricks.com/en/dbfs/index.html">https://docs.databricks.com/en/dbfs/index.html</a>.</p>
+</div></blockquote>
+<p>The Databricks File System (DBFS) is a distributed file system mounted into a
+Databricks workspace and available on Databricks clusters. DBFS is an abstraction
+on top of scalable object storage. A MATLAB® interface to this API is provided and
+is described below.</p>
+<ul class="simple">
+<li><p>Working with files stored in a <code class="docutils literal notranslate"><span class="pre">/Volumes</span></code> path is typically recommended vs. DBFS.
+This is supported using the <a class="reference internal" href="Files.html"><span class="std std-doc">Files</span></a> API. Files is faster and more secure.</p></li>
+<li><p>For general details of working with files on Databricks in other ways from MATLAB see: <a class="reference internal" href="WorkingWithFiles.html"><span class="std std-doc">WorkingWithFiles</span></a>.</p></li>
+<li><p>If using <a class="reference external" href="https://github.com/mathworks-ref-arch/matlab-on-databricks">MATLAB on Databricks</a> DBFS may be available as a mounted filesystem, as noted above this is not recommended.</p></li>
+</ul>
+<section id="upload-a-file-to-dbfs">
+<h2>Upload a file to DBFS<a class="headerlink" href="#upload-a-file-to-dbfs" title="Link to this heading"></a></h2>
+<p>Upload a file to the Databricks file system (DBFS). The upload is performed as a multipart REST 2.0 series of calls using the <code class="docutils literal notranslate"><span class="pre">create</span></code>, <code class="docutils literal notranslate"><span class="pre">add-block</span></code> and <code class="docutils literal notranslate"><span class="pre">close</span></code> API calls. The data is transmitted in 1/2 MiB chunks using the Databricks streaming API.</p>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">DBFS</span><span class="p">();</span>
+<span class="n">db</span><span class="p">.</span><span class="n">upload</span><span class="p">(</span><span class="s">'sample.mat'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The method accepts an additional argument to specify the target folder.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="p">.</span><span class="n">upload</span><span class="p">(</span><span class="s">'sample.mat'</span><span class="p">,</span><span class="s">'/MATLAB/'</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="list-contents-of-a-file-or-folder">
+<h2>List contents of a file or folder<a class="headerlink" href="#list-contents-of-a-file-or-folder" title="Link to this heading"></a></h2>
+<p>List the contents of a directory, or details of the file. If the file or directory does not exist, an empty FileInfo object is returned.</p>
+<p>For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a handle to the interface</span>
+<span class="n">db</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">DBFS</span><span class="p">();</span>
+<span class="n">fList</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">listFiles</span><span class="p">()</span>
+
+<span class="n">fList</span><span class="w"> </span><span class="p">=</span>
+
+<span class="n">1x4</span><span class="w"> </span><span class="s">FileInfo</span><span class="w"> </span><span class="s">array</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">properties:</span>
+
+<span class="w">  </span><span class="nb">path</span>
+<span class="w">  </span><span class="n">is_dir</span>
+<span class="w">  </span><span class="n">file_size</span>
+<span class="w">  </span><span class="n">modification_time</span>
+</pre></div>
+</div>
+<p>This array of FileInfo objects can be viewed as a table.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fTable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">(</span><span class="n">db</span><span class="p">.</span><span class="n">listFiles</span><span class="p">)</span>
+
+<span class="n">fTable</span><span class="w"> </span><span class="p">=</span>
+
+<span class="w"> </span>74<span class="n">x4</span><span class="w"> </span><span class="nb">table</span>
+<span class="w">                 </span><span class="nb">path</span><span class="w">                 </span><span class="n">is_dir</span><span class="w">    </span><span class="n">file_size</span><span class="w">     </span><span class="n">modification_time</span><span class="w">  </span>
+<span class="w">    </span><span class="n">______________________________</span><span class="w">    </span><span class="n">______</span><span class="w">    </span><span class="n">_________</span><span class="w">    </span><span class="n">____________________</span>
+<span class="w">    </span><span class="p">{</span><span class="s">'/FileStore'</span><span class="w">                </span><span class="p">}</span><span class="w">    </span><span class="nb">true</span><span class="w">           </span><span class="mi">0</span><span class="w">       </span><span class="mi">01</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">1970</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+<span class="w">    </span><span class="p">{</span><span class="s">'/myDemo'</span><span class="w">                   </span><span class="p">}</span><span class="w">    </span><span class="nb">true</span><span class="w">           </span><span class="mi">0</span><span class="w">       </span><span class="mi">01</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">1970</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+<span class="w">    </span><span class="p">{</span><span class="s">'/MATLAB'</span><span class="w">                   </span><span class="p">}</span><span class="w">    </span><span class="nb">true</span><span class="w">           </span><span class="mi">0</span><span class="w">       </span><span class="mi">01</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">1970</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+<p>This functionality is exposed as convenience method. This method also accepts an optional path argument.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fTable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">ls</span><span class="p">(</span><span class="s">'/MATLAB'</span><span class="p">)</span>
+
+<span class="n">fTable</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span>28<span class="n">x4</span><span class="w"> </span><span class="nb">table</span>
+<span class="w">                            </span><span class="nb">path</span><span class="w">                            </span><span class="n">is_dir</span><span class="w">    </span><span class="n">file_size</span><span class="w">     </span><span class="n">modification_time</span><span class="w">  </span>
+<span class="w">    </span><span class="n">____________________________________________________</span><span class="w">    </span><span class="n">______</span><span class="w">    </span><span class="n">_________</span><span class="w">    </span><span class="n">____________________</span>
+<span class="w">    </span><span class="s">"/MATLAB/AnalyticObject_Structure.mat"</span><span class="w">                  </span><span class="nb">false</span><span class="w">         </span><span class="mi">10219</span><span class="w">    </span><span class="mi">19</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2021</span><span class="w"> </span><span class="mi">02</span><span class="p">:</span><span class="mi">35</span><span class="p">:</span><span class="mi">42</span>
+<span class="w">    </span><span class="s">"/MATLAB/FinancialTransactionData.csv"</span><span class="w">                  </span><span class="nb">false</span><span class="w">     </span><span class="mi">493534783</span><span class="w">    </span><span class="mi">14</span><span class="o">-</span><span class="n">Jul</span><span class="o">-</span><span class="mi">2020</span><span class="w"> </span><span class="mi">20</span><span class="p">:</span><span class="mi">55</span><span class="p">:</span><span class="mi">48</span>
+<span class="w">    </span><span class="s">"/MATLAB/analysisData.mat"</span><span class="w">                              </span><span class="nb">false</span><span class="w">        </span><span class="mi">930719</span><span class="w">    </span><span class="mi">06</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2021</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">38</span>
+<span class="w">    </span><span class="s">"/MATLAB/demo"</span><span class="w">                                          </span><span class="nb">true</span><span class="w">              </span><span class="mi">0</span><span class="w">    </span><span class="mi">01</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">1970</span><span class="w"> </span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mi">00</span>
+</pre></div>
+</div>
+</section>
+<section id="get-information-about-a-file-or-directory">
+<h2>Get information about a file or directory<a class="headerlink" href="#get-information-about-a-file-or-directory" title="Link to this heading"></a></h2>
+<p>Get the file information for a file or directory using the <code class="docutils literal notranslate"><span class="pre">getStatus</span></code> method.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a handle to the interface</span>
+<span class="n">db</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">DBFS</span><span class="p">();</span>
+<span class="n">info</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">getStatus</span><span class="p">(</span><span class="s">'/MATLAB'</span><span class="p">)</span>
+
+<span class="n">info</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">  </span><span class="n">FileInfo</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+
+<span class="w">                 </span><span class="nb">path</span><span class="p">:</span><span class="w"> </span><span class="s">'/MATLAB'</span>
+<span class="w">               </span><span class="n">is_dir</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span>
+<span class="w">            </span><span class="n">file_size</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">    </span><span class="n">modification_time</span><span class="p">:</span><span class="w"> </span><span class="mi">01</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">1970</span>
+</pre></div>
+</div>
+<p>Getting the status of a particular file requires the full path to the file.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">info</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">db</span><span class="p">.</span><span class="n">getStatus</span><span class="p">(</span><span class="s">'/MATLAB/analysisData.mat'</span><span class="p">)</span>
+<span class="n">info</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">  </span><span class="n">FileInfo</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+
+<span class="w">                 </span><span class="nb">path</span><span class="p">:</span><span class="w"> </span><span class="s">'/MATLAB/analysisData.mat'</span>
+<span class="w">               </span><span class="n">is_dir</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">            </span><span class="n">file_size</span><span class="p">:</span><span class="w"> </span><span class="mi">930719</span>
+<span class="w">    </span><span class="n">modification_time</span><span class="p">:</span><span class="w"> </span><span class="mi">06</span><span class="o">-</span><span class="n">Aug</span><span class="o">-</span><span class="mi">2021</span><span class="w"> </span><span class="mi">17</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">38</span>
+</pre></div>
+</div>
+</section>
+<section id="create-a-folder">
+<h2>Create a folder<a class="headerlink" href="#create-a-folder" title="Link to this heading"></a></h2>
+<p>Create the given directory and necessary parent directories if they do not exist. The creation operation will succeed as long as there is no file (not a directory) at any prefix of the input path.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a handle to the interface</span>
+<span class="n">db</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">DBFS</span><span class="p">();</span>
+<span class="n">db</span><span class="p">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">'/Data'</span><span class="p">);</span>
+<span class="n">Successfully</span><span class="w"> </span><span class="s">created</span><span class="w"> </span><span class="s">folder:</span><span class="w"> </span><span class="o">/</span><span class="n">Data</span>
+</pre></div>
+</div>
+<p>The path of the new directory is a mandatory argument. This path should be the absolute DBFS path (e.g. '/mnt/foo/').</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">db</span><span class="p">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s">'/Data/testfolder'</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="delete-a-file-or-folder">
+<h2>Delete a file or folder<a class="headerlink" href="#delete-a-file-or-folder" title="Link to this heading"></a></h2>
+<p>Delete the file or directory (optionally recursively delete all files in the directory).</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a handle to the interface</span>
+<span class="n">db</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">DBFS</span><span class="p">();</span>
+<span class="n">db</span><span class="p">.</span><span class="n">rm</span><span class="p">(</span><span class="s">'/Data'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If the specified path is a non-empty directory, the invocation will fail with an error:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">Failed</span><span class="w"> </span><span class="s">to</span><span class="w"> </span><span class="s">delete</span><span class="w"> </span><span class="s">folder:</span><span class="w"> </span><span class="o">/</span><span class="n">Data</span>
+<span class="p">{</span><span class="s">"error_code"</span><span class="p">:</span><span class="s">"IO_ERROR"</span><span class="p">,</span><span class="s">"message"</span><span class="p">:</span><span class="s">"Path is a folder: /.../Data and it is not an empty directory"</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>To recursively delete the folder and all subfolders/files, an additional recursive flag is required.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a handle to the interface</span>
+<span class="n">db</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">DBFS</span><span class="p">();</span>
+<span class="n">db</span><span class="p">.</span><span class="n">rm</span><span class="p">(</span><span class="s">'/Data'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If the specified file or directory does not exist the operation will still complete without error,
+displaying &quot;Delete complete&quot;. If the existence of the file or folder is significant it should be
+first checked using the <code class="docutils literal notranslate"><span class="pre">getStatus()</span></code> method.</p>
+</section>
+<section id="moving-a-file-in-dbfs">
+<h2>Moving a file in DBFS<a class="headerlink" href="#moving-a-file-in-dbfs" title="Link to this heading"></a></h2>
+<blockquote>
+<div><p>Note this methods should not be used for large scale file movements, see function help for details.</p>
+</div></blockquote>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a handle to the interface</span>
+<span class="n">db</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">DBFS</span><span class="p">();</span>
+<span class="n">db</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="s">'/mySourceDir/mySourcefile.txt'</span><span class="p">,</span><span class="w"> </span><span class="s">'/myDestinationDir/myDestinationFile.txt'</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="dbfs-limitations">
+<h2>DBFS limitations<a class="headerlink" href="#dbfs-limitations" title="Link to this heading"></a></h2>
+<p>DBFS is a FUSE mount on top of underlying object storage, either Azure® Blob or AWS® S3. This imposes certain limitations particularly the inability to do non-sequential writes. This means that certain MATLAB IO operations for certain file types will not be able to write to a <code class="docutils literal notranslate"><span class="pre">/dbfs</span></code> file path, e.g. <code class="docutils literal notranslate"><span class="pre">save()</span></code> or <code class="docutils literal notranslate"><span class="pre">savefig()</span></code>other such as <code class="docutils literal notranslate"><span class="pre">imwrite()</span></code> can do so. To work around this issue make the initial save to a temporary file in <code class="docutils literal notranslate"><span class="pre">/local_disk0/tmp</span></code>, a conventional filesystem on the node, and from there move the file to a <code class="docutils literal notranslate"><span class="pre">/dbfs</span></code> with <code class="docutils literal notranslate"><span class="pre">copyfile()</span></code> or <code class="docutils literal notranslate"><span class="pre">movefile()</span></code>.</p>
+<p>Local file IO limitations are described here in the case of Azure and apply similarly in the case of AWS: <a class="reference external" href="https://docs.microsoft.com/en-us/azure/databricks/data/databricks-file-system#local-file-apis">https://docs.microsoft.com/en-us/azure/databricks/data/databricks-file-system#local-file-apis</a>.</p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading"></a></h2>
+<p>Please see:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="https://docs.databricks.com/api/latest/dbfs.html">https://docs.databricks.com/api/latest/dbfs.html</a></p></li>
+<li><p><a class="reference external" href="https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/azure-storage">https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/azure-storage</a></p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CommandExecution.html" class="btn btn-neutral float-left" title="Command Execution" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Files.html" class="btn btn-neutral float-right" title="Files API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

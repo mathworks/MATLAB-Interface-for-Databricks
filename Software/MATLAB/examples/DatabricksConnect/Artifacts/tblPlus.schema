@@ -1,0 +1,88 @@
+{
+  "type": "compiler",
+  "funcname": "tblPlus",
+  "fullFilename": "/matlab-databricks/Software/MATLAB/examples/DatabricksConnect/Artifacts/tblPlus.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "TI",
+      "Direction": "in",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "metadata": {},
+            "name": "A",
+            "nullable": true,
+            "type": "long"
+          },
+          {
+            "metadata": {},
+            "name": "B",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "C",
+            "nullable": true,
+            "type": "string"
+          }
+        ],
+        "type": "struct"
+      }
+    },
+    {
+      "type": "io",
+      "Name": "a",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "long"
+    },
+    {
+      "type": "io",
+      "Name": "b",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "double"
+    },
+    {
+      "type": "io",
+      "Name": "c",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "string"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "TO",
+      "Direction": "out",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "metadata": {},
+            "name": "A",
+            "nullable": true,
+            "type": "long"
+          },
+          {
+            "metadata": {},
+            "name": "B",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "C",
+            "nullable": true,
+            "type": "string"
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ]
+}

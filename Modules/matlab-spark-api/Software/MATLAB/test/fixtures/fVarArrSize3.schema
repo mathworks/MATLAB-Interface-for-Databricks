@@ -1,0 +1,89 @@
+{
+  "type": "compiler",
+  "funcname": "fVarArrSize3",
+  "fullFilename": "/matlab-databricks/Modules/matlab-spark-api/Software/MATLAB/test/fixtures/fVarArrSize3.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "ts",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "timestamp"
+    },
+    {
+      "type": "io",
+      "Name": "a",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "string",
+        "type": "array"
+      }
+    },
+    {
+      "type": "io",
+      "Name": "b",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "integer",
+        "type": "array"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "ts",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "timestamp"
+    },
+    {
+      "type": "io",
+      "Name": "a",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "string",
+        "type": "array"
+      }
+    },
+    {
+      "type": "io",
+      "Name": "b",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "integer",
+        "type": "array"
+      }
+    },
+    {
+      "type": "io",
+      "Name": "x",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "string",
+        "type": "array"
+      }
+    },
+    {
+      "type": "io",
+      "Name": "y",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "integer",
+        "type": "array"
+      }
+    }
+  ]
+}

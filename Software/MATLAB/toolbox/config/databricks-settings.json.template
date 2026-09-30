@@ -1,0 +1,16 @@
+{
+    "autotermination_minutes": 120,
+    "vendor":"azure",
+    "aws":{
+        "node_type_id": "i3.xlarge"
+    },
+    "azure":{
+        "node_type_id": "Standard_D4ds_v5"
+    },
+    "defaultDatabricksRuntime": "17.3",
+    "username":"defaultname@example.com",
+    "notificationEmail":"defaultaddress@example.com",
+    "authMethod": "OauthU2M",
+    "profileName": "DEFAULT",
+    "interfaceDirectory": "/Volumes/main/default/myvolume/MathWorks"
+}

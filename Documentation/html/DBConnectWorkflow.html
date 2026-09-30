@@ -1,0 +1,378 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using Databricks-Connect from MATLAB &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Dataframes and columns" href="matlab-spark-api/DataframeColumns.html" />
+    <link rel="prev" title="Using Databricks Container Services / Docker" href="ContainerServices.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Databricks-Connect from MATLAB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#state-of-a-session">State of a session</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#serverless">Serverless</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#data-transfer">Data transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#limitations">Limitations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#compilation-of-artifacts">Compilation of Artifacts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Using Databricks-Connect from MATLAB</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/DBConnectWorkflow.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-databricks-connect-from-matlab">
+<h1>Using Databricks-Connect from MATLAB<a class="headerlink" href="#using-databricks-connect-from-matlab" title="Link to this heading"></a></h1>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h2>
+<p>For instructions on setting up Databricks® Connect see <a class="reference internal" href="Setup.html"><span class="std std-doc">Setup</span></a> and
+<a class="reference internal" href="DBConnect.html"><span class="std std-doc">Databricks Connect Setup</span></a>. If using MATLAB® on Databricks specific
+Databricks Connect setup sets are generally not required.</p>
+</section>
+<section id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<p>The following is a simple test to determine if Databricks Connect is connecting
+from MATLAB to a cluster using simple Spark™ <code class="docutils literal notranslate"><span class="pre">range</span></code>, <code class="docutils literal notranslate"><span class="pre">withColumn</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">randn</span></code> commands.</p>
+<p>A Spark session is instantiated in MATLAB with the <code class="docutils literal notranslate"><span class="pre">getDatabricksSession</span></code> function.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">spark</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">getDatabricksSession</span><span class="p">()</span>
+<span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">range</span><span class="p">(</span><span class="mf">1e5</span><span class="p">);</span>
+<span class="n">DF</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s">"newCol"</span><span class="p">,</span><span class="w"> </span><span class="n">matlab</span><span class="p">.</span><span class="n">pyspark</span><span class="p">.</span><span class="n">sql</span><span class="p">.</span><span class="n">functions</span><span class="p">.</span><span class="n">randn</span><span class="p">());</span>
+<span class="n">DF</span><span class="p">.</span><span class="n">show</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<section id="state-of-a-session">
+<h3>State of a session<a class="headerlink" href="#state-of-a-session" title="Link to this heading"></a></h3>
+<p>When a Databricks Connect session is created with <code class="docutils literal notranslate"><span class="pre">getDatabricksSession()</span></code>, it uses
+the underlying Databricks Connect Python® based library to create the session.
+In many cases, calling this a second time (with the same arguments), will simply
+reuse an existing session.</p>
+<p>Sometimes, a session may become <code class="docutils literal notranslate"><span class="pre">stale</span></code>, and unusable. In this case, it helps to
+clear any existing objects containing a session, e.g. <code class="docutils literal notranslate"><span class="pre">clear</span> <span class="pre">spark</span></code>, and then
+create a new session. Server side content in the previous session e.g. Dataframes,
+will be lost.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">forceNewSession</span></code> named argument to <code class="docutils literal notranslate"><span class="pre">getDatabricksSession</span></code> can be set to <code class="docutils literal notranslate"><span class="pre">true</span></code>
+to create a new Session rather than reuse an existing Spark Session, if available.
+This is especially useful in development workflows, where a new version of an
+artifact is uploaded with the <code class="docutils literal notranslate"><span class="pre">addArtifact</span></code> method. If an old session is reused,
+the artifact cannot be replaced.</p>
+</section>
+</section>
+<section id="serverless">
+<h2>Serverless<a class="headerlink" href="#serverless" title="Link to this heading"></a></h2>
+<p>A <em>serverless</em> compute based Spark Session is supported with more recent Databricks
+Connect versions, 17.3 or later is recommended. A serverless session can be created
+very quickly, typically a few seconds. Such sessions have some contraints:</p>
+<ul class="simple">
+<li><p>They do no currently support compiled MATLAB as <code class="docutils literal notranslate"><span class="pre">.zip</span></code> or <code class="docutils literal notranslate"><span class="pre">.whl</span></code> files.</p></li>
+<li><p>They time out after 10 minutes of inactivity.</p></li>
+<li><p>Connection creation failures can time out after 5 minutes.</p></li>
+</ul>
+<p>Serverless compute will be used if:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">serverless</span></code> argument is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p></li>
+<li><p>The environment variable <code class="docutils literal notranslate"><span class="pre">DATABRICKS_SERVERLESS_COMPUTE_ID</span></code> is set to <code class="docutils literal notranslate"><span class="pre">auto</span></code>.</p></li>
+<li><p>The configuration profile has <code class="docutils literal notranslate"><span class="pre">serverless_compute_id</span></code> set to <code class="docutils literal notranslate"><span class="pre">auto</span></code>.</p></li>
+<li><p>The configuration profile should not contain a <code class="docutils literal notranslate"><span class="pre">cluster_id</span></code> field.</p></li>
+</ul>
+</section>
+<section id="data-transfer">
+<h2>Data transfer<a class="headerlink" href="#data-transfer" title="Link to this heading"></a></h2>
+<p>When using Databricks Connect keep in mind that the Spark dataset object returned to
+MATLAB by many Spark calls is effectively a &quot;handle&quot; to the data and the data still
+resides on the Spark cluster.
+Only when converted to a MATLAB datatype does it become a value in the MATLAB
+workspace and uses a meaningful amount of memory with MATLAB.
+Thus to minimize memory usage by MATLAB and data transfer bandwidth from the
+cluster to MATLAB, perform any possible Spark filtering or data reduction
+operations using the Spark APIs on the dataset object before converting to a
+native MATLAB datatype e.g. a Table.</p>
+</section>
+<section id="limitations">
+<h2>Limitations<a class="headerlink" href="#limitations" title="Link to this heading"></a></h2>
+<p>Databricks documents a number of limitations of Databricks Connect here: <a class="reference external" href="https://docs.databricks.com/aws/en/dev-tools/databricks-connect/python/limitations">https://docs.databricks.com/aws/en/dev-tools/databricks-connect/python/limitations</a></p>
+<p>This package does not support Databricks Connect versions below 13.3.
+For relevant details of Python and MATLAB version compatibility see: <a class="reference internal" href="SupportMatrix.html"><span class="std std-doc">Support Matrix</span></a>.</p>
+<p>When using Databricks Connect the use of the latest Databricks LTS runtime is
+strongly encouraged.</p>
+</section>
+<section id="compilation-of-artifacts">
+<h2>Compilation of Artifacts<a class="headerlink" href="#compilation-of-artifacts" title="Link to this heading"></a></h2>
+<p>See the examples in the directory: <code class="docutils literal notranslate"><span class="pre">examples/DatabricksConnect/Artifacts</span></code>
+and the included <code class="docutils literal notranslate"><span class="pre">README.md</span></code>.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="p">(</span><span class="n">databricksRoot</span><span class="p">(</span><span class="s">'examples'</span><span class="p">,</span><span class="w"> </span><span class="s">'DatabricksConnect'</span><span class="p">,</span><span class="w"> </span><span class="s">'Artifacts'</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>This folder contains some trivial example functions, <code class="docutils literal notranslate"><span class="pre">plusPi</span></code>, <code class="docutils literal notranslate"><span class="pre">doMath</span></code>,
+<code class="docutils literal notranslate"><span class="pre">addStringCol</span></code>, etc..</p>
+<p>Run the build:</p>
+<blockquote>
+<div><p><strong>Note:</strong> Use Databricks Runtime version &gt;= v17.3, which is the first general
+availability (GA) version that officially supports this functionality.</p>
+</div></blockquote>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">PSB</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">buildLibrary</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This builds a wheel file, but additionally
+a file <code class="docutils literal notranslate"><span class="pre">&lt;package_name&gt;_ZipArtifact.zip</span></code> (in this example <code class="docutils literal notranslate"><span class="pre">my.example_Artifact.zip</span></code>).</p>
+<p>The function <code class="docutils literal notranslate"><span class="pre">addStringCol</span></code> expects a table with two columns, <code class="docutils literal notranslate"><span class="pre">integer</span></code> and <code class="docutils literal notranslate"><span class="pre">double</span></code>:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>T_OUT<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">addStringCol</span><span class="p">(</span>T_IN<span class="p">)</span>
+<span class="w">    </span><span class="c">% addStringCol</span>
+
+<span class="w">    </span><span class="n">T_OUT</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">T_IN</span><span class="p">;</span>
+<span class="w">    </span><span class="n">T_OUT</span><span class="p">.</span><span class="n">hello</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="n">T_IN</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"_hello_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="n">T_IN</span><span class="p">.</span><span class="n">did</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Use the following steps to build and run:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">spark</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">getDatabricksSession</span>
+<span class="go">spark = </span>
+<span class="go">  PySparkSession with properties:</span>
+
+<span class="go">      ClusterId: "0812-091301-zntwkr4b"</span>
+<span class="go">    BaseVersion: "14.3"</span>
+<span class="go">    SparkServer: []</span>
+<span class="gp">&gt;&gt; </span><span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">range</span><span class="p">(</span><span class="mf">1e3</span><span class="p">)</span>
+<span class="go">R = </span>
+<span class="go">  Dataframe with no properties.</span>
+<span class="gp">&gt;&gt; </span><span class="n">DF</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s">'did'</span><span class="p">,</span><span class="w"> </span><span class="n">matlab</span><span class="p">.</span><span class="n">pyspark</span><span class="p">.</span><span class="n">sql</span><span class="p">.</span><span class="n">functions</span><span class="p">.</span><span class="n">randn</span><span class="p">())</span>
+<span class="go">DF = </span>
+<span class="go">  Dataframe with no properties.</span>
+<span class="gp">&gt;&gt; </span><span class="n">DF</span><span class="p">.</span><span class="n">printSchema</span>
+<span class="go">root</span>
+<span class="go"> |-- id: long (nullable = false)</span>
+<span class="go"> |-- did: double (nullable = false)</span>
+</pre></div>
+</div>
+<p>To run this from within MATLAB two things must be done:</p>
+<ol class="arabic simple">
+<li><p>The artifact must be added to the current Spark session, and</p></li>
+<li><p>The functions from the python library must be imported into the current
+MATLAB session.</p></li>
+</ol>
+<p>This can be done using a helper method of the <code class="docutils literal notranslate"><span class="pre">PythonSparkBuilder</span></code> object.</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="go">PSB.addArtifact(spark);</span>
+</pre></div>
+</div>
+<p>This artifact is now <em>available</em> in the current Spark session.
+Furthermore, the helper methods imports the generated Python functions
+into the MATLAB environment.</p>
+<p><em>Thus one can call a MATLAB function, compiled into a Python library, directly on Databricks
+without leaving MATLAB.</em></p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt; </span><span class="n">OUT</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">DF</span><span class="p">.</span><span class="n">mapInPandas</span><span class="p">(</span><span class="s">"addStringCol"</span><span class="p">)</span>
+<span class="go">OUT = </span>
+<span class="go">  Dataframe with no properties.</span>
+
+<span class="gp">&gt;&gt; </span><span class="n">OUT</span><span class="p">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">)</span>
+<span class="go">+---+-------------------+----------------+</span>
+<span class="go">|id |did                |hello           |</span>
+<span class="go">+---+-------------------+----------------+</span>
+<span class="go">|0  |-0.7208682031019744|0_hello_-0.72087|</span>
+<span class="go">|1  |1.1940700163708902 |1_hello_1.1941  |</span>
+<span class="go">|2  |-2.727349160372737 |2_hello_-2.7273 |</span>
+<span class="go">|3  |1.270339150176543  |3_hello_1.2703  |</span>
+<span class="go">|4  |0.6858066765685452 |4_hello_0.68581 |</span>
+<span class="go">|5  |-0.8616134822263833|5_hello_-0.86161|</span>
+<span class="go">|6  |1.3108976149587273 |6_hello_1.3109  |</span>
+<span class="go">|7  |1.9688320133711728 |7_hello_1.9688  |</span>
+<span class="go">|8  |-0.5911113396114568|8_hello_-0.59111|</span>
+<span class="go">|9  |0.10349332957650109|9_hello_0.10349 |</span>
+<span class="go">+---+-------------------+----------------+</span>
+<span class="go">only showing top 10 rows</span>
+
+<span class="gp">&gt;&gt; </span><span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">(</span><span class="n">OUT</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The data in the table <code class="docutils literal notranslate"><span class="pre">T</span></code> can now be used, extended, changed, etc.
+If the table should be converted back to a Spark Dataframe, it is done as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Make some change to table</span>
+<span class="n">T</span><span class="p">.</span><span class="n">str_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="n">T</span><span class="p">.</span><span class="n">id</span><span class="p">);</span>
+
+<span class="c">% Convert it to a Spark Dataframe</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">DF_NEW</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">matlab</span><span class="p">.</span><span class="n">sparkutils</span><span class="p">.</span><span class="n">table2dataset</span><span class="p">(</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">spark</span><span class="p">)</span>
+<span class="n">DF_NEW</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">  </span><span class="n">Dataframe</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="nb">properties</span><span class="p">.</span>
+<span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">DF_NEW</span><span class="p">.</span><span class="n">printSchema</span>
+<span class="n">root</span>
+<span class="w"> </span><span class="o">|--</span><span class="w"> </span><span class="n">id</span><span class="p">:</span><span class="w"> </span><span class="n">long</span><span class="w"> </span><span class="p">(</span><span class="n">nullable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+<span class="w"> </span><span class="o">|--</span><span class="w"> </span><span class="n">did</span><span class="p">:</span><span class="w"> </span><span class="nb">double</span><span class="w"> </span><span class="p">(</span><span class="n">nullable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+<span class="w"> </span><span class="o">|--</span><span class="w"> </span><span class="n">hello</span><span class="p">:</span><span class="w"> </span><span class="nb">string</span><span class="w"> </span><span class="p">(</span><span class="n">nullable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+<span class="w"> </span><span class="o">|--</span><span class="w"> </span><span class="n">str_id</span><span class="p">:</span><span class="w"> </span><span class="nb">string</span><span class="w"> </span><span class="p">(</span><span class="n">nullable</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span><span class="p">)</span>
+
+<span class="c">% Write it in Spark</span>
+<span class="n">DF_NEW</span><span class="p">.</span><span class="n">write</span><span class="p">.</span><span class="n">format</span><span class="p">(</span><span class="s">'parquet'</span><span class="p">).</span><span class="n">save</span><span class="p">(</span><span class="s">'/Volumes/main/default/myvolume/Scratch/new_data'</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> Some restrictions apply. E.g., In the current version it is not
+possible to do a <code class="docutils literal notranslate"><span class="pre">mapInPandas</span></code> with a table <strong>and</strong> additional arguments.
+See: <a class="reference external" href="https://docs.databricks.com/en/dev-tools/databricks-connect/python/limitations.html">https://docs.databricks.com/en/dev-tools/databricks-connect/python/limitations.html</a></p>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ContainerServices.html" class="btn btn-neutral float-left" title="Using Databricks Container Services / Docker" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="matlab-spark-api/DataframeColumns.html" class="btn btn-neutral float-right" title="Dataframes and columns" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

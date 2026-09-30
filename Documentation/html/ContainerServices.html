@@ -1,0 +1,341 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Using Databricks Container Services / Docker &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Using Databricks-Connect from MATLAB" href="DBConnectWorkflow.html" />
+    <link rel="prev" title="Databricks Connect Setup" href="DBConnect.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Databricks Container Services / Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#matlab-runtime-using-docker">MATLAB Runtime using Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-dockerfile-variants">Building Dockerfile variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-an-existing-image-with-azure-container-registry-acr">Using an existing image with Azure Container Registry (ACR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-an-existing-image-with-aws">Using an existing image with AWS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#repository-permissions">Repository permissions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Using Databricks Container Services / Docker</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#matlab-runtime-using-docker">MATLAB Runtime using Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-dockerfile-variants">Building Dockerfile variants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-an-existing-image-with-azure-container-registry-acr">Using an existing image with Azure Container Registry (ACR)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-an-existing-image-with-aws">Using an existing image with AWS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#repository-permissions">Repository permissions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Using Databricks Container Services / Docker</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/ContainerServices.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="using-databricks-container-services-docker">
+<h1>Using Databricks Container Services / Docker<a class="headerlink" href="#using-databricks-container-services-docker" title="Link to this heading"></a></h1>
+<section id="matlab-runtime-using-docker">
+<h2>MATLAB Runtime using Docker<a class="headerlink" href="#matlab-runtime-using-docker" title="Link to this heading"></a></h2>
+<p>To execute compiled MATLAB code on a Databricks® cluster the MATLAB runtime corresponding
+to the version of the MATLAB® Compiler SDK™ used to create the <code class="docutils literal notranslate"><span class="pre">.whl</span></code> file containing
+the compiled code must be installed on the cluster. Installing the MATLAB Runtime on a
+cluster can be done in two ways:</p>
+<ul class="simple">
+<li><p>Using an <a class="reference internal" href="InitScripts.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">init</span></code> script</span></a>, which is a Bash script that installs
+the appropriate MATLAB runtime version during the creation of a cluster. Using
+docker rather than init scripts is strongly the recommended approach and is required
+in some circumstances, e.g. Databricks runtimes 17 and greater and clusters without
+internet access.</p></li>
+<li><p>A docker image can be created to initialize cluster nodes. The use of docker
+is is described in the MATLAB on Databricks Reference Architecture see:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/mathworks-ref-arch/matlab-on-databricks/blob/main/guides/PSP%20docs/InstallMATLABRuntime.md">Installing MATLAB Runtime guide</a></p></li>
+<li><p><a class="reference external" href="https://github.com/mathworks-ref-arch/matlab-on-databricks/tree/main/resources/dockerfiles/runtime">MATLAB Runtime docker file</a></p></li>
+</ul>
+</li>
+</ul>
+<p>For more details on using Databricks Container Services see: <a class="reference external" href="https://docs.databricks.com/en/compute/custom-containers.html">https://docs.databricks.com/en/compute/custom-containers.html</a>.</p>
+<p>For more details on the MATLAB runtime see: <a class="reference external" href="https://www.mathworks.com/products/compiler/matlab-runtime.html">https://www.mathworks.com/products/compiler/matlab-runtime.html</a>.</p>
+</section>
+<section id="building-dockerfile-variants">
+<h2>Building Dockerfile variants<a class="headerlink" href="#building-dockerfile-variants" title="Link to this heading"></a></h2>
+<p>It may be required to have a number of Docker® images for different combinations of
+the MATLAB and Databricks runtimes. The function <code class="docutils literal notranslate"><span class="pre">Software/MATLABDocker/Runtime/generateBuildscript.m</span></code>
+can be used to generate a build script for multiple images that supports local docker
+builds (default) and Azure® Container Registry based builds.</p>
+<p>In the azure case this uses the Azure CLI to build the images remotely on Azure.
+Thus avoiding locally storing and transferring a potentially large number of relatively
+big images. Note the <code class="docutils literal notranslate"><span class="pre">nowait</span></code> optional argument can be used to allow the build to
+proceed in the background on Azure. Testing with a sample file is recommended first.</p>
+<p>For example the resulting Azure script will consist of repeating Azure CLI commands similar to:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Build docker image for MATLAB R2025b and Databricks 17.3</span>
+az<span class="w"> </span>acr<span class="w"> </span>build<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--registry<span class="w"> </span><span class="nv">$REPO</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--image<span class="w"> </span><span class="s2">"matlab/databricks/runtime:r2025b-dbx17.3"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--build-arg<span class="w"> </span><span class="nv">MATLAB_RELEASE</span><span class="o">=</span>R2025b<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--build-arg<span class="w"> </span><span class="nv">DATABRICKS_RUNTIME_VERSION</span><span class="o">=</span><span class="s2">"17.3"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--build-arg<span class="w"> </span><span class="nv">MATLAB_DEPS_URL</span><span class="o">=</span><span class="s2">"https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2025b/ubuntu24.04/base-dependencies.txt"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--build-arg<span class="w"> </span><span class="nv">MATLAB_RUNTIME_URL</span><span class="o">=</span><span class="s2">"https://ssd.mathworks.com/supportfiles/downloads/R2025b/Release/3/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2025b_Update_3_glnxa64.zip"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--build-arg<span class="w"> </span><span class="nv">UBUNTU_VERSION</span><span class="o">=</span><span class="s2">"24.04"</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-f<span class="w"> </span>Dockerfile<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Building all possible images will take quite some time and not all may be required
+based on an organization's MATLAB and Databricks version usage policy.
+Comment out unneeded combinations or adjust the input arguments.</p>
+<blockquote>
+<div><p>The Dockerfiles should be periodically regenerated to along with the resulting
+images to receive updated MATLAB &amp; Databricks runtimes.</p>
+</div></blockquote>
+</section>
+<section id="using-an-existing-image-with-azure-container-registry-acr">
+<h2>Using an existing image with Azure Container Registry (ACR)<a class="headerlink" href="#using-an-existing-image-with-azure-container-registry-acr" title="Link to this heading"></a></h2>
+<p>The following commands show how an image can be pulled locally, verified, tagged
+and then pushed to ACR using the Azure <code class="docutils literal notranslate"><span class="pre">az</span></code> CLI tool and <code class="docutils literal notranslate"><span class="pre">docker</span></code>.
+The ACR repository should be in the same Azure region as the Databricks
+Workspace which will use the image(s).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Log into a repo named myacrrepo</span>
+az<span class="w"> </span>acr<span class="w"> </span>login<span class="w"> </span>-n<span class="w"> </span>myacrrepo
+
+<span class="c1"># Pull the required image locally</span>
+myregistry.mathworks.com/matlab/databricks/runtime:r2025b-dbx17.3
+docker<span class="w"> </span>pull<span class="w"> </span>myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3
+
+<span class="c1"># Start the image locally for optional sanity checking or testing</span>
+docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3
+
+<span class="c1"># Tag the image</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3<span class="w"> </span>myacrrepo.azurecr.io/matlab/databricks/runtime:r2025b-dbx17.3
+
+<span class="c1"># Push the image to myacrrepo.azurecr.io</span>
+docker<span class="w"> </span>push<span class="w"> </span>myacrrepo.azurecr.io/matlab/databricks/runtime:r2025b-dbx17.3
+</pre></div>
+</div>
+</section>
+<section id="using-an-existing-image-with-aws">
+<h2>Using an existing image with AWS<a class="headerlink" href="#using-an-existing-image-with-aws" title="Link to this heading"></a></h2>
+<p>The following commands show how an image can be pulled locally, verified, tagged
+and then pushed to an AWS® Elastic Container Registry (ECR) using the
+AWS <code class="docutils literal notranslate"><span class="pre">aws</span></code> CLI tool and <code class="docutils literal notranslate"><span class="pre">docker</span></code>.
+The ECR repository should be in the same AWS region as the Databricks
+Workspace which will use the image(s).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, ensure AWS credentials stored in the ~/.aws/credentials file are current.</span>
+
+<span class="c1"># Make a variable for the registry</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">DOCKER_REGISTRY</span><span class="o">=</span>&lt;REDACTED&gt;.dkr.ecr.&lt;aws-region&gt;.amazonaws.com
+
+<span class="c1"># Login to the registry</span>
+aws<span class="w"> </span>ecr<span class="w"> </span>get-login-password<span class="w"> </span>--region<span class="w"> </span>us-west-2<span class="w"> </span><span class="p">|</span><span class="w"> </span>docker<span class="w"> </span>login<span class="w"> </span>--username<span class="w"> </span>AWS<span class="w"> </span>--password-stdin<span class="w"> </span><span class="nv">$DOCKER_REGISTRY</span>
+
+<span class="c1"># Pull the required image locally</span>
+docker<span class="w"> </span>pull<span class="w">  </span>myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3
+
+<span class="c1"># Start the image locally for optional sanity checking or testing</span>
+docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3
+
+<span class="c1"># Tag the image</span>
+docker<span class="w"> </span>tag<span class="w"> </span>myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3<span class="w"> </span><span class="nv">$DOCKER_REGISTRY</span>/matlab/databricks/runtime:r2025b-dbx17.3
+
+<span class="c1"># Push the image to repository</span>
+docker<span class="w"> </span>push<span class="w"> </span><span class="nv">$DOCKER_REGISTRY</span>/matlab/databricks/runtime:r2025b-dbx17.3
+</pre></div>
+</div>
+<section id="repository-permissions">
+<h3>Repository permissions<a class="headerlink" href="#repository-permissions" title="Link to this heading"></a></h3>
+<p>The repository that was created for this example, was given the following permissions to allow
+for pushing and pulling images. Please consult with local AWS administrators.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"Sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow push"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Principal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"AWS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arn:aws:iam::&lt;REDACTED&gt;:root"</span>
+<span class="w">      </span><span class="p">},</span>
+<span class="w">      </span><span class="nt">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="s2">"ecr:BatchCheckLayerAvailability"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:BatchGetImage"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:CompleteLayerUpload"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:DescribeRepositories"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:GetAuthorizationToken"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:GetDownloadUrlForLayer"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:InitiateLayerUpload"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:ListImages"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:ListTagsForResource"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:PutImage"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:TagResource"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:UntagResource"</span><span class="p">,</span>
+<span class="w">        </span><span class="s2">"ecr:UploadLayerPart"</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="DBConnect.html" class="btn btn-neutral float-left" title="Databricks Connect Setup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="DBConnectWorkflow.html" class="btn btn-neutral float-right" title="Using Databricks-Connect from MATLAB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,285 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Setup" href="Setup.html" />
+    <link rel="prev" title="MATLAB Interface for Databricks" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#jdbc-odbc-and-database-toolbox-workflow">JDBC/ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#databricks-connect-workflow">Databricks Connect workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#matlab-compiler-sdk-workflow-deployed">MATLAB Compiler SDK workflow (Deployed)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#rest-api-interfaces">REST API interfaces</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Overview.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h1>
+<p>This package provides an interface between MATLAB and Databricks®. It can be used in two ways:</p>
+<ol class="arabic simple">
+<li><p>With conventional desktop MATLAB running locally or on a cloud hosted VM.</p></li>
+<li><p>With MATLAB running directly on a Databricks cluster, accessed via a web browser.
+In this case the package is used in conjunction with MATLAB on Databricks
+Reference Architecture: <a class="reference external" href="https://github.com/mathworks-ref-arch/matlab-on-databricks">https://github.com/mathworks-ref-arch/matlab-on-databricks</a>.</p></li>
+</ol>
+<p>In both cases the support of your Databricks admin team will be required.
+To discuss the MATLAB or Databricks requirements and setup email: <a class="reference external" href="mailto:databricks&#37;&#52;&#48;mathworks&#46;com">databricks<span>&#64;</span>mathworks<span>&#46;</span>com</a>.</p>
+<p>The packages supports a number of ways to work with Databricks:</p>
+<section id="jdbc-odbc-and-database-toolbox-workflow">
+<h2>JDBC/ODBC and Database Toolbox workflow<a class="headerlink" href="#jdbc-odbc-and-database-toolbox-workflow" title="Link to this heading"></a></h2>
+<p>This workflow uses the MathWorks <a class="reference external" href="https://mathworks.com/products/database.html">Database Toolbox™</a>
+to connect MATLAB to Databricks using the Databricks JDBC (recommended) or ODBC drivers.
+This workflow is well suited to cases where the amount of data moved between MATLAB
+and Databricks is limited. It does not require knowledge of Spark™. For more details see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="JDBCWorkflow.html"><span class="std std-doc">JDBC Connection from MATLAB to Databricks</span></a></p></li>
+<li><p><a class="reference internal" href="ODBCWorkflow.html"><span class="std std-doc">ODBC Connection from MATLAB to Databricks</span></a></p></li>
+</ul>
+</section>
+<section id="databricks-connect-workflow">
+<h2>Databricks Connect workflow<a class="headerlink" href="#databricks-connect-workflow" title="Link to this heading"></a></h2>
+<p>This approach is particularly useful for development and testing. Databricks Connect
+enables remote Spark API calls from MATLAB to a Databricks Cluster. It allows one
+to exploit the strength of a Spark cluster in filtering and sorting large volumes
+of data and then bring a dataset into MATLAB. The Databricks Connect libraries
+used are Python® based, Python 3.10, 3.11 or 3.12 is required. For details see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="DBConnectWorkflow.html"><span class="std std-doc">Databricks Connect example</span></a></p></li>
+</ul>
+</section>
+<section id="matlab-compiler-sdk-workflow-deployed">
+<h2>MATLAB Compiler SDK workflow (Deployed)<a class="headerlink" href="#matlab-compiler-sdk-workflow-deployed" title="Link to this heading"></a></h2>
+<p>In both of the ODBC/JDBC and Databricks Connect workflows the execution of the
+MATLAB code remains <em>local</em>, i.e. on the desktop. For production work having a
+desktop &quot;in the loop&quot; is not convenient or the need to transfer data to and from
+the cluster will limit performance the MATLAB code is compiled to Python <code class="docutils literal notranslate"><span class="pre">.whl</span></code>
+library using MATLAB® Compiler SDK™. This library is then copied to the cluster
+where it can execute directly having access to data on the cluster via Spark.
+For details see:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html"><span class="std std-doc">PythonSparkBuilder</span></a></p></li>
+<li><p><a class="reference internal" href="JobWorkflow.html"><span class="std std-doc">Job Workflow</span></a></p></li>
+</ul>
+</section>
+<section id="rest-api-interfaces">
+<h2>REST API interfaces<a class="headerlink" href="#rest-api-interfaces" title="Link to this heading"></a></h2>
+<p>Databricks offers various REST APIs for interacting with its services. A number of
+these APIs are used to enable enable the previous workflows. These APIs can be
+used directly from MATLAB. The package supports:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>API</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="ClusterAPI.html"><span class="std std-doc">Clusters</span></a></p></td>
+<td><p>Creating, starting, stopping and listing clusters from MATLAB</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="CommandExecution.html"><span class="std std-doc">Command Execution</span></a></p></td>
+<td><p>Execute arbitrary command on a cluster</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="DBFS.html"><span class="std std-doc">DBFS</span></a></p></td>
+<td><p>Move small volumes of data to and from DBFS</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="Files.html"><span class="std std-doc">Files</span></a></p></td>
+<td><p>Move larger volumes of data to and from Unity Catalog volumes</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="JobsAPI.html"><span class="std std-doc">Jobs</span></a></p></td>
+<td><p>Creating jobs to run compiled MATLAB or notebooks</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="LibraryAPI.html"><span class="std std-doc">Libraries</span></a></p></td>
+<td><p>Install compiled MATLAB as a libraries on a cluster</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="SecretsAPI.html"><span class="std std-doc">Secrets</span></a></p></td>
+<td><p>Storing and retrieve secrets on Databricks</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="SQLWarehousesAPI.html"><span class="std std-doc">SQL warehouses</span></a></p></td>
+<td><p>Managing SQL warehouses for use with Database Toolbox</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="StatementExecution.html"><span class="std std-doc">Statement Execution</span></a></p></td>
+<td><p>Execute SQL via REST, i.e. without ODBC, JDBC or Spark</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="TokenAPI.html"><span class="std std-doc">Tokens</span></a></p></td>
+<td><p>Create and manage of personal access tokens</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="UnityCatalogAPI.html"><span class="std std-doc">Unity Catalog</span></a></p></td>
+<td><p>Manage Unity Catalog metastores, catalogs, tables &amp; shares</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="WorkspacesAPI.html"><span class="std std-doc">Workspaces</span></a></p></td>
+<td><p>Creating and manage notebooks and other workspace artifacts</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="MATLAB Interface for Databricks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Setup.html" class="btn btn-neutral float-right" title="Setup" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

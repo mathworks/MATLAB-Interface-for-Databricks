@@ -1,0 +1,619 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Workflows &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Building Wheel libraries with MATLAB" href="matlab-spark-api/PythonSparkBuilder.html" />
+    <link rel="prev" title="Dataframes and columns" href="matlab-spark-api/DataframeColumns.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Job Workflows</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-job-object">Creating a Job object</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-task">Creating a task</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#a-matlab-batch-task">A MATLAB batch task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-a-matlab-runtime-task">Run a MATLAB runtime task</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#required-argument">Required Argument</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optional-named-arguments">Optional Named Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#databricks-internal-runmatlabtask">databricks.internal.runMATLABTask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#notebooktask">NotebookTask</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#tasks-task">Tasks Task</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sparkpythontask">SparkPythonTask</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#storing-files-on-databricks">Storing files on Databricks</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#references">References</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Job Workflows</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/JobWorkflow.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="job-workflows">
+<h1>Job Workflows<a class="headerlink" href="#job-workflows" title="Link to this heading"></a></h1>
+<p>Databricks® provides different options for
+<a class="reference external" href="https://docs.databricks.com/en/jobs/index.html">Job workflows</a>.
+This interface supports several workflows, namely:</p>
+<ul class="simple">
+<li><p>MATLAB® batch task</p></li>
+<li><p>MATLAB runtime task</p></li>
+<li><p>NotebookTask</p></li>
+<li><p>SparkPythonTask</p></li>
+<li><p>Tasks (task)</p></li>
+</ul>
+<p>The basic recipe for running a task is the following:</p>
+<ol class="arabic simple">
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">databricks.Job</span></code> object and add a cluster.</p></li>
+<li><p>Create a Task and set it as a task in the job.</p></li>
+<li><p>Run the job, or schedule it to run later.</p></li>
+</ol>
+<p>Different tasks have different attributes and options, and simple examples are
+provided below. Corresponding examples can be found in <code class="docutils literal notranslate"><span class="pre">Software/MATLAB/examples/Tasks</span></code>.</p>
+<section id="creating-a-job-object">
+<h2>Creating a Job object<a class="headerlink" href="#creating-a-job-object" title="Link to this heading"></a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">databricks.Job</span></code> object is used to run one or more <code class="docutils literal notranslate"><span class="pre">Tasks</span></code>. It has several
+properties, but typically, as a minimum, has a name and a cluster.</p>
+<blockquote>
+<div><p>A cluster can be either an existing cluster by using a <code class="docutils literal notranslate"><span class="pre">cluster_id</span></code>, or a new
+cluster using a databricks.Cluster object. In the latter case the cluster is created
+when the job runs. When testing, using an existing cluster has a much
+faster turnaround time.</p>
+</div></blockquote>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a cluster object, but do not create the actual cluster - yet</span>
+<span class="n">cl</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="p">;</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">setNumWorkers</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+<span class="c">% If compiled MATLAB code is needed on the cluster, the MATLAB runtime must be enabled.</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">enableMATLABRuntime</span><span class="p">(</span><span class="s">'enableLogging'</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">);</span>
+<span class="c">% Set a spark version if needed.</span>
+<span class="n">cl</span><span class="p">.</span><span class="n">spark_version</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"17.3.x-scala2.13"</span><span class="p">;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>The current cluster Id can be obtained by querying the .databrickscfg file as follows:
+clusterId = databricks.internal.configurationprofile.ConfigFile.getProfileField(&quot;cluster_id&quot;, profileName=&quot;DEFAULT&quot;);</p>
+</div></blockquote>
+<p>Having created this cluster object, a Job can be created:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">jb</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">;</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"my-job-name"</span><span class="p">;</span>
+<span class="c">% Assign the cluster to the job</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">setCluster</span><span class="p">(</span><span class="n">cl</span><span class="p">);</span>
+
+<span class="n">jb</span><span class="p">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">myTask</span><span class="p">);</span>
+
+<span class="n">jb</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+<span class="n">jobRun</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">jb</span><span class="p">.</span><span class="n">runNow</span><span class="p">();</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> The &quot;Tasks&quot; task type treats clusters differently, see below.</p>
+</div></blockquote>
+</section>
+<section id="creating-a-task">
+<h2>Creating a task<a class="headerlink" href="#creating-a-task" title="Link to this heading"></a></h2>
+<p>The following is a description of the various kinds of supported Tasks.</p>
+<section id="a-matlab-batch-task">
+<h3>A MATLAB batch task<a class="headerlink" href="#a-matlab-batch-task" title="Link to this heading"></a></h3>
+<p>A MATLAB batch task runs MATLAB code, which has not been compiled, as a Databricks
+job. The cluster running a job must be based on a Docker® image that contains
+desktop MATLAB. It may be the same image as used to provide the MATLAB interactive
+desktop <em>on</em> Databricks, however in this case the GUI is not used and the associated
+web proxy tool is not started. If an interactive desktop MATLAB is being used on
+the cluster be aware that it will compete for resources with the task.</p>
+<p>If creating a cluster from MATLAB, <code class="docutils literal notranslate"><span class="pre">createDatabricksCluster</span></code> can be used:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a single node cluster from a Desktop MATLAB docker file</span>
+<span class="n">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">"batchCluster"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">dockerAuthFile</span><span class="p">=</span><span class="s">"C:\mydir\dockerAuth.json"</span><span class="p">);</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>For details on docker registry access &amp; authentication see: <a class="reference internal" href="Authentication.html"><span class="std std-doc">Authentication.md</span></a></p>
+</div></blockquote>
+<p>Cluster creation will typically take c. 8 minutes, thus if submitting numerous
+short-lived jobs it is best to create a cluster and then assign jobs to it.</p>
+<p>To create a task that defines MATLAB code to execute, begin by defining the
+statement to execute. Typically, this invokes a top-level script that encompasses
+the more complex functionality making the statement handling less error prone.
+An exit value of non zero returned to Databricks from MATLAB will be cause the job
+to fail.</p>
+<blockquote>
+<div><p>Previously (pre 7.0.5) some manual escaping of the statement was required depending
+on its content. This is now automatic and statements should not be
+escaped, aside from conventional escaping of single and double quotes
+as normal to yield a valid MATLAB string.</p>
+</div></blockquote>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">statement</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"run(""myScriptName""); exit(0)"</span><span class="p">;</span>
+<span class="c">% or</span>
+<span class="n">statement</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'run("myScriptName"); exit(0)'</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Optional &quot;pre&quot; and &quot;post&quot; execution Python® commands can be specified. These are
+executed before and after the MATLAB statement respectively. For example, this may
+be used to interact with PySpark without integrating that functionality directly
+into the MATLAB code.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">preExecPyCmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'print("Running preExecPy")'</span><span class="p">;</span>
+<span class="n">postExecPyCmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'print("Running postExecPy")'</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>Optional &quot;pre&quot; and &quot;post&quot; execution Shell commands can be specified. These are
+executed before and after the MATLAB statement respectively. For example, this may
+be used for house keeping tasks like moving files outside of the MATLAB code.
+Shell commands are appended to a &quot;%sh&quot; magic prefix.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">preExecShCmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'echo "Running preExecSh"'</span><span class="p">;</span>
+<span class="n">postExecShCmd</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">'echo "Running postExecSh"'</span><span class="p">;</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Note that the optional Shell and Python commands run as root in the notebook
+environment where as the MATLAB commands run as the job user, hence permission
+adjustments may be required.</p>
+</div></blockquote>
+<blockquote>
+<div><p>The username the MATLAB command runs as can be queried at runtime using the
+MW_ACCOUNTNAME environment variable, in the pre-exec, post-exec and MATLAB sections.</p>
+</div></blockquote>
+<p>The overall order of execution is:</p>
+<ol class="arabic simple">
+<li><p>preExecPyCmd</p></li>
+<li><p>preExecShCmd</p></li>
+<li><p>MATLAB statement</p></li>
+<li><p>postExecShCmd</p></li>
+<li><p>postExecPyCmd</p></li>
+</ol>
+<p>A temporary file is created and its name can be retrieved from the environment
+variable <code class="docutils literal notranslate"><span class="pre">MW_RESULT_TEMPFILE</span></code> This file can be appended to in steps 1,2,4 &amp; 5
+along with the results from step 3. The first 5 MB of output can be retrieved
+from the job run when the task finishes. Only the output of step 3, the MATLAB
+statement, is captured in this file and the returned result, not the pre and post
+execution commands. For the pre &amp; post commands see the Notebook URL via the
+Databricks UI or the job run return value.</p>
+<p>A notebook path can be specified, if not the job's generated notebook will be
+saved with a name of the form: <code class="docutils literal notranslate"><span class="pre">/Users/username&#64;example.com/tmp/MATLABBatchTask-&lt;UUID&gt;.py</span></code>.
+By default an existing notebook of the same name will be overwritten.
+A <code class="docutils literal notranslate"><span class="pre">/Volumes</span></code> path can also be used.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">notebookPath</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"/Workspace/Users/joe@example.com/MATLABBatchTask.py"</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">MATLABCommand</span></code> argument is that used to specify how MATLAB is launched.
+If it is not specified, the command <code class="docutils literal notranslate"><span class="pre">matlab</span> <span class="pre">-batch</span></code> is used as a prefix to the
+statement. In some specific circumstances, where a preferences directory is required
+and provisioned, <code class="docutils literal notranslate"><span class="pre">matlab</span> <span class="pre">-nodesktop</span> <span class="pre">-r</span></code> can be specified.</p>
+<blockquote>
+<div><p>Note that if setting the <code class="docutils literal notranslate"><span class="pre">MATLABCommand</span></code> argument only the Linux® MATLAB startup
+options apply in the case of Databricks.
+See also: <a class="reference external" href="https://mathworks.com/help/matlab/ref/matlablinux.html">https://mathworks.com/help/matlab/ref/matlablinux.html</a></p>
+</div></blockquote>
+<p>The <code class="docutils literal notranslate"><span class="pre">licenseManager</span></code> argument is used to specify where MATLAB should get its license.
+If specified the <code class="docutils literal notranslate"><span class="pre">MLM_LICENSE_FILE</span></code> environment variable is set to the provided
+value in the notebook. If this value is already set in the docker image or cluster
+definition it is not required at this point.</p>
+<p>If using batch token based licensing for CI/CD workflows then <code class="docutils literal notranslate"><span class="pre">matlab-batch</span></code>
+(no space) is used.</p>
+<p>Optional base parameters can be passed as a struct. Values must be specified as
+scalar text and can be retrieved by the MATLAB code at runtime using:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">valueString</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">getenv</span><span class="p">(</span><span class="s">'structFieldName'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Create the task:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Minimal MATLAB task:</span>
+<span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">MATLABBatchTask</span><span class="p">(</span><span class="s">'disp("Hello World")'</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Create the job and assign the task and cluster:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">jb</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">;</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"Example MATLAB batch Job"</span><span class="p">;</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="c">% Assign the cluster to the job</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">setCluster</span><span class="p">(</span><span class="o">&lt;</span><span class="n">clusterId</span><span class="o">&gt;</span><span class="w"> </span><span class="n">or</span><span class="w"> </span><span class="o">&lt;</span><span class="n">databricks</span><span class="p">.</span><span class="n">Cluster</span><span class="w"> </span><span class="n">object</span><span class="o">&gt;</span><span class="p">);</span>
+<span class="n">jb</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+
+<span class="c">% Run the job</span>
+<span class="n">jobRun</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">jb</span><span class="p">.</span><span class="n">runNow</span><span class="p">();</span>
+
+<span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">jobRun</span><span class="p">.</span><span class="n">getOutput</span><span class="p">;</span>
+
+<span class="n">output</span><span class="p">.</span><span class="n">notebook_output</span>
+<span class="w">  </span><span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">    </span><span class="n">NotebookOutput</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+<span class="w">       </span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="s">"['Hello world\n']"</span>
+<span class="w">    </span><span class="n">truncated</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">notebook_output</span></code> field will contain only the first 5 MB characters of the
+MATLAB output, during the execution of the notebook the full MATLAB output is
+available in a file given by the <code class="docutils literal notranslate"><span class="pre">MW_RESULT_TEMPFILE</span></code> environment variable.
+Thus a <code class="docutils literal notranslate"><span class="pre">postExecShCmd</span></code> could be used to copy that file to permanent storage e.g.
+in <code class="docutils literal notranslate"><span class="pre">/Volumes</span></code>. Best practice to to keep the MATLAB console output minimal and write
+to a <code class="docutils literal notranslate"><span class="pre">/local_disk0/&lt;username&gt;</span></code> or <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> path and then <code class="docutils literal notranslate"><span class="pre">copyfile()</span></code> the result to
+permanent storage in MATLAB code. This can typically happen in a wrapper command
+that is used to keep MATLAB statement argument minimal.</p>
+<p>To see the full list of optional arguments for <code class="docutils literal notranslate"><span class="pre">MATLABBatchTask</span></code>, use:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">help</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">MATLABBatchTask</span>
+<span class="c">% or</span>
+<span class="nb">doc</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">MATLABBatchTask</span>
+</pre></div>
+</div>
+</section>
+<section id="run-a-matlab-runtime-task">
+<h3>Run a MATLAB runtime task<a class="headerlink" href="#run-a-matlab-runtime-task" title="Link to this heading"></a></h3>
+<p>A MATLAB runtime task runs compiled MATLAB code as a Databricks job. The cluster
+running a job must be based on either:</p>
+<ol class="arabic simple">
+<li><p>A docker image that contains the MATLAB runtime.</p></li>
+<li><p>A docker image that contains desktop MATLAB.</p></li>
+<li><p>A cluster that used an init script to install the MATLAB runtime at boot.</p></li>
+</ol>
+<p>If creating a cluster from MATLAB <code class="docutils literal notranslate"><span class="pre">createDatabricksCluster</span></code> can be used:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a single node cluster from a Desktop MATLAB docker file</span>
+<span class="n">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">"batchCluster"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">dockerAuthFile</span><span class="p">=</span><span class="s">"C:\mydir\dockerAuth.json"</span><span class="p">);</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>For details on docker file registry access &amp; authentication see: <a class="reference internal" href="Authentication.html"><span class="std std-doc">Authentication.md</span></a></p>
+</div></blockquote>
+<p>Cluster creation will typically take c. 8 minutes, thus if submitting numerous
+short-lived jobs it is best to create a cluster and then assign jobs to it.</p>
+<section id="required-argument">
+<h4>Required Argument<a class="headerlink" href="#required-argument" title="Link to this heading"></a></h4>
+<p>Command:
+A scalar string specifying the compiled code to be executed.</p>
+</section>
+<section id="optional-named-arguments">
+<h4>Optional Named Arguments<a class="headerlink" href="#optional-named-arguments" title="Link to this heading"></a></h4>
+<p>arguments:
+Arguments passed to the compiled code as a scalar string.
+Single quotes in the arguments value will be substituted with ''' ideally
+only double quotes should be used.</p>
+<p>notebookPath:
+If a notebook path is not provided one is created and used for the
+dynamically generated notebook. The Workspace path has the form:
+<code class="docutils literal notranslate"><span class="pre">/Users/username&#64;example.com/tmp/MATLABRuntimeTask-&lt;UUID&gt;.py</span></code>
+On completion of the task the file should be deleted. This is not done
+automatically.
+By default an existing notebook of the same name will be overwritten.
+A /Volumes path may also be provided.</p>
+<p>If provided the path of the notebook should be an absolute path.</p>
+<p>baseParameters:
+Optional base parameters can be passed as a struct. Values must be specified
+as scalar text and can be retrieved by the MATLAB code at runtime using:
+valueString = getenv('structFieldName');</p>
+<p>preExecPyCmd, postExecPyCmd, preExecShCmd and postExecShCmd:
+Optional preExecPyCmd, postExecPyCmd, preExecShCmd and postExecShCmd arguments
+can be used to add Python code and shell commands to the notebook that are
+invoked before and or after the MATLAB code. This may be useful &quot;house keeping&quot;
+or invoking other workflows. The order of execution is:</p>
+<ol class="arabic simple">
+<li><p>preExecPyCmd</p></li>
+<li><p>preExecShCmd</p></li>
+<li><p>Compiled MATLAB command</p></li>
+<li><p>postExecShCmd</p></li>
+<li><p>postExecPyCmd</p></li>
+</ol>
+<p>Shell commands are appended to a &quot;%%sh&quot; magic prefix.</p>
+<p>A temporary file is created and its name can be retrieved from the environment
+variable <code class="docutils literal notranslate"><span class="pre">MW_RESULT_TEMPFILE</span></code> This file can be appended to in steps 1,2,4 &amp; 5
+along with the results from step 3.  The first 1 MB of output can be retrieved
+from the job run when the task finishes.</p>
+<p>mcrRoot:
+The path to the root of the MATLAB runtime installation, if set this is used
+to build up the LD_LIBRARY_PATH environment variable and set the MCRROOT
+environment variable. By default it is expected that this is set in the
+Cluster definition or docker file.</p>
+<p>ldLibraryPath:
+Used to the set the LD_LIBRARY_PATH environment variable, if set this overrides
+a value which may have been set based on mcrRoot. By default it is expected
+that this is set in the Cluster definition or docker file.</p>
+<p>overwriteNotebook:
+A logical flag that is true by default, meaning that if the created
+notebook will be overwritten if it already exists.</p>
+<p>authMethod:
+The authentication method to use for REST API calls.</p>
+<p>profileName:
+The name of the profile to use from the .databrickscfg configuration file.</p>
+<p>For details on docker file registry access &amp; authentication see:
+<a class="reference internal" href="Authentication.html"><span class="std std-doc">Authentication.md</span></a></p>
+<p>Example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="w">  </span><span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">MATLABRuntimeTask</span><span class="p">(</span><span class="s">"/Workspace/Users/joe@example.com/myCompiledCode"</span><span class="p">,</span><span class="k">...</span>
+<span class="w">                                 </span><span class="nb">arguments</span><span class="p">=</span><span class="s">"3.14"</span><span class="p">,</span><span class="k">...</span>
+<span class="w">                                 </span><span class="n">baseParameters</span><span class="p">=</span><span class="nb">struct</span><span class="p">(</span><span class="s">'massLow'</span><span class="p">,</span><span class="w"> </span><span class="s">'1200'</span><span class="p">,</span><span class="w"> </span><span class="s">'massHigh'</span><span class="p">,</span><span class="w"> </span><span class="s">'1400'</span><span class="p">),</span><span class="k">...</span>
+<span class="w">                                 </span><span class="n">notebookPath</span><span class="p">=</span><span class="s">"/Workspace/Users/joe@example.com/MATLABRuntimeTask.py"</span><span class="p">,</span><span class="k">...</span>
+<span class="w">                                 </span><span class="n">preExecPyCmd</span><span class="p">=</span><span class="s">'print("Running preExec Python")'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">                                 </span><span class="n">postExecPyCmd</span><span class="p">=</span><span class="s">'print("Running postExec Python")'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">                                 </span><span class="n">preExecShCmd</span><span class="p">=</span><span class="s">'echo "Running preExec Shell"'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">                                 </span><span class="n">postExecShCmd</span><span class="p">=</span><span class="s">'echo "Running postExec Shell"'</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">c</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">"runtimeTestCluster"</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">dockerAuthFile</span><span class="p">=</span><span class="s">"C:\myDir\dockerAuth.json"</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">jb</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Job</span><span class="p">;</span>
+<span class="w">  </span><span class="n">jb</span><span class="p">.</span><span class="n">name</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"my-job-name"</span><span class="p">;</span>
+
+<span class="w">  </span><span class="c">% Assign the cluster to the job</span>
+<span class="w">  </span><span class="n">jb</span><span class="p">.</span><span class="n">setCluster</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">  </span>
+<span class="w">  </span><span class="n">jb</span><span class="p">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="w">  </span><span class="n">jb</span><span class="p">.</span><span class="n">create</span><span class="p">();</span>
+<span class="w">  </span><span class="n">jobRun</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">jb</span><span class="p">.</span><span class="n">runNow</span><span class="p">();</span>
+
+<span class="w">  </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">jobRun</span><span class="p">.</span><span class="n">getOutput</span>
+<span class="w">  </span><span class="n">output</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">    </span><span class="nb">struct</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">fields</span><span class="p">:</span>
+<span class="w">           </span><span class="n">metadata</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Run</span><span class="p">]</span>
+<span class="w">    </span><span class="n">notebook_output</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span>×<span class="mi">1</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">NotebookOutput</span><span class="p">]</span>
+<span class="w">  </span><span class="n">output</span><span class="p">.</span><span class="n">notebook_output</span>
+<span class="w">    </span><span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">      </span><span class="n">NotebookOutput</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+<span class="w">         </span><span class="n">result</span><span class="p">:</span><span class="w"> </span><span class="s">"['Input: 3.140000\n', 'Output: 6.280000\n']"</span>
+<span class="w">      </span><span class="n">truncated</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span>
+</pre></div>
+</div>
+<p>A license is not required for MATLAB runtime based tasks.</p>
+<blockquote>
+<div><p>MATLAB runtime tasks run as root.</p>
+</div></blockquote>
+</section>
+</section>
+<section id="databricks-internal-runmatlabtask">
+<h3>databricks.internal.runMATLABTask<a class="headerlink" href="#databricks-internal-runmatlabtask" title="Link to this heading"></a></h3>
+<p>The internal <em>preview</em> function <code class="docutils literal notranslate"><span class="pre">databricks.internal.runMATLABTask()</span></code> can be used to
+abstract some of the distinction between task types and to automatically create
+a cluster based on a docker image.</p>
+<p>Examples:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">jobRun</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">internal</span><span class="p">.</span><span class="n">runMATLABTask</span><span class="p">(</span><span class="n">cluster</span><span class="p">=</span><span class="s">"1031-081221-u31ejni1"</span><span class="p">,</span><span class="w"> </span><span class="n">command</span><span class="p">=</span><span class="s">"/Workspace/Users/joe@example.com/times2"</span><span class="p">,</span><span class="w"> </span><span class="nb">arguments</span><span class="p">=</span><span class="s">"3.14"</span><span class="p">,</span><span class="w"> </span><span class="n">ldLibraryPath</span><span class="p">=</span><span class="n">ldLibraryPath</span><span class="p">)</span>
+
+<span class="n">jobRun</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">internal</span><span class="p">.</span><span class="n">runMATLABTask</span><span class="p">(</span><span class="n">cluster</span><span class="p">=</span><span class="s">"1031-081221-u31ejni1"</span><span class="p">,</span><span class="w"> </span><span class="n">statement</span><span class="p">=</span><span class="s">'disp("Hello World"); exit(0)'</span><span class="p">,</span><span class="w"> </span><span class="n">licenseManager</span><span class="p">=</span><span class="s">"27000@10.0.0.4"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>See also: <code class="docutils literal notranslate"><span class="pre">doc</span> <span class="pre">databricks.internal.runMATLABTask</span></code>.</p>
+</section>
+<section id="notebooktask">
+<h3>NotebookTask<a class="headerlink" href="#notebooktask" title="Link to this heading"></a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">NotebookTask</span></code> will simply run a Notebook on a cluster. It can be run on an existing cluster,
+or on a job cluster (created for the sole purpose of running a given job/task).</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">NotebookTask</span></code> needs at least the path of a notebook to run, and it optionally takes some
+additional parameters, <code class="docutils literal notranslate"><span class="pre">base_parameters</span></code>.</p>
+<p>The parameters can be used for setting widget values in the notebook, if present.
+The <code class="docutils literal notranslate"><span class="pre">base_parameters</span></code> should be in the form of a struct, like this:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">params</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">struct</span><span class="p">(</span><span class="s">'ds_limit'</span><span class="p">,</span><span class="w"> </span><span class="s">'100'</span><span class="p">);</span>
+<span class="n">nbTask</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">NotebookTask</span><span class="p">(</span><span class="s">"/Users/user@example.com/myfolder/myNotebook"</span><span class="p">,</span><span class="w"> </span><span class="n">params</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>See this example: <code class="docutils literal notranslate"><span class="pre">Software/MATLAB/examples/Tasks/NotebookTask</span></code>.</p>
+</section>
+<section id="tasks-task">
+<h3>Tasks Task<a class="headerlink" href="#tasks-task" title="Link to this heading"></a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">Tasks</span></code> task is a specific task that runs other tasks, e.g. a task that run a
+series of different notebook tasks.</p>
+<p>A <code class="docutils literal notranslate"><span class="pre">Tasks</span></code> task is somewhat more complex, but gives more control of the
+tasks to be run. When using a <code class="docutils literal notranslate"><span class="pre">Tasks</span></code> task, at a high-level, the user must define:</p>
+<ul class="simple">
+<li><p>The actual tasks to run.</p></li>
+<li><p>The clusters on which they can run.</p></li>
+<li><p>Any dependencies between the tasks.</p></li>
+<li><p>Any libraries that are needed.</p></li>
+</ul>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">tasks</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Tasks</span><span class="p">();</span>
+
+#<span class="w"> </span><span class="n">Create</span><span class="w"> </span><span class="n">some</span><span class="w"> </span><span class="n">clusters</span><span class="w"> </span><span class="p">(</span><span class="n">don</span><span class="o">'</span><span class="n">t</span><span class="w"> </span><span class="nb">start</span><span class="w"> </span><span class="n">them</span><span class="p">)</span>
+<span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span>
+<span class="w">    </span><span class="c">% Create a cluster key</span>
+<span class="w">    </span><span class="n">cl_keys</span><span class="p">(</span><span class="n">k</span><span class="p">)</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"cluster_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">k</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c">% Create a cluster</span>
+<span class="w">    </span><span class="n">new_cluster</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s">''</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">create</span><span class="p">=</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">useMATLAB</span><span class="p">=</span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="n">autoterminationMinutes</span><span class="p">=</span><span class="mi">0</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c">% Add cluster to list of clusters to use</span>
+<span class="w">    </span><span class="n">tasks</span><span class="p">.</span><span class="n">addJobCluster</span><span class="p">(</span><span class="n">cl_keys</span><span class="p">(</span><span class="n">k</span><span class="p">),</span><span class="w"> </span><span class="n">new_cluster</span><span class="p">);</span>
+<span class="k">end</span>
+
+<span class="c">% Add the tasks</span>
+<span class="c">% TT is a list with 4 different tasks (any permissible type)</span>
+<span class="n">tasks</span><span class="p">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">TT</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="w"> </span><span class="s">"t1"</span><span class="p">,</span><span class="w"> </span><span class="s">"job_cluster_key"</span><span class="p">,</span><span class="w"> </span><span class="n">cl_keys</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="n">tasks</span><span class="p">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">TT</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="w"> </span><span class="s">"t2"</span><span class="p">,</span><span class="w"> </span><span class="s">"job_cluster_key"</span><span class="p">,</span><span class="w"> </span><span class="n">cl_keys</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+<span class="n">tasks</span><span class="p">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">TT</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="s">"t3"</span><span class="p">,</span><span class="w"> </span><span class="s">"job_cluster_key"</span><span class="p">,</span><span class="w"> </span><span class="n">cl_keys</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="w"> </span><span class="s">"depends_on"</span><span class="p">,</span><span class="w"> </span><span class="s">"t1"</span><span class="p">);</span>
+<span class="n">tasks</span><span class="p">.</span><span class="n">addTask</span><span class="p">(</span><span class="n">TT</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="s">"t4"</span><span class="p">,</span><span class="w"> </span><span class="s">"job_cluster_key"</span><span class="p">,</span><span class="w"> </span><span class="n">cl_keys</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span><span class="w"> </span><span class="s">"depends_on"</span><span class="p">,</span><span class="w"> </span><span class="s">"t2"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>A simple example running several of the notebooks from the previous example can be
+found here: <code class="docutils literal notranslate"><span class="pre">Software/MATLAB/examples/Tasks/TasksTask</span></code>.</p>
+</section>
+<section id="sparkpythontask">
+<h3>SparkPythonTask<a class="headerlink" href="#sparkpythontask" title="Link to this heading"></a></h3>
+<p>A <code class="docutils literal notranslate"><span class="pre">SparkPythonTask</span></code> simply runs a Python file with a Spark™ operation. It needs a parameter
+for the <code class="docutils literal notranslate"><span class="pre">python_file</span></code> and zero or more <code class="docutils literal notranslate"><span class="pre">parameters</span></code>. The latter is a string or an array of
+strings, and can be retrieved as command line arguments in the Python file executed.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">task</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">SparkPythonTask</span><span class="p">(</span><span class="k">...</span>
+<span class="w">    </span><span class="n">python_file</span><span class="p">=</span><span class="s">"/Volumes/&lt;some_path&gt;/mypythonfile.py"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="n">parameters</span><span class="p">=</span><span class="nb">string</span><span class="p">([</span><span class="s">"foo"</span><span class="p">,</span><span class="w"> </span><span class="s">"bar"</span><span class="p">]));</span>
+</pre></div>
+</div>
+<p>A simple example can be found here:
+<code class="docutils literal notranslate"><span class="pre">Software/MATLAB/examples/Tasks/SparkPythonTask</span></code>.</p>
+</section>
+</section>
+<section id="storing-files-on-databricks">
+<h2>Storing files on Databricks<a class="headerlink" href="#storing-files-on-databricks" title="Link to this heading"></a></h2>
+<p>The different examples here assume that the user can store and/or access
+different kinds of files and artifacts on Databricks. Jar-files, Wheel-files,
+Notebooks, Python-files, and maybe different data files too.</p>
+<p>This will not be described in any detail here, but is partly used in the
+example files mentioned here.</p>
+<p>The Databricks portal can be used both for uploading and installing files.
+The Databricks Support package also has different functions and classes for
+interacting with the resources. Documentation on the different formats can
+be found in the <a class="reference internal" href="WorkingWithFiles.html"><span class="std std-doc">Working with files</span></a>
+section.</p>
+<section id="references">
+<h3>References<a class="headerlink" href="#references" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>For more information on job submission see: <a class="reference external" href="https://docs.databricks.com/jobs.html">https://docs.databricks.com/jobs.html</a>.</p></li>
+<li><p>For more information on the MATLAB RDD interface see: <a class="reference external" href="https://www.mathworks.com/help/compiler/spark/matlab.compiler.mlspark.rdd-class.html">https://www.mathworks.com/help/compiler/spark/matlab.compiler.mlspark.rdd-class.html</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="matlab-spark-api/DataframeColumns.html" class="btn btn-neutral float-left" title="Dataframes and columns" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="matlab-spark-api/PythonSparkBuilder.html" class="btn btn-neutral float-right" title="Building Wheel libraries with MATLAB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

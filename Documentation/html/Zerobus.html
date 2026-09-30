@@ -1,0 +1,290 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zerobus (Preview) &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Working with files" href="WorkingWithFiles.html" />
+    <link rel="prev" title="Genie - Public Preview" href="Genie.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Zerobus   (Preview)</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#zerobus-client">Zerobus client</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example:</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Zerobus   (Preview)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Zerobus.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="zerobus-preview">
+<h1>Zerobus   (Preview)<a class="headerlink" href="#zerobus-preview" title="Link to this heading"></a></h1>
+<p>Zerobus ingest provides near real-time data ingestion of data into tables at high
+bandwidth for thousands of clients without need for a message bus. For details see:
+<a class="reference external" href="https://www.databricks.com/product/data-engineering/lakeflow-connect/zerobus-ingest">https://www.databricks.com/product/data-engineering/lakeflow-connect/zerobus-ingest</a></p>
+<blockquote>
+<div><p>Zerobus was announced by Databricks® at the Data + AI Summit in June 2026.
+It is currently a preview feature and so this interface may change without notice.</p>
+</div></blockquote>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>A destination table.</p></li>
+<li><p>A service principal.</p></li>
+<li><p>Appropriate permissions granted to the service principal.</p></li>
+</ul>
+<p>To create a table and grant permissions, given, sufficient rights, SQL can be used, e.g.:</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">sql</span>
+<span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">main</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">air_quality</span><span class="w"> </span><span class="p">(</span><span class="n">device_name</span><span class="w"> </span><span class="n">STRING</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="w"> </span><span class="n">LONG</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">sql</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">USE</span><span class="w"> </span><span class="k">CATALOG</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">CATALOG</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">a</span><span class="o">&lt;</span><span class="n">REDACTED</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">`</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="n">USE</span><span class="w"> </span><span class="k">SCHEMA</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">SCHEMA</span><span class="w"> </span><span class="n">main</span><span class="p">.</span><span class="k">default</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">a</span><span class="o">&lt;</span><span class="n">REDACTED</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">`</span><span class="p">;</span>
+<span class="k">GRANT</span><span class="w"> </span><span class="k">MODIFY</span><span class="p">,</span><span class="w"> </span><span class="k">SELECT</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">main</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">air_quality</span><span class="w"> </span><span class="k">TO</span><span class="w"> </span><span class="o">`</span><span class="n">a</span><span class="o">&lt;</span><span class="n">REDACTED</span><span class="o">&gt;</span><span class="mi">1</span><span class="o">`</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>For further details see:</p>
+<p><a class="reference external" href="https://docs.databricks.com/aws/en/ingestion/zerobus-ingest#get-your-workspace-url-and-zerobus-ingest-endpoint">https://docs.databricks.com/aws/en/ingestion/zerobus-ingest#get-your-workspace-url-and-zerobus-ingest-endpoint</a></p>
+</section>
+<section id="zerobus-client">
+<h2>Zerobus client<a class="headerlink" href="#zerobus-client" title="Link to this heading"></a></h2>
+<p>Create a Zerobus object that will authenticate as the service principal:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">z</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Zerobus</span><span class="p">(</span><span class="n">catalog</span><span class="p">=</span><span class="s">"main"</span><span class="p">,</span><span class="w"> </span><span class="n">schema</span><span class="p">=</span><span class="s">"default"</span><span class="p">,</span><span class="w"> </span><span class="nb">table</span><span class="p">=</span><span class="s">"air_quality"</span><span class="p">,</span><span class="w"> </span><span class="n">clientId</span><span class="p">=</span><span class="s">"a&lt;REDACTED&gt;1"</span><span class="p">,</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">=</span><span class="s">"d&lt;REDACTED&gt;5"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The client can be used to make repeated inserts into the table without the need for
+repeated authentication. The client obtains an access token with a life span of 1 hour.
+When the token expires the client will refresh the token.</p>
+<blockquote>
+<div><p>Currently a token may expire during a large transaction leading to a failure without a retry.</p>
+</div></blockquote>
+<p>The following example creates a JSON payload array of two sets of values, corresponding
+to two table rows using the previously defined table schema.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">payload</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">[</span><span class="s">'[{ "device_name": "device_num_1", "temp": 28, "humidity": 60 },'</span><span class="p">,</span><span class="w"> </span><span class="nb">newline</span><span class="w"> </span><span class="k">...</span>
+<span class="w">            </span><span class="s">'{ "device_name": "device_num_2", "temp": 25, "humidity": 55 }]'</span><span class="p">];</span>
+
+<span class="c">% Insert the data into the table</span>
+<span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">z</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Repeated calls to the <code class="docutils literal notranslate"><span class="pre">insert</span></code> method can be made with different payloads. A new client
+should generally not be created per <code class="docutils literal notranslate"><span class="pre">insert</span></code> call to reduce overhead.</p>
+<blockquote>
+<div><p>Writing a <em>batch</em> of rows of data in a single request is more efficient than writing
+individual rows if the data is available a priori.</p>
+</div></blockquote>
+</section>
+<section id="example">
+<h2>Example:<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<p>First created a table using SQL</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="k">CREATE</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">main</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">air_quality</span><span class="w"> </span><span class="p">(</span><span class="n">device_name</span><span class="w"> </span><span class="n">STRING</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="w"> </span><span class="nb">INT</span><span class="p">,</span><span class="w"> </span><span class="n">humidity</span><span class="w"> </span><span class="n">LONG</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"air_quality"</span><span class="p">;</span>
+<span class="n">catalog</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"main"</span><span class="p">;</span>
+<span class="n">schema</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"default"</span><span class="p">;</span>
+
+<span class="n">sp_secret</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"d&lt;REDACTED&gt;5"</span><span class="p">;</span>
+<span class="n">sp_client_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"a&lt;REDACTED&gt;1"</span><span class="p">;</span>
+
+<span class="c">% Create the Zerobus object</span>
+<span class="n">z</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Zerobus</span><span class="p">(</span><span class="n">catalog</span><span class="p">=</span><span class="n">catalog</span><span class="p">,</span><span class="w"> </span><span class="n">schema</span><span class="p">=</span><span class="n">schema</span><span class="p">,</span><span class="w"> </span><span class="nb">table</span><span class="p">=</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">clientId</span><span class="p">=</span><span class="n">sp_client_id</span><span class="p">,</span><span class="w"> </span><span class="n">clientSecret</span><span class="p">=</span><span class="n">sp_secret</span><span class="p">)</span>
+
+<span class="c">% Write 10 rows in total</span>
+<span class="n">numRows</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+
+<span class="c">% Write 2 batched rows at a time</span>
+<span class="k">for</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">numRows</span>
+<span class="w">    </span><span class="c">% Sample random temperature data</span>
+<span class="w">    </span><span class="n">t1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">t2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">]);</span>
+<span class="w">    </span><span class="c">% Sample random humidity data</span>
+<span class="w">    </span><span class="n">h1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">h2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">randi</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">]);</span>
+<span class="w">    </span><span class="c">% Ids for the supposed measurement devices</span>
+<span class="w">    </span><span class="n">id1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"device_num_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nb">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">));</span>
+<span class="w">    </span><span class="n">id2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"device_num_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nb">num2str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span>
+
+<span class="w">    </span><span class="c">% Payload for 2 rows as a JSON array</span>
+<span class="w">    </span><span class="n">payload</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">char</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s">'[{"device_name": "%s", "temp": %d, "humidity": %d }, \n { "device_name": "%s", "temp": %d, "humidity": %d }]'</span><span class="p">,</span><span class="k">...</span>
+<span class="w">        </span><span class="n">id1</span><span class="p">,</span><span class="w"> </span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">h1</span><span class="p">,</span><span class="w"> </span><span class="n">id2</span><span class="p">,</span><span class="w"> </span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">h2</span><span class="p">));</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">% Provide some feedback</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="nb">mod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span>
+<span class="w">        </span><span class="nb">fprintf</span><span class="p">(</span><span class="s">"Insert call #%d\n"</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">);</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="c">% Send the data to Databricks</span>
+<span class="w">    </span><span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">z</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
+<span class="w">    </span><span class="nb">assert</span><span class="p">(</span><span class="n">result</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Genie.html" class="btn btn-neutral float-left" title="Genie - Public Preview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="WorkingWithFiles.html" class="btn btn-neutral float-right" title="Working with files" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

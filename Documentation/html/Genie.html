@@ -1,0 +1,325 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Genie - Public Preview &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Zerobus (Preview)" href="Zerobus.html" />
+    <link rel="prev" title="Workspaces API" href="WorkspacesAPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Genie - Public Preview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#databricks-genie-interface"><code class="docutils literal notranslate"><span class="pre">databricks.Genie</span></code> interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#matlab-databricks-genie-genie-interface"><code class="docutils literal notranslate"><span class="pre">matlab.databricks.genie.Genie</span></code> interface</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Genie - Public Preview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/Genie.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="genie-public-preview">
+<h1>Genie - Public Preview<a class="headerlink" href="#genie-public-preview" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p>Please note that Databricks® labels the Genie API as public preview with parts of it labelled as beta.</p>
+</div></blockquote>
+<p>The Genie API enables integration of natural language data querying into applications
+It supports stateful conversations, allowing follow-up questions. The Genie application
+is exposed in the following ways:</p>
+<ol class="arabic simple">
+<li><p>The REST API via the <code class="docutils literal notranslate"><span class="pre">databricks.Genie</span></code> class.</p></li>
+<li><p>A high-level chatbot based experience via <code class="docutils literal notranslate"><span class="pre">matlab.databricks.startGenieChat()</span></code>.</p></li>
+</ol>
+<p>Using Genie requires a configured &quot;Genie Space&quot;. The space defines the context that
+Genie uses to interpret questions and return results. It must have:</p>
+<ul class="simple">
+<li><p>Access to a Databricks workspace with the Databricks SQL entitlement.</p></li>
+<li><p>At least CAN USE privileges on a SQL pro or serverless SQL warehouse.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">databricks.Genie</span></code> API can be accessed directly as per the many other exposed
+REST APIs.</p>
+<section id="databricks-genie-interface">
+<h2><code class="docutils literal notranslate"><span class="pre">databricks.Genie</span></code> interface<a class="headerlink" href="#databricks-genie-interface" title="Link to this heading"></a></h2>
+<p>Example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Create a Genie top-level object object</span>
+<span class="n">g</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Genie</span><span class="p">;</span>
+
+<span class="c">% List the available spaces</span>
+<span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">listSpaces</span><span class="p">;</span>
+
+<span class="c">% Use the first returned space assuming it is the intended one</span>
+<span class="n">spaceId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">spaces</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">spaceId</span><span class="p">;</span>
+
+<span class="c">% Start a conversation</span>
+<span class="n">content</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"What tables are there and how are they connected? Give me a short summary."</span><span class="p">;</span>
+<span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">startConversation</span><span class="p">(</span><span class="n">spaceId</span><span class="p">,</span><span class="w"> </span><span class="n">content</span><span class="p">);</span>
+<span class="n">conversationId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">conversationId</span><span class="p">;</span>
+<span class="n">messageId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">messageId</span><span class="p">;</span>
+
+<span class="c">% Allow some time for the response to be generated, can be tested using statue/state values</span>
+<span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">getConversationMessage</span><span class="p">(</span><span class="n">spaceId</span><span class="p">,</span><span class="w"> </span><span class="n">conversationId</span><span class="p">,</span><span class="w"> </span><span class="n">messageId</span><span class="p">);</span>
+
+<span class="c">% Display text based response a query is not generated in this case</span>
+<span class="nb">fprintf</span><span class="p">(</span><span class="s">"Response text:\n\n %s\n\n"</span><span class="p">,</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">attachments</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">text</span><span class="p">.</span><span class="n">content</span><span class="p">)</span>
+
+<span class="n">Response</span><span class="w"> </span><span class="s">text:</span>
+
+<span class="w"> </span><span class="n">There</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">tables</span><span class="p">:</span><span class="w"> </span>`<span class="n">main</span>`<span class="p">.</span>`<span class="n">default</span>`<span class="p">.</span>`<span class="n">outages</span>`<span class="w"> </span><span class="n">and</span><span class="w"> </span>`<span class="n">main</span>`<span class="p">.</span>`<span class="n">default</span>`<span class="p">.</span>`<span class="n">deeply</span>`<span class="p">.</span><span class="w"> </span>
+
+<span class="n">The</span><span class="w"> </span><span class="s">`outages`</span><span class="w"> </span><span class="s">table</span><span class="w"> </span><span class="s">contains</span><span class="w"> </span><span class="s">information</span><span class="w"> </span><span class="s">about</span><span class="w"> </span><span class="s">power</span><span class="w"> </span><span class="s">outages,</span><span class="w"> </span><span class="s">including</span><span class="w"> </span><span class="s">columns</span><span class="w"> </span><span class="s">for</span><span class="w"> </span><span class="s">region,</span><span class="w"> </span><span class="s">outage</span><span class="w"> </span><span class="s">time,</span><span class="w"> </span><span class="s">loss,</span><span class="w"> </span><span class="s">customers</span><span class="w"> </span><span class="s">affected,</span><span class="w"> </span><span class="s">restoration</span><span class="w"> </span><span class="s">time,</span><span class="w"> </span><span class="s">and</span><span class="w"> </span><span class="s">cause.</span><span class="w"> </span>
+
+<span class="n">The</span><span class="w"> </span><span class="s">`deeply`</span><span class="w"> </span><span class="s">table</span><span class="w"> </span><span class="s">contains</span><span class="w"> </span><span class="s">structured</span><span class="w"> </span><span class="s">data</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">columns</span><span class="w"> </span><span class="s">for</span><span class="w"> </span><span class="s">id,</span><span class="w"> </span><span class="s">name,</span><span class="w"> </span><span class="s">info</span><span class="w"> </span><span class="s">(a</span><span class="w"> </span><span class="s">struct</span><span class="w"> </span><span class="s">with</span><span class="w"> </span><span class="s">nested</span><span class="w"> </span><span class="s">fields),</span><span class="w"> </span><span class="s">arr</span><span class="w"> </span><span class="s">(an</span><span class="w"> </span><span class="s">array</span><span class="w"> </span><span class="s">of</span><span class="w"> </span><span class="s">integers),</span><span class="w"> </span><span class="s">and</span><span class="w"> </span><span class="s">as</span><span class="w"> </span><span class="s">(an</span><span class="w"> </span><span class="s">array</span><span class="w"> </span><span class="s">of</span><span class="w"> </span><span class="s">structs).</span><span class="w"> </span>
+
+<span class="n">There</span><span class="w"> </span><span class="s">is</span><span class="w"> </span><span class="s">no</span><span class="w"> </span><span class="s">explicit</span><span class="w"> </span><span class="s">connection</span><span class="w"> </span><span class="s">or</span><span class="w"> </span><span class="s">relationship</span><span class="w"> </span><span class="s">between</span><span class="w"> </span><span class="s">these</span><span class="w"> </span><span class="s">two</span><span class="w"> </span><span class="s">tables</span><span class="w"> </span><span class="s">based</span><span class="w"> </span><span class="s">on</span><span class="w"> </span><span class="s">the</span><span class="w"> </span><span class="s">provided</span><span class="w"> </span><span class="s">schema.</span>
+
+
+<span class="c">%% Trigger a query that responds with a query not text</span>
+<span class="n">content</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">"count the number of rows in outages"</span><span class="p">;</span>
+<span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">createConversationMessage</span><span class="p">(</span><span class="n">spaceId</span><span class="p">,</span><span class="w"> </span><span class="n">conversationId</span><span class="p">,</span><span class="w"> </span><span class="n">content</span><span class="p">);</span>
+<span class="n">messageId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">messageId</span><span class="p">;</span>
+
+<span class="c">% wait for a response to be generated</span>
+<span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">getConversationMessage</span><span class="p">(</span><span class="n">spaceId</span><span class="p">,</span><span class="w"> </span><span class="n">conversationId</span><span class="p">,</span><span class="w"> </span><span class="n">messageId</span><span class="p">);</span>
+<span class="n">result</span><span class="p">.</span><span class="n">attachments</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">  </span><span class="n">Attachment</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="nb">properties</span><span class="p">:</span>
+
+<span class="w">    </span><span class="n">attachmentId</span><span class="p">:</span><span class="w"> </span><span class="s">"01f08c84005e11df8c940d586e5f82bb"</span>
+<span class="w">           </span><span class="n">query</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>1<span class="n">x1</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">genie</span><span class="p">.</span><span class="n">Query</span><span class="p">]</span>
+<span class="w">            </span><span class="nb">text</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>0<span class="n">x0</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">datastructures</span><span class="p">.</span><span class="n">genie</span><span class="p">.</span><span class="n">Text</span><span class="p">]</span>
+
+<span class="n">result</span><span class="p">.</span><span class="n">attachments</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">query</span><span class="p">.</span><span class="n">query</span>
+<span class="nb">ans</span><span class="w"> </span><span class="p">=</span><span class="w"> </span>
+<span class="w">    </span><span class="s">"SELECT COUNT(*) FROM `main`.`default`.`outages`"</span>
+
+<span class="c">% Execute the generated query</span>
+<span class="n">attachmentId</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">attachments</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="n">attachmentId</span><span class="p">;</span>
+<span class="p">[</span><span class="n">result</span><span class="p">,</span><span class="w"> </span><span class="n">errorResponse</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">g</span><span class="p">.</span><span class="n">execMsgAttachmentSQLQuery</span><span class="p">(</span><span class="n">spaceId</span><span class="p">,</span><span class="w"> </span><span class="n">conversationId</span><span class="p">,</span><span class="w"> </span><span class="n">messageId</span><span class="p">,</span><span class="w"> </span><span class="n">attachmentId</span><span class="p">);</span>
+
+<span class="c">% Convert the response to a MATLAB table</span>
+<span class="n">T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">internal</span><span class="p">.</span><span class="n">genie</span><span class="p">.</span><span class="n">statementResponse2Table</span><span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">statementResponse</span><span class="p">)</span>
+<span class="n">Renamed</span><span class="w"> </span><span class="s">column:</span><span class="w"> </span><span class="s">count(1)</span><span class="w"> </span><span class="s">to:</span><span class="w"> </span><span class="s">count_1_</span>
+<span class="n">T</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span><span class="nb">table</span>
+<span class="w">    </span><span class="n">count_1_</span>
+<span class="w">    </span><span class="n">________</span>
+<span class="w">      </span><span class="mi">1468</span><span class="w">  </span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Note: <code class="docutils literal notranslate"><span class="pre">statementResponse2Table</span></code> is a partial implementation and does not currently support
+all data type or table configurations, for support contact <a class="reference external" href="mailto:databricks&#37;&#52;&#48;mathworks&#46;com">databricks<span>&#64;</span>mathworks<span>&#46;</span>com</a>.</p>
+</div></blockquote>
+<p>For full REST API details see also: <a class="reference external" href="https://docs.databricks.com/aws/en/genie/conversation-api">https://docs.databricks.com/aws/en/genie/conversation-api</a>.</p>
+</section>
+<section id="matlab-databricks-genie-genie-interface">
+<h2><code class="docutils literal notranslate"><span class="pre">matlab.databricks.genie.Genie</span></code> interface<a class="headerlink" href="#matlab-databricks-genie-genie-interface" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">matlab.databricks.Genie</span></code> is a higher-level set of classes that can make it easier
+to work with Genie. At the highest level is the <code class="docutils literal notranslate"><span class="pre">chat</span></code> method which provides a
+basic chatbot like experience akin to that available in the Databricks Workspace.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">matlab</span><span class="p">.</span><span class="n">databricks</span><span class="p">.</span><span class="n">startGenieChat</span>
+<span class="n">Starting</span><span class="w"> </span><span class="s">chat.</span><span class="w"> </span><span class="s">To</span><span class="w"> </span><span class="s">stop</span><span class="w"> </span><span class="s">type</span><span class="w"> </span><span class="s">'exit chat'</span><span class="w"> </span><span class="s">or</span><span class="w"> </span><span class="s">'quit chat'</span><span class="w"> </span><span class="s">at</span><span class="w"> </span><span class="s">the</span><span class="w"> </span><span class="s">prompt.</span>
+<span class="o">---------------------------------------------------------------------</span>
+<span class="n">Prompt</span><span class="p">:</span><span class="w"> </span><span class="n">What</span><span class="w"> </span><span class="n">tables</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">there</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">how</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">they</span><span class="w"> </span><span class="n">connected</span>?<span class="w"> </span><span class="n">Give</span><span class="w"> </span><span class="n">me</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">short</span><span class="w"> </span><span class="nb">summary</span><span class="p">.</span>
+<span class="p">..</span>
+<span class="n">Text</span><span class="p">:</span><span class="w"> </span><span class="n">There</span><span class="w"> </span><span class="n">are</span><span class="w"> </span><span class="n">two</span><span class="w"> </span><span class="n">tables</span><span class="p">:</span><span class="w"> </span>`<span class="n">main</span>`<span class="p">.</span>`<span class="n">default</span>`<span class="p">.</span>`<span class="n">outages</span>`<span class="w"> </span><span class="n">and</span><span class="w"> </span>`<span class="n">main</span>`<span class="p">.</span>`<span class="n">default</span>`<span class="p">.</span>`<span class="n">deeply</span>`<span class="p">.</span><span class="w"> </span>
+
+<span class="o">-</span><span class="w"> </span><span class="n">The</span><span class="w"> </span>`<span class="n">outages</span>`<span class="w"> </span><span class="nb">table</span><span class="w"> </span><span class="nb">contains</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">about</span><span class="w"> </span><span class="n">power</span><span class="w"> </span><span class="n">outages</span><span class="p">,</span><span class="w"> </span><span class="n">including</span><span class="w"> </span><span class="n">columns</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">region</span><span class="p">,</span><span class="w"> </span><span class="n">outage</span><span class="w"> </span><span class="nb">time</span><span class="p">,</span><span class="w"> </span><span class="n">loss</span><span class="p">,</span><span class="w"> </span><span class="n">customers</span><span class="w"> </span><span class="n">affected</span><span class="p">,</span><span class="w"> </span><span class="n">restoration</span><span class="w"> </span><span class="nb">time</span><span class="p">,</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">cause</span><span class="p">.</span>
+<span class="o">-</span><span class="w"> </span><span class="n">The</span><span class="w"> </span>`<span class="n">deeply</span>`<span class="w"> </span><span class="nb">table</span><span class="w"> </span><span class="nb">contains</span><span class="w"> </span><span class="n">various</span><span class="w"> </span><span class="n">structured</span><span class="w"> </span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">including</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">ID</span><span class="p">,</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">and</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="nb">complex</span><span class="w"> </span>`<span class="n">info</span>`<span class="w"> </span><span class="nb">struct</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">nested</span><span class="w"> </span><span class="n">fields</span><span class="p">.</span>
+
+<span class="n">There</span><span class="w"> </span><span class="s">is</span><span class="w"> </span><span class="s">no</span><span class="w"> </span><span class="s">explicit</span><span class="w"> </span><span class="s">connection</span><span class="w"> </span><span class="s">or</span><span class="w"> </span><span class="s">relationship</span><span class="w"> </span><span class="s">between</span><span class="w"> </span><span class="s">these</span><span class="w"> </span><span class="s">two</span><span class="w"> </span><span class="s">tables</span><span class="w"> </span><span class="s">based</span><span class="w"> </span><span class="s">on</span><span class="w"> </span><span class="s">the</span><span class="w"> </span><span class="s">provided</span><span class="w"> </span><span class="s">schema.</span>
+<span class="n">Prompt</span><span class="p">:</span><span class="w"> </span><span class="nb">count</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">rows</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">outages</span>
+<span class="k">...</span><span class="c">.</span>
+<span class="n">Description</span><span class="p">:</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="n">wants</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">know</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">total</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">entries</span><span class="w"> </span><span class="n">recorded</span><span class="w"> </span><span class="n">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">outages</span><span class="w"> </span><span class="nb">table</span><span class="p">.</span>
+<span class="n">Query</span><span class="p">:</span><span class="w"> </span><span class="n">SELECT</span><span class="w"> </span><span class="n">COUNT</span><span class="p">(</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="n">FROM</span><span class="w"> </span>`<span class="n">main</span>`<span class="p">.</span>`<span class="n">default</span>`<span class="p">.</span>`<span class="n">outages</span>`
+<span class="n">Do</span><span class="w"> </span><span class="s">you</span><span class="w"> </span><span class="s">want</span><span class="w"> </span><span class="s">to</span><span class="w"> </span><span class="s">execute</span><span class="w"> </span><span class="s">the</span><span class="w"> </span><span class="s">query?</span><span class="w"> </span><span class="s">Y/N</span><span class="w"> </span><span class="s">[Y]:</span><span class="w"> </span><span class="s">y</span>
+<span class="n">Executing</span><span class="w"> </span><span class="s">query.</span>
+<span class="n">Renamed</span><span class="w"> </span><span class="s">column:</span><span class="w"> </span><span class="s">count(1)</span><span class="w"> </span><span class="s">to:</span><span class="w"> </span><span class="s">count_1_</span>
+<span class="n">Query</span><span class="w"> </span><span class="s">result</span><span class="w"> </span><span class="s">header:</span>
+<span class="w">    </span><span class="n">count_1_</span>
+<span class="w">    </span><span class="n">________</span>
+<span class="w">      </span><span class="mi">1468</span><span class="w">  </span>
+<span class="n">Save</span><span class="w"> </span><span class="s">the</span><span class="w"> </span><span class="s">table</span><span class="w"> </span><span class="s">to</span><span class="w"> </span><span class="s">base</span><span class="w"> </span><span class="s">workspace?</span><span class="w"> </span><span class="s">Y/N</span><span class="w"> </span><span class="s">[Y]:</span><span class="w"> </span><span class="s">y</span>
+<span class="n">Table</span><span class="w"> </span><span class="s">variable</span><span class="w"> </span><span class="s">name:</span><span class="w"> </span><span class="s">outages_count</span>
+<span class="n">Prompt</span><span class="p">:</span><span class="w"> </span><span class="nb">quit</span><span class="w"> </span><span class="n">chat</span>
+<span class="n">Quitting</span><span class="w"> </span><span class="s">chat.</span>
+
+<span class="c">% In base MATLAB workspace</span>
+<span class="n">outages_count</span>
+<span class="s">outages_count</span><span class="w"> </span><span class="p">=</span>
+<span class="w">  </span><span class="nb">table</span>
+<span class="w">    </span><span class="n">count_1_</span>
+<span class="w">    </span><span class="n">________</span>
+<span class="w">      </span><span class="mi">1468</span><span class="w">  </span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Again, note that the high-level chatbot integration is a preview feature, for example
+arbitrary table content conversion is not fully supported.
+For support contact <a class="reference external" href="mailto:databricks&#37;&#52;&#48;mathworks&#46;com">databricks<span>&#64;</span>mathworks<span>&#46;</span>com</a>.</p>
+</div></blockquote>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="WorkspacesAPI.html" class="btn btn-neutral float-left" title="Workspaces API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Zerobus.html" class="btn btn-neutral float-right" title="Zerobus (Preview)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

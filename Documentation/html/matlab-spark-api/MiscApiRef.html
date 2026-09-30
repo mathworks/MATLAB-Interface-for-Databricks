@@ -1,0 +1,1427 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MATLAB Interface for Apache Spark (matlab.sparkutils &amp; app/functions) - API Reference &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MATLAB Interface for MLflow" href="../matlab-mlflow/index.html" />
+    <link rel="prev" title="MATLAB Interface for Apache Spark (compiler.build.spark) - API Reference" href="CompilerApiRef.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#index">Index</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#help">Help</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils">matlab.sparkutils</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-internal">matlab.sparkutils.internal</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-internal-genexpressionencoders">matlab.sparkutils.internal.genExpressionEncoders</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-internal-hassparkenvironment">matlab.sparkutils.internal.hasSparkEnvironment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-internal-yamldecode">matlab.sparkutils.internal.yamldecode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-internal-yamlencode">matlab.sparkutils.internal.yamlencode</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-filewriter">matlab.sparkutils.FileWriter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-filewriter">matlab.sparkutils.FileWriter.FileWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-addblockfromfile">matlab.sparkutils.FileWriter.addBlockFromFile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-addimport">matlab.sparkutils.FileWriter.addImport</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-addmethod">matlab.sparkutils.FileWriter.addMethod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-addpostclass">matlab.sparkutils.FileWriter.addPostClass</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-addvariable">matlab.sparkutils.FileWriter.addVariable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-escape">matlab.sparkutils.FileWriter.escape</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-getfilename">matlab.sparkutils.FileWriter.getFileName</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-ispython">matlab.sparkutils.FileWriter.isPython</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-lastpackagelevel">matlab.sparkutils.FileWriter.lastPackageLevel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-newmethod">matlab.sparkutils.FileWriter.newMethod</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-plainfilename">matlab.sparkutils.FileWriter.plainFileName</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-filewriter-writefile">matlab.sparkutils.FileWriter.writeFile</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-javawriter">matlab.sparkutils.JavaWriter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-javawriter-javawriter">matlab.sparkutils.JavaWriter.JavaWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-javawriter-addencoder">matlab.sparkutils.JavaWriter.addEncoder</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-javawriter-addvariable">matlab.sparkutils.JavaWriter.addVariable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-javawriter-delete">matlab.sparkutils.JavaWriter.delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-javawriter-getfilename">matlab.sparkutils.JavaWriter.getFileName</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-javawriter-getmcrfactoryname">matlab.sparkutils.JavaWriter.getMCRFactoryName</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-javawriter-writefile">matlab.sparkutils.JavaWriter.writeFile</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-matlabwriter">matlab.sparkutils.MATLABWriter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-matlabwriter-matlabwriter">matlab.sparkutils.MATLABWriter.MATLABWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-matlabwriter-addsubfun">matlab.sparkutils.MATLABWriter.addSubFun</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-matlabwriter-delete">matlab.sparkutils.MATLABWriter.delete</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-notebookwriter">matlab.sparkutils.NotebookWriter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-notebookwriter-notebookwriter">matlab.sparkutils.NotebookWriter.NotebookWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-notebookwriter-addheader">matlab.sparkutils.NotebookWriter.addHeader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-notebookwriter-comment">matlab.sparkutils.NotebookWriter.comment</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-notebookwriter-magic">matlab.sparkutils.NotebookWriter.magic</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-pythonwriter">matlab.sparkutils.PythonWriter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-pythonwriter-pythonwriter">matlab.sparkutils.PythonWriter.PythonWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-pythonwriter-addbulk">matlab.sparkutils.PythonWriter.addBulk</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-pythonwriter-delete">matlab.sparkutils.PythonWriter.delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-pythonwriter-getfilename">matlab.sparkutils.PythonWriter.getFileName</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-pythonwriter-writefile">matlab.sparkutils.PythonWriter.writeFile</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore">matlab.sparkutils.SparkDataframeDatastore</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-sparkdataframedatastore">matlab.sparkutils.SparkDataframeDatastore.SparkDataframeDatastore</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-hasdata">matlab.sparkutils.SparkDataframeDatastore.hasdata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-preview">matlab.sparkutils.SparkDataframeDatastore.preview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-progress">matlab.sparkutils.SparkDataframeDatastore.progress</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-read">matlab.sparkutils.SparkDataframeDatastore.read</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-reset">matlab.sparkutils.SparkDataframeDatastore.reset</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler">matlab.sparkutils.SparkSessionHandler</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-sparksessionhandler">matlab.sparkutils.SparkSessionHandler.SparkSessionHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-addsession">matlab.sparkutils.SparkSessionHandler.addSession</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-deleteonesession">matlab.sparkutils.SparkSessionHandler.deleteOneSession</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-deletesession">matlab.sparkutils.SparkSessionHandler.deleteSession</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-deletesessions">matlab.sparkutils.SparkSessionHandler.deleteSessions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-findsession">matlab.sparkutils.SparkSessionHandler.findSession</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-getsession">matlab.sparkutils.SparkSessionHandler.getSession</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-getsessionhandler">matlab.sparkutils.SparkSessionHandler.getSessionHandler</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-listsessions">matlab.sparkutils.SparkSessionHandler.listSessions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-stringwriter">matlab.sparkutils.StringWriter</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-stringwriter">matlab.sparkutils.StringWriter.StringWriter</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-closefile">matlab.sparkutils.StringWriter.closeFile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-delete">matlab.sparkutils.StringWriter.delete</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-getlines">matlab.sparkutils.StringWriter.getLines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-getprotectstring">matlab.sparkutils.StringWriter.getProtectString</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-getstring">matlab.sparkutils.StringWriter.getString</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-indent">matlab.sparkutils.StringWriter.indent</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-insertfile">matlab.sparkutils.StringWriter.insertFile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-insertlines">matlab.sparkutils.StringWriter.insertLines</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-nl">matlab.sparkutils.StringWriter.nl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-pf">matlab.sparkutils.StringWriter.pf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-tab">matlab.sparkutils.StringWriter.tab</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-sparkutils-stringwriter-unindent">matlab.sparkutils.StringWriter.unindent</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-datatypemapper">matlab.sparkutils.datatypeMapper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-getjavabuilderpath">matlab.sparkutils.getJavaBuilderPath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-getmatlabsparkutilityversion">matlab.sparkutils.getMatlabSparkUtilityVersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-isapachespark">matlab.sparkutils.isApacheSpark</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-sparkutils-table2dataset">matlab.sparkutils.table2dataset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#addfileprotocol">addFileProtocol</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assertuniformclass">assertUniformClass</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#createsparkschemafrommatlabtype">createSparkSchemaFromMatlabType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#findfilerecursively">findFileRecursively</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#generatefunctionschema">generateFunctionSchema</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getsparkapiroot">getSparkApiRoot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#getsparkenvironmenttype">getSparkEnvironmentType</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#isdatabricksenvironment">isDatabricksEnvironment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sparkapipackageversion">sparkApiPackageVersion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stripjavaerror">stripJavaError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#table2dataset">table2dataset</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/matlab-spark-api/MiscApiRef.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="matlab-interface-for-apache-spark-matlab-sparkutils-app-functions-api-reference">
+<h1>MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference<a class="headerlink" href="#matlab-interface-for-apache-spark-matlab-sparkutils-app-functions-api-reference" title="Link to this heading"></a></h1>
+<p>This document includes API reference information for the following namespaces or functions:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#matlab-sparkutils">matlab.sparkutils</a></p></li>
+<li><p>Software/MATLAB/app/functions/*.m</p></li>
+</ul>
+<p>Classes, methods and functions that include the terms <code class="docutils literal notranslate"><span class="pre">private</span></code> or <code class="docutils literal notranslate"><span class="pre">internal</span></code> in their namespace should not be used directly.
+They are subject to change or removal without notice.</p>
+<section id="index">
+<h2>Index<a class="headerlink" href="#index" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>MATLAB® Interface <em>for Apache® Spark™</em> (matlab.sparkutils &amp; app/functions)</p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils">matlab.sparkutils</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils-internal">matlab.sparkutils.internal</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils-internal-genexpressionencoders">matlab.sparkutils.internal.genExpressionEncoders</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-internal-hassparkenvironment">matlab.sparkutils.internal.hasSparkEnvironment</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-internal-yamldecode">matlab.sparkutils.internal.yamldecode</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-internal-yamlencode">matlab.sparkutils.internal.yamlencode</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter">matlab.sparkutils.FileWriter</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-filewriter">matlab.sparkutils.FileWriter.FileWriter</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-addblockfromfile">matlab.sparkutils.FileWriter.addBlockFromFile</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-addimport">matlab.sparkutils.FileWriter.addImport</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-addmethod">matlab.sparkutils.FileWriter.addMethod</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-addpostclass">matlab.sparkutils.FileWriter.addPostClass</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-addvariable">matlab.sparkutils.FileWriter.addVariable</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-escape">matlab.sparkutils.FileWriter.escape</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-getfilename">matlab.sparkutils.FileWriter.getFileName</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-ispython">matlab.sparkutils.FileWriter.isPython</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-lastpackagelevel">matlab.sparkutils.FileWriter.lastPackageLevel</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-newmethod">matlab.sparkutils.FileWriter.newMethod</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-plainfilename">matlab.sparkutils.FileWriter.plainFileName</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-filewriter-writefile">matlab.sparkutils.FileWriter.writeFile</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-javawriter">matlab.sparkutils.JavaWriter</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils-javawriter-javawriter">matlab.sparkutils.JavaWriter.JavaWriter</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-javawriter-addencoder">matlab.sparkutils.JavaWriter.addEncoder</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-javawriter-addvariable">matlab.sparkutils.JavaWriter.addVariable</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-javawriter-delete">matlab.sparkutils.JavaWriter.delete</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-javawriter-getfilename">matlab.sparkutils.JavaWriter.getFileName</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-javawriter-getmcrfactoryname">matlab.sparkutils.JavaWriter.getMCRFactoryName</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-javawriter-writefile">matlab.sparkutils.JavaWriter.writeFile</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-matlabwriter">matlab.sparkutils.MATLABWriter</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils-matlabwriter-matlabwriter">matlab.sparkutils.MATLABWriter.MATLABWriter</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-matlabwriter-addsubfun">matlab.sparkutils.MATLABWriter.addSubFun</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-matlabwriter-delete">matlab.sparkutils.MATLABWriter.delete</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-notebookwriter">matlab.sparkutils.NotebookWriter</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils-notebookwriter-notebookwriter">matlab.sparkutils.NotebookWriter.NotebookWriter</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-notebookwriter-addheader">matlab.sparkutils.NotebookWriter.addHeader</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-notebookwriter-comment">matlab.sparkutils.NotebookWriter.comment</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-notebookwriter-magic">matlab.sparkutils.NotebookWriter.magic</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-pythonwriter">matlab.sparkutils.PythonWriter</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils-pythonwriter-pythonwriter">matlab.sparkutils.PythonWriter.PythonWriter</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-pythonwriter-addbulk">matlab.sparkutils.PythonWriter.addBulk</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-pythonwriter-delete">matlab.sparkutils.PythonWriter.delete</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-pythonwriter-getfilename">matlab.sparkutils.PythonWriter.getFileName</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-pythonwriter-writefile">matlab.sparkutils.PythonWriter.writeFile</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore">matlab.sparkutils.SparkDataframeDatastore</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-sparkdataframedatastore">matlab.sparkutils.SparkDataframeDatastore.SparkDataframeDatastore</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-hasdata">matlab.sparkutils.SparkDataframeDatastore.hasdata</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-preview">matlab.sparkutils.SparkDataframeDatastore.preview</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-progress">matlab.sparkutils.SparkDataframeDatastore.progress</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-read">matlab.sparkutils.SparkDataframeDatastore.read</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparkdataframedatastore-reset">matlab.sparkutils.SparkDataframeDatastore.reset</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler">matlab.sparkutils.SparkSessionHandler</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-sparksessionhandler">matlab.sparkutils.SparkSessionHandler.SparkSessionHandler</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-addsession">matlab.sparkutils.SparkSessionHandler.addSession</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-deleteonesession">matlab.sparkutils.SparkSessionHandler.deleteOneSession</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-deletesession">matlab.sparkutils.SparkSessionHandler.deleteSession</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-deletesessions">matlab.sparkutils.SparkSessionHandler.deleteSessions</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-findsession">matlab.sparkutils.SparkSessionHandler.findSession</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-getsession">matlab.sparkutils.SparkSessionHandler.getSession</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-getsessionhandler">matlab.sparkutils.SparkSessionHandler.getSessionHandler</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-sparksessionhandler-listsessions">matlab.sparkutils.SparkSessionHandler.listSessions</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter">matlab.sparkutils.StringWriter</a></p>
+<ul>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-stringwriter">matlab.sparkutils.StringWriter.StringWriter</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-closefile">matlab.sparkutils.StringWriter.closeFile</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-delete">matlab.sparkutils.StringWriter.delete</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-getlines">matlab.sparkutils.StringWriter.getLines</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-getprotectstring">matlab.sparkutils.StringWriter.getProtectString</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-getstring">matlab.sparkutils.StringWriter.getString</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-indent">matlab.sparkutils.StringWriter.indent</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-insertfile">matlab.sparkutils.StringWriter.insertFile</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-insertlines">matlab.sparkutils.StringWriter.insertLines</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-nl">matlab.sparkutils.StringWriter.nl</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-pf">matlab.sparkutils.StringWriter.pf</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-tab">matlab.sparkutils.StringWriter.tab</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-stringwriter-unindent">matlab.sparkutils.StringWriter.unindent</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-datatypemapper">matlab.sparkutils.datatypeMapper</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-getjavabuilderpath">matlab.sparkutils.getJavaBuilderPath</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-getmatlabsparkutilityversion">matlab.sparkutils.getMatlabSparkUtilityVersion</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-isapachespark">matlab.sparkutils.isApacheSpark</a></p></li>
+<li><p><a class="reference internal" href="#matlab-sparkutils-table2dataset">matlab.sparkutils.table2dataset</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#addfileprotocol">addFileProtocol</a></p></li>
+<li><p><a class="reference internal" href="#assertuniformclass">assertUniformClass</a></p></li>
+<li><p><a class="reference internal" href="#createsparkschemafrommatlabtype">createSparkSchemaFromMatlabType</a></p></li>
+<li><p><a class="reference internal" href="#findfilerecursively">findFileRecursively</a></p></li>
+<li><p><a class="reference internal" href="#generatefunctionschema">generateFunctionSchema</a></p></li>
+<li><p><a class="reference internal" href="#getsparkapiroot">getSparkApiRoot</a></p></li>
+<li><p><a class="reference internal" href="#getsparkenvironmenttype">getSparkEnvironmentType</a></p></li>
+<li><p><a class="reference internal" href="#isdatabricksenvironment">isDatabricksEnvironment</a></p></li>
+<li><p><a class="reference internal" href="#sparkapipackageversion">sparkApiPackageVersion</a></p></li>
+<li><p><a class="reference internal" href="#stripjavaerror">stripJavaError</a></p></li>
+<li><p><a class="reference internal" href="#table2dataset">table2dataset</a></p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="help">
+<h2>Help<a class="headerlink" href="#help" title="Link to this heading"></a></h2>
+<section id="matlab-sparkutils">
+<h3>matlab.sparkutils<a class="headerlink" href="#matlab-sparkutils" title="Link to this heading"></a></h3>
+</section>
+<section id="matlab-sparkutils-internal">
+<h3>matlab.sparkutils.internal<a class="headerlink" href="#matlab-sparkutils-internal" title="Link to this heading"></a></h3>
+</section>
+<section id="matlab-sparkutils-internal-genexpressionencoders">
+<h3>matlab.sparkutils.internal.genExpressionEncoders<a class="headerlink" href="#matlab-sparkutils-internal-genexpressionencoders" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>genExpressionEncoders Generate expression encoders Scala code
+ 
+  Shipping Spark only supports up to 5 return arguments for a tuple.
+  This function generates additional code, to be inserted into
+  SparkUtilityHelper.scala, that will have more versions.
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-internal-hassparkenvironment">
+<h3>matlab.sparkutils.internal.hasSparkEnvironment<a class="headerlink" href="#matlab-sparkutils-internal-hassparkenvironment" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>hasSparkEnvironment Check if this is run in a Spark context
+ 
+  Many tests with the matlab-spark-api can only be performed when a
+  Spark Session can be created. This can be available with Apache
+  Spark, Databricks or other custom environments.
+ 
+  This function is used to decide to filter certain tests, to enable a
+  testing of the pure Spark package too. To make sure that a test class
+  only runs if a Spark session is available, add this lines as a first
+  line in the TestClassSetup method:
+ 
+    testCase.assumeTrue(matlab.sparkutils.internal.hasSparkEnvironment(), 'Ensure Spark Session is available');
+ 
+  If no Spark session is available (by this criteria), the test will
+  not fail, but will be marked as "Filtered out", or in the return
+  values of runtests as "Incomplete".
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-internal-yamldecode">
+<h3>matlab.sparkutils.internal.yamldecode<a class="headerlink" href="#matlab-sparkutils-internal-yamldecode" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>yamldecode Convert YAML to MATLAB data 
+ 
+  Converts YAML encoding to a MATLAB variable. The output can either be
+  returned or written to a file.
+ 
+  Examples:
+  Convert a YAML string
+ 
+   out = matlab.sparkutils.internal.yamldecode('string', 'a: [3, 4, ''hello'']')
+      out =
+        struct with fields:
+ 
+          a: {[3]  [4]  'hello'}
+ 
+  Convert from YAML in a file
+  out = matlab.sparkutils.internal.yamldecode('file', 'mini.yml')
+      out =
+        struct with fields:
+ 
+          a: [1x1 struct]
+          m: 'pancakes'
+ 
+  Not all MATLAB types are currently supported by this converter.
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-internal-yamlencode">
+<h3>matlab.sparkutils.internal.yamlencode<a class="headerlink" href="#matlab-sparkutils-internal-yamlencode" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>yamlencode Convert MATLAB variable to YAML
+ 
+  Converts a MATLAB variable to YAML encoding. The output can either be
+  returned or written to a file.
+ 
+  Examples:
+  Return YAML as a string
+ 
+   out = matlab.sparkutils.internal.yamlencode(struct('a', pi, 'b', 'Hello'), 'string')
+      out =
+          'a: 3.1415926535897931
+           b: Hello'
+ 
+  Write YAML to a file
+  matlab.sparkutils.internal.yamlencode(struct('a', pi, 'b', 'Hello'), 'file', 'myfile.yaml')
+ 
+  Not all MATLAB types are currently supported by this converter.
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter">
+<h3>matlab.sparkutils.FileWriter<a class="headerlink" href="#matlab-sparkutils-filewriter" title="Link to this heading"></a></h3>
+<p>Superclass: handle</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FileWriter - Helper class for creating a File
+  
+  This is inherited in two other classes, JavaWriter and PythonWriter.
+ 
+  These are not generic utilities, but targeted at the needs of this project.
+</pre></div>
+</div>
+<section id="matlab-sparkutils-filewriter-filewriter">
+<h4>matlab.sparkutils.FileWriter.FileWriter<a class="headerlink" href="#matlab-sparkutils-filewriter-filewriter" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FileWriter - Helper class for creating a File
+  
+  This is inherited in two other classes, JavaWriter and PythonWriter.
+ 
+  These are not generic utilities, but targeted at the needs of this project.
+
+    Documentation for matlab.sparkutils.FileWriter
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-addblockfromfile">
+<h4>matlab.sparkutils.FileWriter.addBlockFromFile<a class="headerlink" href="#matlab-sparkutils-filewriter-addblockfromfile" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.FileWriter/addBlockFromFile is a function.
+    addBlockFromFile(obj, fileName)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-addimport">
+<h4>matlab.sparkutils.FileWriter.addImport<a class="headerlink" href="#matlab-sparkutils-filewriter-addimport" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>addImport Adds an import string
+  addImport("my.fine.Class")
+  will produce the line
+  import my.fine.Class;
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-addmethod">
+<h4>matlab.sparkutils.FileWriter.addMethod<a class="headerlink" href="#matlab-sparkutils-filewriter-addmethod" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.FileWriter/addMethod is a function.
+    addMethod(obj, str, atStart)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-addpostclass">
+<h4>matlab.sparkutils.FileWriter.addPostClass<a class="headerlink" href="#matlab-sparkutils-filewriter-addpostclass" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.FileWriter/addPostClass is a function.
+    addPostClass(obj, str)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-addvariable">
+<h4>matlab.sparkutils.FileWriter.addVariable<a class="headerlink" href="#matlab-sparkutils-filewriter-addvariable" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>addVariable Adds a member variable to the class
+  JW.addVariable("public int num");
+  printf arguments can also be used, i.e.
+  JW.addVariable("public %s %s", typeName, memberName);
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-escape">
+<h4>matlab.sparkutils.FileWriter.escape<a class="headerlink" href="#matlab-sparkutils-filewriter-escape" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.FileWriter/escape is a function.
+    str = escape(~, str)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-getfilename">
+<h4>matlab.sparkutils.FileWriter.getFileName<a class="headerlink" href="#matlab-sparkutils-filewriter-getfilename" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.FileWriter/getFileName is a function.
+    obj = matlab.sparkutils.FileWriter
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-ispython">
+<h4>matlab.sparkutils.FileWriter.isPython<a class="headerlink" href="#matlab-sparkutils-filewriter-ispython" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.FileWriter/isPython is a function.
+    ret = isPython(obj)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-lastpackagelevel">
+<h4>matlab.sparkutils.FileWriter.lastPackageLevel<a class="headerlink" href="#matlab-sparkutils-filewriter-lastpackagelevel" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.FileWriter/lastPackageLevel is a function.
+    name = lastPackageLevel(obj)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-newmethod">
+<h4>matlab.sparkutils.FileWriter.newMethod<a class="headerlink" href="#matlab-sparkutils-filewriter-newmethod" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>newMethod Return a StringWriter for a method
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-plainfilename">
+<h4>matlab.sparkutils.FileWriter.plainFileName<a class="headerlink" href="#matlab-sparkutils-filewriter-plainfilename" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.FileWriter/plainFileName is a function.
+    pfn = plainFileName(obj)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-filewriter-writefile">
+<h4>matlab.sparkutils.FileWriter.writeFile<a class="headerlink" href="#matlab-sparkutils-filewriter-writefile" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.FileWriter/writeFile is a function.
+    obj = matlab.sparkutils.FileWriter
+</pre></div>
+</div>
+</section>
+</section>
+<section id="matlab-sparkutils-javawriter">
+<h3>matlab.sparkutils.JavaWriter<a class="headerlink" href="#matlab-sparkutils-javawriter" title="Link to this heading"></a></h3>
+<p>Superclass: matlab.sparkutils.FileWriter</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>JavaWriter - Helper class for creating a Java file
+</pre></div>
+</div>
+<section id="matlab-sparkutils-javawriter-javawriter">
+<h4>matlab.sparkutils.JavaWriter.JavaWriter<a class="headerlink" href="#matlab-sparkutils-javawriter-javawriter" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>JavaWriter - Helper class for creating a Java file
+
+    Documentation for matlab.sparkutils.JavaWriter
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-javawriter-addencoder">
+<h4>matlab.sparkutils.JavaWriter.addEncoder<a class="headerlink" href="#matlab-sparkutils-javawriter-addencoder" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>addEncoder Adds an encoder. 
+ 
+  The encoder info is created by a method in the File class,
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-javawriter-addvariable">
+<h4>matlab.sparkutils.JavaWriter.addVariable<a class="headerlink" href="#matlab-sparkutils-javawriter-addvariable" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>addVariable Adds a member variable to the class
+  JW.addVariable("public int num");
+  printf arguments can also be used, i.e.
+  JW.addVariable("public %s %s", typeName, memberName);
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-javawriter-delete">
+<h4>matlab.sparkutils.JavaWriter.delete<a class="headerlink" href="#matlab-sparkutils-javawriter-delete" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>delete - files or objects
+
+    &lt;strong&gt;Syntax&lt;/strong&gt;
+      delete filename
+      delete filename1 ... filenameN
+      delete(___,ResolveSymbolicLinks=tf)
+      delete(obj)
+
+    &lt;strong&gt;Input Arguments&lt;/strong&gt;
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#f71-847380-filename"&gt;filename&lt;/a&gt; - Name of file to delete
+        string array | character vector | cell array of character vectors
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#f71-847380-h"&gt;obj&lt;/a&gt; - Object
+        single object | array of objects
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#mw_5b772dbd-a426-4b57-8167-1077a1b02460"&gt;tf&lt;/a&gt; - Remove target of symbolic link
+        false or 0 (default) | true or 1
+
+    &lt;strong&gt;Examples&lt;/strong&gt;
+      &lt;a href="matlab:openExample('matlab/DeleteFilesInFolderExample')"&gt;Delete Files in Folder&lt;/a&gt;
+      &lt;a href="matlab:openExample('matlab/DeleteGraphicsObjectsExample')"&gt;Delete Graphics Objects&lt;/a&gt;
+
+    &lt;strong&gt;See also&lt;/strong&gt; &lt;a href="matlab:help clear -displayBanner"&gt;clear&lt;/a&gt;, &lt;a href="matlab:help dir -displayBanner"&gt;dir&lt;/a&gt;, &lt;a href="matlab:help recycle -displayBanner"&gt;recycle&lt;/a&gt;, &lt;a href="matlab:help rmdir -displayBanner"&gt;rmdir&lt;/a&gt;, &lt;a href="matlab:help handle.delete -displayBanner"&gt;delete&lt;/a&gt;
+
+    Introduced in MATLAB before R2006a
+    &lt;a href="matlab:doc delete"&gt;Documentation for delete&lt;/a&gt;
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-javawriter-getfilename">
+<h4>matlab.sparkutils.JavaWriter.getFileName<a class="headerlink" href="#matlab-sparkutils-javawriter-getfilename" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.JavaWriter/getFileName is a function.
+    fileName = getFileName(obj)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-javawriter-getmcrfactoryname">
+<h4>matlab.sparkutils.JavaWriter.getMCRFactoryName<a class="headerlink" href="#matlab-sparkutils-javawriter-getmcrfactoryname" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.JavaWriter/getMCRFactoryName is a function.
+    name = getMCRFactoryName(obj)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-javawriter-writefile">
+<h4>matlab.sparkutils.JavaWriter.writeFile<a class="headerlink" href="#matlab-sparkutils-javawriter-writefile" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.JavaWriter/writeFile is a function.
+    writeFile(obj)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="matlab-sparkutils-matlabwriter">
+<h3>matlab.sparkutils.MATLABWriter<a class="headerlink" href="#matlab-sparkutils-matlabwriter" title="Link to this heading"></a></h3>
+<p>Superclass: matlab.sparkutils.StringWriter</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MATLABWriter A class for writing a MATLAB function
+ 
+  This function is based on the general StringWriter class, but has some
+  additional methods for handling sub-functions in consistent manner.
+</pre></div>
+</div>
+<section id="matlab-sparkutils-matlabwriter-matlabwriter">
+<h4>matlab.sparkutils.MATLABWriter.MATLABWriter<a class="headerlink" href="#matlab-sparkutils-matlabwriter-matlabwriter" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>MATLABWriter A class for writing a MATLAB function
+ 
+  This function is based on the general StringWriter class, but has some
+  additional methods for handling sub-functions in consistent manner.
+
+    Documentation for matlab.sparkutils.MATLABWriter
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-matlabwriter-addsubfun">
+<h4>matlab.sparkutils.MATLABWriter.addSubFun<a class="headerlink" href="#matlab-sparkutils-matlabwriter-addsubfun" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.MATLABWriter/addSubFun is a function.
+    addSubFun(obj, subfun)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-matlabwriter-delete">
+<h4>matlab.sparkutils.MATLABWriter.delete<a class="headerlink" href="#matlab-sparkutils-matlabwriter-delete" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>delete - files or objects
+
+    &lt;strong&gt;Syntax&lt;/strong&gt;
+      delete filename
+      delete filename1 ... filenameN
+      delete(___,ResolveSymbolicLinks=tf)
+      delete(obj)
+
+    &lt;strong&gt;Input Arguments&lt;/strong&gt;
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#f71-847380-filename"&gt;filename&lt;/a&gt; - Name of file to delete
+        string array | character vector | cell array of character vectors
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#f71-847380-h"&gt;obj&lt;/a&gt; - Object
+        single object | array of objects
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#mw_5b772dbd-a426-4b57-8167-1077a1b02460"&gt;tf&lt;/a&gt; - Remove target of symbolic link
+        false or 0 (default) | true or 1
+
+    &lt;strong&gt;Examples&lt;/strong&gt;
+      &lt;a href="matlab:openExample('matlab/DeleteFilesInFolderExample')"&gt;Delete Files in Folder&lt;/a&gt;
+      &lt;a href="matlab:openExample('matlab/DeleteGraphicsObjectsExample')"&gt;Delete Graphics Objects&lt;/a&gt;
+
+    &lt;strong&gt;See also&lt;/strong&gt; &lt;a href="matlab:help clear -displayBanner"&gt;clear&lt;/a&gt;, &lt;a href="matlab:help dir -displayBanner"&gt;dir&lt;/a&gt;, &lt;a href="matlab:help recycle -displayBanner"&gt;recycle&lt;/a&gt;, &lt;a href="matlab:help rmdir -displayBanner"&gt;rmdir&lt;/a&gt;, &lt;a href="matlab:help handle.delete -displayBanner"&gt;delete&lt;/a&gt;
+
+    Introduced in MATLAB before R2006a
+    &lt;a href="matlab:doc delete"&gt;Documentation for delete&lt;/a&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="matlab-sparkutils-notebookwriter">
+<h3>matlab.sparkutils.NotebookWriter<a class="headerlink" href="#matlab-sparkutils-notebookwriter" title="Link to this heading"></a></h3>
+<p>Superclass: matlab.sparkutils.StringWriter</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>NotebookWriter - Helper class for writing Databricks Notebooks
+</pre></div>
+</div>
+<section id="matlab-sparkutils-notebookwriter-notebookwriter">
+<h4>matlab.sparkutils.NotebookWriter.NotebookWriter<a class="headerlink" href="#matlab-sparkutils-notebookwriter-notebookwriter" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>NotebookWriter - Helper class for writing Databricks Notebooks
+
+    Documentation for matlab.sparkutils.NotebookWriter
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-notebookwriter-addheader">
+<h4>matlab.sparkutils.NotebookWriter.addHeader<a class="headerlink" href="#matlab-sparkutils-notebookwriter-addheader" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.NotebookWriter/addHeader is a function.
+    addHeader(obj, sectionTitle)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-notebookwriter-comment">
+<h4>matlab.sparkutils.NotebookWriter.comment<a class="headerlink" href="#matlab-sparkutils-notebookwriter-comment" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.NotebookWriter/comment is a function.
+    comment(obj, commentStr, varargin)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-notebookwriter-magic">
+<h4>matlab.sparkutils.NotebookWriter.magic<a class="headerlink" href="#matlab-sparkutils-notebookwriter-magic" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>magic - square
+
+    &lt;strong&gt;Syntax&lt;/strong&gt;
+      M = magic(n)
+
+    &lt;strong&gt;Input Arguments&lt;/strong&gt;
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/magic.html#d127e1053460"&gt;n&lt;/a&gt; - Matrix order
+        scalar integer
+
+    &lt;strong&gt;Examples&lt;/strong&gt;
+      &lt;a href="matlab:openExample('matlab/ThirdOrderMagicSquareExample')"&gt;Third-Order Magic Square&lt;/a&gt;
+      &lt;a href="matlab:openExample('matlab/MagicSquareExample')"&gt;Magic Square Visualization&lt;/a&gt;
+
+    &lt;strong&gt;See also&lt;/strong&gt; &lt;a href="matlab:help ones -displayBanner"&gt;ones&lt;/a&gt;, &lt;a href="matlab:help rand -displayBanner"&gt;rand&lt;/a&gt;
+
+    Introduced in MATLAB before R2006a
+    &lt;a href="matlab:doc magic"&gt;Documentation for magic&lt;/a&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="matlab-sparkutils-pythonwriter">
+<h3>matlab.sparkutils.PythonWriter<a class="headerlink" href="#matlab-sparkutils-pythonwriter" title="Link to this heading"></a></h3>
+<p>Superclass: matlab.sparkutils.FileWriter</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>PythonWriter A class for writing a Python file
+ 
+  This function is based on the general StringWriter class, but has some
+  additional methods for handling sub-functions in consistent manner.
+</pre></div>
+</div>
+<section id="matlab-sparkutils-pythonwriter-pythonwriter">
+<h4>matlab.sparkutils.PythonWriter.PythonWriter<a class="headerlink" href="#matlab-sparkutils-pythonwriter-pythonwriter" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>PythonWriter A class for writing a Python file
+ 
+  This function is based on the general StringWriter class, but has some
+  additional methods for handling sub-functions in consistent manner.
+
+    Documentation for matlab.sparkutils.PythonWriter
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-pythonwriter-addbulk">
+<h4>matlab.sparkutils.PythonWriter.addBulk<a class="headerlink" href="#matlab-sparkutils-pythonwriter-addbulk" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.PythonWriter/addBulk is a function.
+    addBulk(obj, bulk)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-pythonwriter-delete">
+<h4>matlab.sparkutils.PythonWriter.delete<a class="headerlink" href="#matlab-sparkutils-pythonwriter-delete" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>delete - files or objects
+
+    &lt;strong&gt;Syntax&lt;/strong&gt;
+      delete filename
+      delete filename1 ... filenameN
+      delete(___,ResolveSymbolicLinks=tf)
+      delete(obj)
+
+    &lt;strong&gt;Input Arguments&lt;/strong&gt;
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#f71-847380-filename"&gt;filename&lt;/a&gt; - Name of file to delete
+        string array | character vector | cell array of character vectors
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#f71-847380-h"&gt;obj&lt;/a&gt; - Object
+        single object | array of objects
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#mw_5b772dbd-a426-4b57-8167-1077a1b02460"&gt;tf&lt;/a&gt; - Remove target of symbolic link
+        false or 0 (default) | true or 1
+
+    &lt;strong&gt;Examples&lt;/strong&gt;
+      &lt;a href="matlab:openExample('matlab/DeleteFilesInFolderExample')"&gt;Delete Files in Folder&lt;/a&gt;
+      &lt;a href="matlab:openExample('matlab/DeleteGraphicsObjectsExample')"&gt;Delete Graphics Objects&lt;/a&gt;
+
+    &lt;strong&gt;See also&lt;/strong&gt; &lt;a href="matlab:help clear -displayBanner"&gt;clear&lt;/a&gt;, &lt;a href="matlab:help dir -displayBanner"&gt;dir&lt;/a&gt;, &lt;a href="matlab:help recycle -displayBanner"&gt;recycle&lt;/a&gt;, &lt;a href="matlab:help rmdir -displayBanner"&gt;rmdir&lt;/a&gt;, &lt;a href="matlab:help handle.delete -displayBanner"&gt;delete&lt;/a&gt;
+
+    Introduced in MATLAB before R2006a
+    &lt;a href="matlab:doc delete"&gt;Documentation for delete&lt;/a&gt;
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-pythonwriter-getfilename">
+<h4>matlab.sparkutils.PythonWriter.getFileName<a class="headerlink" href="#matlab-sparkutils-pythonwriter-getfilename" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.PythonWriter/getFileName is a function.
+    fileName = getFileName(obj)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-pythonwriter-writefile">
+<h4>matlab.sparkutils.PythonWriter.writeFile<a class="headerlink" href="#matlab-sparkutils-pythonwriter-writefile" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.PythonWriter/writeFile is a function.
+    writeFile(obj)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="matlab-sparkutils-sparkdataframedatastore">
+<h3>matlab.sparkutils.SparkDataframeDatastore<a class="headerlink" href="#matlab-sparkutils-sparkdataframedatastore" title="Link to this heading"></a></h3>
+<p>Superclass: matlab.io.Datastore</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>SparkDataframeDatastore Class to help build the javaclasspath necessary for Spark
+</pre></div>
+</div>
+<section id="matlab-sparkutils-sparkdataframedatastore-sparkdataframedatastore">
+<h4>matlab.sparkutils.SparkDataframeDatastore.SparkDataframeDatastore<a class="headerlink" href="#matlab-sparkutils-sparkdataframedatastore-sparkdataframedatastore" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>SparkDataframeDatastore Class to help build the javaclasspath necessary for Spark
+
+    Documentation for matlab.sparkutils.SparkDataframeDatastore
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparkdataframedatastore-hasdata">
+<h4>matlab.sparkutils.SparkDataframeDatastore.hasdata<a class="headerlink" href="#matlab-sparkutils-sparkdataframedatastore-hasdata" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>HASDATA   Returns true if more data is available.
+    Return logical scalar indicating availability of data. This
+    method should be called before calling read. This is an
+    abstract method and must be implemented by the subclasses.
+    hasdata is used in conjunction with read to read all the data
+    within the datastore. Following is an example usage:
+ 
+    ds = myDatastore(...);
+    while hasdata(ds)
+        [data, info] = read(ds);
+    end
+ 
+    % reset to read from start of the data
+    reset(ds);
+    [data, info] = read(ds);
+ 
+    See also matlab.sparkutils.SparkDataframeDatastore, read, reset, readall, preview,
+    progress.
+
+Help for matlab.sparkutils.SparkDataframeDatastore/hasdata is inherited from superclass matlab.io.Datastore
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparkdataframedatastore-preview">
+<h4>matlab.sparkutils.SparkDataframeDatastore.preview<a class="headerlink" href="#matlab-sparkutils-sparkdataframedatastore-preview" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>PREVIEW   Preview the data contained in the datastore.
+    Returns a small amount of data from the start of the datastore.
+    This is the default implementation of the preview method,
+    subclasses can implement an efficient version of this method
+    by returning a smaller subset of the data directly from the
+    read method. Subclasses should also consider implementing a
+    more efficient version of this method for improved tall
+    array construction performance. The datatype of the output
+    should be the same as that of the read method. In the
+    provided default implementation, a copy of the datastore is
+    first reset. The read method is called on this copied
+    datastore. The first 8 rows in the output from the read
+    method call are returned as output of the preview method.
+ 
+    See also matlab.io.Datastore, read, hasdata, reset, readall,
+    progress.
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparkdataframedatastore-progress">
+<h4>matlab.sparkutils.SparkDataframeDatastore.progress<a class="headerlink" href="#matlab-sparkutils-sparkdataframedatastore-progress" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Determine percentage of data read from datastore
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparkdataframedatastore-read">
+<h4>matlab.sparkutils.SparkDataframeDatastore.read<a class="headerlink" href="#matlab-sparkutils-sparkdataframedatastore-read" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>READ   Read data and information about the extracted data.
+    Return the data extracted from the datastore in the
+    appropriate form for this datastore. Also return
+    information about where the data was extracted from in
+    the datastore. Both the outputs are required to be
+    returned from the read method, and can be of any type.
+    info is recommended to be a struct with information
+    about the chunk of data read. data represents the
+    underlying class of tall, if tall is created on top of
+    this datastore. This is an abstract method and must be
+    implemented by the subclasses.
+ 
+    See also matlab.sparkutils.SparkDataframeDatastore, hasdata, reset, readall, preview,
+    progress.
+
+Help for matlab.sparkutils.SparkDataframeDatastore/read is inherited from superclass matlab.io.Datastore
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparkdataframedatastore-reset">
+<h4>matlab.sparkutils.SparkDataframeDatastore.reset<a class="headerlink" href="#matlab-sparkutils-sparkdataframedatastore-reset" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>RESET   Reset to the start of the data.
+    Reset the datastore to the state where no data has been
+    read from it. This is an abstract method and must be
+    implemented by the subclasses.
+    In the provided example, the datastore is reset to point to the
+    first file (and first partition) in the datastore.
+ 
+    See also matlab.sparkutils.SparkDataframeDatastore, read, hasdata, readall, preview,
+    progress.
+
+Help for matlab.sparkutils.SparkDataframeDatastore/reset is inherited from superclass matlab.io.Datastore
+</pre></div>
+</div>
+</section>
+</section>
+<section id="matlab-sparkutils-sparksessionhandler">
+<h3>matlab.sparkutils.SparkSessionHandler<a class="headerlink" href="#matlab-sparkutils-sparksessionhandler" title="Link to this heading"></a></h3>
+<p>Superclass: handle</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>SparkSessionHandler Class to handle Spark sessions
+ 
+  This class will make it easier to reuse different Spark sessions,
+  without always recreating them.
+</pre></div>
+</div>
+<section id="matlab-sparkutils-sparksessionhandler-sparksessionhandler">
+<h4>matlab.sparkutils.SparkSessionHandler.SparkSessionHandler<a class="headerlink" href="#matlab-sparkutils-sparksessionhandler-sparksessionhandler" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>SparkSessionHandler Class to handle Spark sessions
+ 
+  This class will make it easier to reuse different Spark sessions,
+  without always recreating them.
+
+    Documentation for matlab.sparkutils.SparkSessionHandler
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparksessionhandler-addsession">
+<h4>matlab.sparkutils.SparkSessionHandler.addSession<a class="headerlink" href="#matlab-sparkutils-sparksessionhandler-addsession" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.SparkSessionHandler/addSession is a function.
+    idx = addSession(obj, sparkMaster, sparkSession)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparksessionhandler-deleteonesession">
+<h4>matlab.sparkutils.SparkSessionHandler.deleteOneSession<a class="headerlink" href="#matlab-sparkutils-sparksessionhandler-deleteonesession" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.SparkSessionHandler/deleteOneSession is a function.
+    deleteOneSession(obj, sparkMaster)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparksessionhandler-deletesession">
+<h4>matlab.sparkutils.SparkSessionHandler.deleteSession<a class="headerlink" href="#matlab-sparkutils-sparksessionhandler-deletesession" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.SparkSessionHandler.deleteSession is a function.
+    matlab.sparkutils.SparkSessionHandler.deleteSession(sparkMaster)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparksessionhandler-deletesessions">
+<h4>matlab.sparkutils.SparkSessionHandler.deleteSessions<a class="headerlink" href="#matlab-sparkutils-sparksessionhandler-deletesessions" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.SparkSessionHandler.deleteSessions is a function.
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparksessionhandler-findsession">
+<h4>matlab.sparkutils.SparkSessionHandler.findSession<a class="headerlink" href="#matlab-sparkutils-sparksessionhandler-findsession" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.SparkSessionHandler/findSession is a function.
+    idx = findSession(obj, sparkMaster)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparksessionhandler-getsession">
+<h4>matlab.sparkutils.SparkSessionHandler.getSession<a class="headerlink" href="#matlab-sparkutils-sparksessionhandler-getsession" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.SparkSessionHandler.getSession is a function.
+    spark = matlab.sparkutils.SparkSessionHandler.getSession(sparkMaster)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparksessionhandler-getsessionhandler">
+<h4>matlab.sparkutils.SparkSessionHandler.getSessionHandler<a class="headerlink" href="#matlab-sparkutils-sparksessionhandler-getsessionhandler" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.SparkSessionHandler.getSessionHandler is a function.
+    SH = matlab.sparkutils.SparkSessionHandler.getSessionHandler
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-sparksessionhandler-listsessions">
+<h4>matlab.sparkutils.SparkSessionHandler.listSessions<a class="headerlink" href="#matlab-sparkutils-sparksessionhandler-listsessions" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.SparkSessionHandler.listSessions is a function.
+    sessions = matlab.sparkutils.SparkSessionHandler.listSessions
+</pre></div>
+</div>
+</section>
+</section>
+<section id="matlab-sparkutils-stringwriter">
+<h3>matlab.sparkutils.StringWriter<a class="headerlink" href="#matlab-sparkutils-stringwriter" title="Link to this heading"></a></h3>
+<p>Superclass: handle</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>StringWriter - Helper class for writing to files or temporary strings
+</pre></div>
+</div>
+<section id="matlab-sparkutils-stringwriter-stringwriter">
+<h4>matlab.sparkutils.StringWriter.StringWriter<a class="headerlink" href="#matlab-sparkutils-stringwriter-stringwriter" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>StringWriter - Helper class for writing to files or temporary strings
+
+    Documentation for matlab.sparkutils.StringWriter
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-closefile">
+<h4>matlab.sparkutils.StringWriter.closeFile<a class="headerlink" href="#matlab-sparkutils-stringwriter-closefile" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.StringWriter/closeFile is a function.
+    closeFile(this)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-delete">
+<h4>matlab.sparkutils.StringWriter.delete<a class="headerlink" href="#matlab-sparkutils-stringwriter-delete" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>delete - files or objects
+
+    &lt;strong&gt;Syntax&lt;/strong&gt;
+      delete filename
+      delete filename1 ... filenameN
+      delete(___,ResolveSymbolicLinks=tf)
+      delete(obj)
+
+    &lt;strong&gt;Input Arguments&lt;/strong&gt;
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#f71-847380-filename"&gt;filename&lt;/a&gt; - Name of file to delete
+        string array | character vector | cell array of character vectors
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#f71-847380-h"&gt;obj&lt;/a&gt; - Object
+        single object | array of objects
+      &lt;a href="matlab:web /usr/local/MATLAB/R2026a/help/matlab/ref/delete.html#mw_5b772dbd-a426-4b57-8167-1077a1b02460"&gt;tf&lt;/a&gt; - Remove target of symbolic link
+        false or 0 (default) | true or 1
+
+    &lt;strong&gt;Examples&lt;/strong&gt;
+      &lt;a href="matlab:openExample('matlab/DeleteFilesInFolderExample')"&gt;Delete Files in Folder&lt;/a&gt;
+      &lt;a href="matlab:openExample('matlab/DeleteGraphicsObjectsExample')"&gt;Delete Graphics Objects&lt;/a&gt;
+
+    &lt;strong&gt;See also&lt;/strong&gt; &lt;a href="matlab:help clear -displayBanner"&gt;clear&lt;/a&gt;, &lt;a href="matlab:help dir -displayBanner"&gt;dir&lt;/a&gt;, &lt;a href="matlab:help recycle -displayBanner"&gt;recycle&lt;/a&gt;, &lt;a href="matlab:help rmdir -displayBanner"&gt;rmdir&lt;/a&gt;, &lt;a href="matlab:help handle.delete -displayBanner"&gt;delete&lt;/a&gt;
+
+    Introduced in MATLAB before R2006a
+    &lt;a href="matlab:doc delete"&gt;Documentation for delete&lt;/a&gt;
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-getlines">
+<h4>matlab.sparkutils.StringWriter.getLines<a class="headerlink" href="#matlab-sparkutils-stringwriter-getlines" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.StringWriter/getLines is a function.
+    lines = getLines(this)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-getprotectstring">
+<h4>matlab.sparkutils.StringWriter.getProtectString<a class="headerlink" href="#matlab-sparkutils-stringwriter-getprotectstring" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.StringWriter/getProtectString is a function.
+    str = getProtectString(this)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-getstring">
+<h4>matlab.sparkutils.StringWriter.getString<a class="headerlink" href="#matlab-sparkutils-stringwriter-getstring" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.StringWriter/getString is a function.
+    str = getString(this)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-indent">
+<h4>matlab.sparkutils.StringWriter.indent<a class="headerlink" href="#matlab-sparkutils-stringwriter-indent" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.StringWriter/indent is a function.
+    indent(this)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-insertfile">
+<h4>matlab.sparkutils.StringWriter.insertFile<a class="headerlink" href="#matlab-sparkutils-stringwriter-insertfile" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.StringWriter/insertFile is a function.
+    insertFile(this, fileName)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-insertlines">
+<h4>matlab.sparkutils.StringWriter.insertLines<a class="headerlink" href="#matlab-sparkutils-stringwriter-insertlines" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>insertLines Splits on \n and inserts lines
+  The strings argument can be one or more actual strings
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-nl">
+<h4>matlab.sparkutils.StringWriter.nl<a class="headerlink" href="#matlab-sparkutils-stringwriter-nl" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.StringWriter/nl is a function.
+    nl(this)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-pf">
+<h4>matlab.sparkutils.StringWriter.pf<a class="headerlink" href="#matlab-sparkutils-stringwriter-pf" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Short-hand for printf
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-tab">
+<h4>matlab.sparkutils.StringWriter.tab<a class="headerlink" href="#matlab-sparkutils-stringwriter-tab" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.StringWriter/tab is a function.
+    tab(this, num)
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-stringwriter-unindent">
+<h4>matlab.sparkutils.StringWriter.unindent<a class="headerlink" href="#matlab-sparkutils-stringwriter-unindent" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matlab.sparkutils.StringWriter/unindent is a function.
+    unindent(this)
+</pre></div>
+</div>
+</section>
+</section>
+<section id="matlab-sparkutils-datatypemapper">
+<h3>matlab.sparkutils.datatypeMapper<a class="headerlink" href="#matlab-sparkutils-datatypemapper" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>datatypeMapper Do mappings of datatypes
+ 
+  This helps with mapping of datatypes between matlab, Java and Spark.
+  entry = matlab.sparkutils.datatypeMapper(from, name)
+  returns the types for matlab, java and spark (values for from) for
+  the datatype named 'name'.
+  entry = matlab.sparkutils.datatypeMapper('matlab', 'single')
+  entry =
+    struct with fields:
+ 
+      MATLABType: "single"
+        JavaType: "Float"
+       SparkType: "FloatType"
+  entry = matlab.sparkutils.datatypeMapper('java', 'String')
+  entry =
+    struct with fields:
+ 
+      MATLABType: "string"
+        JavaType: "String"
+       SparkType: "StringType"
+ 
+  Call without arguments to see what types are supported.
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-getjavabuilderpath">
+<h3>matlab.sparkutils.getJavaBuilderPath<a class="headerlink" href="#matlab-sparkutils-getjavabuilderpath" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>getJavaBuilderPath Return the MATLAB Runtime javabuilder.jar path
+  First try the MATLAB Java Builder toolbox dir, then check for a local runtime
+  Check MCRROOT env. var. then default paths
+  If the silent argument is set to logical true then an error will not be thrown
+  if the file cannot be found, the default is false, throw the error.
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-getmatlabsparkutilityversion">
+<h3>matlab.sparkutils.getMatlabSparkUtilityVersion<a class="headerlink" href="#matlab-sparkutils-getmatlabsparkutilityversion" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>getMatlabSparkUtilityVersion Retrieve version from pom-file
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-isapachespark">
+<h3>matlab.sparkutils.isApacheSpark<a class="headerlink" href="#matlab-sparkutils-isapachespark" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>isApacheSpark Returns true if this is 'normal Spark'
+ 
+  This function will return true for Apache Spark, and false otherwise.
+  The only other Spark supported currently is Databricks
+</pre></div>
+</div>
+</section>
+<section id="matlab-sparkutils-table2dataset">
+<h3>matlab.sparkutils.table2dataset<a class="headerlink" href="#matlab-sparkutils-table2dataset" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TABLE2DATASET Function to create Spark dataset from MATLAB table
+ 
+  It takes as arguments a MATLAB table, the spark session reference, and
+  an optional schema object, and converts the table into a Dataset object.
+ 
+  This function should be used for tests, not for large tables.
+ 
+  To use it, at least a table and a spark session are needed:
+ 
+    dataset = matlab.sparkutils.table2dataset(matlabTable, sparkSession);
+ 
+  When the optional third input argument (schema) is not provided, the
+  Column data types are automatically mapped as follows (also see the 
+  createSparkSchemaFromMatlabType in the functions folder):
+ 
+    MATLAB            Spark     Notes
+    ======            ======    =====
+    char              String    converting back to MATLAB results in string, not char
+    string            String    &lt;missing&gt; value interpreted as the String \0
+    double            Double
+    single            Float
+    int8              Byte
+    int16             Short
+    int32             Integer
+    int64             Long
+    logical           Boolean
+    struct            Struct
+    table             Struct    converting back to MATLAB results in struct, not table
+    containers.Map    Map
+    cell              WrappedArray
+    datetime          Timestamp
+    duration          CalendarInterval
+    (any other type)  *** NOT SUPPORTED ***
+ 
+  An optional third argument (schema) can also be specified. This is useful
+  when a schema object is already available, for example the schema of a
+  pre-existing Spark dataset.
+ 
+    dataset = spark.read.format("parquet").load("/my/files")
+    T = table(dataset);
+    T = runAlgorithm(T);
+    schema = dataset.schema;
+    dataset = matlab.sparkutils.table2dataset(matlabTable, sparkSession, schema);
+ 
+  The optional schema argument can also be specified as a cell-array of
+  chars or a string array, representing case-insensitive column data types.
+  Only the following basic data types are supported:
+ 
+    string or char, double, single or float, int8 or byte, int16 or short,
+    int32 or int or integer, int64 or long, logical or boolean, duration,
+    datetime or timestamp.
+ 
+  This list does not include complex data types such as struct, map,
+  or table. If your data contains such data types, either use the 2-inputs
+  variant of this function in order to auto-generate the schema, or use a
+  schema-object from a pre-existing dataset object.
+</pre></div>
+</div>
+</section>
+<section id="addfileprotocol">
+<h3>addFileProtocol<a class="headerlink" href="#addfileprotocol" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>addFileProtocol Add 'file://' to local paths for Unix
+ 
+  For Windows, this function doesn't change anything.
+ 
+  Example:
+  fn = '/my/file.csv'
+  fpfn = addFileProtocol(fn)
+  fpfn =
+      'file:///my/file.csv'
+  sn = "/tmp/another/file.parquet"
+  fpsn = addFileProtocol(sn)
+  fpsn = 
+      "file:///tmp/another/file.parquet"
+</pre></div>
+</div>
+</section>
+<section id="assertuniformclass">
+<h3>assertUniformClass<a class="headerlink" href="#assertuniformclass" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ASSERTUNIFORMCLASS Assert cell array elements are of same type
+ 
+  All elements of cell array must be of the same type
+  Example:
+   assertUniformClass('double', {3,4,5});
+   =&gt; Will work
+   assertUniformClass('double', {3,4,'hello'});
+   =&gt; Will throw an error
+</pre></div>
+</div>
+</section>
+<section id="createsparkschemafrommatlabtype">
+<h3>createSparkSchemaFromMatlabType<a class="headerlink" href="#createsparkschemafrommatlabtype" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>createSparkSchemaFromMatlabType Create StructType from value
+</pre></div>
+</div>
+</section>
+<section id="findfilerecursively">
+<h3>findFileRecursively<a class="headerlink" href="#findfilerecursively" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>findFileRecursively Search directories recursively for a file
+ 
+  filesFound = findFileRecursively(startDir, rxName)
+  will recursively search for a file with name 'rxName' in the
+  directory 'startDir'. The 'rxName' is a regular expression.
+</pre></div>
+</div>
+</section>
+<section id="generatefunctionschema">
+<h3>generateFunctionSchema<a class="headerlink" href="#generatefunctionschema" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>generateFunctionSchema Generate schema file for a function
+ 
+  This function creates a schema file that provides the SparkBuilder
+  with additional information when compiling functions that should run
+  on Spark clusters.
+ 
+  This function acts as a convenience functions for:
+    compiler.build.spark.schema.mathworks.generateFunctionSchema
+ 
+  For help see: compiler.build.spark.schema.mathworks.generateFunctionSchema
+</pre></div>
+</div>
+</section>
+<section id="getsparkapiroot">
+<h3>getSparkApiRoot<a class="headerlink" href="#getsparkapiroot" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>getSparkApiRoot Return root of MATLAB Spark API project
+  getSparkApiRoot alone will return the root for the MATLAB code in the
+  project.
+ 
+  getSparkApiRoot with additional arguments will add these to the path
+  
+   funDir = getSparkApiRoot('app', 'functions')
+ 
+   The special argument of a negative number will move up folders, e.g.
+   the following call will move up two folders, and then into
+   Documentation.
+ 
+   docDir = getSparkApiRoot(-2, 'Documentation')
+</pre></div>
+</div>
+</section>
+<section id="getsparkenvironmenttype">
+<h3>getSparkEnvironmentType<a class="headerlink" href="#getsparkenvironmenttype" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>getSparkEnvironmentType Get the environment type of Spark
+ 
+  Spark can be used in either 'Apache Spark' or 'Databricks'
+  environment. This function will return either "ApacheSpark" or
+  "Databricks", depending on what environment is currently used.
+</pre></div>
+</div>
+</section>
+<section id="isdatabricksenvironment">
+<h3>isDatabricksEnvironment<a class="headerlink" href="#isdatabricksenvironment" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>isDatabricksEnvironment Check if this is run in Databricks context
+ 
+  Spark can be used in either 'Apache Spark' or 'Databricks'
+  environment. This function will return either true if this is a
+  Databricks environment.
+</pre></div>
+</div>
+</section>
+<section id="sparkapipackageversion">
+<h3>sparkApiPackageVersion<a class="headerlink" href="#sparkapipackageversion" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>sparkApiPackageVersion Return version of the matlab-spark-api package
+</pre></div>
+</div>
+</section>
+<section id="stripjavaerror">
+<h3>stripJavaError<a class="headerlink" href="#stripjavaerror" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>stripJavaError Attempt to convert a stack trace into something prettier.
+  (adapted from sendmail.m)
+</pre></div>
+</div>
+</section>
+<section id="table2dataset">
+<h3>table2dataset<a class="headerlink" href="#table2dataset" title="Link to this heading"></a></h3>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>TABLE2DATASET Function to create Spark dataset from MATLAB table
+ 
+  For help, please refer to matlab.sparkutils.table2dataset
+</pre></div>
+</div>
+<hr class="docutils" />
+<p><strong>Copyright 2020-2026 The MathWorks Inc.</strong></p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="CompilerApiRef.html" class="btn btn-neutral float-left" title="MATLAB Interface for Apache Spark (compiler.build.spark) - API Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../matlab-mlflow/index.html" class="btn btn-neutral float-right" title="MATLAB Interface for MLflow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

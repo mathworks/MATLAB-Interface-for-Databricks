@@ -1,0 +1,27 @@
+{
+  "type": "compiler",
+  "funcname": "fValues_Arrays3",
+  "fullFilename": "/matlab-databricks/Modules/matlab-spark-api/Software/MATLAB/test/fixtures/fValues_Arrays3.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "in",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "string"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "out",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": {
+        "containsNull": true,
+        "elementType": "string",
+        "type": "array"
+      }
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "InTypes": [
+    [
+      "table",
+      [
+        ["int64", [1, 1], "id"],
+        ["datetime", [1, 1], "ts"]
+      ]
+    ]
+  ],
+  "OutTypes": [
+    [
+      "table",
+      [
+        ["int64", [1, 1], "id"],
+        ["datetime", [1, 1], "ts"],
+        ["string", [1, 10], "timez"]
+      ]
+    ]
+  ]
+}
