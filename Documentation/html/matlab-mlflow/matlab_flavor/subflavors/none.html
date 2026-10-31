@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>none sub flavor &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="compiler_sdk_python sub flavor" href="compiler_sdk_python.html" />
+    <link rel="prev" title="Usage" href="../Usage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">MATLAB Interface <em>for MLflow</em></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../InstallationPython.html">Installation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Fluent.html">Fluent MATLAB Interface for Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../FluentAPI.html">MLflow MATLAB Fluent API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../InstallationPython.html">Installation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Usage.html">Usage</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">none sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compiler_sdk_python.html">compiler_sdk_python sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="onnx.html">onnx sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../QuickStart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../Authentication.html">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../MLflowAPI.html">MATLAB Interface <em>for MLflow</em> - API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">MATLAB Interface <em>for MLflow</em></a></li>
+      <li class="breadcrumb-item active">none sub flavor</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/matlab-mlflow/matlab_flavor/subflavors/none.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="none-sub-flavor">
+<h1>none sub flavor<a class="headerlink" href="#none-sub-flavor" title="Link to this heading"></a></h1>
+<p>To save or log MATLAB/Simulink code and data into a MATLAB flavor MLflow model use <a class="reference internal" href="../Usage.html#mlflow.matlab.save_model" title="mlflow.matlab.save_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.matlab.save_model()</span></code></a> or <a class="reference internal" href="../Usage.html#mlflow.matlab.log_model" title="mlflow.matlab.log_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.matlab.log_model()</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">MATLABFiles</span></code> option. The option accepts a string array of separate files as well as directories. For example to save a model:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Save two specific files and an entire directory into a MATLAB flavor MLflow model.</span>
+<span class="c">% When saving also specify Path to indicate where to save the model</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">matlab</span><span class="p">.</span><span class="n">save_model</span><span class="p">(</span><span class="n">MATLABFiles</span><span class="p">=[</span><span class="s">"someFunction.m"</span><span class="p">,</span><span class="s">"/some/path/file.m"</span><span class="p">,</span><span class="s">"/some/directory"</span><span class="p">],</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="n">Path</span><span class="p">=</span><span class="s">"/work/models/myModel"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or to log a model:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% In order to log a model in a specific run in a specific experiment, first set an experiment</span>
+<span class="n">py</span><span class="p">.</span><span class="n">mlflow</span><span class="p">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s">"My MATLAB Experiment"</span><span class="p">)</span>
+<span class="c">% And start a run</span>
+<span class="n">py</span><span class="p">.</span><span class="n">mlflow</span><span class="p">.</span><span class="n">start_run</span><span class="p">()</span>
+<span class="c">% Then log the model, when logging a model, Path is not required</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">matlab</span><span class="p">.</span><span class="n">log_model</span><span class="p">(</span><span class="n">MATLABFiles</span><span class="p">=[</span><span class="s">"someFunction.m"</span><span class="p">,</span><span class="s">"/some/path/file.m"</span><span class="p">,</span><span class="s">"/some/directory"</span><span class="p">])</span>
+<span class="c">% End the run</span>
+<span class="n">py</span><span class="p">.</span><span class="n">mlflow</span><span class="p">.</span><span class="n">end_run</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In order to be able to use a saved model in MATLAB again, use <a class="reference internal" href="../Usage.html#mlflow.matlab.load_model" title="mlflow.matlab.load_model"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.matlab.load_model()</span></code></a> to first (if needed) download or copy the model locally, and then obtain the path of the local model. Then for example either <code class="docutils literal notranslate"><span class="pre">cd</span></code> to that path or use <code class="docutils literal notranslate"><span class="pre">addpath</span></code>/<code class="docutils literal notranslate"><span class="pre">genpath</span></code> to add this path to the MATLAB path.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Load a model</span>
+<span class="n">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">mlflow</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">load_model</span><span class="p">(</span><span class="s">"/work/models/myModel"</span><span class="p">)</span>
+<span class="c">% Add the directory structure to the MATLAB path such that the code can be run in MATLAB</span>
+<span class="nb">addpath</span><span class="p">(</span><span class="nb">genpath</span><span class="p">(</span><span class="n">p</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>With a local model this will typically just return the local location where the MATLAB code and data is already located. For a model on a remote tracking server, the model will be downloaded to a temporary local location and then this location is returned. To download a remote model to a specific local location (or to make a copy of a local model), specify this desired location as second input:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Download model to a specific location</span>
+<span class="n">p</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">mlflow</span><span class="p">.</span><span class="n">model</span><span class="p">.</span><span class="n">load_model</span><span class="p">(</span><span class="s">"models:/someModel/1"</span><span class="p">,</span><span class="s">"/work/models/someModel"</span><span class="p">)</span>
+<span class="c">% In this example go to that directory instead of adding it to the MATLAB path</span>
+<span class="nb">cd</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Usage.html" class="btn btn-neutral float-left" title="Usage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="compiler_sdk_python.html" class="btn btn-neutral float-right" title="compiler_sdk_python sub flavor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

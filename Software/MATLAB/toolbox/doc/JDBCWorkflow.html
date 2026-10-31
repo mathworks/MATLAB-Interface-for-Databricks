@@ -1,0 +1,624 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>JDBC and Database Toolbox workflow</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:36" dir="auto" id="user-content-jdbc-and-database-toolbox-workflow">JDBC and Database Toolbox workflow</h1>
+<p data-sourcepos="3:1-10:11" dir="auto">This workflow requires a Databricks® JDBC driver which must be downloaded from
+<a data-sourcepos="4:1-4:67" href="https://www.databricks.com/spark/jdbc-drivers-archive" rel="nofollow noreferrer noopener" target="_blank">Databricks</a>. The <code data-sourcepos="4:74-4:86">jarFilePath</code>
+name-value pair can be used to specify the path to the driver.
+See <a data-sourcepos="6:5-6:53" href="InstallingJDBCDriver.html">Installing JDBC Driver</a> for download and Java version
+compatibility details.
+The driver must be on the MATLAB® dynamic Java® class path to be used.
+The creation of a <code data-sourcepos="9:19-9:45">databricks.JDBCConnection</code> object adds the driver to the path
+ordinarily.</p>
+<p data-sourcepos="12:1-12:50" dir="auto">The package supports both Databricks JDBC drivers:</p>
+<ul data-sourcepos="14:1-15:44" dir="auto">
+<li data-sourcepos="14:1-14:65">Versions &gt;= 2.7.3 and &lt; 3.0.0 (the non-OSS Simba based driver).</li>
+<li data-sourcepos="15:1-15:44">Versions 3.0.3 and newer (the OSS driver).</li>
+</ul>
+<p data-sourcepos="17:1-18:55" dir="auto">The OSS driver requires that MATLAB uses a Java environment of v11 or greater,
+see: <a data-sourcepos="18:6-18:54" href="InstallingJDBCDriver.html">Installing JDBC Driver</a>.</p>
+<blockquote data-sourcepos="20:1-21:96" dir="auto">
+<p data-sourcepos="20:3-21:96">Apart from using a <em data-sourcepos="20:22-20:27">JDBC</em> driver to connect to Databricks through Database Toolbox™,
+it is also possible to connect through <a data-sourcepos="21:42-21:95" href="ODBCWorkflow.html">Database Toolbox and an ODBC driver</a>.</p>
+</blockquote>
+<h2 data-sourcepos="23:1-23:47" dir="auto" id="user-content-connect-to-databricks-using-database-toolbox">Connect to Databricks using Database Toolbox</h2>
+<p data-sourcepos="25:1-28:71" dir="auto"><a data-sourcepos="25:1-25:68" href="https://www.mathworks.com/products/database.html" rel="nofollow noreferrer noopener" target="_blank">Database Toolbox</a> provides both
+GUI and programmatic interfaces for configuring connections to databases. In this
+section both approaches are described, in general the programmatic approach is used
+however the GUI based approach can be useful for testing and debugging.</p>
+<p data-sourcepos="30:1-30:60" dir="auto">Further, Databricks offers two ways of connecting over JDBC:</p>
+<ol data-sourcepos="32:1-33:22" dir="auto">
+<li data-sourcepos="32:1-32:25">To a specific cluster.</li>
+<li data-sourcepos="33:1-33:22">To a SQL Warehouse.</li>
+</ol>
+<p data-sourcepos="35:1-36:49" dir="auto">Refer to the <a data-sourcepos="35:14-35:68" href="SQLWarehousesAPI.html">SQL Warehouses API documentation</a> for more
+information on how to connect to a SQL warehouse.</p>
+<h3 data-sourcepos="38:1-38:42" dir="auto" id="user-content-creating-a-connection-programmatically">Creating a connection programmatically</h3>
+<p data-sourcepos="40:1-43:98" dir="auto">The <code data-sourcepos="40:5-40:31">databricks.JDBCConnection</code> class is used to create a configured JDBC Database
+Connection object. The <code data-sourcepos="41:24-41:53">JDBCdatabase.jdbc.connection</code> object is stored in the
+<code data-sourcepos="42:1-42:27">JDBCConnection.Connection</code> property. By default the class will use the same
+authentication method used by the REST API interfaces, see <a data-sourcepos="43:60-43:97" href="Authentication.html">Authentication.md</a>.</p>
+<p data-sourcepos="45:1-47:35" dir="auto">The following named arguments can be used to override the values
+obtained from settings &amp; configuration files and defaults when creating a
+<code data-sourcepos="47:1-47:27">databricks.JDBCConnection</code> object.</p>
+<h3 data-sourcepos="49:1-49:46" dir="auto" id="user-content-optional-named-argument-types-and-defaults">Optional named argument types and defaults</h3>
+<table data-sourcepos="51:1-90:75" dir="auto">
+<thead>
+<tr data-sourcepos="51:1-51:75">
+<th data-sourcepos="51:2-51:26">Name</th>
+<th data-sourcepos="51:28-51:36">Type</th>
+<th data-sourcepos="51:38-51:74">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="53:1-53:75">
+<td data-sourcepos="53:2-53:26">driverClass</td>
+<td data-sourcepos="53:28-53:36">string</td>
+<td data-sourcepos="53:38-53:74">"com.databricks.client.jdbc.Driver"</td>
+</tr>
+<tr data-sourcepos="54:1-54:75">
+<td data-sourcepos="54:2-54:26">jarFilePath</td>
+<td data-sourcepos="54:28-54:36">string</td>
+<td data-sourcepos="54:38-54:74">Depends on drivers &amp; Java version</td>
+</tr>
+<tr data-sourcepos="55:1-55:75">
+<td data-sourcepos="55:2-55:26">useDriverType</td>
+<td data-sourcepos="55:28-55:36">char</td>
+<td data-sourcepos="55:38-55:74">Must be either 'oss' or 'simba'</td>
+</tr>
+<tr data-sourcepos="56:1-56:75">
+<td data-sourcepos="56:2-56:26"/>
+<td data-sourcepos="56:28-56:36"/>
+<td data-sourcepos="56:38-56:74"/>
+</tr>
+<tr data-sourcepos="57:1-57:75">
+<td data-sourcepos="57:2-57:26">connectionURL</td>
+<td data-sourcepos="57:28-57:36">string</td>
+<td data-sourcepos="57:38-57:74"/>
+</tr>
+<tr data-sourcepos="58:1-58:75">
+<td data-sourcepos="58:2-58:26">connectionURLAppend</td>
+<td data-sourcepos="58:28-58:36">string</td>
+<td data-sourcepos="58:38-58:74"/>
+</tr>
+<tr data-sourcepos="59:1-59:75">
+<td data-sourcepos="59:2-59:26"/>
+<td data-sourcepos="59:28-59:36"/>
+<td data-sourcepos="59:38-59:74"/>
+</tr>
+<tr data-sourcepos="60:1-60:75">
+<td data-sourcepos="60:2-60:26">host</td>
+<td data-sourcepos="60:28-60:36">string</td>
+<td data-sourcepos="60:38-60:74"/>
+</tr>
+<tr data-sourcepos="61:1-61:75">
+<td data-sourcepos="61:2-61:26">port</td>
+<td data-sourcepos="61:28-61:36">string</td>
+<td data-sourcepos="61:38-61:74">"443"</td>
+</tr>
+<tr data-sourcepos="62:1-62:75">
+<td data-sourcepos="62:2-62:26"/>
+<td data-sourcepos="62:28-62:36"/>
+<td data-sourcepos="62:38-62:74"/>
+</tr>
+<tr data-sourcepos="63:1-63:75">
+<td data-sourcepos="63:2-63:26">schema</td>
+<td data-sourcepos="63:28-63:36">string</td>
+<td data-sourcepos="63:38-63:74">"default"</td>
+</tr>
+<tr data-sourcepos="64:1-64:75">
+<td data-sourcepos="64:2-64:26">catalog</td>
+<td data-sourcepos="64:28-64:36">string</td>
+<td data-sourcepos="64:38-64:74"/>
+</tr>
+<tr data-sourcepos="65:1-65:75">
+<td data-sourcepos="65:2-65:26"/>
+<td data-sourcepos="65:28-65:36"/>
+<td data-sourcepos="65:38-65:74"/>
+</tr>
+<tr data-sourcepos="66:1-66:75">
+<td data-sourcepos="66:2-66:26">cluster</td>
+<td data-sourcepos="66:28-66:54">databricks.Cluster/string</td>
+<td data-sourcepos="66:56-66:74"/>
+</tr>
+<tr data-sourcepos="67:1-67:75">
+<td data-sourcepos="67:2-67:26"/>
+<td data-sourcepos="67:28-67:36"/>
+<td data-sourcepos="67:38-67:74"/>
+</tr>
+<tr data-sourcepos="68:1-68:75">
+<td data-sourcepos="68:2-68:26">useDriverAuth</td>
+<td data-sourcepos="68:28-68:36">logical</td>
+<td data-sourcepos="68:38-68:74">true</td>
+</tr>
+<tr data-sourcepos="69:1-69:91">
+<td data-sourcepos="69:2-69:26">authMethod</td>
+<td data-sourcepos="69:28-69:57">matlab.databricks.AuthMethod</td>
+<td data-sourcepos="69:59-69:90">Settings file authMethod value</td>
+</tr>
+<tr data-sourcepos="70:1-70:75">
+<td data-sourcepos="70:2-70:26">profileName</td>
+<td data-sourcepos="70:28-70:36">string</td>
+<td data-sourcepos="70:38-70:74">Settings file profileName value</td>
+</tr>
+<tr data-sourcepos="71:1-71:75">
+<td data-sourcepos="71:2-71:26"/>
+<td data-sourcepos="71:28-71:36"/>
+<td data-sourcepos="71:38-71:74"/>
+</tr>
+<tr data-sourcepos="72:1-72:104">
+<td data-sourcepos="72:2-72:26">OauthService</td>
+<td data-sourcepos="72:28-72:59">matlab.databricks.OauthService</td>
+<td data-sourcepos="72:61-72:103">matlab.databricks.OauthService.Databricks</td>
+</tr>
+<tr data-sourcepos="73:1-73:75">
+<td data-sourcepos="73:2-73:26">oauth2ClientId</td>
+<td data-sourcepos="73:28-73:36">string</td>
+<td data-sourcepos="73:38-73:74">"databricks-sql-jdbc"</td>
+</tr>
+<tr data-sourcepos="74:1-74:75">
+<td data-sourcepos="74:2-74:26">passthroughAccessToken</td>
+<td data-sourcepos="74:28-74:36">string</td>
+<td data-sourcepos="74:38-74:74"/>
+</tr>
+<tr data-sourcepos="75:1-75:75">
+<td data-sourcepos="75:2-75:26">passthroughRefreshToken</td>
+<td data-sourcepos="75:28-75:36">string</td>
+<td data-sourcepos="75:38-75:74"/>
+</tr>
+<tr data-sourcepos="76:1-76:75">
+<td data-sourcepos="76:2-76:26">scope</td>
+<td data-sourcepos="76:28-76:36">string</td>
+<td data-sourcepos="76:38-76:74"/>
+</tr>
+<tr data-sourcepos="77:1-77:75">
+<td data-sourcepos="77:2-77:26">TokenCachePassPhrase</td>
+<td data-sourcepos="77:28-77:36">string</td>
+<td data-sourcepos="77:38-77:74"/>
+</tr>
+<tr data-sourcepos="78:1-78:75">
+<td data-sourcepos="78:2-78:26">enableTokenCache</td>
+<td data-sourcepos="78:28-78:36">logical</td>
+<td data-sourcepos="78:38-78:74"/>
+</tr>
+<tr data-sourcepos="79:1-79:75">
+<td data-sourcepos="79:2-79:26">cacheFilePath</td>
+<td data-sourcepos="79:28-79:36">string</td>
+<td data-sourcepos="79:38-79:74"/>
+</tr>
+<tr data-sourcepos="80:1-80:75">
+<td data-sourcepos="80:2-80:26"/>
+<td data-sourcepos="80:28-80:36"/>
+<td data-sourcepos="80:38-80:74"/>
+</tr>
+<tr data-sourcepos="81:1-81:75">
+<td data-sourcepos="81:2-81:26">httpPath</td>
+<td data-sourcepos="81:28-81:36">string</td>
+<td data-sourcepos="81:38-81:74"/>
+</tr>
+<tr data-sourcepos="82:1-82:75">
+<td data-sourcepos="82:2-82:26">ssl</td>
+<td data-sourcepos="82:28-82:36">logical</td>
+<td data-sourcepos="82:38-82:74">true</td>
+</tr>
+<tr data-sourcepos="83:1-83:75">
+<td data-sourcepos="83:2-83:26">thriftTransport</td>
+<td data-sourcepos="83:28-83:36">int32</td>
+<td data-sourcepos="83:38-83:74"/>
+</tr>
+<tr data-sourcepos="84:1-84:75">
+<td data-sourcepos="84:2-84:28">defaultStringColumnLength</td>
+<td data-sourcepos="84:30-84:36">int32</td>
+<td data-sourcepos="84:38-84:74"/>
+</tr>
+<tr data-sourcepos="85:1-85:75">
+<td data-sourcepos="85:2-85:26"/>
+<td data-sourcepos="85:28-85:36"/>
+<td data-sourcepos="85:38-85:74"/>
+</tr>
+<tr data-sourcepos="86:1-86:75">
+<td data-sourcepos="86:2-86:26">disableSourceCreation</td>
+<td data-sourcepos="86:28-86:36">logical</td>
+<td data-sourcepos="86:38-86:74">false</td>
+</tr>
+<tr data-sourcepos="87:1-87:75">
+<td data-sourcepos="87:2-87:26">dataSourceName</td>
+<td data-sourcepos="87:28-87:36">string</td>
+<td data-sourcepos="87:38-87:74"/>
+</tr>
+<tr data-sourcepos="88:1-88:75">
+<td data-sourcepos="88:2-88:26"/>
+<td data-sourcepos="88:28-88:36"/>
+<td data-sourcepos="88:38-88:74"/>
+</tr>
+<tr data-sourcepos="89:1-89:75">
+<td data-sourcepos="89:2-89:26">logLevel</td>
+<td data-sourcepos="89:28-89:36">string</td>
+<td data-sourcepos="89:38-89:74">"0"</td>
+</tr>
+<tr data-sourcepos="90:1-90:75">
+<td data-sourcepos="90:2-90:26">verbose</td>
+<td data-sourcepos="90:28-90:36">logical</td>
+<td data-sourcepos="90:38-90:74">true</td>
+</tr>
+</tbody>
+</table>
+<h3 data-sourcepos="92:1-92:40" dir="auto" id="user-content-optional-named-argument-descriptions">Optional named argument descriptions</h3>
+<table data-sourcepos="94:1-133:75" dir="auto">
+<thead>
+<tr data-sourcepos="94:1-94:75">
+<th data-sourcepos="94:2-94:26">Name</th>
+<th data-sourcepos="94:28-94:74">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="96:1-96:75">
+<td data-sourcepos="96:2-96:26">driverClass</td>
+<td data-sourcepos="96:28-96:74">Class name of the JDBC driver</td>
+</tr>
+<tr data-sourcepos="97:1-97:75">
+<td data-sourcepos="97:2-97:26">jarFilePath</td>
+<td data-sourcepos="97:28-97:74">Path to the JDBC driver jar file</td>
+</tr>
+<tr data-sourcepos="98:1-98:75">
+<td data-sourcepos="98:2-98:26">useDriverType</td>
+<td data-sourcepos="98:28-98:74">Used to select a specific driver type</td>
+</tr>
+<tr data-sourcepos="99:1-99:75">
+<td data-sourcepos="99:2-99:26"/>
+<td data-sourcepos="99:28-99:74"/>
+</tr>
+<tr data-sourcepos="100:1-100:75">
+<td data-sourcepos="100:2-100:26">connectionURL</td>
+<td data-sourcepos="100:28-100:74">Overrides the complete  connection URL value</td>
+</tr>
+<tr data-sourcepos="101:1-101:75">
+<td data-sourcepos="101:2-101:26">connectionURLAppend</td>
+<td data-sourcepos="101:28-101:74">Append further values to the connection URL</td>
+</tr>
+<tr data-sourcepos="102:1-102:75">
+<td data-sourcepos="102:2-102:26"/>
+<td data-sourcepos="102:28-102:74"/>
+</tr>
+<tr data-sourcepos="103:1-103:75">
+<td data-sourcepos="103:2-103:26">host</td>
+<td data-sourcepos="103:28-103:74">Databricks Workspace hostname</td>
+</tr>
+<tr data-sourcepos="104:1-104:75">
+<td data-sourcepos="104:2-104:26">Port</td>
+<td data-sourcepos="104:28-104:74">Port to be used by the connection</td>
+</tr>
+<tr data-sourcepos="105:1-105:75">
+<td data-sourcepos="105:2-105:26"/>
+<td data-sourcepos="105:28-105:74"/>
+</tr>
+<tr data-sourcepos="106:1-106:75">
+<td data-sourcepos="106:2-106:26">schema</td>
+<td data-sourcepos="106:28-106:74">Name of the database/schema to use</td>
+</tr>
+<tr data-sourcepos="107:1-107:75">
+<td data-sourcepos="107:2-107:26">catalog</td>
+<td data-sourcepos="107:28-107:74">Set the Unity Catalog catalog</td>
+</tr>
+<tr data-sourcepos="108:1-108:75">
+<td data-sourcepos="108:2-108:26"/>
+<td data-sourcepos="108:28-108:74"/>
+</tr>
+<tr data-sourcepos="109:1-109:75">
+<td data-sourcepos="109:2-109:26">cluster</td>
+<td data-sourcepos="109:28-109:74">databricks.Cluster or Cluster Id text value</td>
+</tr>
+<tr data-sourcepos="110:1-110:75">
+<td data-sourcepos="110:2-110:26"/>
+<td data-sourcepos="110:28-110:74"/>
+</tr>
+<tr data-sourcepos="111:1-111:75">
+<td data-sourcepos="111:2-111:26">useDriverAuth</td>
+<td data-sourcepos="111:28-111:74">The driver's Oauth2 auth used by default</td>
+</tr>
+<tr data-sourcepos="112:1-112:75">
+<td data-sourcepos="112:2-112:26">authMethod</td>
+<td data-sourcepos="112:28-112:74">Use a non default authentication method</td>
+</tr>
+<tr data-sourcepos="113:1-113:75">
+<td data-sourcepos="113:2-113:26">profileName</td>
+<td data-sourcepos="113:28-113:74">Name of a profile in <code data-sourcepos="113:50-113:65">.databrickscfg</code> file</td>
+</tr>
+<tr data-sourcepos="114:1-114:75">
+<td data-sourcepos="114:2-114:26"/>
+<td data-sourcepos="114:28-114:74"/>
+</tr>
+<tr data-sourcepos="115:1-115:75">
+<td data-sourcepos="115:2-115:26">OauthService</td>
+<td data-sourcepos="115:28-115:74">Specify an OAuth service provider</td>
+</tr>
+<tr data-sourcepos="116:1-116:75">
+<td data-sourcepos="116:2-116:26">oauth2ClientId</td>
+<td data-sourcepos="116:28-116:74">The Client Id for OAuth 2.0 authentication</td>
+</tr>
+<tr data-sourcepos="117:1-117:75">
+<td data-sourcepos="117:2-117:26">passthroughAccessToken</td>
+<td data-sourcepos="117:28-117:74">Value for a token that is passed opaquely</td>
+</tr>
+<tr data-sourcepos="118:1-118:75">
+<td data-sourcepos="118:2-118:26">passthroughRefreshToken</td>
+<td data-sourcepos="118:28-118:74">Refresh token to be passed opaquely</td>
+</tr>
+<tr data-sourcepos="119:1-119:75">
+<td data-sourcepos="119:2-119:26">scope</td>
+<td data-sourcepos="119:28-119:74">Sets the scope used with OAuth flows</td>
+</tr>
+<tr data-sourcepos="120:1-120:75">
+<td data-sourcepos="120:2-120:26">TokenCachePassPhrase</td>
+<td data-sourcepos="120:28-120:74">Refresh token encryption when using driver</td>
+</tr>
+<tr data-sourcepos="121:1-121:75">
+<td data-sourcepos="121:2-121:26">enableTokenCache</td>
+<td data-sourcepos="121:28-121:74">Enables token caching when using the driver</td>
+</tr>
+<tr data-sourcepos="122:1-122:75">
+<td data-sourcepos="122:2-122:26">cacheFilePath</td>
+<td data-sourcepos="122:28-122:74">Token cache used with the packages' Oauth2</td>
+</tr>
+<tr data-sourcepos="123:1-123:75">
+<td data-sourcepos="123:2-123:26"/>
+<td data-sourcepos="123:28-123:74"/>
+</tr>
+<tr data-sourcepos="124:1-124:75">
+<td data-sourcepos="124:2-124:26">httpPath</td>
+<td data-sourcepos="124:28-124:74">Overrides httpPath in the connection URL</td>
+</tr>
+<tr data-sourcepos="125:1-125:75">
+<td data-sourcepos="125:2-125:26">ssl</td>
+<td data-sourcepos="125:28-125:74">Enable SSL flag</td>
+</tr>
+<tr data-sourcepos="126:1-126:75">
+<td data-sourcepos="126:2-126:26">thriftTransport</td>
+<td data-sourcepos="126:28-126:74">thriftTransport level (ignored by OSS driver)</td>
+</tr>
+<tr data-sourcepos="127:1-127:75">
+<td data-sourcepos="127:2-127:28">defaultStringColumnLength</td>
+<td data-sourcepos="127:30-127:74">Max length of string columns</td>
+</tr>
+<tr data-sourcepos="128:1-128:75">
+<td data-sourcepos="128:2-128:26"/>
+<td data-sourcepos="128:28-128:74"/>
+</tr>
+<tr data-sourcepos="129:1-129:75">
+<td data-sourcepos="129:2-129:26">disableSourceCreation</td>
+<td data-sourcepos="129:28-129:74">Prevents automatic data source creation</td>
+</tr>
+<tr data-sourcepos="130:1-130:75">
+<td data-sourcepos="130:2-130:26">dataSourceName</td>
+<td data-sourcepos="130:28-130:74">Non default name for a data source if saved</td>
+</tr>
+<tr data-sourcepos="131:1-131:75">
+<td data-sourcepos="131:2-131:26"/>
+<td data-sourcepos="131:28-131:74"/>
+</tr>
+<tr data-sourcepos="132:1-132:75">
+<td data-sourcepos="132:2-132:26">logLevel</td>
+<td data-sourcepos="132:28-132:74">Logging level, the default value is: "0"</td>
+</tr>
+<tr data-sourcepos="133:1-133:75">
+<td data-sourcepos="133:2-133:26">verbose</td>
+<td data-sourcepos="133:28-133:74">Logical flag to enable more or less feedback</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="135:1-135:192" dir="auto">For more details see: <a data-sourcepos="135:23-135:191" href="https://docs.databricks.com/en/_extras/documents/Databricks-JDBC-Driver-Install-and-Configuration-Guide.pdf" rel="nofollow noreferrer noopener" target="_blank">Databricks-JDBC-Driver-Install-and-Configuration-Guide.pdf</a>.</p>
+<blockquote data-sourcepos="137:1-137:89" dir="auto">
+<p data-sourcepos="137:3-137:89">See <a data-sourcepos="137:7-137:41" href="Authentication.html">Authentication</a> for environment variable configuration details.</p>
+</blockquote>
+<p data-sourcepos="139:1-141:81" dir="auto">If a connection cannot be created an empty <code data-sourcepos="139:44-139:69">database.jdbc.connection</code> is returned
+in the connection property. If a JDBC Driver Error is returned in the connection's
+<code data-sourcepos="141:1-141:9">Message</code> property it will be displayed but an error will not be raised directly.</p>
+<p data-sourcepos="143:1-143:53" dir="auto">Returning a connection generally takes a few seconds.</p>
+<p data-sourcepos="145:1-146:92" dir="auto">It is good practice to call the Connection property's close method when the connection
+is no longer needed. The object's close method will also call the connection's close method.</p>
+<p data-sourcepos="148:1-148:46" dir="auto">Examples using default authentication details:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="150:1-159:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1">   <span class="n">j</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">JDBCConnection</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC2">   <span class="n">myData</span> <span class="o">=</span> <span class="n">fetch</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">Connection</span><span class="p">,</span> <span class="s2">"SELECT * FROM mycatalog.mydatabasename.myDatabaseTable LIMIT 10"</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"/>
+<span class="line" data-lang="matlab" id="LC4">   <span class="c1">% or set a default catalog and schema for the connection</span></span>
+<span class="line" data-lang="matlab" id="LC5">   <span class="n">j</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">JDBCConnection</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="s1">'mycatalog'</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="s1">'mydatabasename'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC6">   </span>
+<span class="line" data-lang="matlab" id="LC7">   <span class="c1">% Use Database Toolbox to read an entire table of data</span></span>
+<span class="line" data-lang="matlab" id="LC8">   <span class="n">myData</span> <span class="o">=</span> <span class="n">sqlread</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">Connection</span><span class="p">,</span> <span class="s1">'myDatabaseTable'</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="161:1-161:42" dir="auto" id="user-content-working-with-the-database-explorer-app">Working with the Database Explorer app</h3>
+<p data-sourcepos="163:1-164:61" dir="auto">When Database Toolbox is installed the Database Explorer app can be found via the apps
+tab or by calling <code data-sourcepos="164:19-164:36">databaseExplorer</code> from the MATLAB console.</p>
+<p data-sourcepos="166:1-167:83" dir="auto">Database Explorer uses the Data Sources to create connections. A connection can be
+configured manually using the UI as described below or programmatically as follows:</p>
+<p data-sourcepos="169:1-169:45" dir="auto">Create a connection, as previously described.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="171:1-173:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">j</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">JDBCConnection</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="175:1-177:30" dir="auto">Save the connection as a data source, by default the source name will be: <code data-sourcepos="175:75-175:99">Databricks-&lt;Cluster Id&gt;</code>.
+A source is created when a connection is created but it is not saved
+unless <code data-sourcepos="177:8-177:19">saveSource</code> is called.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="179:1-181:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">j</span><span class="o">.</span><span class="n">saveSource</span><span class="p">()</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="183:1-183:79" dir="auto">Copy the connection's token/password to the clipboard for later use in the GUI.</p>
+<blockquote data-sourcepos="184:1-184:40" dir="auto">
+<p data-sourcepos="184:2-184:40">This token/password value is sensitive.</p>
+</blockquote>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="186:1-188:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">j</span><span class="o">.</span><span class="n">copyToken</span><span class="p">()</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="190:1-194:83" dir="auto">Then in the Database Explorer app select the newly created data source. When the
+username and password are requested, enter "token" as username and paste the token
+value from the clipboard as the password. Once created, the app will ask for the catalog
+and schema to connect to before displaying a list of tables. One can then proceed to
+explore the data and build up queries that can be easily imported into MATLAB code.</p>
+<h3 data-sourcepos="196:1-196:28" dir="auto" id="user-content-sql-warehouse-connection">SQL Warehouse Connection</h3>
+<p data-sourcepos="198:1-198:117" dir="auto">A SQL Warehouse connection is created slightly differently from a cluster based connection, using the Warehouse's id.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="200:1-205:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">warehouse</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">warehouse</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">"qfufxboufejuuibuxbz"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">conn</span> <span class="o">=</span> <span class="n">warehouse</span><span class="o">.</span><span class="n">connect</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">myData</span> <span class="o">=</span> <span class="n">fetch</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s2">"SELECT * FROM mycatalog.mydatabasename.myDatabaseTable LIMIT 10"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="207:1-207:24" dir="auto" id="user-content-testing-a-connection">Testing a connection</h3>
+<p data-sourcepos="209:1-209:96" dir="auto">To verify that a connection has been established successfully, call the <code data-sourcepos="209:73-209:88">testConnection</code> method:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="211:1-213:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="p">[</span><span class="n">tf</span><span class="p">,</span> <span class="n">message</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">testConnection</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="215:1-215:77" dir="auto" id="user-content-manually-creating-a-connection-using-database-toolbox-not-recommended">Manually Creating a connection using Database Toolbox (<em data-sourcepos="215:60-215:76">Not recommended</em>)</h3>
+<p data-sourcepos="217:1-219:63" dir="auto">A number of values are required to connect and authenticate with Databricks as shown
+previously. To create a Database Toolbox GUI based connection begin by configuring a
+JDBC datasource. The values for which should be set as follows:</p>
+<table data-sourcepos="221:1-227:243" dir="auto">
+<thead>
+<tr data-sourcepos="221:1-221:17">
+<th align="left" data-sourcepos="221:2-221:8">Field</th>
+<th align="left" data-sourcepos="221:10-221:16">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="223:1-223:59">
+<td align="left" data-sourcepos="223:2-223:7">Name</td>
+<td align="left" data-sourcepos="223:9-223:58">The name of the database, in this case 'default'</td>
+</tr>
+<tr data-sourcepos="224:1-224:18">
+<td align="left" data-sourcepos="224:2-224:9">Vendor</td>
+<td align="left" data-sourcepos="224:11-224:17">OTHER</td>
+</tr>
+<tr data-sourcepos="225:1-225:108">
+<td align="left" data-sourcepos="225:2-225:18">Driver Location</td>
+<td align="left" data-sourcepos="225:20-225:107">Path to the downloaded JDBC driver jar file, e.g. '/path/to/databricks-jdbc-2.8.0.jar'</td>
+</tr>
+<tr data-sourcepos="226:1-226:46">
+<td align="left" data-sourcepos="226:2-226:9">Driver</td>
+<td align="left" data-sourcepos="226:11-226:45">com.databricks.client.jdbc.Driver</td>
+</tr>
+<tr data-sourcepos="227:1-227:243">
+<td align="left" data-sourcepos="227:2-227:6">URL</td>
+<td align="left" data-sourcepos="227:8-227:242">jdbc:<a data-sourcepos="227:14-227:43" href="databricks://EndpointHost:443/">databricks://EndpointHost:443/</a>;transportMode=http;ssl=1;httpPath=sql/protocolv1/o//;thriftTransport=2;AuthMech=3;UID=token;PWD=;UserAgentEntry=MathWorks_MATLAB/25.2.0;LogLevel=0;</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="229:1-230:20" dir="auto">When the fields of the URL are populated, assuming use of Azure®, the completed
+value will resemble:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="232:1-234:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1"> jdbc:databricks://&lt;redacted&gt;.azuredatabricks.net:443/default;transportMode=http;ssl=1;httpPath=sql/protocolv1/o/1234567891234567/0406-211843-kmiwte6o;thriftTransport=2;AuthMech=3;UID=token;PWD=&lt;REDACTED&gt;;UserAgentEntry=MathWorks_MATLAB/25.2.0;LogLevel=0;</span></code></pre><copy-code/><insert-code-snippet/></div>
+<blockquote data-sourcepos="236:1-237:34" dir="auto">
+<p data-sourcepos="236:3-237:34">If using databricks.JDBCConnection, the resulting URL can be access using the
+<code data-sourcepos="237:3-237:17">ConnectionURL</code> hidden property.</p>
+</blockquote>
+<p data-sourcepos="239:1-240:20" dir="auto">The driver name value is <code data-sourcepos="239:26-239:60">com.databricks.client.jdbc.Driver</code>. With older drivers
+this value differed.</p>
+<p data-sourcepos="242:1-245:62" dir="auto">When the data source has been created and saved it can be used by the <code data-sourcepos="242:71-242:82">database()</code>
+function. Note the username value is set to <em data-sourcepos="243:45-243:51">token</em> and the password value should
+be that of token itself (see below). Output similar to that shown should be returned.
+If not checking the value of <code data-sourcepos="245:30-245:46">dHandle.Message</code> may be helpful.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="247:1-278:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">conn</span> <span class="o">=</span> <span class="n">database</span><span class="p">(</span><span class="s1">'default'</span><span class="p">,</span><span class="s1">'token'</span><span class="p">,</span><span class="n">password</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="o">&gt;&gt;</span> <span class="n">conn</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="nb">ans</span> <span class="o">=</span> </span>
+<span class="line" data-lang="matlab" id="LC4">  <span class="n">connection</span> <span class="n">with</span> <span class="k">properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC5"/>
+<span class="line" data-lang="matlab" id="LC6">                  <span class="n">DataSource</span><span class="p">:</span> <span class="s1">'default'</span></span>
+<span class="line" data-lang="matlab" id="LC7">                    <span class="n">UserName</span><span class="p">:</span> <span class="s1">'token'</span></span>
+<span class="line" data-lang="matlab" id="LC8">                      <span class="n">Driver</span><span class="p">:</span> <span class="s1">'com.databricks.client.jdb ...'</span></span>
+<span class="line" data-lang="matlab" id="LC9">                         <span class="n">URL</span><span class="p">:</span> <span class="s1">'jdbc:databricks://adb-605 ...'</span></span>
+<span class="line" data-lang="matlab" id="LC10">                     <span class="n">Message</span><span class="p">:</span> <span class="s1">''</span></span>
+<span class="line" data-lang="matlab" id="LC11">                        <span class="n">Type</span><span class="p">:</span> <span class="s1">'JDBC Connection Object'</span></span>
+<span class="line" data-lang="matlab" id="LC12">  <span class="n">Database</span> <span class="n">Properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC13"/>
+<span class="line" data-lang="matlab" id="LC14">                  <span class="n">AutoCommit</span><span class="p">:</span> <span class="s1">'on'</span></span>
+<span class="line" data-lang="matlab" id="LC15">                    <span class="n">ReadOnly</span><span class="p">:</span> <span class="s1">'off'</span></span>
+<span class="line" data-lang="matlab" id="LC16">                <span class="n">LoginTimeout</span><span class="p">:</span> <span class="mi">0</span></span>
+<span class="line" data-lang="matlab" id="LC17">      <span class="n">MaxDatabaseConnections</span><span class="p">:</span> <span class="mi">0</span></span>
+<span class="line" data-lang="matlab" id="LC18"/>
+<span class="line" data-lang="matlab" id="LC19">  <span class="n">Catalog</span> <span class="nb">and</span> <span class="n">Schema</span> <span class="n">Information</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC20"/>
+<span class="line" data-lang="matlab" id="LC21">              <span class="n">DefaultCatalog</span><span class="p">:</span> <span class="s1">'hive_metastore'</span></span>
+<span class="line" data-lang="matlab" id="LC22">                    <span class="n">Catalogs</span><span class="p">:</span> <span class="p">{</span><span class="s1">'consulting'</span><span class="p">,</span> <span class="s1">'hive_metastore'</span><span class="p">,</span> <span class="s1">'main'</span> <span class="k">...</span><span class="c"> and 2 more}</span></span>
+<span class="line" data-lang="matlab" id="LC23">                     <span class="n">Schemas</span><span class="p">:</span> <span class="p">{</span><span class="s1">'global_temp'</span><span class="p">,</span> <span class="s1">'default'</span><span class="p">,</span> <span class="s1">'default'</span> <span class="k">...</span><span class="c"> and 11 more}</span></span>
+<span class="line" data-lang="matlab" id="LC24"/>
+<span class="line" data-lang="matlab" id="LC25">  <span class="n">Database</span> <span class="nb">and</span> <span class="n">Driver</span> <span class="n">Information</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC26"/>
+<span class="line" data-lang="matlab" id="LC27">         <span class="n">DatabaseProductName</span><span class="p">:</span> <span class="s1">'SparkSQL'</span></span>
+<span class="line" data-lang="matlab" id="LC28">      <span class="n">DatabaseProductVersion</span><span class="p">:</span> <span class="s1">'3.5.0'</span></span>
+<span class="line" data-lang="matlab" id="LC29">                  <span class="n">DriverName</span><span class="p">:</span> <span class="s1">'DatabricksJDBC'</span></span>
+<span class="line" data-lang="matlab" id="LC30">               <span class="n">DriverVersion</span><span class="p">:</span> <span class="s1">'02.07.01.1004'</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="280:1-280:37" dir="auto"><a class="no-attachment-icon" href="images/dbtbx.png" rel="noopener noreferrer" target="_blank"><img alt="Database Toolbox" data-sourcepos="280:1-280:37" src="images/dbtbx.png"/></a></p>
+<p data-sourcepos="282:1-283:79" dir="auto"><em data-sourcepos="282:1-282:6">Note</em> The use of default as a datasource name is not advised as this is often used
+as a database name also and this can hinder the creations of a database handle.</p>
+<h2 data-sourcepos="285:1-285:16" dir="auto" id="user-content-example-usage">Example usage</h2>
+<p data-sourcepos="287:1-288:52" dir="auto">The following simple example assumes a sample table that ships with MATLAB in CSV
+format has previously been imported into Databricks.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="290:1-316:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">% outages.csv can be found here:</span>
+<span class="line" data-lang="plaintext" id="LC2">which('outages.csv')</span>
+<span class="line" data-lang="plaintext" id="LC3">/usr/local/MATLAB/R2024b/toolbox/matlab/demos/outages.csv</span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">% Create the connection</span>
+<span class="line" data-lang="plaintext" id="LC6">j = databricks.JDBCConnection;</span>
+<span class="line" data-lang="plaintext" id="LC7"/>
+<span class="line" data-lang="plaintext" id="LC8">% Read the entire table</span>
+<span class="line" data-lang="plaintext" id="LC9">data = sqlread(j.Connection, 'mycatalog.mydatabasename.outages');</span>
+<span class="line" data-lang="plaintext" id="LC10"/>
+<span class="line" data-lang="plaintext" id="LC11">Display the first few lines of the table</span>
+<span class="line" data-lang="plaintext" id="LC12">head(data,3)</span>
+<span class="line" data-lang="plaintext" id="LC13"/>
+<span class="line" data-lang="plaintext" id="LC14">&gt;&gt; head(data,3)</span>
+<span class="line" data-lang="plaintext" id="LC15">       Region               OutageTime             Loss     Customers          RestorationTime              Cause      </span>
+<span class="line" data-lang="plaintext" id="LC16">    _____________    _________________________    ______    __________    _________________________    ________________</span>
+<span class="line" data-lang="plaintext" id="LC17">    {'SouthWest'}    {'2002-02-01 12:18:00.0'}    458.98    1.8202e+06    {'2002-02-07 16:50:00.0'}    {'winter storm'}</span>
+<span class="line" data-lang="plaintext" id="LC18">    {'SouthEast'}    {'2003-01-23 00:49:00.0'}    530.14    2.1204e+05    {0×0 char               }    {'winter storm'}</span>
+<span class="line" data-lang="plaintext" id="LC19">    {'SouthEast'}    {'2003-02-07 21:15:00.0'}     289.4    1.4294e+05    {'2003-02-17 08:14:00.0'}    {'winter storm'}</span>
+<span class="line" data-lang="plaintext" id="LC20"/>
+<span class="line" data-lang="plaintext" id="LC21">% Delete the table if no longer needed</span>
+<span class="line" data-lang="plaintext" id="LC22">execute(j.Connection, 'DROP TABLE mycatalog.mydatabasename.outages')</span>
+<span class="line" data-lang="plaintext" id="LC23"/>
+<span class="line" data-lang="plaintext" id="LC24">% Close the connection when done</span>
+<span class="line" data-lang="plaintext" id="LC25">close(j.Connection);</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="318:1-318:20" dir="auto" id="user-content-write-performance">Write performance</h2>
+<p data-sourcepos="320:1-321:37" dir="auto">Simba driver (only) write performance can be improved significantly by setting the
+following database driver parameters:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="323:1-326:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">UseNativeQuery=1;</span>
+<span class="line" data-lang="plaintext" id="LC2">EnableNativeParameterizedQuery=0;</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="328:1-329:11" dir="auto">This is enabled by default when connections are created but if desired can be disabled
+as follows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="331:1-336:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">warehouse</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">warehouse</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">"qfufxboufejuuibuxbz"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">conn</span> <span class="o">=</span> <span class="n">warehouse</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">useNativeQuery</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">enableNativeParameterizedQuery</span><span class="o">=</span><span class="nb">true</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">sqlwrite</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="n">tablename</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="338:1-338:2" dir="auto">or</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="340:1-345:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">c</span> <span class="o">=</span> <span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s2">"dbwrite"</span><span class="p">,</span> <span class="mi">0</span> <span class="p">,</span> <span class="n">useMATLAB</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">databricks</span><span class="o">.</span><span class="n">internal</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">waitForClusterToStart</span><span class="p">(</span><span class="n">clusterId</span><span class="o">=</span><span class="n">c</span><span class="o">.</span><span class="n">cluster_id</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">j</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">JDBCConnection</span><span class="p">(</span><span class="n">cluster</span><span class="o">=</span><span class="n">c</span><span class="p">,</span> <span class="n">useNativeQuery</span><span class="o">=</span><span class="nb">false</span><span class="p">,</span> <span class="n">enableNativeParameterizedQuery</span><span class="o">=</span><span class="nb">true</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">sqlwrite</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">Connection</span><span class="p">,</span> <span class="n">tablename</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="347:1-347:26" dir="auto" id="user-content-naming-in-unity-catalog">Naming in Unity Catalog</h2>
+<p data-sourcepos="349:1-354:28" dir="auto">Some naming limitations apply when accessing resources governed by Unity Catalog via
+SQL, for more details see:
+<a data-sourcepos="351:1-351:142" href="https://docs.databricks.com/en/sql/language-manual/sql-ref-names.html" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/en/sql/language-manual/sql-ref-names.html</a>.
+Most commonly, a table or schema name might contain a hyphen, "-". In the following
+example the schema is named "my-schema", and so this must be enclosed by
+back-ticks within the query.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="356:1-358:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">data</span> <span class="o">=</span> <span class="n">fetch</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">Connection</span><span class="p">,</span> <span class="s2">"SELECT * FROM mycatalog.`my-schema`.mytable"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="360:1-360:20" dir="auto" id="user-content-spark-sql-support">Spark SQL support</h2>
+<p data-sourcepos="362:1-364:63" dir="auto">This functionality is independent of the <code data-sourcepos="362:42-362:54">spark.sql()</code> functionality which can also
+be used to execute SQL commands on Databricks via the Spark™ <code data-sourcepos="363:68-363:72">sql</code> API call.
+This functionality is described in the Spark API documentation.</p>
+<h2 data-sourcepos="366:1-366:39" dir="auto" id="user-content-user-defined-functions-udf-support">User Defined Functions (UDF) support</h2>
+<p data-sourcepos="368:1-371:58" dir="auto">The automatic creation of UDFs and their respective registration functions and
+usage is described separately in the Spark API documentation. UDFs can be used
+to invoke compiled MATLAB code in SQL statements executed on a Databricks cluster
+by any language  or external interface making SQL queries.</p>
+<h2 data-sourcepos="373:1-373:17" dir="auto" id="user-content-authentication">Authentication</h2>
+<p data-sourcepos="375:1-376:33" dir="auto">See <a data-sourcepos="375:5-375:39" href="Authentication.html">Authentication</a> for more details of Personal Access Token
+and other authentication methods.</p>
+<h3 data-sourcepos="378:1-378:52" dir="auto" id="user-content-authentication-when-running-matlab-on-databricks">Authentication when running MATLAB on Databricks</h3>
+<p data-sourcepos="380:1-382:71" dir="auto">When running MATLAB directly on a Databricks cluster, authentication is typically
+handled automatically through the cluster's configuration. However the credentials
+provided by the Databricks environment do not support JDBC connections.</p>
+<p data-sourcepos="384:1-385:20" dir="auto">The following approach can be used to avoid having to provide a PAT in this scenario
+by using <code data-sourcepos="385:10-385:19">OauthU2M</code>:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="387:1-391:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">j</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">JDBCConnection</span><span class="p">(</span><span class="n">authMethod</span><span class="o">=</span><span class="s2">"OauthU2M"</span><span class="p">,</span> <span class="n">useDriverAuth</span><span class="o">=</span><span class="nb">false</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">data</span> <span class="o">=</span> <span class="n">fetch</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">Connection</span><span class="p">,</span> <span class="s2">"SELECT * FROM mycatalog.`my-schema`.mytable LIMIT 10"</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">t</span> <span class="o">=</span> <span class="nb">table</span><span class="p">(</span><span class="n">data</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<blockquote data-sourcepos="393:1-396:10" dir="auto">
+<p data-sourcepos="393:3-396:10">Note the <code data-sourcepos="393:12-393:32">useDriverAuth=false</code> is important because the JDBC drivers Oauth
+flow is not supported when using MATLAB in the browser as the Java driver attempts
+to open a conventional browser, which is not possible when already running in a
+browser.</p>
+</blockquote>
+<h2 data-sourcepos="398:1-398:16" dir="auto" id="user-content-proxy-support">Proxy support</h2>
+<p data-sourcepos="400:1-402:64" dir="auto">The Databricks JDBC driver supports SOCKS proxies only. <code data-sourcepos="400:57-400:72">JDBCConnection</code> does not
+currently attempt to configure proxy details.
+Consider using <code data-sourcepos="402:16-402:36">connectionURLAppend</code> to set details if required.</p>
+<h2 data-sourcepos="404:1-404:16" dir="auto" id="user-content-token-caching">Token Caching</h2>
+<p data-sourcepos="406:1-411:75" dir="auto">The <code data-sourcepos="406:5-406:22">enableTokenCache</code> argument Controls caching of tokens when using driver based
+authentication only. <code data-sourcepos="407:22-407:39">enableTokenCache</code> is not supported prior to driver version
+2.7.1 for Windows® or with 2.7.3 on Linux® &amp; macOS®. Unless specified <code data-sourcepos="408:83-408:100">enableTokenCache</code>
+is enabled by default when supported. If using package based authentication
+tokens are always cached unless the <code data-sourcepos="410:37-410:68">DISABLE_DATABRICKS_TOKEN_CACHE</code> environment
+variable is set to true. If PAT authentication is used caching is not used.</p></div></main><script src="resources/copycode.js">//</script></body></html>

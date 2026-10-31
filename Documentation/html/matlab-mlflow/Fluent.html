@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fluent MATLAB Interface for Tracking &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="MLflow MATLAB Fluent API" href="FluentAPI.html" />
+    <link rel="prev" title="Installation - Python based Interfaces" href="InstallationPython.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">MATLAB Interface <em>for MLflow</em></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="InstallationPython.html">Installation and Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Fluent MATLAB Interface for Tracking</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-usage-of-the-python-api-directly">Advanced usage of the Python API directly</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-log-metrics-in-batch">Example - log metrics in batch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-logging-an-image">Example - logging an image</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="FluentAPI.html">MLflow MATLAB Fluent API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="InstallationPython.html">Installation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_flavor/Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_flavor/Usage.html">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_flavor/subflavors/none.html">none sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_flavor/subflavors/compiler_sdk_python.html">compiler_sdk_python sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_flavor/subflavors/onnx.html">onnx sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QuickStart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MLflowAPI.html">MATLAB Interface <em>for MLflow</em> - API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">MATLAB Interface <em>for MLflow</em></a></li>
+      <li class="breadcrumb-item active">Fluent MATLAB Interface for Tracking</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/matlab-mlflow/Fluent.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fluent-matlab-interface-for-tracking">
+<h1>Fluent MATLAB Interface for Tracking<a class="headerlink" href="#fluent-matlab-interface-for-tracking" title="Link to this heading"></a></h1>
+<p>Logging data to runs in MATLAB works pretty much the same as in the <a class="reference external" href="https://mlflow.org/docs/latest/tracking.html#logging-data-to-runs">MLflow Python fluent API</a>. As a matter of fact the MATLAB interface wraps this MLflow Python API and may even return Python objects in places or throw Python style errors if an error occurs.</p>
+<p>For a full overview of the MLflow fluent API functions which are supported through this package in MATLAB directly, see <a class="reference internal" href="FluentAPI.html"><span class="std std-doc">MLflow MATLAB Fluent API</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There is no Automatic MLflow Logging in MATLAB. Include explicit calls to <a class="reference internal" href="FluentAPI.html#mlflow.set_experiment" title="mlflow.set_experiment"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.set_experiment()</span></code></a>, <a class="reference internal" href="FluentAPI.html#mlflow.start_run" title="mlflow.start_run"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.start_run()</span></code></a>, <a class="reference internal" href="FluentAPI.html#mlflow.log_param" title="mlflow.log_param"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_param()</span></code></a>, <a class="reference internal" href="FluentAPI.html#mlflow.log_metric" title="mlflow.log_metric"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_metric()</span></code></a>, etc. in code to log the desired information.</p>
+</div>
+<p>To log to a remote server, ensure the <a class="reference internal" href="InstallationPython.html#mlflow-tracking-servers"><span class="std std-ref">correct tracking URI has been configured</span></a>.</p>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Link to this heading"></a></h2>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Start a new experiment or select an existing experiment named myExperiment</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s">"myExperiment"</span><span class="p">)</span>
+<span class="c">% Create a new unnamed run</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">start_run</span><span class="p">()</span>
+<span class="c">% Log a parameter named Gain with value 3.14</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">log_param</span><span class="p">(</span><span class="s">"Gain"</span><span class="p">,</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="c">% End the run</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">end_run</span><span class="p">();</span>
+<span class="c">% Create another run, named this time</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">start_run</span><span class="p">(</span><span class="n">run_name</span><span class="p">=</span><span class="s">"myRun"</span><span class="p">)</span>
+<span class="c">% Log a metric named Score with value 42</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">log_metric</span><span class="p">(</span><span class="s">"Score"</span><span class="p">,</span><span class="mi">42</span><span class="p">)</span>
+<span class="c">% End the run</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">end_run</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="advanced-usage-of-the-python-api-directly">
+<h2>Advanced usage of the Python API directly<a class="headerlink" href="#advanced-usage-of-the-python-api-directly" title="Link to this heading"></a></h2>
+<p>Since the MATLAB MLflow fluent interface is based on the Python MLflow fluent interface, and thus also <a class="reference internal" href="InstallationPython.html"><span class="std std-doc">requires the Python MLflow package to have been installed and configured for MATLAB</span></a>, you do also have access to the <em>entire</em> MLflow Python package from within MATLAB through its <a class="reference external" href="https://www.mathworks.com/help/matlab/call-python-libraries.html">external language interface to Python</a>. Meaning that for example <a class="reference internal" href="FluentAPI.html#mlflow.log_metric" title="mlflow.log_metric"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_metric()</span></code></a> can be called in MATLAB as either <a class="reference internal" href="FluentAPI.html#mlflow.log_metric" title="mlflow.log_metric"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_metric()</span></code></a> (to call it through the MATLAB interface) or <a class="reference internal" href="FluentAPI.html#mlflow.log_metric" title="mlflow.log_metric"><code class="xref py py-func docutils literal notranslate"><span class="pre">py.mlflow.log_metric</span></code></a> (to call the Python function <em>directly</em>). Now this is of course not that interesting for functions which are available in both interfaces, but it <em>can</em> be useful if you need functionality which is available in the Python SDK but which is not directly exposed through the MATLAB interface provided in this package.</p>
+<p>You may also need to make use of this interface to be able to provide the right Python input types to some of the functions which are available in the MATLAB interface, see for example the <a class="reference internal" href="#example-logging-an-image">logging and image example</a> below.</p>
+<section id="example-log-metrics-in-batch">
+<h3>Example - log metrics in batch<a class="headerlink" href="#example-log-metrics-in-batch" title="Link to this heading"></a></h3>
+<p>Suppose you already have a function which trains a model and which then apart from the model itself, also returns a table with metrics of how the training progressed over time:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">metrics</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">trainMyModel</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>To log these metrics in MLflow you could then go into this function and modify it to log the metrics as you go, but you could also consider logging all the metrics in one big batch after the fact; which is what we will do in this example. This can be done with the <code class="xref py py-meth docutils literal notranslate"><span class="pre">log_batch</span></code> method of the <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.client.MlflowClient</span></code> in the MLflow Python SDK but for which there is no direct MATLAB interface in this package.</p>
+<p>Now first of all, we do want to log these metrics as part of a run in an experiment, so we will want to set the experiment and start a run. Since you can in fact mix the MATLAB interface with the direct Python interface, in this example we use the MATLAB interface for that part:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="p">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s">"Batch Log Example"</span><span class="p">);</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">start_run</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Then we call our training function:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">model</span><span class="p">,</span><span class="w"> </span><span class="n">metrics</span><span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">trainMyModel</span><span class="p">(</span><span class="n">data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>And now let's suppose that <code class="docutils literal notranslate"><span class="pre">metrics</span></code> is a table with columns <code class="docutils literal notranslate"><span class="pre">iteration</span></code>, <code class="docutils literal notranslate"><span class="pre">timestamp</span></code> and <code class="docutils literal notranslate"><span class="pre">accuracy</span></code>. We could then first turn this table into a Python list of <code class="xref py py-class docutils literal notranslate"><span class="pre">MLflow</span> <span class="pre">Metric</span> <span class="pre">objects</span></code> (as that is what <code class="xref py py-meth docutils literal notranslate"><span class="pre">log_batch</span></code> expects as input).</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Start an empty list</span>
+<span class="n">m</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">py</span><span class="p">.</span><span class="n">list</span><span class="p">;</span>
+<span class="c">% Go through all the rows in the table</span>
+<span class="k">for</span><span class="w"> </span><span class="nb">i</span><span class="p">=</span><span class="mi">1</span><span class="p">:</span><span class="nb">height</span><span class="p">(</span><span class="n">metrics</span><span class="p">)</span>
+<span class="w">    </span><span class="c">% Create a new Metric instance with all the values set correctly and</span>
+<span class="w">    </span><span class="c">% append it to the list</span>
+<span class="w">    </span><span class="n">m</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">py</span><span class="p">.</span><span class="n">mlflow</span><span class="p">.</span><span class="n">entities</span><span class="p">.</span><span class="n">Metric</span><span class="p">(</span><span class="w"> </span><span class="k">...</span>
+<span class="w">        </span><span class="n">key</span><span class="p">=</span><span class="s">"Accuracy"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">        </span><span class="n">value</span><span class="p">=</span><span class="n">metrics</span><span class="p">.</span><span class="n">accuracy</span><span class="p">(</span><span class="nb">i</span><span class="p">),</span><span class="w"> </span><span class="k">...</span>
+<span class="w">        </span><span class="nb">step</span><span class="p">=</span><span class="nb">int32</span><span class="p">(</span><span class="n">metrics</span><span class="p">.</span><span class="n">iteration</span><span class="p">(</span><span class="nb">i</span><span class="p">)),</span><span class="w"> </span><span class="k">...</span>
+<span class="w">        </span><span class="n">timestamp</span><span class="p">=</span><span class="nb">int64</span><span class="p">(</span><span class="n">metrics</span><span class="p">.</span><span class="n">timestamp</span><span class="p">(</span><span class="nb">i</span><span class="p">))</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="p">));</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>After this an <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.client.MlflowClient</span></code> instance can be created and its <code class="xref py py-meth docutils literal notranslate"><span class="pre">log_batch</span></code> method can be called with the list of metrics and the current run ID as input:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">mlflowClient</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">py</span><span class="p">.</span><span class="n">mlflow</span><span class="p">.</span><span class="n">client</span><span class="p">.</span><span class="n">MlflowClient</span><span class="p">();</span>
+<span class="n">mlflowClient</span><span class="p">.</span><span class="n">log_batch</span><span class="p">(</span><span class="n">mlflow</span><span class="p">.</span><span class="n">active_run</span><span class="p">().</span><span class="n">info</span><span class="p">.</span><span class="n">run_id</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Finally, the run should be ended:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">mlflow</span><span class="p">.</span><span class="n">end_run</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="example-logging-an-image">
+<h3>Example - logging an image<a class="headerlink" href="#example-logging-an-image" title="Link to this heading"></a></h3>
+<p>The MATLAB interface <em>does</em> supply the <a class="reference internal" href="FluentAPI.html#mlflow.log_image" title="mlflow.log_image"><code class="xref py py-func docutils literal notranslate"><span class="pre">mlflow.log_image()</span></code></a> function, <em>however</em> the image must be provided in the form of an <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.Image</span></code> which is not directly available in the MATLAB interface (or a <code class="xref py py-class docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> or an <code class="xref py py-class docutils literal notranslate"><span class="pre">PIL.Image.Image</span></code>). So we will need to use the Python interface to create such an <code class="xref py py-class docutils literal notranslate"><span class="pre">mlflow.Image</span></code> instance first. For example:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% Set an experiment and start a run</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">set_experiment</span><span class="p">(</span><span class="s">"Image Example"</span><span class="p">);</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">start_run</span><span class="p">();</span>
+
+<span class="c">% Create the mlflow.Image instance based on myImage.png from disk</span>
+<span class="c">% we will need the direct Python interface for this so the command</span>
+<span class="c">% starts with py.</span>
+<span class="n">im</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">py</span><span class="p">.</span><span class="n">mlflow</span><span class="p">.</span><span class="n">Image</span><span class="p">(</span><span class="s">'myImage.png'</span><span class="p">);</span>
+<span class="c">% We can then use log_image from the MATLAB interface</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">log_image</span><span class="p">(</span><span class="n">im</span><span class="p">,</span><span class="n">key</span><span class="p">=</span><span class="s">"MyImage"</span><span class="p">);</span>
+
+<span class="c">% End the run</span>
+<span class="n">mlflow</span><span class="p">.</span><span class="n">end_run</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="InstallationPython.html" class="btn btn-neutral float-left" title="Installation - Python based Interfaces" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="FluentAPI.html" class="btn btn-neutral float-right" title="MLflow MATLAB Fluent API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

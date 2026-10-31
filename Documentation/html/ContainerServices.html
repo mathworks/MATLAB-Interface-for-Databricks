@@ -1,0 +1,127 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Using Databricks Container Services / Docker</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:46" dir="auto" id="user-content-using-databricks-container-services--docker">Using Databricks Container Services / Docker</h1>
+<h2 data-sourcepos="3:1-3:30" dir="auto" id="user-content-matlab-runtime-using-docker">MATLAB Runtime using Docker</h2>
+<p data-sourcepos="5:1-8:32" dir="auto">To execute compiled MATLAB code on a Databricks® cluster the MATLAB runtime corresponding
+to the version of the MATLAB® Compiler SDK™ used to create the <code data-sourcepos="6:74-6:79">.whl</code> file containing
+the compiled code must be installed on the cluster. Installing the MATLAB Runtime on a
+cluster can be done in two ways:</p>
+<ul data-sourcepos="10:1-20:132" dir="auto">
+<li data-sourcepos="10:1-14:16">
+<p data-sourcepos="10:3-14:16">Using an <a data-sourcepos="10:12-10:42" href="InitScripts.html"><code data-sourcepos="10:13-10:18">init</code> script</a>, which is a Bash script that installs
+the appropriate MATLAB runtime version during the creation of a cluster. Using
+docker rather than init scripts is strongly the recommended approach and is required
+in some circumstances, e.g. Databricks runtimes 17 and greater and clusters without
+internet access.</p>
+</li>
+<li data-sourcepos="16:1-20:132">
+<p data-sourcepos="16:3-17:71">A docker image can be created to initialize cluster nodes. The use of docker
+is is described in the MATLAB on Databricks Reference Architecture see:</p>
+<ul data-sourcepos="19:3-20:132">
+<li data-sourcepos="19:3-19:149"><a data-sourcepos="19:5-19:149" href="https://github.com/mathworks-ref-arch/matlab-on-databricks/blob/main/guides/PSP%2520docs/InstallMATLABRuntime.html" rel="nofollow noreferrer noopener" target="_blank">Installing MATLAB Runtime guide</a></li>
+<li data-sourcepos="20:3-20:132"><a data-sourcepos="20:5-20:132" href="https://github.com/mathworks-ref-arch/matlab-on-databricks/tree/main/resources/dockerfiles/runtime" rel="nofollow noreferrer noopener" target="_blank">MATLAB Runtime docker file</a></li>
+</ul>
+</li>
+</ul>
+<p data-sourcepos="22:1-22:188" dir="auto">For more details on using Databricks Container Services see: <a data-sourcepos="22:62-22:187" href="https://docs.databricks.com/en/compute/custom-containers.html" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/en/compute/custom-containers.html</a>.</p>
+<p data-sourcepos="24:1-24:175" dir="auto">For more details on the MATLAB runtime see: <a data-sourcepos="24:45-24:174" href="https://www.mathworks.com/products/compiler/matlab-runtime.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/products/compiler/matlab-runtime.html</a>.</p>
+<h2 data-sourcepos="26:1-26:31" dir="auto" id="user-content-building-dockerfile-variants">Building Dockerfile variants</h2>
+<p data-sourcepos="28:1-31:64" dir="auto">It may be required to have a number of Docker® images for different combinations of
+the MATLAB and Databricks runtimes. The function <code data-sourcepos="29:50-29:102">Software/MATLABDocker/Runtime/generateBuildscript.m</code>
+can be used to generate a build script for multiple images that supports local docker
+builds (default) and Azure® Container Registry based builds.</p>
+<p data-sourcepos="33:1-36:84" dir="auto">In the azure case this uses the Azure CLI to build the images remotely on Azure.
+Thus avoiding locally storing and transferring a potentially large number of relatively
+big images. Note the <code data-sourcepos="35:22-35:29">nowait</code> optional argument can be used to allow the build to
+proceed in the background on Azure. Testing with a sample file is recommended first.</p>
+<p data-sourcepos="38:1-38:95" dir="auto">For example the resulting Azure script will consist of repeating Azure CLI commands similar to:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-shell" data-canonical-lang="bash" data-sourcepos="40:1-51:3" v-pre="true"><code><span class="line" data-lang="shell" id="LC1"><span class="c"># Build docker image for MATLAB R2025b and Databricks 17.3</span></span>
+<span class="line" data-lang="shell" id="LC2">az acr build <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC3">    <span class="nt">--registry</span> <span class="nv">$REPO</span> <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC4">    <span class="nt">--image</span> <span class="s2">"matlab/databricks/runtime:r2025b-dbx17.3"</span> <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC5">    <span class="nt">--build-arg</span> <span class="nv">MATLAB_RELEASE</span><span class="o">=</span>R2025b <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC6">    <span class="nt">--build-arg</span> <span class="nv">DATABRICKS_RUNTIME_VERSION</span><span class="o">=</span><span class="s2">"17.3"</span> <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC7">    <span class="nt">--build-arg</span> <span class="nv">MATLAB_DEPS_URL</span><span class="o">=</span><span class="s2">"https://raw.githubusercontent.com/mathworks-ref-arch/container-images/refs/heads/main/matlab-runtime-deps/r2025b/ubuntu24.04/base-dependencies.txt"</span> <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC8">    <span class="nt">--build-arg</span> <span class="nv">MATLAB_RUNTIME_URL</span><span class="o">=</span><span class="s2">"https://ssd.mathworks.com/supportfiles/downloads/R2025b/Release/3/deployment_files/installer/complete/glnxa64/MATLAB_Runtime_R2025b_Update_3_glnxa64.zip"</span> <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC9">    <span class="nt">--build-arg</span> <span class="nv">UBUNTU_VERSION</span><span class="o">=</span><span class="s2">"24.04"</span> <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC10">    <span class="nt">-f</span> Dockerfile <span class="nb">.</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="53:1-55:64" dir="auto">Building all possible images will take quite some time and not all may be required
+based on an organization's MATLAB and Databricks version usage policy.
+Comment out unneeded combinations or adjust the input arguments.</p>
+<blockquote data-sourcepos="57:1-58:57" dir="auto">
+<p data-sourcepos="57:3-58:57">The Dockerfiles should be periodically regenerated to along with the resulting
+images to receive updated MATLAB &amp; Databricks runtimes.</p>
+</blockquote>
+<h2 data-sourcepos="60:1-60:62" dir="auto" id="user-content-using-an-existing-image-with-azure-container-registry-acr">Using an existing image with Azure Container Registry (ACR)</h2>
+<p data-sourcepos="62:1-65:38" dir="auto">The following commands show how an image can be pulled locally, verified, tagged
+and then pushed to ACR using the Azure <code data-sourcepos="63:40-63:43">az</code> CLI tool and <code data-sourcepos="63:58-63:65">docker</code>.
+The ACR repository should be in the same Azure region as the Databricks
+Workspace which will use the image(s).</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-shell" data-canonical-lang="bash" data-sourcepos="67:1-83:3" v-pre="true"><code><span class="line" data-lang="shell" id="LC1"><span class="c"># Log into a repo named myacrrepo</span></span>
+<span class="line" data-lang="shell" id="LC2">az acr login <span class="nt">-n</span> myacrrepo</span>
+<span class="line" data-lang="shell" id="LC3"/>
+<span class="line" data-lang="shell" id="LC4"><span class="c"># Pull the required image locally</span></span>
+<span class="line" data-lang="shell" id="LC5">myregistry.mathworks.com/matlab/databricks/runtime:r2025b-dbx17.3</span>
+<span class="line" data-lang="shell" id="LC6">docker pull myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3</span>
+<span class="line" data-lang="shell" id="LC7"/>
+<span class="line" data-lang="shell" id="LC8"><span class="c"># Start the image locally for optional sanity checking or testing</span></span>
+<span class="line" data-lang="shell" id="LC9">docker run <span class="nt">-it</span> <span class="nt">--rm</span> myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3</span>
+<span class="line" data-lang="shell" id="LC10"/>
+<span class="line" data-lang="shell" id="LC11"><span class="c"># Tag the image</span></span>
+<span class="line" data-lang="shell" id="LC12">docker tag myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3 myacrrepo.azurecr.io/matlab/databricks/runtime:r2025b-dbx17.3</span>
+<span class="line" data-lang="shell" id="LC13"/>
+<span class="line" data-lang="shell" id="LC14"><span class="c"># Push the image to myacrrepo.azurecr.io</span></span>
+<span class="line" data-lang="shell" id="LC15">docker push myacrrepo.azurecr.io/matlab/databricks/runtime:r2025b-dbx17.3</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="85:1-85:35" dir="auto" id="user-content-using-an-existing-image-with-aws">Using an existing image with AWS</h2>
+<p data-sourcepos="87:1-91:38" dir="auto">The following commands show how an image can be pulled locally, verified, tagged
+and then pushed to an AWS® Elastic Container Registry (ECR) using the
+AWS <code data-sourcepos="89:5-89:9">aws</code> CLI tool and <code data-sourcepos="89:24-89:31">docker</code>.
+The ECR repository should be in the same AWS region as the Databricks
+Workspace which will use the image(s).</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-shell" data-canonical-lang="bash" data-sourcepos="93:1-113:3" v-pre="true"><code><span class="line" data-lang="shell" id="LC1"><span class="c"># First, ensure AWS credentials stored in the ~/.aws/credentials file are current.</span></span>
+<span class="line" data-lang="shell" id="LC2"/>
+<span class="line" data-lang="shell" id="LC3"><span class="c"># Make a variable for the registry</span></span>
+<span class="line" data-lang="shell" id="LC4"><span class="nb">export </span><span class="nv">DOCKER_REGISTRY</span><span class="o">=</span>&lt;REDACTED&gt;.dkr.ecr.&lt;aws-region&gt;.amazonaws.com</span>
+<span class="line" data-lang="shell" id="LC5"/>
+<span class="line" data-lang="shell" id="LC6"><span class="c"># Login to the registry</span></span>
+<span class="line" data-lang="shell" id="LC7">aws ecr get-login-password <span class="nt">--region</span> us-west-2 | docker login <span class="nt">--username</span> AWS <span class="nt">--password-stdin</span> <span class="nv">$DOCKER_REGISTRY</span></span>
+<span class="line" data-lang="shell" id="LC8"/>
+<span class="line" data-lang="shell" id="LC9"><span class="c"># Pull the required image locally</span></span>
+<span class="line" data-lang="shell" id="LC10">docker pull  myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3</span>
+<span class="line" data-lang="shell" id="LC11"/>
+<span class="line" data-lang="shell" id="LC12"><span class="c"># Start the image locally for optional sanity checking or testing</span></span>
+<span class="line" data-lang="shell" id="LC13">docker run <span class="nt">-it</span> <span class="nt">--rm</span> myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3</span>
+<span class="line" data-lang="shell" id="LC14"/>
+<span class="line" data-lang="shell" id="LC15"><span class="c"># Tag the image</span></span>
+<span class="line" data-lang="shell" id="LC16">docker tag myregistry.example.com/matlab/databricks/runtime:r2025b-dbx17.3 <span class="nv">$DOCKER_REGISTRY</span>/matlab/databricks/runtime:r2025b-dbx17.3</span>
+<span class="line" data-lang="shell" id="LC17"/>
+<span class="line" data-lang="shell" id="LC18"><span class="c"># Push the image to repository</span></span>
+<span class="line" data-lang="shell" id="LC19">docker push <span class="nv">$DOCKER_REGISTRY</span>/matlab/databricks/runtime:r2025b-dbx17.3</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="115:1-115:26" dir="auto" id="user-content-repository-permissions">Repository permissions</h3>
+<p data-sourcepos="117:1-118:77" dir="auto">The repository that was created for this example, was given the following permissions to allow
+for pushing and pulling images. Please consult with local AWS administrators.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-json" data-canonical-lang="json" data-sourcepos="120:1-148:3" v-pre="true"><code><span class="line" data-lang="json" id="LC1"><span class="p">{</span></span>
+<span class="line" data-lang="json" id="LC2"><span class="w">  </span><span class="nl">"Version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2012-10-17"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC3"><span class="w">  </span><span class="nl">"Statement"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></span>
+<span class="line" data-lang="json" id="LC4"><span class="w">    </span><span class="p">{</span></span>
+<span class="line" data-lang="json" id="LC5"><span class="w">      </span><span class="nl">"Sid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow push"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC6"><span class="w">      </span><span class="nl">"Effect"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Allow"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC7"><span class="w">      </span><span class="nl">"Principal"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span class="line" data-lang="json" id="LC8"><span class="w">        </span><span class="nl">"AWS"</span><span class="p">:</span><span class="w"> </span><span class="s2">"arn:aws:iam::&lt;REDACTED&gt;:root"</span></span>
+<span class="line" data-lang="json" id="LC9"><span class="w">      </span><span class="p">},</span></span>
+<span class="line" data-lang="json" id="LC10"><span class="w">      </span><span class="nl">"Action"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></span>
+<span class="line" data-lang="json" id="LC11"><span class="w">        </span><span class="s2">"ecr:BatchCheckLayerAvailability"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC12"><span class="w">        </span><span class="s2">"ecr:BatchGetImage"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC13"><span class="w">        </span><span class="s2">"ecr:CompleteLayerUpload"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC14"><span class="w">        </span><span class="s2">"ecr:DescribeRepositories"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC15"><span class="w">        </span><span class="s2">"ecr:GetAuthorizationToken"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC16"><span class="w">        </span><span class="s2">"ecr:GetDownloadUrlForLayer"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC17"><span class="w">        </span><span class="s2">"ecr:InitiateLayerUpload"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC18"><span class="w">        </span><span class="s2">"ecr:ListImages"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC19"><span class="w">        </span><span class="s2">"ecr:ListTagsForResource"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC20"><span class="w">        </span><span class="s2">"ecr:PutImage"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC21"><span class="w">        </span><span class="s2">"ecr:TagResource"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC22"><span class="w">        </span><span class="s2">"ecr:UntagResource"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC23"><span class="w">        </span><span class="s2">"ecr:UploadLayerPart"</span></span>
+<span class="line" data-lang="json" id="LC24"><span class="w">      </span><span class="p">]</span></span>
+<span class="line" data-lang="json" id="LC25"><span class="w">    </span><span class="p">}</span></span>
+<span class="line" data-lang="json" id="LC26"><span class="w">  </span><span class="p">]</span></span>
+<span class="line" data-lang="json" id="LC27"><span class="p">}</span></span></code></pre><copy-code/><insert-code-snippet/></div></div></main><script src="resources/copycode.js">//</script></body></html>

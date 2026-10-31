@@ -1,0 +1,365 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation - Python based Interfaces &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Fluent MATLAB Interface for Tracking" href="Fluent.html" />
+    <link rel="prev" title="MATLAB Interface for MLflow" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">MATLAB Interface <em>for MLflow</em></a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation and Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-environment">Python Environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#uv">uv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-virtual-environment-venv">Python Virtual Environment <code class="docutils literal notranslate"><span class="pre">venv</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-configuration">MATLAB Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlflow-tracking-servers">MLflow Tracking servers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#self-signed-https-servers">Self-signed HTTPS servers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-authentication">Server authentication</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Fluent.html">Fluent MATLAB Interface for Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="FluentAPI.html">MLflow MATLAB Fluent API</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation and Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#requirements">Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-environment">Python Environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#uv">uv</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-virtual-environment-venv">Python Virtual Environment <code class="docutils literal notranslate"><span class="pre">venv</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-configuration">MATLAB Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mlflow-tracking-servers">MLflow Tracking servers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#self-signed-https-servers">Self-signed HTTPS servers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#server-authentication">Server authentication</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_flavor/Introduction.html">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_flavor/Usage.html">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_flavor/subflavors/none.html">none sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_flavor/subflavors/compiler_sdk_python.html">compiler_sdk_python sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_flavor/subflavors/onnx.html">onnx sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="QuickStart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="MLflowAPI.html">MATLAB Interface <em>for MLflow</em> - API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">MATLAB Interface <em>for MLflow</em></a></li>
+      <li class="breadcrumb-item active">Installation - Python based Interfaces</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/matlab-mlflow/InstallationPython.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation-python-based-interfaces">
+<h1>Installation - Python based Interfaces<a class="headerlink" href="#installation-python-based-interfaces" title="Link to this heading"></a></h1>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This installation step is only required when wanting to work with the <a class="reference internal" href="Fluent.html"><span class="std std-doc">fluent mlflow interface in MATLAB</span></a> and/or the <a class="reference internal" href="matlab_flavor/Introduction.html"><span class="std std-doc">MATLAB flavor</span></a>. It is not necessary to perform these steps when you only want to work with the <a class="reference internal" href="QuickStart.html"><span class="std std-doc">RESTful interface to mlflow</span></a>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When working with this mlflow package as part of another MathWorks Product Support Package like &quot;MATLAB Interface <em>for Databricks</em>&quot; or &quot;MATLAB Interface <em>for Azure Machine Learning</em>&quot; then under certain circumstances, your environment may already have been pre-configured with Python and the <code class="docutils literal notranslate"><span class="pre">mlflow</span></code> package, in which case these steps do <em>not</em> have to be repeated. This is for example true when working with &quot;MATLAB as Custom Application on AzureML&quot;.</p>
+</div>
+<section id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Python 3.10 (or newer) environment with:</p>
+<ul>
+<li><p>mlflow</p></li>
+<li><p>matlab-mlflow (this package)</p></li>
+<li><p>onnx (if working with ONNX sub flavor)</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="python-environment">
+<h2>Python Environment<a class="headerlink" href="#python-environment" title="Link to this heading"></a></h2>
+<p>A <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> and <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> are included inside the <code class="docutils literal notranslate"><span class="pre">Software/Python</span></code> directory which can help with setting up such a Python (virtual) environment with the correct tools. Instructions are included below on how to setup the environment using <a class="reference internal" href="#python-virtual-environment-venv">Python Virtual Environment (venv)</a> or alternatively using <a class="reference internal" href="#uv">uv</a>. You are of course also free to setup this environment in any other way you like (conda, virtualenv, system package manager, etc.)</p>
+<section id="uv">
+<h3>uv<a class="headerlink" href="#uv" title="Link to this heading"></a></h3>
+<p>Apart from managing virtual environments and Python packages, <a class="reference external" href="https://docs.astral.sh/uv/">uv</a> can also manage Python versions itself and create virtual environments with/for specific Python versions. For most <code class="docutils literal notranslate"><span class="pre">uv</span></code> commands a <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">&lt;version&gt;</span></code> option can be added, e.g. <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">3.10</span></code> or <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">3.12</span></code> to target Python version 3.10 or 3.12 respectively. In the examples below <code class="docutils literal notranslate"><span class="pre">-p</span> <span class="pre">3.10</span></code> is used but this can be changed. Make sure to choose a Python version which is compatible with the MATLAB release(s) you want to work with, see:</p>
+<p><a class="reference external" href="https://www.mathworks.com/support/requirements/python-compatibility.html">https://www.mathworks.com/support/requirements/python-compatibility.html</a></p>
+<section id="linux">
+<h4>Linux<a class="headerlink" href="#linux" title="Link to this heading"></a></h4>
+<p>To create a virtual environment <code class="docutils literal notranslate"><span class="pre">.venv</span></code> inside the <code class="docutils literal notranslate"><span class="pre">Software/Python</span></code> directory with the correct packages for the project using <code class="docutils literal notranslate"><span class="pre">uv</span></code>, use:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>Software/Python
+<span class="gp">$ </span>uv<span class="w"> </span>sync<span class="w"> </span>-p<span class="w"> </span><span class="m">3</span>.10
+</pre></div>
+</div>
+</section>
+<section id="windows">
+<h4>Windows<a class="headerlink" href="#windows" title="Link to this heading"></a></h4>
+<p>To create a virtual environment <code class="docutils literal notranslate"><span class="pre">.venv</span></code> inside the <code class="docutils literal notranslate"><span class="pre">Software/Python</span></code> directory with the correct packages for the project using <code class="docutils literal notranslate"><span class="pre">uv</span></code>, use:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">c:\work\matlab-mlflow&gt;</span> <span class="k">cd</span> Software\Python
+<span class="gp">c:\work\matlab-mlflow\Software\Python&gt;</span> uv sync -p 3.10
+</pre></div>
+</div>
+</section>
+</section>
+<section id="python-virtual-environment-venv">
+<h3>Python Virtual Environment <code class="docutils literal notranslate"><span class="pre">venv</span></code><a class="headerlink" href="#python-virtual-environment-venv" title="Link to this heading"></a></h3>
+<p>When working with Python standard <code class="docutils literal notranslate"><span class="pre">venv</span></code> module to create a virtual environment you first need to install a particular Python (with <code class="docutils literal notranslate"><span class="pre">venv</span></code> module) version and then you create the virtual environment using that Python version. Make sure to install a Python version that is compatible with the MATLAB version(s) you want to work with, see:</p>
+<p><a class="reference external" href="https://www.mathworks.com/support/requirements/python-compatibility.html">https://www.mathworks.com/support/requirements/python-compatibility.html</a></p>
+<p>On Linux you will typically install Python using your system package manager, on Windows you typically download an installer from <a class="reference external" href="https://python.org">https://python.org</a>. If your Linux distro version does not have a standard package for the Python version you want/need or if you cannot find a Windows installer for the right version, consider using a tool like <a class="reference internal" href="#uv">uv</a> which can also download and manage Python versions for you.</p>
+<section id="id1">
+<h4>Linux<a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<p>To create a virtual environment <code class="docutils literal notranslate"><span class="pre">.venv</span></code> inside the <code class="docutils literal notranslate"><span class="pre">Software/Python</span></code> directory, use:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">cd</span><span class="w"> </span>Software/Python
+<span class="gp">$ </span>python3.10<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We explicitly call <code class="docutils literal notranslate"><span class="pre">python3.10</span></code> here and not just <code class="docutils literal notranslate"><span class="pre">python</span></code> to ensure we indeed create a virtual environment for that Python version specifically and not using any other Python version which may have been on <code class="docutils literal notranslate"><span class="pre">PATH</span></code>.</p>
+</div>
+<p>And then install the required packages by activating the environment:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span><span class="nb">source</span><span class="w"> </span>.venv/bin/activate
+</pre></div>
+</div>
+<p>and then using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h4>Windows<a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<p>To create a virtual environment <code class="docutils literal notranslate"><span class="pre">.venv</span></code> inside the <code class="docutils literal notranslate"><span class="pre">Software/Python</span></code> directory, use:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">c:\work\matlab-mlflow&gt;</span> <span class="k">cd</span> Software\Python
+<span class="gp">c:\work\matlab-mlflow\Software\Python&gt;</span> <span class="nv">%LOCALAPPDATA%</span>\Programs\Python\Python310\python.exe -m venv .venv
+</pre></div>
+</div>
+<blockquote>
+<div><p><em>Assuming CPython 3.10 has been installed in its default (user-based) location. If it (or a different version) has been installed elsewhere, replace the path <code class="docutils literal notranslate"><span class="pre">%LOCALAPPDATA%\Programs\Python\Python310</span></code> as appropriate.</em></p>
+</div></blockquote>
+<p>And then install the required packages by activating the environment:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">c:\work\matlab-mlflow\Software\Python&gt;</span> .venv\Scripts\activate
+</pre></div>
+</div>
+<p>and then using <code class="docutils literal notranslate"><span class="pre">pip</span></code>:</p>
+<div class="highlight-doscon notranslate"><div class="highlight"><pre><span></span><span class="gp">c:\work\matlab-mlflow\Software\Python&gt;</span> pip install -r requirements.txt
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="matlab-configuration">
+<h2>MATLAB Configuration<a class="headerlink" href="#matlab-configuration" title="Link to this heading"></a></h2>
+<p>To add the relevant MATLAB code to your MATLABPATH inside MATLAB, use <code class="docutils literal notranslate"><span class="pre">startup.m</span></code> from the <code class="docutils literal notranslate"><span class="pre">Software/MATLAB</span></code> directory:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="go">% For example, cd to the right directory and run startup</span>
+<span class="gp">&gt;&gt; </span><span class="nb">cd</span><span class="w"> </span><span class="n">Software</span><span class="o">/</span><span class="n">MATLAB</span>
+<span class="gp">&gt;&gt; </span><span class="nb">startup</span>
+<span class="go">% Or for example use run with the absolute path of the script</span>
+<span class="gp">&gt;&gt; </span><span class="nb">run</span><span class="p">(</span><span class="s">'/work/matlab-mlflow/Software/MATLAB/startup.m'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Further, to configure MATLAB's Python Interface to work with the (virtual) environment which contains the <a class="reference internal" href="#requirements">required Python packages</a>, use the <a class="reference external" href="https://www.mathworks.com/help/matlab/ref/pyenv.html"><code class="docutils literal notranslate"><span class="pre">pyenv</span></code></a> function:</p>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="go">% For example on Linux</span>
+<span class="gp">&gt;&gt; </span><span class="nb">pyenv</span><span class="p">(</span><span class="s">'Version'</span><span class="p">,</span><span class="s">'/work/matlab-mlflow/Software/Python/.venv/bin/python'</span><span class="p">)</span>
+<span class="go">% Or on Windows</span>
+<span class="gp">&gt;&gt; </span><span class="nb">pyenv</span><span class="p">(</span><span class="s">'Version'</span><span class="p">,</span><span class="s">'c:\work\matlab-mlflow\Software\Python\.venv\Scripts/pythonw.exe'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>This is a persistent setting and does not have to be repeated every MATLAB session.</em></p>
+</section>
+<section id="mlflow-tracking-servers">
+<h2>MLflow Tracking servers<a class="headerlink" href="#mlflow-tracking-servers" title="Link to this heading"></a></h2>
+<p>Both the Fluent interface and the MATLAB MLflow flavor support working with MLflow (compatible<a class="footnote-reference brackets" href="#id4" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>) Tracking servers. This is supported in the same way as in other Python MLflow packages, see:</p>
+<p><a class="reference external" href="https://mlflow.org/docs/latest/self-hosting/architecture/tracking-server/#logging_to_a_tracking_server">https://mlflow.org/docs/latest/self-hosting/architecture/tracking-server/#logging_to_a_tracking_server</a></p>
+<p>So that is by either setting environment variable <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code> before using the package or by explicitly calling <code class="docutils literal notranslate"><span class="pre">mlflow.set_tracking_uri</span></code> in your MATLAB code.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>In some environments <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_URI</span></code> may have been automatically set for you. E.g. if you are working on AzureML Compute Instances, Microsoft will automatically set it to point the Model storage of your AzureML Workspace.</p>
+</div>
+<section id="self-signed-https-servers">
+<h3>Self-signed HTTPS servers<a class="headerlink" href="#self-signed-https-servers" title="Link to this heading"></a></h3>
+<p>If you are working with a server accessed over HTTPS and the server is using a self-signed certificate you can set environment variable <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_SERVER_CERT_PATH</span></code> and point it to the (PEM encoded) certificate of the server to allow the MATLAB Fluent interface to work with it.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This must be set <em>before</em> interacting with <em>any</em> of the functionality in the Fluent- or MATLAB flavor interfaces. Setting the variable after the interfaces have already been used in a MATLAB session will have no effect. Restart MATLAB as appropriate.</p>
+</div>
+</section>
+<section id="server-authentication">
+<h3>Server authentication<a class="headerlink" href="#server-authentication" title="Link to this heading"></a></h3>
+<p>If your server requires username/password or token authentication, configure environment variables <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_USERNAME</span></code> and <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_PASSWORD</span></code>, or <code class="docutils literal notranslate"><span class="pre">MLFLOW_TRACKING_TOKEN</span></code> respectively.</p>
+<p>If your server requires a custom authentication plugin, install the plugin in the <a class="reference internal" href="#python-environment">Python environment as used by MATLAB</a> and provide any further configurations as documented in the plugin documentation.</p>
+</section>
+</section>
+</section>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">1</a><span class="fn-bracket">]</span></span>
+<p>For example, Databricks and Azure Machine Learning offer experiment and model tracking through a MLflow <em>compatbile</em> interface. I.e. they do not literally use <a class="reference external" href="https://mlflow.org/docs/latest/self-hosting/architecture/tracking-server/"><em>the</em> MLflow Tracking Server</a> but they <em>do</em> offer endpoints which are fully API compatible with MLflow and are therefore also compatible with this package.</p>
+</aside>
+</aside>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="MATLAB Interface for MLflow" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Fluent.html" class="btn btn-neutral float-right" title="Fluent MATLAB Interface for Tracking" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

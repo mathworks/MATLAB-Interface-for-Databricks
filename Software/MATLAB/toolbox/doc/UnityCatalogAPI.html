@@ -1,0 +1,362 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Unity Catalog API</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:19" dir="auto" id="user-content-unity-catalog-api">Unity Catalog API</h1>
+<p data-sourcepos="3:1-4:125" dir="auto">To learn more about Unity Catalog in general, refer to its product page on the
+Databricks® website: <a data-sourcepos="4:26-4:125" href="https://www.databricks.com/product/unity-catalog" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/product/unity-catalog</a></p>
+<h2 data-sourcepos="6:1-6:51" dir="auto" id="user-content-data-access-in-matlab-interface-for-databricks">Data Access in MATLAB Interface <em data-sourcepos="6:36-6:51">for Databricks</em></h2>
+<ul data-sourcepos="8:1-9:91" dir="auto">
+<li data-sourcepos="8:1-10:0">Data managed by Unity Catalog can be accessed when working through the <a data-sourcepos="8:74-8:96" href="JDBCWorkflow.html">JDBC</a>
+and <a data-sourcepos="9:5-9:27" href="ODBCWorkflow.html">ODBC</a> and Database Toolbox™ workflows or Databricks Connect v2.</li>
+</ul>
+<h2 data-sourcepos="11:1-11:50" dir="auto" id="user-content-management-in-matlab-interface-for-databricks">Management in MATLAB Interface <em data-sourcepos="11:35-11:50">for Databricks</em></h2>
+<ul data-sourcepos="13:1-15:78" dir="auto">
+<li data-sourcepos="13:1-13:58">Unity Catalog can be managed through the API, see below.</li>
+<li data-sourcepos="14:1-15:78">Unity Catalog can also be managed by executing the correct manually written SQL
+queries through <a data-sourcepos="15:17-15:39" href="JDBCWorkflow.html">JDBC</a> and <a data-sourcepos="15:45-15:67" href="ODBCWorkflow.html">ODBC</a> workflows.</li>
+</ul>
+<p data-sourcepos="17:1-17:230" dir="auto">The Unity Catalog Management interface in this package consists of one class <code data-sourcepos="17:78-17:102">databricks.UnityCatalog</code>, which contains all API methods and a number of data structure classes in the <code data-sourcepos="17:182-17:221">databricks.datastructures.unitycatalog</code> package.</p>
+<p data-sourcepos="19:1-19:151" dir="auto">The methods and data structure classes follow the methods and objects described in the Unity Catalog API 2.1 Specification as documented by Databricks:</p>
+<p data-sourcepos="21:1-21:86" dir="auto"><a data-sourcepos="21:1-21:86" href="https://api-docs.databricks.com/rest/latest/unity-catalog-api-specification-2-1.html" rel="nofollow noreferrer noopener" target="_blank">https://api-docs.databricks.com/rest/latest/unity-catalog-api-specification-2-1.html</a></p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="{note}" data-sourcepos="23:1-25:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">The API on the Databricks end does not appear to behave *exactly* as documented by Databricks. Some of the `force` options of the `delete*` methods do not appear to have an actual effect. Also, updating shared objects does not appear to actually be possible through the `updateShare` operation therefore a separate `updateShareObjects` method has been implemented.</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="27:1-27:425" dir="auto">Some of the API methods return data structure classes as outputs, some take such data structure classes as inputs. The data structure classes do <em data-sourcepos="27:146-27:150">not</em> have methods like <code data-sourcepos="27:170-27:175">list</code>, <code data-sourcepos="27:178-27:185">create</code> or <code data-sourcepos="27:190-27:197">update</code> (the only method the data structure classes have is the static <a data-sourcepos="27:262-27:295" href="#frominputs-method"><code data-sourcepos="27:263-27:274">fromInputs</code></a> helper method). Methods like <code data-sourcepos="27:326-27:339">listCatalogs</code>, <code data-sourcepos="27:342-27:356">createCatalog</code> and <code data-sourcepos="27:362-27:376">updateCatalog</code> are part of the <code data-sourcepos="27:394-27:418">databricks.UnityCatalog</code> class.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="{hint}" data-sourcepos="29:1-59:4" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">This is a slightly different architecture than the other Databricks REST API interfaces in the package.</span>
+<span class="line" data-lang="plaintext" id="LC2"/>
+<span class="line" data-lang="plaintext" id="LC3">For example in the [Clusters API](ClusterAPI.md), to get Cluster information:</span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">```matlab</span>
+<span class="line" data-lang="plaintext" id="LC6">% First create a Cluster instance</span>
+<span class="line" data-lang="plaintext" id="LC7">cluster = databricks.Cluster();</span>
+<span class="line" data-lang="plaintext" id="LC8">% Then set the ID on this object</span>
+<span class="line" data-lang="plaintext" id="LC9">cluster.cluster_id = 'abc-def-ghi';</span>
+<span class="line" data-lang="plaintext" id="LC10">% Then refresh to get its details</span>
+<span class="line" data-lang="plaintext" id="LC11">cluster.refresh;</span>
+<span class="line" data-lang="plaintext" id="LC12"/>
+<span class="line" data-lang="plaintext" id="LC13">% Or to list the clusters, call list method of Cluster class</span>
+<span class="line" data-lang="plaintext" id="LC14">clusterList = databricks.Cluster.list();</span>
+<span class="line" data-lang="plaintext" id="LC15">```</span>
+<span class="line" data-lang="plaintext" id="LC16"/>
+<span class="line" data-lang="plaintext" id="LC17">But in the Unity Catalog API:</span>
+<span class="line" data-lang="plaintext" id="LC18"/>
+<span class="line" data-lang="plaintext" id="LC19">```matlab</span>
+<span class="line" data-lang="plaintext" id="LC20">% Create the Unity Catalog client instance</span>
+<span class="line" data-lang="plaintext" id="LC21">uc = databricks.UnityCatalog;</span>
+<span class="line" data-lang="plaintext" id="LC22"/>
+<span class="line" data-lang="plaintext" id="LC23">% Get catalog details by calling getCatalog on the client object with catalog</span>
+<span class="line" data-lang="plaintext" id="LC24">% name as input</span>
+<span class="line" data-lang="plaintext" id="LC25">catalog = uc.getCatalog('main');</span>
+<span class="line" data-lang="plaintext" id="LC26"/>
+<span class="line" data-lang="plaintext" id="LC27">% Or to list catalogs, call listCatalogs on the client object rather than list</span>
+<span class="line" data-lang="plaintext" id="LC28">% on some Catalog object</span>
+<span class="line" data-lang="plaintext" id="LC29">catalogList = uc.listCatalogs();</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="61:1-61:21" dir="auto" id="user-content-unitycatalog-class">UnityCatalog class</h2>
+<p data-sourcepos="63:1-63:56" dir="auto">To work with the UnityCatalog class, create an instance:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="65:1-67:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">uc</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">UnityCatalog</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="69:1-69:29" dir="auto">and call the desired methods:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="71:1-73:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">metastores</span> <span class="o">=</span> <span class="n">uc</span><span class="o">.</span><span class="n">listMetastores</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="75:1-75:93" dir="auto">All methods contain help text which can be accessed through the <code data-sourcepos="75:65-75:70">help</code> function, for example:</p>
+<blockquote data-sourcepos="77:1-77:79" dir="auto">
+<p data-sourcepos="77:3-77:79">If running MATLAB® on Databricks use the <code data-sourcepos="77:48-77:52">doc</code> command instead of <code data-sourcepos="77:73-77:78">help</code>.</p>
+</blockquote>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="79:1-109:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; help databricks.UnityCatalog.createCatalog</span>
+<span class="line" data-lang="plaintext" id="LC2">  createCatalog creates a new catalog.</span>
+<span class="line" data-lang="plaintext" id="LC3"/>
+<span class="line" data-lang="plaintext" id="LC4">  Example:</span>
+<span class="line" data-lang="plaintext" id="LC5"/>
+<span class="line" data-lang="plaintext" id="LC6">    result = uc.createCatalog(cataloginfo);</span>
+<span class="line" data-lang="plaintext" id="LC7"/>
+<span class="line" data-lang="plaintext" id="LC8">  Required Inputs:</span>
+<span class="line" data-lang="plaintext" id="LC9">    cataloginfo</span>
+<span class="line" data-lang="plaintext" id="LC10">        Description:</span>
+<span class="line" data-lang="plaintext" id="LC11">            settings/configuration for the new catalog</span>
+<span class="line" data-lang="plaintext" id="LC12">        Type:</span>
+<span class="line" data-lang="plaintext" id="LC13">            databricks.datastructures.unitycatalog.CatalogInfo</span>
+<span class="line" data-lang="plaintext" id="LC14">        Required Properties in the data structure which must be set:</span>
+<span class="line" data-lang="plaintext" id="LC15">            name</span>
+<span class="line" data-lang="plaintext" id="LC16">        Optional Properties in the data structure which can be set:</span>
+<span class="line" data-lang="plaintext" id="LC17">            comment</span>
+<span class="line" data-lang="plaintext" id="LC18">            ucproperties</span>
+<span class="line" data-lang="plaintext" id="LC19">            provider_name</span>
+<span class="line" data-lang="plaintext" id="LC20">            share_name</span>
+<span class="line" data-lang="plaintext" id="LC21"/>
+<span class="line" data-lang="plaintext" id="LC22">  Outputs:</span>
+<span class="line" data-lang="plaintext" id="LC23">    result</span>
+<span class="line" data-lang="plaintext" id="LC24">        Description:</span>
+<span class="line" data-lang="plaintext" id="LC25">            settings/configuration of the created catalog</span>
+<span class="line" data-lang="plaintext" id="LC26">        Type:</span>
+<span class="line" data-lang="plaintext" id="LC27">            databricks.datastructures.unitycatalog.CatalogInfo</span>
+<span class="line" data-lang="plaintext" id="LC28"/>
+<span class="line" data-lang="plaintext" id="LC29">  See Also: databricks.datastructures.unitycatalog.CatalogInfo</span></code></pre><copy-code/><insert-code-snippet/></div>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="{hint}" data-sourcepos="111:1-113:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">This can also be called on an object instance, e.g. `&gt;&gt; help uc.createCatalog`.</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="115:1-115:187" dir="auto">The help text shows exactly what inputs the methods expects and if the input is a data structure object which properties must and can be set. It also shows what output the method returns.</p>
+<p data-sourcepos="117:1-117:222" dir="auto">An overview of the methods is listed below. For further details on how to call each method exactly use the <code data-sourcepos="117:108-117:113">help</code> function or refer to the full <a data-sourcepos="117:145-117:200" href="DatabricksAPI.html#databricksunitycatalog">API Reference</a> in the documentation.</p>
+<h3 data-sourcepos="119:1-119:11" dir="auto" id="user-content-methods">Methods</h3>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="{eval-rst}" data-sourcepos="121:1-182:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">:createCatalog:                   Creates a new catalog.</span>
+<span class="line" data-lang="plaintext" id="LC2">:createExternalLocation:          Creates a new external location.</span>
+<span class="line" data-lang="plaintext" id="LC3">:createMetastore:                 Creates a new metastore.</span>
+<span class="line" data-lang="plaintext" id="LC4">:createMetastoreAssignment:       Creates meta store assignments.</span>
+<span class="line" data-lang="plaintext" id="LC5">:createProvider:                  Creates a delta sharing provider.</span>
+<span class="line" data-lang="plaintext" id="LC6">:createRecipient:                 Creates a new delta sharing recipient.</span>
+<span class="line" data-lang="plaintext" id="LC7">:createSchema:                    Creates a new schema.</span>
+<span class="line" data-lang="plaintext" id="LC8">:createShare:                     Creates new delta sharing share.</span>
+<span class="line" data-lang="plaintext" id="LC9">:createStorageCredential:         Creates a new storage credential.</span>
+<span class="line" data-lang="plaintext" id="LC10">:deleteCatalog:                   Deletes a catalog. </span>
+<span class="line" data-lang="plaintext" id="LC11">:deleteExternalLocation:          Deletes an external location.</span>
+<span class="line" data-lang="plaintext" id="LC12">:deleteMetastore:                 Deletes a metastore.</span>
+<span class="line" data-lang="plaintext" id="LC13">:deleteMetastoreAssignment:       Deletes a metastore assignment.</span>
+<span class="line" data-lang="plaintext" id="LC14">:deleteProvider:                  Deletes a delta sharing provider.</span>
+<span class="line" data-lang="plaintext" id="LC15">:deleteRecipient:                 Deletes a delta sharing recipient.</span>
+<span class="line" data-lang="plaintext" id="LC16">:deleteSchema:                    Deletes a schema.</span>
+<span class="line" data-lang="plaintext" id="LC17">:deleteShare:                     Deletes delta sharing share.</span>
+<span class="line" data-lang="plaintext" id="LC18">:deleteStorageCredential:         Deletes a storage credential.</span>
+<span class="line" data-lang="plaintext" id="LC19">:deleteTable:                     Deletes a table.</span>
+<span class="line" data-lang="plaintext" id="LC20">:getArtifactAllowlists:           Gets the artifact allowlist of a certain artifact type.</span>
+<span class="line" data-lang="plaintext" id="LC21">:getCatalog:                      Gets catalog information.</span>
+<span class="line" data-lang="plaintext" id="LC22">:getExternalLocation:             Gets external location information.</span>
+<span class="line" data-lang="plaintext" id="LC23">:getMetastore:                    Gets metastore information.</span>
+<span class="line" data-lang="plaintext" id="LC24">:getMyGroups:                     Gets group membership information of the user.</span>
+<span class="line" data-lang="plaintext" id="LC25">:getMyInfo:                       Retrieves current user information as it relates to Unity Catalog.</span>
+<span class="line" data-lang="plaintext" id="LC26">:getPermissions:                  Gets permissions as set for a given object.</span>
+<span class="line" data-lang="plaintext" id="LC27">:getProvider:                     Gets delta sharing provider information.</span>
+<span class="line" data-lang="plaintext" id="LC28">:getRecipient:                    Gets delta sharing recipient information.</span>
+<span class="line" data-lang="plaintext" id="LC29">:getRecipientSharePermissions:    Gets permissions for the given delta.</span>
+<span class="line" data-lang="plaintext" id="LC30">:getSchema:                       Gets schema information.</span>
+<span class="line" data-lang="plaintext" id="LC31">:getShare:                        Gets delta sharing share information.</span>
+<span class="line" data-lang="plaintext" id="LC32">:getSharePermissions:             Gets permissions of specified delta sharing share.</span>
+<span class="line" data-lang="plaintext" id="LC33">:getStorageCredential:            Gets storage credential information.</span>
+<span class="line" data-lang="plaintext" id="LC34">:getTable:                        Gets table information.</span>
+<span class="line" data-lang="plaintext" id="LC35">:listCatalogs:                    Gets list of catalogs.</span>
+<span class="line" data-lang="plaintext" id="LC36">:listExternalLocations:           Gets list of external locations.</span>
+<span class="line" data-lang="plaintext" id="LC37">:listFiles:                       List files in an external URL. </span>
+<span class="line" data-lang="plaintext" id="LC38">:listMetastores:                  Lists metastores.</span>
+<span class="line" data-lang="plaintext" id="LC39">:listProviders:                   Lists delta sharing providers.</span>
+<span class="line" data-lang="plaintext" id="LC40">:listProviderShares:              Lists delta sharing shares for a given provider.</span>
+<span class="line" data-lang="plaintext" id="LC41">:listRecipients:                  Lists delta sharing recipients.</span>
+<span class="line" data-lang="plaintext" id="LC42">:listSchemas:                     Lists schemas in a given catalog.</span>
+<span class="line" data-lang="plaintext" id="LC43">:listShares:                      Lists delta sharing shares.</span>
+<span class="line" data-lang="plaintext" id="LC44">:listStorageCredentials:          Lists storage credentials.</span>
+<span class="line" data-lang="plaintext" id="LC45">:listTables:                      Lists tables in a given catalog and schema.</span>
+<span class="line" data-lang="plaintext" id="LC46">:listTableSummaries:              Lists high level table information for tables in a given catalog.</span>
+<span class="line" data-lang="plaintext" id="LC47">:rotateRecipientToken:            Rotates the token for an external recipient.</span>
+<span class="line" data-lang="plaintext" id="LC48">:setArtifactAllowlist:            Set the artifact allowlist of a certain artifact type.</span>
+<span class="line" data-lang="plaintext" id="LC49">:updateCatalog:                   Updates catalog settings.</span>
+<span class="line" data-lang="plaintext" id="LC50">:updateExternalLocation:          Updates external location settings.</span>
+<span class="line" data-lang="plaintext" id="LC51">:updateMetastore:                 Updates metastore settings.</span>
+<span class="line" data-lang="plaintext" id="LC52">:updateMetastoreAssignment:       Updates metastore assignment on a given workspace.</span>
+<span class="line" data-lang="plaintext" id="LC53">:updatePermissions:               Updates permissions on a given object.</span>
+<span class="line" data-lang="plaintext" id="LC54">:updateProvider:                  Updates delta sharing provider settings.</span>
+<span class="line" data-lang="plaintext" id="LC55">:updateRecipient:                 Updates delta sharing recipient settings.</span>
+<span class="line" data-lang="plaintext" id="LC56">:updateSchema:                    Updates schema settings.</span>
+<span class="line" data-lang="plaintext" id="LC57">:updateShare:                     Updates delta sharing share settings.</span>
+<span class="line" data-lang="plaintext" id="LC58">:updateShareObjects:              Updates objects on a given delta sharing share.</span>
+<span class="line" data-lang="plaintext" id="LC59">:updateSharePermissions:          Updates permissions on a delta sharing share.</span>
+<span class="line" data-lang="plaintext" id="LC60">:updateStorageCredential:         Updates store credential settings.</span></code></pre><copy-code/><insert-code-snippet/></div>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="{note}" data-sourcepos="184:1-186:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">As can be seen, `listTables`, `getTable` and `deleteTable` methods exist but there is no `createTable` method. This is a limitation from the Databricks end. Use the Databricks Web Interface or SQL queries through the [JDBC and Database Toolbox workflows](JDBCWorkflow.md) for creating tables.</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="188:1-188:36" dir="auto" id="user-content-authentication-and-authorization">Authentication and Authorization</h3>
+<p data-sourcepos="190:1-190:231" dir="auto">The <code data-sourcepos="190:5-190:18">UnityCatalog</code> class uses the same <a data-sourcepos="190:40-190:74" href="Authentication.html">authentication</a> as all other API interfaces in the package meaning it can be configured through <code data-sourcepos="190:156-190:172">databricks.json</code>, <code data-sourcepos="190:175-190:195">.databricks-connect</code> or by setting the <code data-sourcepos="190:215-190:221">Token</code> property.</p>
+<p data-sourcepos="192:1-192:494" dir="auto">Which methods can be called and/or what exactly certain methods will return, depends on the user's authorization. For example some methods can only be called by Databricks Account Administrators or Workspace Administrators. Also, some of the <code data-sourcepos="192:243-192:249">list*</code> methods may only return the objects owned by the user when working as a normal user, and <em data-sourcepos="192:340-192:344">all</em> objects when authorized as Account Administrator. For exact details, see the Unity Catalog API specification documentation as provided by Databricks:</p>
+<p data-sourcepos="194:1-194:86" dir="auto"><a data-sourcepos="194:1-194:86" href="https://api-docs.databricks.com/rest/latest/unity-catalog-api-specification-2-1.html" rel="nofollow noreferrer noopener" target="_blank">https://api-docs.databricks.com/rest/latest/unity-catalog-api-specification-2-1.html</a></p>
+<h2 data-sourcepos="196:1-196:25" dir="auto" id="user-content-data-structure-classes">Data Structure Classes</h2>
+<p data-sourcepos="198:1-198:300" dir="auto">The data structure classes implemented in the <code data-sourcepos="198:47-198:86">databricks.datastructures.unitycatalog</code> package are used to return information about Unity Catalog objects to the user when querying or listing object and/or allow the user to configure properties of Unity Catalog objects when creating or updating them.</p>
+<p data-sourcepos="200:1-200:209" dir="auto">When a data structure object is required as input to a <code data-sourcepos="200:56-200:64">create*</code> or <code data-sourcepos="200:69-200:77">update*</code> methods, some of the properties <em data-sourcepos="200:111-200:116">must</em> be set, some may be <em data-sourcepos="200:138-200:147">optional</em> and some may be ignored by a specific operation, for example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="{code-block}" data-lang-params="matlabsession" data-sourcepos="202:1-235:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">---</span>
+<span class="line" data-lang="plaintext" id="LC2">emphasize-lines: 9-20</span>
+<span class="line" data-lang="plaintext" id="LC3">---</span>
+<span class="line" data-lang="plaintext" id="LC4">&gt;&gt; help databricks.UnityCatalog.createCatalog</span>
+<span class="line" data-lang="plaintext" id="LC5">  createCatalog creates a new catalog.</span>
+<span class="line" data-lang="plaintext" id="LC6"/>
+<span class="line" data-lang="plaintext" id="LC7">  Example:</span>
+<span class="line" data-lang="plaintext" id="LC8"/>
+<span class="line" data-lang="plaintext" id="LC9">    result = uc.createCatalog(cataloginfo);</span>
+<span class="line" data-lang="plaintext" id="LC10"/>
+<span class="line" data-lang="plaintext" id="LC11">  Required Inputs:</span>
+<span class="line" data-lang="plaintext" id="LC12">    cataloginfo</span>
+<span class="line" data-lang="plaintext" id="LC13">        Description:</span>
+<span class="line" data-lang="plaintext" id="LC14">            settings/configuration for the new catalog</span>
+<span class="line" data-lang="plaintext" id="LC15">        Type:</span>
+<span class="line" data-lang="plaintext" id="LC16">            databricks.datastructures.unitycatalog.CatalogInfo</span>
+<span class="line" data-lang="plaintext" id="LC17">        Required Properties in the data structure which must be set:</span>
+<span class="line" data-lang="plaintext" id="LC18">            name</span>
+<span class="line" data-lang="plaintext" id="LC19">        Optional Properties in the data structure which can be set:</span>
+<span class="line" data-lang="plaintext" id="LC20">            comment</span>
+<span class="line" data-lang="plaintext" id="LC21">            ucproperties</span>
+<span class="line" data-lang="plaintext" id="LC22">            provider_name</span>
+<span class="line" data-lang="plaintext" id="LC23">            share_name</span>
+<span class="line" data-lang="plaintext" id="LC24"/>
+<span class="line" data-lang="plaintext" id="LC25">  Outputs:</span>
+<span class="line" data-lang="plaintext" id="LC26">    result</span>
+<span class="line" data-lang="plaintext" id="LC27">        Description:</span>
+<span class="line" data-lang="plaintext" id="LC28">            settings/configuration of the created catalog</span>
+<span class="line" data-lang="plaintext" id="LC29">        Type:</span>
+<span class="line" data-lang="plaintext" id="LC30">            databricks.datastructures.unitycatalog.CatalogInfo</span>
+<span class="line" data-lang="plaintext" id="LC31"/>
+<span class="line" data-lang="plaintext" id="LC32">  See Also: databricks.datastructures.unitycatalog.CatalogInfo</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="237:1-237:385" dir="auto">Shows that when working with the <code data-sourcepos="237:34-237:48">createCatalog</code> method a <code data-sourcepos="237:59-237:110">databricks.datastructures.unitycatalog.CatalogInfo</code> data structure must be supplied as input. Its <code data-sourcepos="237:158-237:163">name</code> property <em data-sourcepos="237:174-237:179">must</em> be set and <code data-sourcepos="237:192-237:200">comment</code>, <code data-sourcepos="237:203-237:216">ucproperties</code>, <code data-sourcepos="237:219-237:233">provider_name</code> and <code data-sourcepos="237:239-237:250">share_name</code> are <em data-sourcepos="237:256-237:265">optional</em>, other properties like <code data-sourcepos="237:290-237:301">created_by</code> <em data-sourcepos="237:303-237:310">cannot</em> be set by the user. To see all properties of the <code data-sourcepos="237:361-237:373">CatalogInfo</code> class, use:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="239:1-257:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; help databricks.datastructures.unitycatalog.CatalogInfo</span>
+<span class="line" data-lang="plaintext" id="LC2">  CatalogInfo Databricks Data Structure</span>
+<span class="line" data-lang="plaintext" id="LC3"> </span>
+<span class="line" data-lang="plaintext" id="LC4">  databricks.datastructures.unitycatalog.CatalogInfo Properties:</span>
+<span class="line" data-lang="plaintext" id="LC5">    name - of Catalog relative to parent metastore</span>
+<span class="line" data-lang="plaintext" id="LC6">    comment - User-supplied free-form text</span>
+<span class="line" data-lang="plaintext" id="LC7">    ucproperties - Extensible Catalog properties</span>
+<span class="line" data-lang="plaintext" id="LC8">    owner - Username/groupname of Catalog owner</span>
+<span class="line" data-lang="plaintext" id="LC9">    provider_name - For Delta Sharing Catalogs: the name of the delta sharing</span>
+<span class="line" data-lang="plaintext" id="LC10">       provider</span>
+<span class="line" data-lang="plaintext" id="LC11">    share_name - For Delta Sharing Catalogs: the name of the share under the share</span>
+<span class="line" data-lang="plaintext" id="LC12">       provider</span>
+<span class="line" data-lang="plaintext" id="LC13">    metastore_id - Unique identifier of the parent Metastore</span>
+<span class="line" data-lang="plaintext" id="LC14">    created_at - Date of Catalog creation</span>
+<span class="line" data-lang="plaintext" id="LC15">    created_by - Username of Catalog creator</span>
+<span class="line" data-lang="plaintext" id="LC16">    updated_at - Date of last update to Catalog</span>
+<span class="line" data-lang="plaintext" id="LC17">    updated_by - Username of user who last updated Catalog</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="259:1-259:98" dir="auto">For a full overview of all data structure classes, refer to the <a data-sourcepos="259:65-259:97" href="DatabricksAPI.html">API Reference</a>.</p>
+<h3 data-sourcepos="261:1-261:9" dir="auto" id="user-content-usage">Usage</h3>
+<p data-sourcepos="263:1-263:95" dir="auto">In MATLAB to create a data structure instance, simply instantiate an object of the right class:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="265:1-267:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">catalog</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">unitycatalog</span><span class="o">.</span><span class="n">CatalogInfo</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="269:1-269:63" dir="auto">And then set the properties to the desired values, for example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="271:1-273:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">catalog</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"MyNewCatalog"</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="275:1-275:337" dir="auto">Data structures can also be nested, for example <code data-sourcepos="275:49-275:110">databricks.datastructures.unitycatalog.StorageCredentialInfo</code> has a property <code data-sourcepos="275:127-275:151">azure_service_principal</code> which is of type <code data-sourcepos="275:170-275:231">databricks.datastructures.unitycatalog.AzureServicePrincipal</code>. The easiest way to fill-out properties of such nested properties is to work with subscripted assignment:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="277:1-282:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">% Create the outer object</span>
+<span class="line" data-lang="plaintext" id="LC2">&gt;&gt; sci = databricks.datastructures.unitycatalog.StorageCredentialInfo;</span>
+<span class="line" data-lang="plaintext" id="LC3">% Index into the property which holds another object and set one of its properties</span>
+<span class="line" data-lang="plaintext" id="LC4">&gt;&gt; sci.azure_service_principal(1).application_id = "72330b4c-f020-4736-a588-66168c2360de";</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="284:1-284:184" dir="auto">Note the <code data-sourcepos="284:10-284:14">(1)</code> subscript which will first create the object instance, and it is then immediately possible to set one of its properties, <code data-sourcepos="284:137-284:152">application_id</code> in this example, to some value.</p>
+<p data-sourcepos="286:1-286:162" dir="auto">Alternatively it is of course also possible to first create an instance of the nested data structure class and then assign it to the property in the outer object:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="288:1-296:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% First create the nested object and set its properties</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">asp</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">unitycatalog</span><span class="o">.</span><span class="n">AzureServicePrincipal</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">asp</span><span class="o">.</span><span class="n">application_id</span> <span class="o">=</span> <span class="s2">"72330b4c-f020-4736-a588-66168c2360de"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="c1">% Create the outer object</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">sci</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">unitycatalog</span><span class="o">.</span><span class="n">StorageCredentialInfo</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="c1">% Assign the entire nested object to the property</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">sci</span><span class="o">.</span><span class="n">azure_service_principal</span> <span class="o">=</span> <span class="n">asp</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="298:1-298:21" dir="auto" id="user-content-frominputs-method">fromInputs method</h3>
+<p data-sourcepos="300:1-300:321" dir="auto">All data structures which may be used as inputs, have a static <code data-sourcepos="300:64-300:75">fromInputs</code> method which allows immediately setting properties using Name-Value pairs upon construction. For example, the following one-liner can be used to immediately create a <code data-sourcepos="300:243-300:255">CatalogInfo</code> instance with properties <code data-sourcepos="300:282-300:287">name</code> and <code data-sourcepos="300:293-300:301">comment</code> set to some values:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="302:1-304:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">catalog</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">unitycatalog</span><span class="o">.</span><span class="n">CatalogInfo</span><span class="o">.</span><span class="n">fromInputs</span><span class="p">(</span><span class="s2">"name"</span><span class="p">,</span><span class="s2">"MyNewCatalog"</span><span class="p">,</span><span class="s2">"comment"</span><span class="p">,</span><span class="s2">"My Comment"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="306:1-306:42" dir="auto">And this can also be used in a nested way:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="308:1-314:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Importing the package is not required but allows writing shorter code</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="k">import</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">unitycatalog</span><span class="o">.*</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% Use fromInputs in a nested way</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">sci</span> <span class="o">=</span> <span class="n">StorageCredentialInfo</span><span class="o">.</span><span class="n">fromInputs</span><span class="p">(</span><span class="s2">"azure_service_principal"</span><span class="p">,</span><span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC5">    <span class="n">AzureServicePrincipal</span><span class="o">.</span><span class="n">fromInputs</span><span class="p">(</span><span class="s2">"application_id"</span><span class="p">,</span><span class="s2">"72330b4c-f020-4736-a588-66168c2360de"</span><span class="p">));</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="316:1-316:16" dir="auto" id="user-content-example-usage">Example Usage</h2>
+<h3 data-sourcepos="318:1-318:19" dir="auto" id="user-content-catalog-example">Catalog example</h3>
+<p data-sourcepos="320:1-320:131" dir="auto">This example shows how to list, create, update and delete catalogs. Working with other objects (e.g. schemas) will be very similar.</p>
+<p data-sourcepos="322:1-322:32" dir="auto">Import package for shorter code:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="324:1-326:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; import databricks.datastructures.unitycatalog.*</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="328:1-328:26" dir="auto">Create the client instance</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="330:1-332:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; uc = databricks.UnityCatalog();</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="334:1-334:17" dir="auto">List all catalogs</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="336:1-344:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; catalogs = uc.listCatalogs()</span>
+<span class="line" data-lang="plaintext" id="LC2"/>
+<span class="line" data-lang="plaintext" id="LC3">catalogs = </span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">  CatalogInfoList with properties:</span>
+<span class="line" data-lang="plaintext" id="LC6"/>
+<span class="line" data-lang="plaintext" id="LC7">    catalogs: [1×2 databricks.datastructures.unitycatalog.CatalogInfo]</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="346:1-346:48" dir="auto">Show the details of one the catalogs in the list</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="348:1-366:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; catalogs.catalogs(1)</span>
+<span class="line" data-lang="plaintext" id="LC2"/>
+<span class="line" data-lang="plaintext" id="LC3">ans = </span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">  CatalogInfo with properties:</span>
+<span class="line" data-lang="plaintext" id="LC6"/>
+<span class="line" data-lang="plaintext" id="LC7">             name: "main"</span>
+<span class="line" data-lang="plaintext" id="LC8">          comment: "Main catalog (auto-created)"</span>
+<span class="line" data-lang="plaintext" id="LC9">     ucproperties: [0×0 JSONMapperMap]</span>
+<span class="line" data-lang="plaintext" id="LC10">            owner: "user@example.com"</span>
+<span class="line" data-lang="plaintext" id="LC11">    provider_name: [0×0 string]</span>
+<span class="line" data-lang="plaintext" id="LC12">       share_name: [0×0 string]</span>
+<span class="line" data-lang="plaintext" id="LC13">     metastore_id: "27a49677-ca3a-44f6-934f-090c7d14f232"</span>
+<span class="line" data-lang="plaintext" id="LC14">       created_at: 11-Jan-2023 15:52:37</span>
+<span class="line" data-lang="plaintext" id="LC15">       created_by: "user@example.com"</span>
+<span class="line" data-lang="plaintext" id="LC16">       updated_at: 11-Jan-2023 15:52:37</span>
+<span class="line" data-lang="plaintext" id="LC17">       updated_by: "user@example.com"</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="368:1-368:20" dir="auto">Create a new catalog</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="370:1-389:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; newCatalogName = "myNewCatalog";</span>
+<span class="line" data-lang="plaintext" id="LC2">&gt;&gt; newCatalogInfo = uc.createCatalog(CatalogInfo.fromInputs("name",newCatalogName))</span>
+<span class="line" data-lang="plaintext" id="LC3"/>
+<span class="line" data-lang="plaintext" id="LC4">newCatalogInfo = </span>
+<span class="line" data-lang="plaintext" id="LC5"/>
+<span class="line" data-lang="plaintext" id="LC6">  CatalogInfo with properties:</span>
+<span class="line" data-lang="plaintext" id="LC7"/>
+<span class="line" data-lang="plaintext" id="LC8">             name: "mynewcatalog"</span>
+<span class="line" data-lang="plaintext" id="LC9">          comment: [0×0 string]</span>
+<span class="line" data-lang="plaintext" id="LC10">     ucproperties: [0×0 JSONMapperMap]</span>
+<span class="line" data-lang="plaintext" id="LC11">            owner: "user@example.com"</span>
+<span class="line" data-lang="plaintext" id="LC12">    provider_name: [0×0 string]</span>
+<span class="line" data-lang="plaintext" id="LC13">       share_name: [0×0 string]</span>
+<span class="line" data-lang="plaintext" id="LC14">     metastore_id: "1472f26e-6c88-4d67-9712-d1000cd7e2e9"</span>
+<span class="line" data-lang="plaintext" id="LC15">       created_at: 26-Jan-2023 11:08:32</span>
+<span class="line" data-lang="plaintext" id="LC16">       created_by: "user@example.com"</span>
+<span class="line" data-lang="plaintext" id="LC17">       updated_at: 26-Jan-2023 11:08:32</span>
+<span class="line" data-lang="plaintext" id="LC18">       updated_by: "user@example.com"</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="391:1-391:43" dir="auto">Update the comment property of this catalog</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="393:1-411:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; updatedCatalogInfo = uc.updateCatalog(newCatalogName, CatalogInfo.fromInputs("comment","My Comment"))</span>
+<span class="line" data-lang="plaintext" id="LC2"/>
+<span class="line" data-lang="plaintext" id="LC3">updatedCatalogInfo = </span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">  CatalogInfo with properties:</span>
+<span class="line" data-lang="plaintext" id="LC6"/>
+<span class="line" data-lang="plaintext" id="LC7">             name: "mynewcatalog"</span>
+<span class="line" data-lang="plaintext" id="LC8">          comment: "My Comment"</span>
+<span class="line" data-lang="plaintext" id="LC9">     ucproperties: [0×0 JSONMapperMap]</span>
+<span class="line" data-lang="plaintext" id="LC10">            owner: "user@example.com"</span>
+<span class="line" data-lang="plaintext" id="LC11">    provider_name: [0×0 string]</span>
+<span class="line" data-lang="plaintext" id="LC12">       share_name: [0×0 string]</span>
+<span class="line" data-lang="plaintext" id="LC13">     metastore_id: "1472f26e-6c88-4d67-9712-d1000cd7e2e9"</span>
+<span class="line" data-lang="plaintext" id="LC14">       created_at: 26-Jan-2023 11:08:32</span>
+<span class="line" data-lang="plaintext" id="LC15">       created_by: "user@example.com"</span>
+<span class="line" data-lang="plaintext" id="LC16">       updated_at: 26-Jan-2023 11:09:47</span>
+<span class="line" data-lang="plaintext" id="LC17">       updated_by: "user@example.com"</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="413:1-413:142" dir="auto">Delete the catalog. To be able to delete, first the catalog must be empty, so first actually delete the automatically created <code data-sourcepos="413:127-413:135">default</code> schema</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="415:1-417:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; uc.deleteSchema(newCatalogName + ".default");</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="419:1-419:33" dir="auto">and then delete the empty catalog</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="421:1-423:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; uc.deleteCatalog(newCatalogName);</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="425:1-425:22" dir="auto" id="user-content-permissions-example">Permissions example</h2>
+<p data-sourcepos="427:1-427:340" dir="auto">The following example shows how to work with <code data-sourcepos="427:46-427:64">updatePermissions</code>. To update permissions do not directly update some <code data-sourcepos="427:117-427:129">permissions</code> property of some existing object. It is required to provide a list of <em data-sourcepos="427:201-427:209">changes</em> to make to the existing permissions of an existing object. Specify <em data-sourcepos="427:278-427:296">which permissions</em> to <em data-sourcepos="427:301-427:305">add</em> or <em data-sourcepos="427:310-427:317">remove</em> for <em data-sourcepos="427:323-427:339">which principal</em>.</p>
+<p data-sourcepos="429:1-429:261" dir="auto">In the example below it is assumed a specific user <code data-sourcepos="429:52-429:73">someuser@example.com</code> already has <code data-sourcepos="429:87-429:94">SELECT</code> permissions on table <code data-sourcepos="429:117-429:138">main.default.mytable</code>. First remove that specific permission, and instead add <code data-sourcepos="429:196-429:203">SELECT</code> permissions for the user's whole group named <code data-sourcepos="429:250-429:260">somegroup</code>.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="431:1-445:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Import the package for shorter code</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="k">import</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">unitycatalog</span><span class="o">.*</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% Instantiate a PermissionsDiff</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">pd</span> <span class="o">=</span> <span class="n">PermissionsDiff</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="c1">% Add the changes</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="c1">% Remove SELECT permissions for the specific user</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">pd</span><span class="o">.</span><span class="n">changes</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">principal</span> <span class="o">=</span> <span class="s2">"someuser@example.com"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="n">pd</span><span class="o">.</span><span class="n">changes</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="nb">remove</span> <span class="o">=</span> <span class="s2">"SELECT"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="c1">% Add SELECT permissions for the group</span></span>
+<span class="line" data-lang="matlab" id="LC10"><span class="n">pd</span><span class="o">.</span><span class="n">changes</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">principal</span> <span class="o">=</span> <span class="s2">"somegroup"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC11"><span class="n">pd</span><span class="o">.</span><span class="n">changes</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="nb">add</span> <span class="o">=</span> <span class="s2">"SELECT"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC12"><span class="c1">% Call updatePermissions</span></span>
+<span class="line" data-lang="matlab" id="LC13"><span class="n">uc</span><span class="o">.</span><span class="n">updatePermissions</span><span class="p">(</span><span class="s2">"table"</span><span class="p">,</span><span class="s2">"main.default.mytable"</span><span class="p">,</span><span class="n">pd</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="447:1-447:22" dir="auto" id="user-content-artifact-allowlists">Artifact Allowlists</h2>
+<p data-sourcepos="449:1-449:313" dir="auto">This feature is a public preview on the Databricks platfrom, The associated APIs may change without notice. In Databricks Runtime 13.3 and above it allows the addition libraries and init scripts to the allowlist in Unity Catalog so that users can use these artifacts on compute configured with shared access mode.</p>
+<p data-sourcepos="451:1-451:25" dir="auto">The relevant methods are:</p>
+<ul data-sourcepos="453:1-454:83" dir="auto">
+<li data-sourcepos="453:1-453:81"><code data-sourcepos="453:3-453:24">setArtifactAllowlist</code> - Set the artifact allowlist of a certain artifact type.</li>
+<li data-sourcepos="454:1-455:0"><code data-sourcepos="454:3-454:25">getArtifactAllowlists</code> - Gets the artifact allowlist of a certain artifact type.</li>
+</ul>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="456:1-472:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; uc = databricks.UnityCatalog;</span>
+<span class="line" data-lang="plaintext" id="LC2">&gt;&gt; matcher = databricks.datastructures.unitycatalog.ArtifactMatchers;</span>
+<span class="line" data-lang="plaintext" id="LC3">&gt;&gt; matcher.artifact = "/Volumes/main/default/myvolume/myDir/runtime_install_r2023b.sh";</span>
+<span class="line" data-lang="plaintext" id="LC4">&gt;&gt; matcher.match_type = "PREFIX_MATCH";</span>
+<span class="line" data-lang="plaintext" id="LC5">&gt;&gt; alr = databricks.datastructures.unitycatalog.AllowlistRequest;</span>
+<span class="line" data-lang="plaintext" id="LC6">&gt;&gt; alr.artifact_matchers = matcher</span>
+<span class="line" data-lang="plaintext" id="LC7">&gt;&gt; artifact_type = databricks.datastructures.unitycatalog.ArtifactType.INIT_SCRIPT;</span>
+<span class="line" data-lang="plaintext" id="LC8">&gt;&gt; setResult = uc.setArtifactAllowlist(artifact_type, alr)</span>
+<span class="line" data-lang="plaintext" id="LC9">setResult = </span>
+<span class="line" data-lang="plaintext" id="LC10">  SetArtifactAllowlistResp with properties:</span>
+<span class="line" data-lang="plaintext" id="LC11"/>
+<span class="line" data-lang="plaintext" id="LC12">    artifact_matchers: [1×1 databricks.datastructures.unitycatalog.ArtifactMatchers]</span>
+<span class="line" data-lang="plaintext" id="LC13">         metastore_id: "3ce438d4-321c-49ec-9ac1-123123123123"</span>
+<span class="line" data-lang="plaintext" id="LC14">           created_by: "joe@example.com"</span>
+<span class="line" data-lang="plaintext" id="LC15">           created_at: 04-Dec-2023 13:50:23</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="474:1-474:28" dir="auto">List init script allow list:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="476:1-488:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; uc = databricks.UnityCatalog();</span>
+<span class="line" data-lang="plaintext" id="LC2">&gt;&gt; artifact_type = databricks.datastructures.unitycatalog.ArtifactType.INIT_SCRIPT</span>
+<span class="line" data-lang="plaintext" id="LC3">&gt;&gt; getResult = uc.getArtifactAllowlists(artifact_type)</span>
+<span class="line" data-lang="plaintext" id="LC4">getResult = </span>
+<span class="line" data-lang="plaintext" id="LC5">  GetArtifactAllowlistsResp with properties:</span>
+<span class="line" data-lang="plaintext" id="LC6"/>
+<span class="line" data-lang="plaintext" id="LC7">    artifact_matchers: [1×1 databricks.datastructures.unitycatalog.ArtifactMatchers]</span>
+<span class="line" data-lang="plaintext" id="LC8">         metastore_id: "3ce438d4-321c-49ec-9ac1-123123123123"</span>
+<span class="line" data-lang="plaintext" id="LC9">           created_by: "joe@example.com"</span>
+<span class="line" data-lang="plaintext" id="LC10">           created_at: 04-Dec-2023 13:50:23</span>
+<span class="line" data-lang="plaintext" id="LC11">&gt;&gt;</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="490:1-490:153" dir="auto">For further information see: <a data-sourcepos="490:30-490:153" href="https://docs.databricks.com/api/workspace/artifactallowlists" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/artifactallowlists</a></p></div></main><script src="resources/copycode.js">//</script></body></html>

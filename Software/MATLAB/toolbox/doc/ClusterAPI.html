@@ -1,0 +1,501 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Clusters API</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:14" dir="auto" id="user-content-clusters-api">Clusters API</h1>
+<h2 data-sourcepos="3:1-3:29" dir="auto" id="user-content-using-the-utility-function">Using the utility function</h2>
+<p data-sourcepos="5:1-10:63" dir="auto">The function <code data-sourcepos="5:14-5:38">createDatabricksCluster</code> will create a Databricks® cluster.
+It relies on the <code data-sourcepos="6:18-6:37">databricks.Cluster</code> class, and its
+methods and helper functions. It is an easy way to create a cluster,
+and it offers a few options. If there is a need for more fine grained
+control of the cluster creation options, please use the underlying
+class and its APIs directly, as described in the next sections.</p>
+<p data-sourcepos="12:1-12:10" dir="auto">Arguments:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="14:1-138:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">             name : The name of the cluster.</span>
+<span class="line" data-lang="plaintext" id="LC2"/>
+<span class="line" data-lang="plaintext" id="LC3">       numWorkers : The number of workers in the cluster. This can be a</span>
+<span class="line" data-lang="plaintext" id="LC4">                    single number or an array of lower and upper bound,</span>
+<span class="line" data-lang="plaintext" id="LC5">                    e.g. for a cluster between 2 and 10 workers the value</span>
+<span class="line" data-lang="plaintext" id="LC6">                    should be [2, 10]. If 0 is used then a single node cluster</span>
+<span class="line" data-lang="plaintext" id="LC7">                    will be created, as distinct from a cluster of size 1.</span>
+<span class="line" data-lang="plaintext" id="LC8"/>
+<span class="line" data-lang="plaintext" id="LC9">        useMATLAB : Optional argument to install MATLAB runtime on the</span>
+<span class="line" data-lang="plaintext" id="LC10">                    cluster. Default is true. If a Docker Image URL is</span>
+<span class="line" data-lang="plaintext" id="LC11">                    provided this option is ignored.</span>
+<span class="line" data-lang="plaintext" id="LC12"/>
+<span class="line" data-lang="plaintext" id="LC13">           create : Optional argument to set to true if the cluster should</span>
+<span class="line" data-lang="plaintext" id="LC14">                    be created immediately. If set to false, the function</span>
+<span class="line" data-lang="plaintext" id="LC15">                    will only return an object that can be used for</span>
+<span class="line" data-lang="plaintext" id="LC16">                    creating a cluster. This is useful for creating Spark</span>
+<span class="line" data-lang="plaintext" id="LC17">                    jobs. Default is true.</span>
+<span class="line" data-lang="plaintext" id="LC18"/>
+<span class="line" data-lang="plaintext" id="LC19">   dockerAuthFile : The name of a file containing docker information,</span>
+<span class="line" data-lang="plaintext" id="LC20">                    image URL, user name, and password. This can be</span>
+<span class="line" data-lang="plaintext" id="LC21">                    used to easily use docker settings when creating a</span>
+<span class="line" data-lang="plaintext" id="LC22">                    cluster. The filename can be an absolute path or</span>
+<span class="line" data-lang="plaintext" id="LC23">                    relative path. Currently, only no password or</span>
+<span class="line" data-lang="plaintext" id="LC24">                    basic_auth is supported.</span>
+<span class="line" data-lang="plaintext" id="LC25">                    The "spark_version" field is optional, but is</span>
+<span class="line" data-lang="plaintext" id="LC26">                    helpful for determining spark_version. It's</span>
+<span class="line" data-lang="plaintext" id="LC27">                    required if the image tag doesn't reflect the</span>
+<span class="line" data-lang="plaintext" id="LC28">                    Databricks runtime version.</span>
+<span class="line" data-lang="plaintext" id="LC29"/>
+<span class="line" data-lang="plaintext" id="LC30">                     {</span>
+<span class="line" data-lang="plaintext" id="LC31">                       "url": "some.repo.com/matlab/databricks/desktop:r2025a-dbx15.4",</span>
+<span class="line" data-lang="plaintext" id="LC32">                       "basic_auth": {</span>
+<span class="line" data-lang="plaintext" id="LC33">                         "username": "b304&lt;REDACTED&gt;40",</span>
+<span class="line" data-lang="plaintext" id="LC34">                         "password": "ol_8&lt;REDACTED&gt;qr"</span>
+<span class="line" data-lang="plaintext" id="LC35">                       },</span>
+<span class="line" data-lang="plaintext" id="LC36">                       "spark_version": "15.4.x-scala2.12"</span>
+<span class="line" data-lang="plaintext" id="LC37">                     }</span>
+<span class="line" data-lang="plaintext" id="LC38"/>
+<span class="line" data-lang="plaintext" id="LC39">                    If the repository doesn't need authentication, the</span>
+<span class="line" data-lang="plaintext" id="LC40">                    file may consist of only the url.</span>
+<span class="line" data-lang="plaintext" id="LC41"/>
+<span class="line" data-lang="plaintext" id="LC42">        dockerURL : Optional argument to specify the URL of a Docker Image.</span>
+<span class="line" data-lang="plaintext" id="LC43">                    When using Docker the spark conf</span>
+<span class="line" data-lang="plaintext" id="LC44">                    spark.databricks.unityCatalog.volumes.enabled</span>
+<span class="line" data-lang="plaintext" id="LC45">                    property will be set to "true".</span>
+<span class="line" data-lang="plaintext" id="LC46"/>
+<span class="line" data-lang="plaintext" id="LC47">   dockerUsername : Optional argument to specify the docker registry username.</span>
+<span class="line" data-lang="plaintext" id="LC48"/>
+<span class="line" data-lang="plaintext" id="LC49">   dockerPassword : Optional argument to specify the docker registry password.</span>
+<span class="line" data-lang="plaintext" id="LC50"/>
+<span class="line" data-lang="plaintext" id="LC51">     sparkVersion : Set this to set a given spark_version otherwise</span>
+<span class="line" data-lang="plaintext" id="LC52">                    a version based on the current default Databricks Runtime</span>
+<span class="line" data-lang="plaintext" id="LC53">                    will be used. This value is the Databricks Cluster API</span>
+<span class="line" data-lang="plaintext" id="LC54">                    spark_version field and is not strictly the version of Spark</span>
+<span class="line" data-lang="plaintext" id="LC55">                    used. It has the form: 15.4.x-scala2.12. The specific value</span>
+<span class="line" data-lang="plaintext" id="LC56">                    for a given Databricks runtime can be verified in the</span>
+<span class="line" data-lang="plaintext" id="LC57">                    Databricks UI.</span>
+<span class="line" data-lang="plaintext" id="LC58"/>
+<span class="line" data-lang="plaintext" id="LC59">       nodeTypeId : Set this to pick a different node type than what</span>
+<span class="line" data-lang="plaintext" id="LC60">                    is set in the users default settings.</span>
+<span class="line" data-lang="plaintext" id="LC61"/>
+<span class="line" data-lang="plaintext" id="LC62">   initScriptPath : Specify a non default initscript path.</span>
+<span class="line" data-lang="plaintext" id="LC63">                    If not specified and the default script is not present</span>
+<span class="line" data-lang="plaintext" id="LC64">                    the local script will be uploaded to the user's workspace.</span>
+<span class="line" data-lang="plaintext" id="LC65">                    % By default the initscript is stored in:</span>
+<span class="line" data-lang="plaintext" id="LC66">                    &lt;settings: interfaceDirectory&gt;/runtimes/runtime_install.sh</span>
+<span class="line" data-lang="plaintext" id="LC67"/>
+<span class="line" data-lang="plaintext" id="LC68"> interfaceDirectory : /Volumes path under which MathWorks files can be stored.</span>
+<span class="line" data-lang="plaintext" id="LC69"/>
+<span class="line" data-lang="plaintext" id="LC70">          release : MATLAB release of the form R&lt;YYYY&gt;&lt;a|b&gt;, e.g. as returned by</span>
+<span class="line" data-lang="plaintext" id="LC71">                    matlabRelease().Release, for the runtime to install.</span>
+<span class="line" data-lang="plaintext" id="LC72">                    By default the release of MATLAB in use is used.</span>
+<span class="line" data-lang="plaintext" id="LC73"/>
+<span class="line" data-lang="plaintext" id="LC74">      runtimePath : Specify a path to to a MATLAB runtime .zip file.</span>
+<span class="line" data-lang="plaintext" id="LC75">                    /Volumes, DBFS and http paths are supported.</span>
+<span class="line" data-lang="plaintext" id="LC76"/>
+<span class="line" data-lang="plaintext" id="LC77">       policyName : Set the name of the cluster policy used to create the cluster.</span>
+<span class="line" data-lang="plaintext" id="LC78"/>
+<span class="line" data-lang="plaintext" id="LC79">         policyId : Set the ID of the cluster policy used to create the cluster.</span>
+<span class="line" data-lang="plaintext" id="LC80"/>
+<span class="line" data-lang="plaintext" id="LC81">               ML : Selects a Databricks Runtime version with ML functionality</span>
+<span class="line" data-lang="plaintext" id="LC82">                    enabled.</span>
+<span class="line" data-lang="plaintext" id="LC83"/>
+<span class="line" data-lang="plaintext" id="LC84">              GPU : Selects a Databricks Runtime version with GPU functionality</span>
+<span class="line" data-lang="plaintext" id="LC85">                    enabled.</span>
+<span class="line" data-lang="plaintext" id="LC86"/>
+<span class="line" data-lang="plaintext" id="LC87">           photon : Selects a Databricks Runtime version with Photon functionality</span>
+<span class="line" data-lang="plaintext" id="LC88">                    enabled.</span>
+<span class="line" data-lang="plaintext" id="LC89"/>
+<span class="line" data-lang="plaintext" id="LC90">       accessMode : Data security mode decides what data governance model to</span>
+<span class="line" data-lang="plaintext" id="LC91">                    use when accessing data from a cluster.</span>
+<span class="line" data-lang="plaintext" id="LC92">                    Default: databricks.datastructures.DataSecurityMode.SINGLE_USER</span>
+<span class="line" data-lang="plaintext" id="LC93"/>
+<span class="line" data-lang="plaintext" id="LC94">      sparkConfig : Additional Spark Conf pair settings to apply to a cluster</span>
+<span class="line" data-lang="plaintext" id="LC95">                    e.g. databricks.SparkConfPair({'mykey', 'myvalue'})</span>
+<span class="line" data-lang="plaintext" id="LC96"/>
+<span class="line" data-lang="plaintext" id="LC97">     sparkEnvPair : Additional environment variable(s) to apply to a cluster</span>
+<span class="line" data-lang="plaintext" id="LC98">                    e.g. databricks.SparkEnvPair('MyVariable','MyValue')</span>
+<span class="line" data-lang="plaintext" id="LC99">                    To set multiple values:</span>
+<span class="line" data-lang="plaintext" id="LC100">                    databricks.SparkEnvPair({'SPARK_WORKER_MEMORY','28000m';'SPARK_LOCAL_DIRS','/local_disk0'})</span>
+<span class="line" data-lang="plaintext" id="LC101"/>
+<span class="line" data-lang="plaintext" id="LC102">       clusterTag : Additional ClusterTags to apply to a cluster</span>
+<span class="line" data-lang="plaintext" id="LC103">                    e.g. databricks.ClusterTag('myKey', 'myValue');</span>
+<span class="line" data-lang="plaintext" id="LC104"/>
+<span class="line" data-lang="plaintext" id="LC105"> autoterminationMinutes : Specifies the number of minutes of idle time after</span>
+<span class="line" data-lang="plaintext" id="LC106">                          which the cluster will be stopped.</span>
+<span class="line" data-lang="plaintext" id="LC107"/>
+<span class="line" data-lang="plaintext" id="LC108">       authMethod : A matlab.databricks.AuthMethod.</span>
+<span class="line" data-lang="plaintext" id="LC109"/>
+<span class="line" data-lang="plaintext" id="LC110">      profileName : A configuration file profileName value.</span>
+<span class="line" data-lang="plaintext" id="LC111"/>
+<span class="line" data-lang="plaintext" id="LC112">    enableLogging : Enables logging of the initscript and other steps.</span>
+<span class="line" data-lang="plaintext" id="LC113">                    The default is false.</span>
+<span class="line" data-lang="plaintext" id="LC114"/>
+<span class="line" data-lang="plaintext" id="LC115">           logDir : The location to which logs are written, the default is:</span>
+<span class="line" data-lang="plaintext" id="LC116">                    dbfs:/cluster-logs</span>
+<span class="line" data-lang="plaintext" id="LC117">                    If using /Volumes (Public Preview) additional restrictions</span>
+<span class="line" data-lang="plaintext" id="LC118">                    apply. See: https://docs.databricks.com/aws/en/compute/configure#compute-log-delivery</span>
+<span class="line" data-lang="plaintext" id="LC119"/>
+<span class="line" data-lang="plaintext" id="LC120">  updateClusterId : Update the cluster Id value stored in the default</span>
+<span class="line" data-lang="plaintext" id="LC121">                    or specified cluster. The default is false.</span>
+<span class="line" data-lang="plaintext" id="LC122"/>
+<span class="line" data-lang="plaintext" id="LC123">          verbose : Enable additional feedback. Default is true.</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="140:1-140:9" dir="auto">Examples:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="142:1-145:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Create a cluster with 4 workers that installs the MATLAB runtime</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span> <span class="o">=</span> <span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s1">'my-cluster'</span><span class="p">,</span> <span class="mi">4</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="147:1-151:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Create a cluster definition without actually creating the cluster. This is</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="c1">% useful when defining a cluster to be used in a Job.</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">cl</span> <span class="o">=</span> <span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s1">'my-sl-cluster'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">create</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="153:1-159:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Create a cluster without a MATLAB runtime installed. This cluster</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="c1">% can still be used for interactively handling a Databricks session</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% from within MATLAB, but no compiled MATLAB code can run on the</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="c1">% cluster.</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">cl</span> <span class="o">=</span> <span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s1">'plain-cluster'</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">useMATLAB</span> <span class="o">=</span> <span class="nb">false</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="161:1-161:92" dir="auto">For further docker related information, see also: <a data-sourcepos="161:51-161:91" href="ContainerServices.html">ContainerServices</a>.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="163:1-169:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Create a cluster based off a Docker image</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span> <span class="o">=</span> <span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s1">'my-docker-cluster'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC3">    <span class="s1">'dockerURL'</span><span class="p">,</span> <span class="s1">'myrepo.com/mathworks/databricksruntime:17.3-LTS-R2024b'</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC4">    <span class="s1">'dockerUsername'</span><span class="p">,</span> <span class="s1">'myusername'</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC5">    <span class="s1">'dockerPassword'</span><span class="p">,</span> <span class="s1">'mypassword'</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="171:1-175:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Create a cluster using an init script stored on a Volume</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span> <span class="o">=</span> <span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s2">"myVolumeCluster"</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sparkVersion</span><span class="o">=</span><span class="s2">"16.4.x-scala2.12"</span><span class="p">,</span><span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC3">    <span class="n">initScriptPath</span><span class="o">=</span><span class="s2">"/Volumes/main/default/myvolume/myDir/runtime_install.sh"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="177:1-177:30" dir="auto" id="user-content-set-the-name-of-the-cluster">Set the name of the cluster</h2>
+<p data-sourcepos="179:1-179:69" dir="auto">The name of the cluster can be set using the property <em data-sourcepos="179:55-179:68">cluster_name</em>.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="181:1-184:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">cluster_name</span> <span class="o">=</span> <span class="s1">'My Cluster Name'</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="186:1-186:39" dir="auto" id="user-content-set-number-of-workers-or-autoscaling">Set number of workers or autoscaling</h2>
+<p data-sourcepos="188:1-190:72" dir="auto">The number of workers in the cluster can be set with one of two methods.
+Either by setting the number of workers through a single scalar number
+or by specifying autoscaling by providing the min/max number of workers.</p>
+<p data-sourcepos="192:1-195:6" dir="auto">If <em data-sourcepos="192:4-192:16">num_workers</em> is the number of worker nodes that a given cluster should have.
+Then the cluster will have one Spark™ Driver and <em data-sourcepos="193:56-193:68">num_workers</em> Executors for a total
+of <em data-sourcepos="194:4-194:20">num_workers + 1</em> Spark nodes. Creating a <em data-sourcepos="194:46-194:58">Single Node</em> cluster is described
+below.</p>
+<p data-sourcepos="197:1-197:39" dir="auto">For example, to specify a fixed number:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="199:1-202:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">setNumWorkers</span><span class="p">(</span><span class="mi">25</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="204:1-204:23" dir="auto">To specify autoscaling:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="206:1-209:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">setNumWorkers</span><span class="p">([</span><span class="mi">2</span> <span class="mi">10</span><span class="p">]);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="211:1-211:27" dir="auto" id="user-content-configure-a-docker-image">Configure a Docker Image</h2>
+<p data-sourcepos="213:1-214:92" dir="auto">As an alternative to providing an init script to configure cluster nodes a Docker®
+image URL may also be configured, using the Cluster API this is done using <code data-sourcepos="214:76-214:91">setDockerImage</code>.</p>
+<p data-sourcepos="216:1-216:40" dir="auto">Using string/character vector arguments:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="218:1-221:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">setDockerImage</span><span class="p">(</span><span class="s1">'http://mydockerrepourl.example.com'</span><span class="p">,</span> <span class="s1">'myusername'</span><span class="p">,</span> <span class="s1">'mypassword'</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="223:1-223:77" dir="auto">Using data structures as can be used with REST API return values for example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="225:1-235:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">dbCredentials</span><span class="o">.</span><span class="n">username</span> <span class="o">=</span> <span class="s2">"myusername"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">dbCredentials</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="s2">"mypassword"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">dbAuth</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">DockerBasicAuth</span><span class="p">(</span><span class="n">dbCredentials</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">dockerSettings</span><span class="o">.</span><span class="n">url</span> <span class="o">=</span> <span class="s2">"http://mydockerrepourl.example.com"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">dockerSettings</span><span class="o">.</span><span class="n">basic_auth</span> <span class="o">=</span> <span class="n">dbAuth</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC7">  </span>
+<span class="line" data-lang="matlab" id="LC8"><span class="n">dockerImage</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">DockerImage</span><span class="p">(</span><span class="n">dockerSettings</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="n">cl</span><span class="o">.</span><span class="n">setDockerImage</span><span class="p">(</span><span class="n">dockerImage</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="237:1-239:11" dir="auto">Note, it is not good practice to include passwords in source code, please
+consider reading the value from a file or other external source in real
+world code.</p>
+<h2 data-sourcepos="241:1-241:18" dir="auto" id="user-content-set-a-policy-id">Set a policy id</h2>
+<p data-sourcepos="243:1-246:71" dir="auto">A cluster policy applies rules to the creation of clusters. Only admin users can
+create, edit, and delete policies. The policy rules limit the attributes or
+attribute values available for cluster creation. Setting the <em data-sourcepos="245:62-245:72">policy_id</em> for a
+cluster indicates which policy should be used to validate its creation.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="248:1-251:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">setPolicyId</span><span class="p">(</span><span class="s1">'ABCD000000000000'</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="253:1-255:65" dir="auto">If a <em data-sourcepos="253:6-253:16">policy_id</em> value pair is specified in the <em data-sourcepos="253:49-253:74">databricks-settings.json</em> file
+it will be applied to Cluster objects by default. This can be helpful if a given
+policy is always required e.g. for members of a given department.</p>
+<h2 data-sourcepos="257:1-257:32" dir="auto" id="user-content-list-available-spark-versions">List available Spark Versions</h2>
+<p data-sourcepos="259:1-260:20" dir="auto">Return the list of available Spark versions. These versions can be used when
+launching a cluster.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="262:1-282:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">versions</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="n">getSparkVersions</span></span>
+<span class="line" data-lang="matlab" id="LC3"/>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">versions</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC5">  <span class="mi">50</span><span class="n">x2</span> <span class="nb">table</span></span>
+<span class="line" data-lang="matlab" id="LC6">                <span class="n">key</span>                                               <span class="n">name</span>                             </span>
+<span class="line" data-lang="matlab" id="LC7">    <span class="err">________________________________</span>    <span class="err">_____________________________________________________________</span></span>
+<span class="line" data-lang="matlab" id="LC8">    <span class="s2">"10.4.x-cpu-ml-scala2.12"</span>           <span class="s2">"10.4 LTS ML (includes Apache Spark 3.2.1, Scala 2.12)"</span>      </span>
+<span class="line" data-lang="matlab" id="LC9">    <span class="s2">"10.4.x-gpu-ml-scala2.12"</span>           <span class="s2">"10.4 LTS ML (includes Apache Spark 3.2.1, GPU, Scala 2.12)"</span> </span>
+<span class="line" data-lang="matlab" id="LC10">    <span class="s2">"10.4.x-photon-scala2.12"</span>           <span class="s2">"10.4 LTS Photon (includes Apache Spark 3.2.1, Scala 2.12)"</span>  </span>
+<span class="line" data-lang="matlab" id="LC11">    <span class="s2">"10.4.x-scala2.12"</span>                  <span class="s2">"10.4 LTS (includes Apache Spark 3.2.1, Scala 2.12)"</span>         </span>
+<span class="line" data-lang="matlab" id="LC12">    <span class="s2">"11.3.x-cpu-ml-scala2.12"</span>           <span class="s2">"11.3 LTS ML (includes Apache Spark 3.3.0, Scala 2.12)"</span>      </span>
+<span class="line" data-lang="matlab" id="LC13">    <span class="s2">"11.3.x-gpu-ml-scala2.12"</span>           <span class="s2">"11.3 LTS ML (includes Apache Spark 3.3.0, GPU, Scala 2.12)"</span> </span>
+<span class="line" data-lang="matlab" id="LC14">    <span class="s2">"11.3.x-photon-scala2.12"</span>           <span class="s2">"11.3 LTS Photon (includes Apache Spark 3.3.0, Scala 2.12)"</span>  </span>
+<span class="line" data-lang="matlab" id="LC15">    <span class="s2">"11.3.x-scala2.12"</span>                  <span class="s2">"11.3 LTS (includes Apache Spark 3.3.0, Scala 2.12)"</span>         </span>
+<span class="line" data-lang="matlab" id="LC16">    <span class="s2">"12.2.x-cpu-ml-scala2.12"</span>           <span class="s2">"12.2 LTS ML (includes Apache Spark 3.3.2, Scala 2.12)"</span>      </span>
+<span class="line" data-lang="matlab" id="LC17">    <span class="s2">"12.2.x-gpu-ml-scala2.12"</span>           <span class="s2">"12.2 LTS ML (includes Apache Spark 3.3.2, GPU, Scala 2.12)"</span> </span>
+<span class="line" data-lang="matlab" id="LC18">    <span class="s2">"12.2.x-photon-scala2.12"</span>           <span class="s2">"12.2 LTS Photon (includes Apache Spark 3.3.2, Scala 2.12)"</span>  </span>
+<span class="line" data-lang="matlab" id="LC19">    <span class="p">[</span><span class="n">TRUNCATED</span><span class="p">]</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="284:1-284:38" dir="auto" id="user-content-list-available-machine-node-types">List available machine (node) types</h2>
+<p data-sourcepos="286:1-287:76" dir="auto">List of supported Spark node types. These node types can be used when launching
+a cluster. Note that node types will differ if using AWS® or Azure®.</p>
+<p data-sourcepos="289:1-289:12" dir="auto">For example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="291:1-304:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">nodeList</span> <span class="o">=</span> <span class="n">cl</span><span class="o">.</span><span class="n">getNodeTypes</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">nodeList</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC4">  <span class="mi">216</span><span class="n">x22</span> <span class="nb">table</span></span>
+<span class="line" data-lang="matlab" id="LC5">         <span class="n">node_type_id</span>          <span class="n">memory_mb</span>     <span class="n">num_cores</span>          <span class="n">description</span>             <span class="n">instance_type_id</span>        <span class="n">is_deprecated</span>                 <span class="n">category</span>                  <span class="n">support_ebs_volumes</span>    <span class="n">support_cluster_tags</span>    <span class="n">num_gpus</span>    <span class="n">node_instance_type</span>    <span class="n">is_hidden</span>    <span class="n">support_port_forwarding</span>    <span class="n">display_order</span>    <span class="n">is_io_cache_enabled</span>    <span class="n">node_info</span>     <span class="n">photon_worker_capable</span>    <span class="n">photon_driver_capable</span>    <span class="n">is_encrypted_in_transit</span>    <span class="n">is_graviton</span>    <span class="n">require_fabric_manager</span>    <span class="n">min_photon_version</span></span>
+<span class="line" data-lang="matlab" id="LC6">    <span class="err">_______________________</span>    <span class="err">__________</span>    <span class="err">_________</span>    <span class="err">_______________________</span>    <span class="err">_______________________</span>    <span class="err">_____________</span>    <span class="err">___________________________________</span>    <span class="err">___________________</span>    <span class="err">____________________</span>    <span class="err">________</span>    <span class="err">__________________</span>    <span class="err">_________</span>    <span class="err">_______________________</span>    <span class="err">_____________</span>    <span class="err">___________________</span>    <span class="err">__________</span>    <span class="err">_____________________</span>    <span class="err">_____________________</span>    <span class="err">_______________________</span>    <span class="err">___________</span>    <span class="err">______________________</span>    <span class="err">__________________</span></span>
+<span class="line" data-lang="matlab" id="LC7">    <span class="p">{</span><span class="s1">'Standard_DS3_v2'</span>    <span class="p">}</span>         <span class="mi">14336</span>        <span class="mi">4</span>        <span class="p">{</span><span class="s1">'Standard_DS3_v2'</span>    <span class="p">}</span>    <span class="p">{</span><span class="s1">'Standard_DS3_v2'</span>    <span class="p">}</span>        <span class="nb">false</span>        <span class="p">{</span><span class="s1">'General Purpose'</span>                <span class="p">}</span>           <span class="nb">true</span>                   <span class="nb">true</span>                <span class="mi">0</span>            <span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span>          <span class="nb">false</span>               <span class="nb">true</span>                    <span class="mi">0</span>                 <span class="nb">false</span>           <span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span>            <span class="nb">true</span>                     <span class="nb">true</span>                      <span class="nb">false</span>                <span class="nb">false</span>               <span class="nb">false</span>               <span class="p">{[</span><span class="o">&lt;</span><span class="nb">missing</span><span class="o">&gt;</span><span class="p">]}</span>   </span>
+<span class="line" data-lang="matlab" id="LC8">    <span class="p">{</span><span class="s1">'Standard_DS4_v2'</span>    <span class="p">}</span>         <span class="mi">28672</span>        <span class="mi">8</span>        <span class="p">{</span><span class="s1">'Standard_DS4_v2'</span>    <span class="p">}</span>    <span class="p">{</span><span class="s1">'Standard_DS4_v2'</span>    <span class="p">}</span>        <span class="nb">false</span>        <span class="p">{</span><span class="s1">'General Purpose'</span>                <span class="p">}</span>           <span class="nb">true</span>                   <span class="nb">true</span>                <span class="mi">0</span>            <span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span>          <span class="nb">false</span>               <span class="nb">true</span>                    <span class="mi">0</span>                 <span class="nb">false</span>           <span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span>            <span class="nb">true</span>                     <span class="nb">true</span>                      <span class="nb">false</span>                <span class="nb">false</span>               <span class="nb">false</span>               <span class="p">{</span><span class="s1">'11.3'</span>     <span class="p">}</span>   </span>
+<span class="line" data-lang="matlab" id="LC9">    <span class="p">{</span><span class="s1">'Standard_DS5_v2'</span>    <span class="p">}</span>         <span class="mi">57344</span>       <span class="mi">16</span>        <span class="p">{</span><span class="s1">'Standard_DS5_v2'</span>    <span class="p">}</span>    <span class="p">{</span><span class="s1">'Standard_DS5_v2'</span>    <span class="p">}</span>        <span class="nb">false</span>        <span class="p">{</span><span class="s1">'General Purpose'</span>                <span class="p">}</span>           <span class="nb">true</span>                   <span class="nb">true</span>                <span class="mi">0</span>            <span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span>          <span class="nb">false</span>               <span class="nb">true</span>                    <span class="mi">0</span>                 <span class="nb">false</span>           <span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span>            <span class="nb">true</span>                     <span class="nb">true</span>                      <span class="nb">false</span>                <span class="nb">false</span>               <span class="nb">false</span>               <span class="p">{</span><span class="s1">'11.3'</span>     <span class="p">}</span>   </span>
+<span class="line" data-lang="matlab" id="LC10">    <span class="p">{</span><span class="s1">'Standard_D4s_v3'</span>    <span class="p">}</span>         <span class="mi">16384</span>        <span class="mi">4</span>        <span class="p">{</span><span class="s1">'Standard_D4s_v3'</span>    <span class="p">}</span>    <span class="p">{</span><span class="s1">'Standard_D4s_v3'</span>    <span class="p">}</span>        <span class="nb">false</span>        <span class="p">{</span><span class="s1">'General Purpose'</span>                <span class="p">}</span>           <span class="nb">true</span>                   <span class="nb">true</span>                <span class="mi">0</span>            <span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span>          <span class="nb">false</span>               <span class="nb">true</span>                    <span class="mi">0</span>                 <span class="nb">false</span>           <span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span>            <span class="nb">true</span>                     <span class="nb">true</span>                      <span class="nb">false</span>                <span class="nb">false</span>               <span class="nb">false</span>               <span class="p">{</span><span class="s1">'11.3'</span>     <span class="p">}</span>   </span>
+<span class="line" data-lang="matlab" id="LC11">    <span class="p">{</span><span class="s1">'Standard_D8s_v3'</span>    <span class="p">}</span>         <span class="mi">32768</span>        <span class="mi">8</span>        <span class="p">{</span><span class="s1">'Standard_D8s_v3'</span>    <span class="p">}</span>    <span class="p">{</span><span class="s1">'Standard_D8s_v3'</span>    <span class="p">}</span>        <span class="nb">false</span>        <span class="p">{</span><span class="s1">'General Purpose'</span>                <span class="p">}</span>           <span class="nb">true</span>                   <span class="nb">true</span>                <span class="mi">0</span>            <span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span>          <span class="nb">false</span>               <span class="nb">true</span>                    <span class="mi">0</span>                 <span class="nb">false</span>           <span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span>            <span class="nb">true</span>                     <span class="nb">true</span>                      <span class="nb">false</span>                <span class="nb">false</span>               <span class="nb">false</span>               <span class="p">{</span><span class="s1">'11.3'</span>     <span class="p">}</span>   </span>
+<span class="line" data-lang="matlab" id="LC12">    <span class="p">[</span><span class="n">TRUNCATED</span><span class="p">]</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="306:1-306:29" dir="auto" id="user-content-create-a-new-spark-cluster">Create a new Spark Cluster</h2>
+<p data-sourcepos="308:1-309:73" dir="auto">Creating a new Spark cluster while acquiring new instances from the cloud provider
+if necessary is possible if the user has specified the number of workers.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="311:1-320:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Configure a spark cluster</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">cl</span><span class="o">.</span><span class="n">cluster_name</span> <span class="o">=</span> <span class="s1">'Sample Cluster'</span><span class="p">;</span>    <span class="c1">% user specified name</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">cl</span><span class="o">.</span><span class="n">spark_version</span> <span class="o">=</span> <span class="s1">'17.3.x-scala2.13'</span><span class="p">;</span> <span class="c1">% key from the getSparkVersions</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">cl</span><span class="o">.</span><span class="n">setNumWorkers</span><span class="p">([</span><span class="mi">2</span> <span class="mi">10</span><span class="p">]);</span>              <span class="c1">% autoscaling cluster min 2, max 10</span></span>
+<span class="line" data-lang="matlab" id="LC6"/>
+<span class="line" data-lang="matlab" id="LC7"><span class="c1">% Create the cluster</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="n">cl</span><span class="o">.</span><span class="n">create</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="322:1-323:31" dir="auto">The output of a successful creation will be the addition of a <code data-sourcepos="322:63-322:74">cluster_id</code>
+property to the cluster object.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="325:1-336:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC2"/>
+<span class="line" data-lang="matlab" id="LC3"> <span class="n">Cluster</span> <span class="n">with</span> <span class="k">properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC4"/>
+<span class="line" data-lang="matlab" id="LC5">    <span class="n">cluster_name</span><span class="p">:</span> <span class="s1">'Sample Cluster'</span></span>
+<span class="line" data-lang="matlab" id="LC6">   <span class="n">spark_version</span><span class="p">:</span> <span class="s1">'17.3.x-scala2.13'</span></span>
+<span class="line" data-lang="matlab" id="LC7">    <span class="n">node_type_id</span><span class="p">:</span> <span class="s1">'i3.xlarge'</span></span>
+<span class="line" data-lang="matlab" id="LC8">         <span class="n">Version</span><span class="p">:</span> <span class="mi">2</span></span>
+<span class="line" data-lang="matlab" id="LC9">       <span class="n">autoscale</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC10">      <span class="n">cluster_id</span><span class="p">:</span> <span class="s1">'0531-031912-trill440'</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="338:1-340:77" dir="auto">The call to <code data-sourcepos="338:13-338:20">create</code> is asynchronous; the returned <code data-sourcepos="338:52-338:63">cluster_id</code> can
+be used to poll the cluster state. When this method returns, the cluster is
+in a <em data-sourcepos="340:6-340:14">PENDING</em> state. The cluster is usable once it enters a <em data-sourcepos="340:62-340:70">RUNNING</em> state.</p>
+<p data-sourcepos="342:1-345:12" dir="auto">The use of additional methods will configure the cluster for use with MATLAB®.
+Use the <code data-sourcepos="343:9-343:29">enableMATLABRuntime</code> method to automate the installation of the
+MATLAB runtime on the cluster. See <a data-sourcepos="344:36-344:78" href="InitScripts.html">Init script configuration</a>
+for details.</p>
+<p data-sourcepos="347:1-348:15" dir="auto">Similarly, it is possible to create and attach custom tags during the creation
+of the cluster.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="350:1-353:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">tags</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">ClusterTag</span><span class="p">(</span><span class="s1">'owner'</span><span class="p">,</span><span class="s1">'JohnSmith'</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">setCustomTags</span><span class="p">(</span><span class="n">tags</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="355:1-355:70" dir="auto" id="user-content-describe-a-cluster-ie-get-information-about-an-existing-cluster">Describe a cluster (i.e. get information about an existing cluster)</h2>
+<p data-sourcepos="357:1-358:76" dir="auto">Retrieve the information for a cluster given its identifier. Clusters can be
+described while they are running or up to 30 days after they are terminated.</p>
+<p data-sourcepos="360:1-360:51" dir="auto">To see all information about a cluster, please use:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="362:1-403:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span><span class="o">.</span><span class="nb">refresh</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span></span>
+<span class="line" data-lang="matlab" id="LC3"/>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">cl</span> <span class="o">=</span> </span>
+<span class="line" data-lang="matlab" id="LC5">  <span class="n">Cluster</span> <span class="n">with</span> <span class="k">properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC6"/>
+<span class="line" data-lang="matlab" id="LC7">                    <span class="n">cluster_name</span><span class="p">:</span> <span class="s1">'Sample Cluster'</span></span>
+<span class="line" data-lang="matlab" id="LC8">                    <span class="n">node_type_id</span><span class="p">:</span> <span class="s1">'Standard_D4ds_v5'</span></span>
+<span class="line" data-lang="matlab" id="LC9">                   <span class="n">spark_version</span><span class="p">:</span> <span class="s1">'17.3.x-scala2.13'</span></span>
+<span class="line" data-lang="matlab" id="LC10">                      <span class="n">spark_conf</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="n">x1</span> <span class="n">containers</span><span class="o">.</span><span class="n">Map</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC11">                 <span class="n">instance_source</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC12">                  <span class="n">spark_env_vars</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x1</span> <span class="n">containers</span><span class="o">.</span><span class="n">Map</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC13">          <span class="n">driver_instance_source</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC14">         <span class="n">autotermination_minutes</span><span class="p">:</span> <span class="mi">120</span></span>
+<span class="line" data-lang="matlab" id="LC15">         <span class="n">effective_spark_version</span><span class="p">:</span> <span class="s1">'17.3.x-scala2.13'</span></span>
+<span class="line" data-lang="matlab" id="LC16">                   <span class="n">state_message</span><span class="p">:</span> <span class="s1">''</span></span>
+<span class="line" data-lang="matlab" id="LC17">                      <span class="n">start_time</span><span class="p">:</span> <span class="mi">17</span><span class="o">-</span><span class="n">Sep</span><span class="o">-</span><span class="mi">2025</span> <span class="mi">17</span><span class="p">:</span><span class="mi">17</span><span class="p">:</span><span class="mi">29</span></span>
+<span class="line" data-lang="matlab" id="LC18">             <span class="n">driver_node_type_id</span><span class="p">:</span> <span class="s1">'Standard_D4ds_v5'</span></span>
+<span class="line" data-lang="matlab" id="LC19">                      <span class="n">cluster_id</span><span class="p">:</span> <span class="s1">'0917-171729-smm2fzjo'</span></span>
+<span class="line" data-lang="matlab" id="LC20">                 <span class="n">terminated_time</span><span class="p">:</span> <span class="mi">18</span><span class="o">-</span><span class="n">Sep</span><span class="o">-</span><span class="mi">2025</span> <span class="mi">00</span><span class="p">:</span><span class="mi">34</span><span class="p">:</span><span class="mi">49</span></span>
+<span class="line" data-lang="matlab" id="LC21">            <span class="n">last_state_loss_time</span><span class="p">:</span> <span class="mi">17</span><span class="o">-</span><span class="n">Sep</span><span class="o">-</span><span class="mi">2025</span> <span class="mi">22</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">58</span></span>
+<span class="line" data-lang="matlab" id="LC22">                           <span class="n">state</span><span class="p">:</span> <span class="s1">'RUNNING'</span></span>
+<span class="line" data-lang="matlab" id="LC23">              <span class="n">last_activity_time</span><span class="p">:</span> <span class="mi">17</span><span class="o">-</span><span class="n">Sep</span><span class="o">-</span><span class="mi">2025</span> <span class="mi">22</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">04</span></span>
+<span class="line" data-lang="matlab" id="LC24">                     <span class="n">custom_tags</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC25">             <span class="n">last_restarted_time</span><span class="p">:</span> <span class="mi">17</span><span class="o">-</span><span class="n">Sep</span><span class="o">-</span><span class="mi">2025</span> <span class="mi">22</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mi">58</span></span>
+<span class="line" data-lang="matlab" id="LC26">             <span class="n">enable_elastic_disk</span><span class="p">:</span> <span class="mi">1</span></span>
+<span class="line" data-lang="matlab" id="LC27">                    <span class="n">default_tags</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC28">                  <span class="n">cluster_source</span><span class="p">:</span> <span class="s1">'UI'</span></span>
+<span class="line" data-lang="matlab" id="LC29">              <span class="n">termination_reason</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC30">               <span class="n">creator_user_name</span><span class="p">:</span> <span class="s1">'joe@example.com'</span></span>
+<span class="line" data-lang="matlab" id="LC31">    <span class="n">enable_local_disk_encryption</span><span class="p">:</span> <span class="mi">0</span></span>
+<span class="line" data-lang="matlab" id="LC32">          <span class="n">init_scripts_safe_mode</span><span class="p">:</span> <span class="mi">0</span></span>
+<span class="line" data-lang="matlab" id="LC33">                <span class="n">spark_context_id</span><span class="p">:</span> <span class="mi">4393639146836003594</span></span>
+<span class="line" data-lang="matlab" id="LC34">                  <span class="n">driver_healthy</span><span class="p">:</span> <span class="mi">1</span></span>
+<span class="line" data-lang="matlab" id="LC35">                  <span class="n">runtime_engine</span><span class="p">:</span> <span class="s1">'STANDARD'</span></span>
+<span class="line" data-lang="matlab" id="LC36">                <span class="n">azure_attributes</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC37">                     <span class="n">num_workers</span><span class="p">:</span> <span class="mi">0</span></span>
+<span class="line" data-lang="matlab" id="LC38">              <span class="n">data_security_mode</span><span class="p">:</span> <span class="s1">'SINGLE_USER'</span></span>
+<span class="line" data-lang="matlab" id="LC39">                       <span class="n">disk_spec</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC40">                <span class="n">single_user_name</span><span class="p">:</span> <span class="s1">'joe@example.com'</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="405:1-405:70" dir="auto">The <code data-sourcepos="405:5-405:11">state</code> property provides information of the state of the cluster.</p>
+<table data-sourcepos="407:1-416:104" dir="auto">
+<thead>
+<tr data-sourcepos="407:1-407:28">
+<th data-sourcepos="407:2-407:13">State</th>
+<th data-sourcepos="407:15-407:27">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="409:1-409:76">
+<td data-sourcepos="409:2-409:13">PENDING</td>
+<td data-sourcepos="409:15-409:75">Indicates that a cluster is in the process of being created.</td>
+</tr>
+<tr data-sourcepos="410:1-410:79">
+<td data-sourcepos="410:2-410:13">RUNNING</td>
+<td data-sourcepos="410:15-410:78">Indicates that a cluster has been started and is ready for use.</td>
+</tr>
+<tr data-sourcepos="411:1-411:73">
+<td data-sourcepos="411:2-411:13">RESTARTING</td>
+<td data-sourcepos="411:15-411:72">Indicates that a cluster is in the process of restarting.</td>
+</tr>
+<tr data-sourcepos="412:1-412:86">
+<td data-sourcepos="412:2-412:13">RESIZING</td>
+<td data-sourcepos="412:15-412:85">Indicates that a cluster is in the process of adding or removing nodes.</td>
+</tr>
+<tr data-sourcepos="413:1-413:77">
+<td data-sourcepos="413:2-413:13">TERMINATING</td>
+<td data-sourcepos="413:15-413:76">Indicates that a cluster is in the process of being destroyed.</td>
+</tr>
+<tr data-sourcepos="414:1-414:72">
+<td data-sourcepos="414:2-414:13">TERMINATED</td>
+<td data-sourcepos="414:15-414:71">Indicates that a cluster has been successfully destroyed.</td>
+</tr>
+<tr data-sourcepos="415:1-415:152">
+<td data-sourcepos="415:2-415:13">ERROR</td>
+<td data-sourcepos="415:15-415:151">This state is not used anymore. It was used to indicate a cluster that failed to be created. Terminating and Terminated are used instead.</td>
+</tr>
+<tr data-sourcepos="416:1-416:104">
+<td data-sourcepos="416:2-416:13">UNKNOWN</td>
+<td data-sourcepos="416:15-416:103">Indicates that a cluster is in an unknown state. A cluster should never be in this state.</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="418:1-418:40" dir="auto"><a class="no-attachment-icon" href="images/ClusterState.png" rel="noopener noreferrer" target="_blank"><img alt="ClusterState" data-sourcepos="418:1-418:40" src="images/ClusterState.png"/></a></p>
+<h2 data-sourcepos="420:1-420:32" dir="auto" id="user-content-starting-a-terminated-cluster">Starting a terminated cluster</h2>
+<p data-sourcepos="422:1-422:46" dir="auto">Start a terminated Spark cluster given its ID.</p>
+<ul data-sourcepos="424:1-426:69" dir="auto">
+<li data-sourcepos="424:1-424:55">The previous cluster ID and attributes are preserved.</li>
+<li data-sourcepos="425:1-425:171">The cluster starts with the last specified cluster size. If the previous cluster was an autoscaling cluster, the current cluster starts with the minimum number of nodes.</li>
+<li data-sourcepos="426:1-426:69">If the cluster is not in a <code data-sourcepos="426:30-426:41">TERMINATED</code> state, nothing will happen.</li>
+</ul>
+<p data-sourcepos="428:1-428:49" dir="auto">Clusters launched to run a job cannot be started.</p>
+<p data-sourcepos="430:1-430:27" dir="auto">To start a stopped cluster:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="432:1-434:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span><span class="o">.</span><span class="nb">start</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="436:1-436:24" dir="auto" id="user-content-terminating-a-cluster">Terminating a cluster</h2>
+<p data-sourcepos="438:1-441:40" dir="auto">It is possible to terminate a cluster using its <code data-sourcepos="438:49-438:60">cluster_id</code>. The cluster
+is removed asynchronously. Once the termination has completed, the cluster will
+be in a <code data-sourcepos="440:9-440:20">TERMINATED</code> state. If the cluster is already in a <code data-sourcepos="440:60-440:72">TERMINATING</code> or
+<code data-sourcepos="441:1-441:12">TERMINATED</code> state, nothing will happen.</p>
+<p data-sourcepos="443:1-443:65" dir="auto">30 days after a cluster is terminated, it is permanently deleted.</p>
+<p data-sourcepos="445:1-445:23" dir="auto">To terminate a cluster:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="447:1-451:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">setClusterId</span><span class="p">(</span><span class="s1">'0531-031912-trill440'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">cl</span><span class="o">.</span><span class="n">terminate</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="453:1-453:33" dir="auto" id="user-content-permanently-deleting-a-cluster">Permanently deleting a cluster</h2>
+<p data-sourcepos="455:1-457:26" dir="auto">When permanently deleting a running cluster it is terminated and
+its resources are asynchronously removed. If the cluster is terminated, then
+it is immediately removed.</p>
+<p data-sourcepos="459:1-460:62" dir="auto">You cannot perform any action on a permanently deleted cluster.
+Such a cluster is also no longer returned in the cluster list.</p>
+<p data-sourcepos="462:1-462:32" dir="auto">To permanently delete a cluster.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="464:1-466:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span><span class="o">.</span><span class="n">permanentDelete</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="468:1-468:26" dir="auto" id="user-content-list-available-clusters">List available clusters</h2>
+<p data-sourcepos="470:1-470:88" dir="auto">To connect to an existing cluster, it is possible to list available Databricks clusters.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="472:1-474:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">clusterList</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="o">.</span><span class="n">list</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="476:1-476:86" dir="auto">If the cluster_id is known, it is possible to directly connect to an existing cluster.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="478:1-482:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">setClusterId</span><span class="p">(</span><span class="s1">'0531-031912-trill440'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">cl</span><span class="o">.</span><span class="nb">refresh</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="484:1-484:37" dir="auto" id="user-content-configuring-initialization-scripts">Configuring initialization scripts</h2>
+<p data-sourcepos="486:1-488:53" dir="auto">Use the <code data-sourcepos="486:9-486:29">enableMATLABRuntime</code> method to automate the installation of the
+MATLAB runtime on the cluster. See <a data-sourcepos="487:36-487:78" href="InitScripts.html">Init script configuration</a>
+for details. In general call when creating a cluster:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="490:1-492:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span><span class="o">.</span><span class="n">enableMATLABRuntime</span><span class="p">(</span><span class="s1">'enableInitLogging'</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="494:1-496:51" dir="auto">This enables the installation of the runtime and logging. The default logging
+directory is <code data-sourcepos="495:14-495:38">dbfs:/logs/cluster_logs</code>. Logging is optional and the destination
+can also be configured using <code data-sourcepos="496:30-496:50">enableMATLABRuntime</code>.</p>
+<h2 data-sourcepos="498:1-498:36" dir="auto" id="user-content-configuring-log-delivery-location">Configuring log delivery location</h2>
+<p data-sourcepos="500:1-503:39" dir="auto">When a cluster is created it is possible to specify a location to deliver Spark
+driver, worker, and event logs. The location is in part based on the cluster ID.
+This can be useful for viewing init script logs. The base location is specified
+prior to creating a cluster as follows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="505:1-509:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">conf</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">ClusterLogConf</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">conf</span><span class="o">.</span><span class="n">setDestination</span><span class="p">(</span><span class="s1">'dbfs:/logs/cluster_logs'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">cl</span><span class="o">.</span><span class="n">setClusterLogConf</span><span class="p">(</span><span class="n">conf</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="511:1-515:61" dir="auto">In this case the runtime was not in place so the init script failed. Init script
+logs are stored in a subdirectory of the specified location named in the following
+format (default):
+<code data-sourcepos="514:1-514:61">dbfs:/cluster-logs/init_scripts/&lt;cluster_id&gt;_&lt;container_ip&gt;</code>
+Standard out and standard error are stored in separate files.</p>
+<h2 data-sourcepos="517:1-517:32" dir="auto" id="user-content-listing-events-from-a-cluster">Listing events from a cluster</h2>
+<p data-sourcepos="519:1-519:83" dir="auto">Retrieving a list of events about the activity of a cluster is possible as follows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="521:1-537:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">db</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">db</span><span class="o">.</span><span class="n">setClusterId</span><span class="p">(</span><span class="s1">'0306-145113-sw6tbqnb'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">ev</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">getEvents</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">ev</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC5">  <span class="mi">8</span><span class="n">x3</span> <span class="nb">timetable</span></span>
+<span class="line" data-lang="matlab" id="LC6">         <span class="n">timestamp</span>                 <span class="n">cluster_id</span>                  <span class="nb">type</span>             <span class="nb">details</span>   </span>
+<span class="line" data-lang="matlab" id="LC7">    <span class="err">____________________</span>    <span class="err">________________________</span>    <span class="err">__________________</span>    <span class="err">____________</span></span>
+<span class="line" data-lang="matlab" id="LC8">    <span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span> <span class="mi">18</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">02</span>    <span class="p">{</span><span class="s1">'0306-145113-sw6tbqnb'</span><span class="p">}</span>    <span class="p">{</span><span class="s1">'TERMINATING'</span>   <span class="p">}</span>    <span class="p">{</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">}</span></span>
+<span class="line" data-lang="matlab" id="LC9">    <span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span> <span class="mi">16</span><span class="p">:</span><span class="mi">58</span><span class="p">:</span><span class="mi">03</span>    <span class="p">{</span><span class="s1">'0306-145113-sw6tbqnb'</span><span class="p">}</span>    <span class="p">{</span><span class="s1">'DRIVER_HEALTHY'</span><span class="p">}</span>    <span class="p">{</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">}</span></span>
+<span class="line" data-lang="matlab" id="LC10">    <span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span> <span class="mi">16</span><span class="p">:</span><span class="mi">57</span><span class="p">:</span><span class="mi">29</span>    <span class="p">{</span><span class="s1">'0306-145113-sw6tbqnb'</span><span class="p">}</span>    <span class="p">{</span><span class="s1">'RUNNING'</span>       <span class="p">}</span>    <span class="p">{</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">}</span></span>
+<span class="line" data-lang="matlab" id="LC11">    <span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span> <span class="mi">16</span><span class="p">:</span><span class="mi">54</span><span class="p">:</span><span class="mi">41</span>    <span class="p">{</span><span class="s1">'0306-145113-sw6tbqnb'</span><span class="p">}</span>    <span class="p">{</span><span class="s1">'STARTING'</span>      <span class="p">}</span>    <span class="p">{</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">}</span></span>
+<span class="line" data-lang="matlab" id="LC12">    <span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span> <span class="mi">16</span><span class="p">:</span><span class="mi">53</span><span class="p">:</span><span class="mi">49</span>    <span class="p">{</span><span class="s1">'0306-145113-sw6tbqnb'</span><span class="p">}</span>    <span class="p">{</span><span class="s1">'TERMINATING'</span>   <span class="p">}</span>    <span class="p">{</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">}</span></span>
+<span class="line" data-lang="matlab" id="LC13">    <span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span> <span class="mi">15</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mi">04</span>    <span class="p">{</span><span class="s1">'0306-145113-sw6tbqnb'</span><span class="p">}</span>    <span class="p">{</span><span class="s1">'DRIVER_HEALTHY'</span><span class="p">}</span>    <span class="p">{</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">}</span></span>
+<span class="line" data-lang="matlab" id="LC14">    <span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span> <span class="mi">15</span><span class="p">:</span><span class="mi">02</span><span class="p">:</span><span class="mi">46</span>    <span class="p">{</span><span class="s1">'0306-145113-sw6tbqnb'</span><span class="p">}</span>    <span class="p">{</span><span class="s1">'RUNNING'</span>       <span class="p">}</span>    <span class="p">{</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">}</span></span>
+<span class="line" data-lang="matlab" id="LC15">    <span class="mi">06</span><span class="o">-</span><span class="n">Mar</span><span class="o">-</span><span class="mi">2026</span> <span class="mi">14</span><span class="p">:</span><span class="mi">51</span><span class="p">:</span><span class="mi">14</span>    <span class="p">{</span><span class="s1">'0306-145113-sw6tbqnb'</span><span class="p">}</span>    <span class="p">{</span><span class="s1">'CREATING'</span>      <span class="p">}</span>    <span class="p">{</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">}</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="539:1-539:33" dir="auto" id="user-content-creating-a-single-node-cluster">Creating a Single Node cluster</h2>
+<p data-sourcepos="541:1-545:24" dir="auto">A single node cluster combines the role of a driver node and worker node on a
+single node, rather than having a separate driver and worker nodes. This can be
+useful for reducing execution costs for small scale workloads e.g. during testing
+or development or when running an application like desktop MATLAB which typically
+runs on a single system.</p>
+<p data-sourcepos="547:1-550:57" dir="auto">The process for starting a single node cluster is similar to that of a regular
+cluster as previously described with the addition of configuring a <code data-sourcepos="548:68-548:79">ClusterTag</code>
+and a <code data-sourcepos="549:7-549:21">SparkConfPair</code> as shown. The number of workers should be set to 0,
+the driver node will fullfil the role of the worker also.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="552:1-573:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">cluster_name</span> <span class="o">=</span> <span class="s1">'mySingleNodeClusterName'</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">cl</span><span class="o">.</span><span class="n">spark_version</span> <span class="o">=</span><span class="s1">'17.3.x-scala2.13'</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC4"/>
+<span class="line" data-lang="matlab" id="LC5"><span class="c1">% Configure a tag to denote a single node cluster</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">tagSingleNode</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'ResourceClass'</span><span class="p">,</span><span class="s1">'SingleNode'</span><span class="p">};</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">tags</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">ClusterTag</span><span class="p">(</span><span class="n">tagSingleNode</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="n">cl</span><span class="o">.</span><span class="n">setCustomTags</span><span class="p">(</span><span class="n">tags</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC9"/>
+<span class="line" data-lang="matlab" id="LC10"><span class="c1">% Configure a SparkConfPair to denote a single node cluster</span></span>
+<span class="line" data-lang="matlab" id="LC11"><span class="n">scpSingleNode</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'spark.master'</span><span class="p">,</span><span class="s1">'local[*,4]'</span><span class="p">;</span><span class="s1">'spark.databricks.cluster.profile'</span><span class="p">,</span><span class="s1">'singleNode'</span><span class="p">};</span></span>
+<span class="line" data-lang="matlab" id="LC12"><span class="n">scps</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SparkConfPair</span><span class="p">(</span><span class="n">scpSingleNode</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC13"><span class="n">cl</span><span class="o">.</span><span class="n">setSparkConf</span><span class="p">(</span><span class="n">scps</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC14"/>
+<span class="line" data-lang="matlab" id="LC15"><span class="c1">% Set number of workers to 0</span></span>
+<span class="line" data-lang="matlab" id="LC16"><span class="n">cl</span><span class="o">.</span><span class="n">setNumWorkers</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC17"/>
+<span class="line" data-lang="matlab" id="LC18"><span class="c1">% Configure other properties as required and start the cluster as normal</span></span>
+<span class="line" data-lang="matlab" id="LC19"><span class="n">cl</span><span class="o">.</span><span class="n">enableMATLABRuntime</span><span class="p">(</span><span class="s1">'enableInitLogging'</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="s1">'enableRuntimeInstall'</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC20"><span class="n">cl</span><span class="o">.</span><span class="n">create</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="575:1-576:85" dir="auto">Alternatively a convenience method <code data-sourcepos="575:36-575:52">setSingleNode()</code> is provided to set
+the required number of workers, custom tag and Spark Conf pair in a single operation.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="578:1-589:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">cluster_name</span> <span class="o">=</span> <span class="s1">'mySingleNodeClusterName'</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">cl</span><span class="o">.</span><span class="n">spark_version</span> <span class="o">=</span><span class="s1">'17.3.x-scala2.13'</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC4"/>
+<span class="line" data-lang="matlab" id="LC5"><span class="c1">% Configure a single node cluster</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">cl</span><span class="o">.</span><span class="n">setSingleNode</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC7"/>
+<span class="line" data-lang="matlab" id="LC8"><span class="c1">% Configure other properties as required and start the cluster as normal</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="n">cl</span><span class="o">.</span><span class="n">enableMATLABRuntime</span><span class="p">(</span><span class="s1">'enableInitLogging'</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="s1">'enableRuntimeInstall'</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC10"><span class="n">cl</span><span class="o">.</span><span class="n">create</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="591:1-591:44" dir="auto" id="user-content-standard-shareduser_isolation-clusters">Standard (Shared/USER_ISOLATION) clusters</h2>
+<p data-sourcepos="593:1-596:45" dir="auto">There are a number of compatibility and capability considerations that arise when
+creating Standard (formerly USER_ISOLATION/Shared) clusters. This is discussed in
+detail in: <a data-sourcepos="595:12-595:50" href="Isolation.html">User Isolation clusters</a>. MATLAB is not supported on
+Dedicated clusters and not Standard clusters.</p>
+<h2 data-sourcepos="598:1-598:21" dir="auto" id="user-content-mw_runtime_release">MW_RUNTIME_RELEASE</h2>
+<p data-sourcepos="600:1-602:57" dir="auto">If creating a MATLAB runtime enabled cluster setting a Spark environment variable
+<code data-sourcepos="601:1-601:20">MW_RUNTIME_RELEASE</code> to indicate the MATLAB Runtime release used is recommended.
+The <code data-sourcepos="602:5-602:25">enableMATLABRuntime</code> method does this automatically.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="604:1-607:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">SEP</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SparkEnvPair</span><span class="p">({</span><span class="s2">"MW_RUNTIME_RELEASE"</span><span class="p">,</span> <span class="s2">"R2025b"</span><span class="p">});</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span><span class="o">.</span><span class="n">setSparkEnvVars</span><span class="p">(</span><span class="n">SEP</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="609:1-609:107" dir="auto">This can be queried using <code data-sourcepos="609:27-609:106">release = matlab.databricks.cluster.getClusterMATLABRelease(cluster=clusterId)</code>.</p>
+<h2 data-sourcepos="611:1-611:53" dir="auto" id="user-content-enabling-the-matlab-runtime-on-an-existing-cluster">Enabling the MATLAB Runtime on an existing cluster</h2>
+<p data-sourcepos="613:1-618:67" dir="auto">The <code data-sourcepos="613:5-613:31">databricks.Cluster.edit()</code> method can be used to update the configuration of
+an existing cluster. To simplify applying all of the required updates to use the
+MATLAB runtime the function <code data-sourcepos="615:29-615:85">matlab.databricks.cluster.MATLABEnableExistingCluster()</code>
+is provided and supports limited configurability.
+Editing a cluster requires that it be restarted. Clusters can also be edited via
+the Databricks GUI which can be more convenient for occasional use.</p>
+<p data-sourcepos="620:1-620:8" dir="auto">Example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="622:1-626:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">existingCluster</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="o">.</span><span class="n">findById</span><span class="p">(</span><span class="s2">"0708-093802-38njgrhw"</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="c1">% Or use findByName()</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">updatedCluster</span> <span class="o">=</span> <span class="nb">matlab</span><span class="o">.</span><span class="n">databricks</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">MATLABEnableExistingCluster</span><span class="p">(</span><span class="n">existingCluster</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="628:1-628:13" dir="auto" id="user-content-references">References</h2>
+<ol data-sourcepos="630:1-630:132" dir="auto">
+<li data-sourcepos="630:1-630:132">For more details see <a data-sourcepos="630:25-630:132" href="https://docs.databricks.com/api/latest/clusters.html" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/latest/clusters.html</a></li>
+</ol></div></main><script src="resources/copycode.js">//</script></body></html>

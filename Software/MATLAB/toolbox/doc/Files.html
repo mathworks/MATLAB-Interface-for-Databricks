@@ -1,0 +1,153 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Files API</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:11" dir="auto" id="user-content-files-api">Files API</h1>
+<p data-sourcepos="3:1-3:206" dir="auto">The Files API is a HTTP API that allows reading, writing, listing and deleting of files and directories. The API makes working with file content as raw bytes easier and more efficient than DBFS for example.</p>
+<p data-sourcepos="5:1-5:219" dir="auto">The API supports Unity Catalog volumes, where files and directories to operate on are specified using their volume URI path, which follows the format <code data-sourcepos="5:151-5:218">/Volumes/&lt;catalog_name&gt;/&lt;schema_name&gt;/&lt;volume_name&gt;/&lt;path_to_file&gt;</code>.</p>
+<blockquote data-sourcepos="7:1-7:107" dir="auto">
+<p data-sourcepos="7:3-7:107">Please note this API is in "Public Preview" with Databricks® and is subject to change without notice.</p>
+</blockquote>
+<ul data-sourcepos="9:1-10:126" dir="auto">
+<li data-sourcepos="9:1-9:123">For more details see: <a data-sourcepos="9:25-9:122" href="https://docs.databricks.com/api/workspace/files" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/files</a>.</li>
+<li data-sourcepos="10:1-10:126">For details of working with files on Databricks in other ways from MATLAB® see: <a data-sourcepos="10:87-10:125" href="WorkingWithFiles.html">WorkingWithFiles</a>.</li>
+</ul>
+<p data-sourcepos="12:1-12:62" dir="auto">To use the Files API begin by creating a <code data-sourcepos="12:42-12:48">Files</code> object, e.g.:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="14:1-16:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">f</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Files</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="18:1-18:74" dir="auto">The following methods can then be used to work with files and directories:</p>
+<ul data-sourcepos="20:1-28:10" dir="auto">
+<li data-sourcepos="20:1-20:10"><code data-sourcepos="20:3-20:10">create</code></li>
+<li data-sourcepos="21:1-21:21"><code data-sourcepos="21:3-21:21">directoryMetadata</code></li>
+<li data-sourcepos="22:1-22:12"><code data-sourcepos="22:3-22:12">download</code></li>
+<li data-sourcepos="23:1-23:16"><code data-sourcepos="23:3-23:16">fileMetadata</code></li>
+<li data-sourcepos="24:1-24:8"><code data-sourcepos="24:3-24:8">list</code></li>
+<li data-sourcepos="25:1-25:17"><code data-sourcepos="25:3-25:17">listPaginated</code></li>
+<li data-sourcepos="26:1-26:6"><code data-sourcepos="26:3-26:6">rm</code></li>
+<li data-sourcepos="27:1-27:9"><code data-sourcepos="27:3-27:9">rmdir</code></li>
+<li data-sourcepos="28:1-29:0"><code data-sourcepos="28:3-28:10">upload</code></li>
+</ul>
+<h2 data-sourcepos="30:1-30:32" dir="auto" id="user-content-create---create-a-directory"><code data-sourcepos="30:4-30:11">create</code> - Create a directory</h2>
+<p data-sourcepos="32:1-35:52" dir="auto">If necessary, also creates any parent directories of the new, empty directory
+(like the UNIX® shell command mkdir -p). On success a logical <code data-sourcepos="33:67-33:72">true</code> is returned,
+otherwise <code data-sourcepos="34:11-34:17">false</code>. A <code data-sourcepos="34:22-34:68">databricks.datastructures.files.ErrorResponse</code> is also returned.
+If called on an existing directory true is returned.</p>
+<p data-sourcepos="37:1-38:23" dir="auto">The required <code data-sourcepos="37:14-37:28">directoryPath</code> argument is given as an absolute path,
+as a scalar text value.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="40:1-46:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">f</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Files</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="p">[</span><span class="nb">result</span><span class="p">,</span> <span class="n">errorResponse</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="s2">"/Volumes/main/default/myvolume/myDir"</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="nb">result</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC4">  <span class="nb">logical</span></span>
+<span class="line" data-lang="matlab" id="LC5">   <span class="mi">1</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="48:1-48:141" dir="auto">See also: <a data-sourcepos="48:11-48:140" href="https://docs.databricks.com/api/workspace/files/createdirectory" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/files/createdirectory</a>.</p>
+<h2 data-sourcepos="50:1-50:57" dir="auto" id="user-content-directorymetadata---gets-the-metadata-of-a-directory"><code data-sourcepos="50:4-50:22">directoryMetadata</code> - Gets the metadata of a directory</h2>
+<p data-sourcepos="52:1-54:61" dir="auto">On success a <code data-sourcepos="52:14-52:64">databricks.datastructures.files.DirectoryMetadata</code> object is returned.
+On expected error a <code data-sourcepos="53:21-53:67">databricks.datastructures.files.ErrorResponse</code> is returned.
+The <code data-sourcepos="54:5-54:12">exists</code> property indicates if a directory exists or not.</p>
+<p data-sourcepos="56:1-57:23" dir="auto">The required <code data-sourcepos="56:14-56:28">directoryPath</code> argument is given as an absolute path,
+as a scalar text value.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="59:1-65:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">f</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Files</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">md</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">directoryMetadata</span><span class="p">(</span><span class="s2">"/Volumes/main/default/myvolume/myDir"</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">md</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC4">    <span class="n">DirectoryMetadata</span> <span class="n">with</span> <span class="k">properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC5">      <span class="n">exists</span><span class="p">:</span> <span class="mi">1</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="67:1-67:151" dir="auto">See also: <a data-sourcepos="67:11-67:150" href="https://docs.databricks.com/api/workspace/files/getdirectorymetadata" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/files/getdirectorymetadata</a>.</p>
+<h2 data-sourcepos="69:1-69:32" dir="auto" id="user-content-download---downloads-a-file"><code data-sourcepos="69:4-69:13">download</code> - Downloads a file</h2>
+<p data-sourcepos="71:1-74:72" dir="auto">Files of up to 5 GiB can be downloaded. On success a logical <code data-sourcepos="71:62-71:67">true</code> is returned,
+otherwise <code data-sourcepos="72:11-72:17">false</code>. A <code data-sourcepos="72:22-72:68">databricks.datastructures.files.ErrorResponse</code> is also returned.
+The optional logical <code data-sourcepos="73:22-73:32">overwrite</code> flag can be used to prevent overwriting a
+destination file, the default is true i.e. do overwrite the destination.</p>
+<p data-sourcepos="76:1-78:19" dir="auto">If an optional <code data-sourcepos="76:16-76:28">destination</code> path named argument is provided it is used as the path
+to download to otherwise the name of the file to be downloaded and the current
+directory are used.</p>
+<p data-sourcepos="80:1-81:23" dir="auto">The required <code data-sourcepos="80:14-80:21">source</code> argument is given as an absolute path,
+as a scalar text value.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="83:1-89:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">f</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Files</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="p">[</span><span class="nb">result</span><span class="p">,</span> <span class="n">errorResponse</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">download</span><span class="p">(</span><span class="s2">"/Volumes/main/default/myvolume/myDir/hello-world.txt"</span><span class="p">,</span> <span class="n">destination</span><span class="o">=</span><span class="s2">"hw-downloaded.txt"</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="nb">result</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC4">  <span class="nb">logical</span></span>
+<span class="line" data-lang="matlab" id="LC5">   <span class="mi">1</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="91:1-91:127" dir="auto">See also: <a data-sourcepos="91:11-91:126" href="https://docs.databricks.com/api/workspace/files/download" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/files/download</a>.</p>
+<h2 data-sourcepos="93:1-93:46" dir="auto" id="user-content-filemetadata---get-the-metadata-of-a-file"><code data-sourcepos="93:4-93:17">fileMetadata</code> - Get the metadata of a file</h2>
+<p data-sourcepos="95:1-97:53" dir="auto">On success a <code data-sourcepos="95:14-95:59">databricks.datastructures.files.FileMetadata</code> object is returned.
+On expected error a <code data-sourcepos="96:21-96:67">databricks.datastructures.files.ErrorResponse</code> is returned.
+The contentLength property is the file size in bytes.</p>
+<p data-sourcepos="99:1-99:86" dir="auto">The required <code data-sourcepos="99:14-99:23">filePath</code> argument is given as an absolute path, as a scalar text value.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="101:1-109:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">f</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Files</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">md</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">fileMetadata</span><span class="p">(</span><span class="s2">"/Volumes/main/default/myvolume/myDir/hello-world.txt"</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">md</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC4">    <span class="n">FileMetadata</span> <span class="n">with</span> <span class="k">properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC5">        <span class="n">contentType</span><span class="p">:</span> <span class="s2">"application/octet-stream"</span></span>
+<span class="line" data-lang="matlab" id="LC6">      <span class="n">contentLength</span><span class="p">:</span> <span class="mi">13</span></span>
+<span class="line" data-lang="matlab" id="LC7">       <span class="n">lastModified</span><span class="p">:</span> <span class="mi">08</span><span class="o">-</span><span class="n">Jan</span><span class="o">-</span><span class="mi">2024</span> <span class="mi">10</span><span class="p">:</span><span class="mi">27</span><span class="p">:</span><span class="mi">07</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="111:1-111:133" dir="auto">See also: <a data-sourcepos="111:11-111:132" href="https://docs.databricks.com/api/workspace/files/getmetadata" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/files/getmetadata</a>.</p>
+<h2 data-sourcepos="113:1-113:22" dir="auto" id="user-content-list---list-files"><code data-sourcepos="113:4-113:9">list</code> - List files</h2>
+<p data-sourcepos="115:1-118:65" dir="auto">Return a complete list of files in a directory.
+On success a <code data-sourcepos="116:14-116:59">databricks.datastructures.files.ListResponse</code> is returned
+otherwise a <code data-sourcepos="117:13-117:59">databricks.datastructures.files.ErrorResponse</code> is returned.
+To return a page at a time use <code data-sourcepos="118:32-118:65">databricks.Files.listPaginated()</code></p>
+<p data-sourcepos="120:1-121:23" dir="auto">The required <code data-sourcepos="120:14-120:28">directoryPath</code> argument is given as an absolute path,
+as a scalar text value.</p>
+<p data-sourcepos="123:1-124:31" dir="auto">An optional <code data-sourcepos="123:13-123:22">pageSize</code> int64 argument can be provided that sets the page size
+used the default value is 1000.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="126:1-131:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">f</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Files</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="nb">result</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="s1">'/Volumes/main/default/myvolume/myDir'</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3">  <span class="n">ListResponse</span> <span class="n">with</span> <span class="k">properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC4">    <span class="n">contents</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x5</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">DirectoryEntry</span><span class="p">]</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="133:1-134:67" dir="auto">This method is not recommended for directories with very large file counts
+as runtime may be excessive, other approaches should be considered.</p>
+<p data-sourcepos="136:1-136:153" dir="auto">See also: <a data-sourcepos="136:11-136:152" href="https://docs.databricks.com/api/workspace/files/listdirectorycontents" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/files/listdirectorycontents</a>.</p>
+<h2 data-sourcepos="138:1-138:48" dir="auto" id="user-content-listpaginated---list-a-single-page-of-files">listPaginated - List a single 'page' of files</h2>
+<p data-sourcepos="140:1-140:88" dir="auto">This method list some or all directory contents potentially returning a <code data-sourcepos="140:73-140:87">nextPageToken</code>.</p>
+<p data-sourcepos="142:1-143:31" dir="auto">An optional <code data-sourcepos="142:13-142:22">pageSize</code> int64 argument can be provided that sets the page size
+used the default value is 1000.</p>
+<p data-sourcepos="145:1-145:61" dir="auto">An optional <code data-sourcepos="145:13-145:23">pageToken</code> scalar text argument can be provided.</p>
+<p data-sourcepos="147:1-150:67" dir="auto">The token being the <code data-sourcepos="147:21-147:35">nextPageToken</code> in the response of the previous request
+to list the contents of this directory. Provide this token to retrieve the
+next page of directory entries. When providing a <code data-sourcepos="149:50-149:60">pagetoken</code>, all other
+parameters provided to the request must match the previous request.</p>
+<p data-sourcepos="152:1-155:29" dir="auto">To list all of the entries in a directory, it is necessary to continue
+requesting pages of entries until the response contains no <code data-sourcepos="153:60-153:74">nextPageToken</code>.
+Note that the number of entries returned must not be used to determine
+when the listing is complete.</p>
+<p data-sourcepos="157:1-157:67" dir="auto">To return all pages at one time also see: <code data-sourcepos="157:43-157:67">databricks.Files.list()</code></p>
+<p data-sourcepos="159:1-160:23" dir="auto">The required <code data-sourcepos="159:14-159:28">directoryPath</code> argument is given as an absolute path,
+as a scalar text value.</p>
+<p data-sourcepos="162:1-163:72" dir="auto">On success a <code data-sourcepos="162:14-162:59">databricks.datastructures.files.ListResponse</code> is returned
+otherwise a <code data-sourcepos="163:13-163:59">databricks.datastructures.files.ErrorResponse</code> is returned.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="165:1-170:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">f</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Files</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="nb">result</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">list</span><span class="p">(</span><span class="s1">'/Volumes/main/default/myvolume/myDir'</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3">  <span class="n">ListResponse</span> <span class="n">with</span> <span class="k">properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC4">    <span class="n">contents</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="n">x5</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">DirectoryEntry</span><span class="p">]</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="172:1-172:153" dir="auto">See also: <a data-sourcepos="172:11-172:152" href="https://docs.databricks.com/api/workspace/files/listdirectorycontents" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/files/listdirectorycontents</a>.</p>
+<h2 data-sourcepos="174:1-174:22" dir="auto" id="user-content-rm---deletes-a-file">rm - Deletes a file</h2>
+<p data-sourcepos="176:1-178:91" dir="auto">On success a logical <code data-sourcepos="176:22-176:27">true</code> is returned, on failure a <code data-sourcepos="176:55-176:61">false</code> is returned along with
+a populated <code data-sourcepos="177:13-177:59">databricks.datastructures.files.ErrorResponse</code>.
+The required <code data-sourcepos="178:14-178:28">directoryPath</code> argument is given as an absolute path, as a scalar text value.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="180:1-186:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">f</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Files</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2">  <span class="p">[</span><span class="nb">result</span><span class="p">,</span> <span class="n">errorResponse</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">rm</span><span class="p">(</span><span class="s2">"/Volumes/main/default/myvolume/myDir/hello-world.txt"</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3">  <span class="nb">result</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC4">    <span class="nb">logical</span></span>
+<span class="line" data-lang="matlab" id="LC5">     <span class="mi">1</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="188:1-188:123" dir="auto">See also: <a data-sourcepos="188:11-188:122" href="https://docs.databricks.com/api/workspace/files/delete" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/files/delete</a>.</p>
+<h2 data-sourcepos="190:1-190:37" dir="auto" id="user-content-rmdir---deletes-an-empty-directory">rmdir - Deletes an empty directory</h2>
+<p data-sourcepos="192:1-195:95" dir="auto">To delete a non-empty directory, first delete all of its contents.
+This can be done by listing the directory contents and deleting each file
+and subdirectory recursively. On success a logical <code data-sourcepos="194:52-194:57">true</code> is returned, on failure
+a logical <code data-sourcepos="195:11-195:17">false</code> and  a populated <code data-sourcepos="195:36-195:82">databricks.datastructures.files.ErrorResponse</code> is returned.</p>
+<p data-sourcepos="197:1-198:23" dir="auto">The required <code data-sourcepos="197:14-197:28">directoryPath</code> argument is given as an absolute path,
+as a scalar text value.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="200:1-206:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">f</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Files</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="p">[</span><span class="nb">result</span><span class="p">,</span> <span class="n">errorResponse</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="nb">rmdir</span><span class="p">(</span><span class="s2">"/Volumes/main/default/myvolume/myDeleteMeDir"</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="nb">result</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC4">  <span class="nb">logical</span></span>
+<span class="line" data-lang="matlab" id="LC5">   <span class="mi">1</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="208:1-208:141" dir="auto">See also: <a data-sourcepos="208:11-208:140" href="https://docs.databricks.com/api/workspace/files/deletedirectory" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/files/deletedirectory</a>.</p>
+<h2 data-sourcepos="210:1-210:26" dir="auto" id="user-content-upload---uploads-a-file">upload - Uploads a file</h2>
+<p data-sourcepos="212:1-213:91" dir="auto">A file of up to 5 GiB can be uploaded. On success a logical <code data-sourcepos="212:61-212:66">true</code> is returned, on failure a
+<code data-sourcepos="213:1-213:7">false</code> is returned along with a populated <code data-sourcepos="213:44-213:90">databricks.datastructures.files.ErrorResponse</code>.</p>
+<p data-sourcepos="215:1-216:22" dir="auto">The required <code data-sourcepos="215:14-215:21">source</code> and <code data-sourcepos="215:27-215:39">destination</code> path arguments are given as absolute paths,
+as scalar text values.</p>
+<p data-sourcepos="218:1-219:36" dir="auto">The optional named <code data-sourcepos="218:20-218:30">overwrite</code> argument indicates if the destination file should be overwritten
+if it exists. The default is <code data-sourcepos="219:30-219:35">true</code>.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="221:1-227:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">f</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Files</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"> <span class="p">[</span><span class="nb">result</span><span class="p">,</span> <span class="n">upload</span><span class="p">]</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">upload</span><span class="p">(</span><span class="s2">"hello-world.txt"</span><span class="p">,</span> <span class="s2">"/Volumes/main/default/myvolume/myDir/hello-world.txt"</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3"> <span class="nb">result</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC4">   <span class="nb">logical</span></span>
+<span class="line" data-lang="matlab" id="LC5">    <span class="mi">1</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="229:1-229:123" dir="auto">See also: <a data-sourcepos="229:11-229:122" href="https://docs.databricks.com/api/workspace/files/upload" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/files/upload</a>.</p></div></main><script src="resources/copycode.js">//</script></body></html>

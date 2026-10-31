@@ -1,0 +1,71 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Statement Execution API</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:25" dir="auto" id="user-content-statement-execution-api">Statement Execution API</h1>
+<blockquote data-sourcepos="3:1-3:66" dir="auto">
+<p data-sourcepos="3:3-3:66">The underlying Databricks® REST API is currently in preview.</p>
+</blockquote>
+<p data-sourcepos="5:1-9:22" dir="auto">The Databricks SQL Statement Execution API can be used to execute SQL statements
+on a SQL warehouse and fetch the result. A subset of this functionality is supported
+from MATLAB®. This is a preview release only and Statement Execution functionality
+should be expected to change or be removed without notice in future releases. Feature
+support is incomplete.</p>
+<h2 data-sourcepos="11:1-11:37" dir="auto" id="user-content-create-a-statement-execution-query">Create a Statement Execution query</h2>
+<p data-sourcepos="13:1-15:38" dir="auto">The following code creates a Statement Execution object, configures it with a simple
+SQL query to return the integers from 0 to 99 and to export the results via
+external storage e.g. Azure® blob.</p>
+<p data-sourcepos="17:1-17:108" dir="auto">For details of how to programmatically interact with a SQL Warehouse see: <a data-sourcepos="17:75-17:107" href="WorkspacesAPI.html">WorkspacesAPI</a>.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="19:1-48:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% The StatementExecution object se will be used to run the query</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">se</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">statementexecution</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">StatementExecution</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"/>
+<span class="line" data-lang="matlab" id="LC4"><span class="c1">% Set a warehouse Id</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">warehouseId</span> <span class="o">=</span> <span class="s2">"02&lt;REDACTEDa4"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC6"/>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">esr</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">statementexecution</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ExecuteStatementRequest</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="n">esr</span><span class="o">.</span><span class="n">warehouse_id</span> <span class="o">=</span> <span class="n">warehouseId</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="c1">% Set the SQL statement of interest, integers 0-99</span></span>
+<span class="line" data-lang="matlab" id="LC10"><span class="n">esr</span><span class="o">.</span><span class="n">statement</span> <span class="o">=</span> <span class="s2">"SELECT * FROM range(100)"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC11"><span class="n">esr</span><span class="o">.</span><span class="n">wait_timeout</span> <span class="o">=</span> <span class="s2">"10s"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC12"><span class="c1">% Export the result to external storage</span></span>
+<span class="line" data-lang="matlab" id="LC13"><span class="n">esr</span><span class="o">.</span><span class="n">disposition</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">statementexecution</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Disposition</span><span class="o">.</span><span class="n">EXTERNAL_LINKS</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC14"/>
+<span class="line" data-lang="matlab" id="LC15"><span class="c1">% Execute the query</span></span>
+<span class="line" data-lang="matlab" id="LC16"><span class="p">[</span><span class="n">code</span><span class="p">,</span> <span class="nb">result</span><span class="p">,</span> <span class="n">response</span><span class="p">]</span> <span class="o">=</span> <span class="n">se</span><span class="o">.</span><span class="n">executeStatement</span><span class="p">(</span><span class="n">esr</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC17"/>
+<span class="line" data-lang="matlab" id="LC18"><span class="k">if</span> <span class="n">code</span> <span class="o">~=</span> <span class="nb">matlab</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">http</span><span class="o">.</span><span class="n">StatusCode</span><span class="o">.</span><span class="n">OK</span></span>
+<span class="line" data-lang="matlab" id="LC19">    <span class="nb">error</span><span class="p">(</span><span class="s2">"Error executing: %s"</span><span class="p">,</span> <span class="n">esr</span><span class="o">.</span><span class="n">statement</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC20"><span class="k">end</span></span>
+<span class="line" data-lang="matlab" id="LC21"/>
+<span class="line" data-lang="matlab" id="LC22"><span class="c1">% Download the file from external storage</span></span>
+<span class="line" data-lang="matlab" id="LC23"><span class="n">resultFile1</span> <span class="o">=</span> <span class="nb">websave</span><span class="p">(</span><span class="s1">'seResult.json'</span><span class="p">,</span> <span class="nb">result</span><span class="o">.</span><span class="nb">result</span><span class="o">.</span><span class="n">external_links</span><span class="o">.</span><span class="n">external_link</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC24"><span class="c1">% The default format is JSON, in this case using built in jsondecode to return</span></span>
+<span class="line" data-lang="matlab" id="LC25"><span class="c1">% a cell array</span></span>
+<span class="line" data-lang="matlab" id="LC26"><span class="n">resultDataCell1</span> <span class="o">=</span> <span class="nb">jsondecode</span><span class="p">(</span><span class="nb">fileread</span><span class="p">(</span><span class="n">resultFile1</span><span class="p">))</span></span>
+<span class="line" data-lang="matlab" id="LC27"><span class="c1">% Convert the cell array to a table</span></span>
+<span class="line" data-lang="matlab" id="LC28"><span class="n">resultDataTable1</span> <span class="o">=</span> <span class="nb">cell2table</span><span class="p">(</span><span class="n">resultDataCell1</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="50:1-50:69" dir="auto">To return data in CSV format, the format can be specified as follows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="52:1-63:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">esr</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">statementexecution</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">ExecuteStatementRequest</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">esr</span><span class="o">.</span><span class="n">warehouse_id</span> <span class="o">=</span> <span class="n">warehouseId</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">esr</span><span class="o">.</span><span class="n">statement</span> <span class="o">=</span> <span class="s2">"SELECT * FROM range(100)"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">esr</span><span class="o">.</span><span class="n">wait_timeout</span> <span class="o">=</span> <span class="s2">"10s"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">esr</span><span class="o">.</span><span class="n">disposition</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">statementexecution</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">Disposition</span><span class="o">.</span><span class="n">EXTERNAL_LINKS</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">esr</span><span class="o">.</span><span class="nb">format</span> <span class="o">=</span> <span class="s2">"CSV"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="p">[</span><span class="n">code</span><span class="p">,</span> <span class="nb">result</span><span class="p">,</span> <span class="n">response</span><span class="p">]</span> <span class="o">=</span> <span class="n">se</span><span class="o">.</span><span class="n">executeStatement</span><span class="p">(</span><span class="n">esr</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC8"/>
+<span class="line" data-lang="matlab" id="LC9"><span class="n">resultFile1</span> <span class="o">=</span> <span class="nb">websave</span><span class="p">(</span><span class="s1">'elresult.csv'</span><span class="p">,</span> <span class="nb">result</span><span class="o">.</span><span class="nb">result</span><span class="o">.</span><span class="n">external_links</span><span class="o">.</span><span class="n">external_link</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC10"><span class="n">resultDataTable2</span> <span class="o">=</span> <span class="nb">readtable</span><span class="p">(</span><span class="n">resultFile1</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="65:1-67:83" dir="auto">When more than one chunk is returned, subsequent chunks need to also be downloaded
+and the results concatenated. The internal function: <code data-sourcepos="66:54-66:110">databricks.internal.statementexecution.executeStatement</code>
+is a more complete higher-level implementation that downloads complete result sets.</p>
+<h2 data-sourcepos="69:1-69:22" dir="auto" id="user-content-methods-of-interest">Methods of interest</h2>
+<p data-sourcepos="71:1-72:74" dir="auto">Statement execution specific methods on the <code data-sourcepos="71:45-71:98">databricks.statementexecution.api.StatementExecution</code>
+object are as follows, additional methods are inherited from base classes:</p>
+<ul data-sourcepos="74:1-77:54" dir="auto">
+<li data-sourcepos="74:1-74:46">cancelExecution - Cancel statement execution</li>
+<li data-sourcepos="75:1-75:44">executeStatement - Execute a SQL statement</li>
+<li data-sourcepos="76:1-76:61">getStatement - Get status, manifest, and result first chunk</li>
+<li data-sourcepos="77:1-78:0">getStatementResultChunkN - Get result chunk by index</li>
+</ul>
+<h2 data-sourcepos="79:1-79:13" dir="auto" id="user-content-references">References</h2>
+<p data-sourcepos="81:1-81:35" dir="auto">For further details of the API see:</p>
+<ul data-sourcepos="83:1-84:142" dir="auto">
+<li data-sourcepos="83:1-83:126"><a data-sourcepos="83:3-83:126" href="https://docs.databricks.com/api/workspace/statementexecution" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/api/workspace/statementexecution</a></li>
+<li data-sourcepos="84:1-84:142"><a data-sourcepos="84:3-84:142" href="https://docs.databricks.com/en/sql/admin/sql-execution-tutorial.html" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/en/sql/admin/sql-execution-tutorial.html</a></li>
+</ul></div></main><script src="resources/copycode.js">//</script></body></html>

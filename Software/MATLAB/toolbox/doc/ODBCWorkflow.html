@@ -1,0 +1,236 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>ODBC and Database Toolbox workflow</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:36" dir="auto" id="user-content-odbc-and-database-toolbox-workflow">ODBC and Database Toolbox workflow</h1>
+<p data-sourcepos="3:1-4:85" dir="auto">Before making an ODBC connection to Databricks® it is first necessary to install
+the ODBC driver. This package supports the Databricks ODBC driver v2.8.0 and greater.</p>
+<h2 data-sourcepos="6:1-6:27" dir="auto" id="user-content-odbc-driver-installation">ODBC driver installation</h2>
+<p data-sourcepos="8:1-8:176" dir="auto">Begin with the Databricks provided download and documentation: <a data-sourcepos="8:64-8:175" href="https://www.databricks.com/spark/odbc-drivers-download" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/spark/odbc-drivers-download</a>.</p>
+<p data-sourcepos="10:1-10:190" dir="auto">Work through the documentation <a data-sourcepos="10:32-10:151" href="https://docs.databricks.com/integrations/jdbc-odbc-bi.html" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/integrations/jdbc-odbc-bi.html</a> to install the driver and setup a DSN.</p>
+<p data-sourcepos="12:1-16:89" dir="auto">Setting the Thrift Transport type to <code data-sourcepos="12:38-12:43">HTTP</code> enables the HTTP Path to be set in the
+HTTP options. This value can be found in the Databricks Cluster Advanced options
+properties under ODBC/JDBC. The host value refers to the Databricks server hostname
+in the same properties. Username and password authentication is typically used with
+the username set to <code data-sourcepos="16:21-16:27">token</code> and the password set to the Databricks personal access token.</p>
+<p data-sourcepos="18:1-18:98" dir="auto">If correctly configured the <em data-sourcepos="18:29-18:34">Test</em> results should return <code data-sourcepos="18:58-18:97">Successfully connected to data source!</code>.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="{tip}" data-sourcepos="20:1-22:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">Apart from using a *ODBC* driver to connect to Databricks through Database Toolbox, it is also possible to connect through [Database Toolbox and a *JDBC* driver](JDBCWorkflow.md).</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="24:1-24:24" dir="auto" id="user-content-creating-a-connection">Creating a connection</h2>
+<p data-sourcepos="26:1-27:79" dir="auto">The package provides a higher-level class `databricks.ODBCConnection to simplify
+creating a connection or alternatively a connection can be manually configured.</p>
+<h2 data-sourcepos="29:1-29:56" dir="auto" id="user-content-making-a-databricksodbcconnection-based-connection">Making a <code data-sourcepos="29:13-29:39">databricks.ODBCConnection</code> based connection</h2>
+<p data-sourcepos="31:1-31:67" dir="auto">ODBCConnection Creates a Database Toolbox™ connection object.</p>
+<blockquote data-sourcepos="33:1-35:39" dir="auto">
+<p data-sourcepos="33:3-35:39">Pending resolution of an apparent ODBC driver bug Oauth, particularly U2M,
+authentication, is not currently supported. It it expected that this issue
+will be resolved in a future release.</p>
+</blockquote>
+<p data-sourcepos="37:1-39:66" dir="auto">The primary role of this class is to construct the connection string used
+by the Databricks ODBC driver. Essentially this string combines a large number
+of configuration values. This is error prone to construct by hand.</p>
+<p data-sourcepos="41:1-43:69" dir="auto">The Connection object is stored in the ODBCConnection's Connection property.
+By default the class will use the same authentication provider chain as
+used by the REST API interfaces, see Documentation/Authentication.md.</p>
+<p data-sourcepos="45:1-46:58" dir="auto">The following optional named arguments can be used to override the values
+obtained from settings &amp; configuration files and defaults.</p>
+<h3 data-sourcepos="48:1-48:46" dir="auto" id="user-content-optional-named-argument-types-and-defaults">Optional named argument types and defaults</h3>
+<table data-sourcepos="50:1-69:48" dir="auto">
+<thead>
+<tr data-sourcepos="50:1-50:48">
+<th data-sourcepos="50:2-50:25">Name</th>
+<th data-sourcepos="50:27-50:35">Type</th>
+<th data-sourcepos="50:37-50:47">Default</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="52:1-52:48">
+<td data-sourcepos="52:2-52:25">host</td>
+<td data-sourcepos="52:27-52:35">string</td>
+<td data-sourcepos="52:37-52:47"/>
+</tr>
+<tr data-sourcepos="53:1-53:48">
+<td data-sourcepos="53:2-53:25">dsnless</td>
+<td data-sourcepos="53:27-53:35">string</td>
+<td data-sourcepos="53:37-53:47"/>
+</tr>
+<tr data-sourcepos="54:1-54:48">
+<td data-sourcepos="54:2-54:25">port</td>
+<td data-sourcepos="54:27-54:35">string</td>
+<td data-sourcepos="54:37-54:47">"443"</td>
+</tr>
+<tr data-sourcepos="55:1-55:48">
+<td data-sourcepos="55:2-55:25">driver</td>
+<td data-sourcepos="55:27-55:35">string</td>
+<td data-sourcepos="55:37-55:47"/>
+</tr>
+<tr data-sourcepos="56:1-56:64">
+<td data-sourcepos="56:2-56:25">cluster</td>
+<td data-sourcepos="56:27-56:53">databricks.Cluster/string</td>
+<td data-sourcepos="56:55-56:63"/>
+</tr>
+<tr data-sourcepos="57:1-57:48">
+<td data-sourcepos="57:2-57:25">ssl</td>
+<td data-sourcepos="57:27-57:35">logical</td>
+<td data-sourcepos="57:37-57:47">true</td>
+</tr>
+<tr data-sourcepos="58:1-58:48">
+<td data-sourcepos="58:2-58:25">thriftTransport</td>
+<td data-sourcepos="58:27-58:35">int32</td>
+<td data-sourcepos="58:37-58:47">2</td>
+</tr>
+<tr data-sourcepos="59:1-59:48">
+<td data-sourcepos="59:2-59:25">schema</td>
+<td data-sourcepos="59:27-59:35">string</td>
+<td data-sourcepos="59:37-59:47">"default"</td>
+</tr>
+<tr data-sourcepos="60:1-60:48">
+<td data-sourcepos="60:2-60:25">catalog</td>
+<td data-sourcepos="60:27-60:35">string</td>
+<td data-sourcepos="60:37-60:47"/>
+</tr>
+<tr data-sourcepos="61:1-61:48">
+<td data-sourcepos="61:2-61:25">httpPath</td>
+<td data-sourcepos="61:27-61:35">string</td>
+<td data-sourcepos="61:37-61:47"/>
+</tr>
+<tr data-sourcepos="62:1-62:90">
+<td data-sourcepos="62:2-62:25">authMethod</td>
+<td data-sourcepos="62:27-62:56">matlab.databricks.AuthMethod</td>
+<td data-sourcepos="62:58-62:89">Settings file authMethod value</td>
+</tr>
+<tr data-sourcepos="63:1-63:70">
+<td data-sourcepos="63:2-63:25">profileName</td>
+<td data-sourcepos="63:27-63:35">string</td>
+<td data-sourcepos="63:37-63:69">Settings file profileName value</td>
+</tr>
+<tr data-sourcepos="64:1-64:48">
+<td data-sourcepos="64:2-64:25">passthroughAccessToken</td>
+<td data-sourcepos="64:27-64:35">string</td>
+<td data-sourcepos="64:37-64:47"/>
+</tr>
+<tr data-sourcepos="65:1-65:48">
+<td data-sourcepos="65:2-65:25">scope</td>
+<td data-sourcepos="65:27-65:35">string</td>
+<td data-sourcepos="65:37-65:47"/>
+</tr>
+<tr data-sourcepos="66:1-66:103">
+<td data-sourcepos="66:2-66:25">OauthService</td>
+<td data-sourcepos="66:27-66:58">matlab.databricks.OauthService</td>
+<td data-sourcepos="66:60-66:102">matlab.databricks.OauthService.Databricks</td>
+</tr>
+<tr data-sourcepos="67:1-67:48">
+<td data-sourcepos="67:2-67:25">logLevel</td>
+<td data-sourcepos="67:27-67:35">string</td>
+<td data-sourcepos="67:37-67:47">"1"</td>
+</tr>
+<tr data-sourcepos="68:1-68:48">
+<td data-sourcepos="68:2-68:25">dsnlessAppend</td>
+<td data-sourcepos="68:27-68:35">string</td>
+<td data-sourcepos="68:37-68:47"/>
+</tr>
+<tr data-sourcepos="69:1-69:48">
+<td data-sourcepos="69:2-69:25">verbose</td>
+<td data-sourcepos="69:27-69:35">logical</td>
+<td data-sourcepos="69:37-69:47">true</td>
+</tr>
+</tbody>
+</table>
+<h3 data-sourcepos="71:1-71:40" dir="auto" id="user-content-optional-named-argument-descriptions">Optional named argument descriptions</h3>
+<table data-sourcepos="73:1-87:78" dir="auto">
+<thead>
+<tr data-sourcepos="73:1-73:78">
+<th data-sourcepos="73:2-73:28">Name</th>
+<th data-sourcepos="73:30-73:77">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="75:1-75:78">
+<td data-sourcepos="75:2-75:28">dsnless</td>
+<td data-sourcepos="75:30-75:77">Overrides the complete connection string value</td>
+</tr>
+<tr data-sourcepos="76:1-76:78">
+<td data-sourcepos="76:2-76:28">schema</td>
+<td data-sourcepos="76:30-76:77">Name of the database/schema to use</td>
+</tr>
+<tr data-sourcepos="77:1-77:78">
+<td data-sourcepos="77:2-77:28">catalog</td>
+<td data-sourcepos="77:30-77:77">Set the unity catalog catalog</td>
+</tr>
+<tr data-sourcepos="78:1-78:78">
+<td data-sourcepos="78:2-78:28">httpPath</td>
+<td data-sourcepos="78:30-78:77">Overrides httpPath connection string value</td>
+</tr>
+<tr data-sourcepos="79:1-79:78">
+<td data-sourcepos="79:2-79:28">authMethod</td>
+<td data-sourcepos="79:30-79:77">A non default authentication method</td>
+</tr>
+<tr data-sourcepos="80:1-80:78">
+<td data-sourcepos="80:2-80:28">profileName</td>
+<td data-sourcepos="80:30-80:77">Profile name in the <code data-sourcepos="80:51-80:66">.databrickscfg</code> file</td>
+</tr>
+<tr data-sourcepos="81:1-81:78">
+<td data-sourcepos="81:2-81:28">passthroughAccessToken</td>
+<td data-sourcepos="81:30-81:77">Value for a token that is passed opaquely</td>
+</tr>
+<tr data-sourcepos="82:1-82:78">
+<td data-sourcepos="82:2-82:28">scope</td>
+<td data-sourcepos="82:30-82:77">Set the scope used with Oauth flows</td>
+</tr>
+<tr data-sourcepos="83:1-83:78">
+<td data-sourcepos="83:2-83:28">OauthService</td>
+<td data-sourcepos="83:30-83:77">Specify an Oauth service provider</td>
+</tr>
+<tr data-sourcepos="84:1-84:86">
+<td data-sourcepos="84:2-84:28">defaultStringColumnLength</td>
+<td data-sourcepos="84:30-84:85">Truncation work around value for string lengths &gt; 4000</td>
+</tr>
+<tr data-sourcepos="85:1-85:78">
+<td data-sourcepos="85:2-85:28">logLevel</td>
+<td data-sourcepos="85:30-85:77">Logging level, the default value is: "1"</td>
+</tr>
+<tr data-sourcepos="86:1-86:78">
+<td data-sourcepos="86:2-86:28">dsnlessAppend</td>
+<td data-sourcepos="86:30-86:77">A value appended to the connection string</td>
+</tr>
+<tr data-sourcepos="87:1-87:78">
+<td data-sourcepos="87:2-87:28">verbose</td>
+<td data-sourcepos="87:30-87:77">Enable more or less feedback, default is true</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="89:1-90:71" dir="auto">Call the Connection's close method when the connection is no longer needed.
+The object's close method will also call the connection's close method.</p>
+<p data-sourcepos="92:1-94:81" dir="auto">If a connection cannot be created an empty <code data-sourcepos="92:44-92:69">database.odbc.connection</code> is returned
+in the connection property. If an ODBC Driver Error is returned in the connection's
+<code data-sourcepos="94:1-94:9">Message</code> property it will be displayed but an error will not be raised directly.</p>
+<p data-sourcepos="96:1-96:53" dir="auto">Returning a connection generally takes a few seconds.</p>
+<p data-sourcepos="98:1-98:77" dir="auto">Example using default authentication file derived default connection details:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="100:1-106:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1">   <span class="n">o</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">ODBCConnection</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="s1">'myDatabaseName'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC2">   <span class="n">conn</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">Connection</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3">   </span>
+<span class="line" data-lang="matlab" id="LC4">   <span class="c1">% Use Database Toolbox to read a table of data</span></span>
+<span class="line" data-lang="matlab" id="LC5">   <span class="n">myData</span> <span class="o">=</span> <span class="n">sqlread</span><span class="p">(</span><span class="n">conn</span><span class="p">,</span> <span class="s1">'myDatabaseTable'</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="108:1-108:29" dir="auto" id="user-content-making-a-manual-connection">Making a manual connection</h2>
+<h3 data-sourcepos="110:1-110:29" dir="auto" id="user-content-usage-in-database-toolbox">Usage in Database Toolbox</h3>
+<p data-sourcepos="112:1-113:85" dir="auto">To connect to the configured DSN/data source from Database Toolbox there are a
+number of options, which options are available may depend on the MATLAB® release.</p>
+<h3 data-sourcepos="115:1-115:23" dir="auto" id="user-content-programmatic-access">Programmatic Access</h3>
+<p data-sourcepos="117:1-119:17" dir="auto">Since typically username and password are already stored in the DSN and, if possible,
+including passwords in code should be avoided, the preferred way to programmatically
+connect is using:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="121:1-123:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">conn</span> <span class="o">=</span> <span class="n">odbc</span><span class="p">(</span><span class="s1">'DSN=yourDSNName'</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="125:1-125:76" dir="auto">Where you replace <code data-sourcepos="125:19-125:31">yourDSNName</code> with the name of the DSN configured earlier.</p>
+<p data-sourcepos="127:1-127:269" dir="auto">Refer to the documentation of the Database Toolbox to learn more about how to then further interact with the <code data-sourcepos="127:110-127:115">conn</code> connection object: <a data-sourcepos="127:136-127:269" href="https://www.mathworks.com/help/database/relational-databases.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/help/database/relational-databases.html</a></p>
+<blockquote data-sourcepos="129:1-129:305" dir="auto">
+<p data-sourcepos="129:3-129:305">Database Toolbox provides a SQLConnectionOptions object to simplify working with ODBC connections: <a data-sourcepos="129:102-129:305" href="https://www.mathworks.com/help/database/ug/database.options.odbc.sqlserver.sqlconnectionoptions.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/help/database/ug/database.options.odbc.sqlserver.sqlconnectionoptions.html</a></p>
+</blockquote>
+<h3 data-sourcepos="131:1-131:21" dir="auto" id="user-content-database-explorer">Database Explorer</h3>
+<p data-sourcepos="133:1-138:52" dir="auto">To connect to Databricks using <a data-sourcepos="133:32-133:120" href="https://www.mathworks.com/help/database/ug/databaseexplorer-app.html" rel="nofollow noreferrer noopener" target="_blank">Database Explorer</a>
+simply start the Database Explorer App and then under <code data-sourcepos="134:55-134:63">Connect</code>, then <code data-sourcepos="134:71-134:89">ODBC Data Sources</code>
+select the DSN which was created earlier. This will then <em data-sourcepos="135:58-135:65">always</em> prompt for username
+and password which <em data-sourcepos="136:20-136:25">must</em> be entered, even if the username/password were already set
+inside the DSN. Typically the username is quite literally <code data-sourcepos="137:59-137:65">token</code> and then as password
+enter one of your Databricks Personal Access Tokens.</p>
+<h2 data-sourcepos="140:1-140:13" dir="auto" id="user-content-references">References</h2>
+<ul data-sourcepos="142:1-145:120" dir="auto">
+<li data-sourcepos="142:1-142:114"><a data-sourcepos="142:3-142:114" href="https://www.databricks.com/spark/odbc-drivers-download" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/spark/odbc-drivers-download</a></li>
+<li data-sourcepos="143:1-143:142"><a data-sourcepos="143:3-143:142" href="https://docs.databricks.com/en/integrations/odbc/authentication.html" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/en/integrations/odbc/authentication.html</a></li>
+<li data-sourcepos="144:1-144:242"><a data-sourcepos="144:3-144:242" href="https://docs.databricks.com/en/_extras/documents/Simba-Apache-Spark-ODBC-Connector-Install-and-Configuration-Guide.pdf" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/en/_extras/documents/Simba-Apache-Spark-ODBC-Connector-Install-and-Configuration-Guide.pdf</a></li>
+<li data-sourcepos="145:1-145:120"><a data-sourcepos="145:3-145:120" href="https://www.databricks.com/legal/jdbc-odbc-driver-license" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/legal/jdbc-odbc-driver-license</a></li>
+</ul></div></main><script src="resources/copycode.js">//</script></body></html>

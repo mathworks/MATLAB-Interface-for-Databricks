@@ -1,0 +1,139 @@
+{
+  "type": "compiler",
+  "funcname": "fTable",
+  "fullFilename": "/matlab-databricks/Modules/matlab-spark-api/Software/MATLAB/test/fixtures/fTable.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "IT",
+      "Direction": "in",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "name": "id",
+            "nullable": false,
+            "type": "long",
+            "metadata": {}
+          },
+          {
+            "name": "ts",
+            "nullable": false,
+            "type": "timestamp",
+            "metadata": {}
+          },
+          {
+            "name": "tf",
+            "nullable": false,
+            "type": "boolean",
+            "metadata": {}
+          },
+          {
+            "name": "dn",
+            "nullable": false,
+            "type": "double",
+            "metadata": {}
+          },
+          {
+            "name": "fl",
+            "nullable": false,
+            "type": "float",
+            "metadata": {}
+          },
+          {
+            "name": "i16",
+            "nullable": false,
+            "type": "short",
+            "metadata": {}
+          },
+          {
+            "name": "i32",
+            "nullable": false,
+            "type": "integer",
+            "metadata": {}
+          },
+          {
+            "name": "i64",
+            "nullable": false,
+            "type": "long",
+            "metadata": {}
+          },
+          {
+            "name": "name",
+            "nullable": false,
+            "type": "string",
+            "metadata": {}
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "OT",
+      "Direction": "out",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "name": "id",
+            "nullable": false,
+            "type": "long",
+            "metadata": {}
+          },
+          {
+            "name": "ts",
+            "nullable": false,
+            "type": "timestamp",
+            "metadata": {}
+          },
+          {
+            "name": "tf",
+            "nullable": false,
+            "type": "boolean",
+            "metadata": {}
+          },
+          {
+            "name": "dn",
+            "nullable": false,
+            "type": "double",
+            "metadata": {}
+          },
+          {
+            "name": "fl",
+            "nullable": false,
+            "type": "float",
+            "metadata": {}
+          },
+          {
+            "name": "i16",
+            "nullable": false,
+            "type": "short",
+            "metadata": {}
+          },
+          {
+            "name": "i32",
+            "nullable": false,
+            "type": "integer",
+            "metadata": {}
+          },
+          {
+            "name": "i64",
+            "nullable": false,
+            "type": "long",
+            "metadata": {}
+          },
+          {
+            "name": "name",
+            "nullable": false,
+            "type": "string",
+            "metadata": {}
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ]
+}

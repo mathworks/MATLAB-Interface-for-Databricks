@@ -1,0 +1,238 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Setup</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:7" dir="auto" id="user-content-setup">Setup</h1>
+<blockquote data-sourcepos="3:1-5:122" dir="auto">
+<p data-sourcepos="3:3-5:122">This setup process formerly offered an admin mode.
+This has now been replaced with GitHub® hosted admin centric content:
+<a data-sourcepos="5:3-5:122" href="https://github.com/mathworks-ref-arch/matlab-on-databricks" rel="nofollow noreferrer noopener" target="_blank">https://github.com/mathworks-ref-arch/matlab-on-databricks</a></p>
+</blockquote>
+<p data-sourcepos="7:1-9:30" dir="auto">If using MATLAB on Databricks®, setup is usu­ally performed automatically when MATLAB
+starts if installation of the MATLAB interface for Databricks is enabled.
+No further action is required.</p>
+<h2 data-sourcepos="11:1-11:30" dir="auto" id="user-content-setup-when-working-remotely">Setup when working remotely</h2>
+<p data-sourcepos="13:1-14:44" dir="auto">To begin setting up the MATLAB interface for Databricks change directory to the
+<code data-sourcepos="14:1-14:17">Software/MATLAB</code> directory and run <code data-sourcepos="14:37-14:43">setup</code>.</p>
+<p data-sourcepos="16:1-18:51" dir="auto">Some steps will require Databricks admin permissions and the help of a
+Databricks administrator who has already performed required steps in the
+Github hosted Reference Architecture setup process.</p>
+<p data-sourcepos="20:1-21:76" dir="auto">Detailed information about supported releases of MATLAB, this package, Databricks
+runtimes and Python® can be found in: <a data-sourcepos="21:43-21:75" href="SupportMatrix.html">SupportMatrix</a>.</p>
+<blockquote data-sourcepos="23:1-26:87" dir="auto">
+<p data-sourcepos="23:3-26:87">If migrating from a version prior to 5.0.0, then configuration file changes
+require that old files are replaced. Archive existing settings files using
+<code data-sourcepos="25:3-25:31">setup(archiveSettings=true)</code>. Alternatively backup: <code data-sourcepos="25:56-25:93">[home directory]/.databricks-connect</code>,
+<code data-sourcepos="26:3-26:35">[home directory]/.databrickscfg</code> &amp; <code data-sourcepos="26:39-26:75">[prefdir]/.databricks-settings.json</code> if desired.</p>
+</blockquote>
+<blockquote data-sourcepos="28:1-29:29" dir="auto">
+<p data-sourcepos="28:3-29:29">Tip: The <code data-sourcepos="28:12-28:20">prefdir</code> command in MATLAB returns the preferences directory, see:
+<code data-sourcepos="29:3-29:15">doc prefdir</code>, for details.</p>
+</blockquote>
+<h2 data-sourcepos="31:1-31:20" dir="auto" id="user-content-client-side-setup">Client side setup</h2>
+<p data-sourcepos="33:1-36:86" dir="auto">If installing from a <code data-sourcepos="33:22-33:27">.zip</code>, file paths for the package and its submodules must be
+added to the MATLAB path. <em data-sourcepos="34:27-34:33">After</em> running <code data-sourcepos="34:43-34:49">setup</code> these paths can be added to the
+permanent MATLAB path if desired. Alternatively run the package's <code data-sourcepos="35:67-35:91">Software/MATLAB/startup</code>
+command to set the paths and optionally perform other checks before using the package.</p>
+<blockquote data-sourcepos="38:1-38:95" dir="auto">
+<p data-sourcepos="38:3-38:95">Tip: Default or existing values are show in square brackets. Just press enter to select them.</p>
+</blockquote>
+<p data-sourcepos="40:1-40:33" dir="auto"><a class="no-attachment-icon" href="images/setup1.png" rel="noopener noreferrer" target="_blank"><img alt="Begin setup" data-sourcepos="40:1-40:33" src="images/setup1.png"/></a></p>
+<blockquote data-sourcepos="42:1-44:55" dir="auto">
+<p data-sourcepos="42:3-44:55">Tip: Use the mouse <em data-sourcepos="42:22-42:27">only</em> to <em data-sourcepos="42:32-42:39">select</em>, <em data-sourcepos="42:42-42:47">copy</em> and <em data-sourcepos="42:53-42:59">paste</em> any links presented,
+clicking the links while MATLAB is busy or waiting on input can result in browser
+windows opening only when MATLAB finishes processing.</p>
+</blockquote>
+<p data-sourcepos="46:1-46:35" dir="auto"><a class="no-attachment-icon" href="images/setup2.png" rel="noopener noreferrer" target="_blank"><img alt="Setup command" data-sourcepos="46:1-46:35" src="images/setup2.png"/></a></p>
+<h3 data-sourcepos="48:1-48:30" dir="auto" id="user-content-settings-and-configuration">Settings and configuration</h3>
+<p data-sourcepos="50:1-52:33" dir="auto">Based on responses to the questions, several text files are used to record settings
+and configuration values, for further details if required see <em data-sourcepos="51:63-52:26">Configuration
+and Settings file details</em> below.</p>
+<blockquote data-sourcepos="54:1-55:38" dir="auto">
+<p data-sourcepos="54:3-55:38">Tip: If rerunning setup for some reason and settings values have not changed this
+step can be skipped by choosing "N".</p>
+</blockquote>
+<p data-sourcepos="57:1-57:49" dir="auto"><a class="no-attachment-icon" href="images/setup2c.png" rel="noopener noreferrer" target="_blank"><img alt="Settings and configuration" data-sourcepos="57:1-57:49" src="images/setup2c.png"/></a></p>
+<blockquote data-sourcepos="59:1-60:79" dir="auto">
+<p data-sourcepos="59:3-60:79">Tip: If you copy and paste the complete Workspace URL, this often includes the
+required ?o=[org_id] parameter so it does not have to be provided separately.</p>
+</blockquote>
+<p data-sourcepos="62:1-62:58" dir="auto"><a class="no-attachment-icon" href="images/setup3.png" rel="noopener noreferrer" target="_blank"><img alt="Databricks Workspace URL address bar" data-sourcepos="62:1-62:58" src="images/setup3.png"/></a></p>
+<p data-sourcepos="64:1-65:47" dir="auto">The simplest way to get the Databricks Workspace URL is to log into databricks and copy and
+paste the value from the browser's address bar.</p>
+<p data-sourcepos="67:1-67:36" dir="auto"><a class="no-attachment-icon" href="images/setup5.png" rel="noopener noreferrer" target="_blank"><img alt="Provide org_id" data-sourcepos="67:1-67:36" src="images/setup5.png"/></a></p>
+<p data-sourcepos="69:1-71:52" dir="auto">The <code data-sourcepos="69:5-69:12">org_id</code> or Workspace Id is a numeric value that follows the <code data-sourcepos="69:66-69:69">o=</code> parameter in the
+Databricks Workspace URL, if unsure the Databricks admin will be able to provide this value.
+It may also appear in the Workspace hostname itself.</p>
+<p data-sourcepos="73:1-73:36" dir="auto"><a class="no-attachment-icon" href="images/setup6.png" rel="noopener noreferrer" target="_blank"><img alt="Provide org_id" data-sourcepos="73:1-73:36" src="images/setup6.png"/></a></p>
+<p data-sourcepos="75:1-79:11" dir="auto">Select an authentication type, in this case <code data-sourcepos="75:45-75:49">PAT</code> or Personal Access Token is selected.
+Often this form of authentication will be disabled and another form must be used, typically
+OauthU2M. The Databricks admin can advise on the preferred option.
+See <a data-sourcepos="78:5-78:39" href="Authentication.html">Authentication</a> for details on the supported authentication
+mechanisms.</p>
+<p data-sourcepos="81:1-81:36" dir="auto"><a class="no-attachment-icon" href="images/setup7.png" rel="noopener noreferrer" target="_blank"><img alt="Provide org_id" data-sourcepos="81:1-81:36" src="images/setup7.png"/></a></p>
+<p data-sourcepos="83:1-84:67" dir="auto"><code data-sourcepos="83:1-83:5">PAT</code> requires a token which, if enabled, can be obtained from the Databricks Workspace.
+<em data-sourcepos="84:1-84:67">The token value is sensitive and should not be shared or exposed.</em></p>
+<p data-sourcepos="86:1-86:31" dir="auto"><a class="no-attachment-icon" href="images/setup8.png" rel="noopener noreferrer" target="_blank"><img alt="SCIM test" data-sourcepos="86:1-86:31" src="images/setup8.png"/></a></p>
+<p data-sourcepos="88:1-91:50" dir="auto">The credentials can be tested. To do so a call is made using the
+<code data-sourcepos="89:1-89:20">databricks.SCIM.me</code> method. This REST API method returns the Databricks username
+(typically an email address) and the notification email address, allowing manual
+entry of these values to be skipped if successful.</p>
+<p data-sourcepos="93:1-100:36" dir="auto">At this point the client side setup process intersects with the server side process
+discussed below. A <code data-sourcepos="94:20-94:29">/Volumes</code> path is required, this is the location where
+the MATLAB runtime and associated files are stored. If this is not known or has
+not yet been decided, use a temporary place holder value e.g. <code data-sourcepos="96:63-96:104">/Volumes/main/default/myvolume/MathWorks</code>
+and rerun <code data-sourcepos="97:11-97:17">setup</code> to update the value later. This location is referred to as the
+"Interface Directory". This is a central location that can be shared by MATLAB
+users and it is good practice for the Databricks admin to make the location read-only
+for robustness and security reasons.</p>
+<h3 data-sourcepos="102:1-102:26" dir="auto" id="user-content-databricks-jdbc-driver">Databricks JDBC driver</h3>
+<p data-sourcepos="104:1-108:146" dir="auto">The Databricks JDBC driver can be used along with Database Toolbox™ to access data in Databricks.
+The driver is not included in this package and must be downloaded from
+<a data-sourcepos="106:1-106:67" href="https://www.databricks.com/spark/jdbc-drivers-archive" rel="nofollow noreferrer noopener" target="_blank">Databricks</a>.
+The associated license from Databricks must be accepted. This
+license can be found here: <a data-sourcepos="108:28-108:145" href="https://www.databricks.com/legal/jdbc-odbc-driver-license" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/legal/jdbc-odbc-driver-license</a>.</p>
+<p data-sourcepos="110:1-110:55" dir="auto">For usage details see: <a data-sourcepos="110:24-110:54" href="JDBCWorkflow.html">JDBCWorkflow</a>.</p>
+<p data-sourcepos="112:1-112:50" dir="auto"><a class="no-attachment-icon" href="images/setup9.png" rel="noopener noreferrer" target="_blank"><img alt="Databricks JDBC driver setup" data-sourcepos="112:1-112:50" src="images/setup9.png"/></a></p>
+<p data-sourcepos="114:1-114:186" dir="auto">The Databricks ODBC driver is also supported and can be downloaded from: <a data-sourcepos="114:74-114:185" href="https://www.databricks.com/spark/odbc-drivers-download" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/spark/odbc-drivers-download</a>.</p>
+<h3 data-sourcepos="116:1-116:22" dir="auto" id="user-content-databricks-connect">Databricks Connect</h3>
+<p data-sourcepos="118:1-120:93" dir="auto">Databricks Connect can be used to make interactive Spark™ API calls from MATLAB.
+The Databricks Connect libraries are Python based and require a local Python installation.
+Python 3.10, 3.11 &amp; 3.12 are supported for Databricks runtimes 13.3, 14.3, 15.4, 16.4 &amp; 17.3.</p>
+<p data-sourcepos="122:1-125:36" dir="auto">In this example the 13.3 and 14.3 versions of the libraries are setup. 15.4 is skipped
+as this requires Python 3.11 which is not configured for use with MATLAB in this case.
+See <a data-sourcepos="124:5-124:38" href="DBConnect.html">Databricks Connect</a> for details of how to manually configure
+alternate versions at a later stage.</p>
+<p data-sourcepos="127:1-127:47" dir="auto"><a class="no-attachment-icon" href="images/setup10.png" rel="noopener noreferrer" target="_blank"><img alt="Databricks Connect setup" data-sourcepos="127:1-127:47" src="images/setup10.png"/></a></p>
+<p data-sourcepos="129:1-129:65" dir="auto">For usage details see: <a data-sourcepos="129:24-129:64" href="DBConnectWorkflow.html">DBConnectWorkflow</a>.</p>
+<h4 data-sourcepos="131:1-131:9" dir="auto" id="user-content-note">Note</h4>
+<ul data-sourcepos="133:1-134:97" dir="auto">
+<li data-sourcepos="133:1-133:116">Setup may terminate a Python environment that is currently being used within MATLAB, requiring it to be restarted.</li>
+<li data-sourcepos="134:1-135:0">A <code data-sourcepos="134:5-134:22">requirements.txt</code> file is included for manual python environment configuration if preferred.</li>
+</ul>
+<h3 data-sourcepos="136:1-136:26" dir="auto" id="user-content-matlab-runtime-license">MATLAB runtime license</h3>
+<p data-sourcepos="138:1-141:27" dir="auto">The final step is to accept the MATLAB runtime license. This updates the local
+copy of the <code data-sourcepos="139:13-139:25">init script</code> used to deploy the MATLAB runtimes. It is expected that
+a copy of this script has already been provisioned on the server side using the
+server side workflow below.</p>
+<p data-sourcepos="143:1-143:45" dir="auto"><a class="no-attachment-icon" href="images/setup11.png" rel="noopener noreferrer" target="_blank"><img alt="MATLAB runtime license" data-sourcepos="143:1-143:45" src="images/setup11.png"/></a></p>
+<p data-sourcepos="145:1-145:77" dir="auto">Use of the MATLAB runtime does not require connectivity to a license manager.</p>
+<p data-sourcepos="147:1-148:78" dir="auto">Setup of many aspects of the package is now complete.
+A link to the top-level documentation in either HTML or Markdown is displayed.</p>
+<p data-sourcepos="150:1-150:47" dir="auto"><em data-sourcepos="150:1-150:47">This concludes the client side setup process.</em></p>
+<h3 data-sourcepos="152:1-152:18" dir="auto" id="user-content-matlab-runtime">MATLAB runtime</h3>
+<p data-sourcepos="154:1-156:77" dir="auto">As in the client only setup it is necessary to provide an <em data-sourcepos="154:59-154:79">interface directory</em>, i.e.
+a path in <code data-sourcepos="155:11-155:20">/Volumes</code> to which MATLAB runtimes and associated files can be written.
+Regular users can be restricted to having read only access to this directory.</p>
+<p data-sourcepos="158:1-158:45" dir="auto"><a class="no-attachment-icon" href="images/setup12.png" rel="noopener noreferrer" target="_blank"><img alt="MATLAB runtime license" data-sourcepos="158:1-158:45" src="images/setup12.png"/></a></p>
+<p data-sourcepos="160:1-166:44" dir="auto">As new releases of this package are relatively frequent, see <code data-sourcepos="160:62-160:100">[RELEASENOTES.md](../RELEASENOTES.md)</code>,
+only two releases of the MATLAB runtime are produced each year the, <em data-sourcepos="161:69-161:71">a</em> and <em data-sourcepos="161:77-161:79">b</em>
+releases. Interim update releases are produced to provide on going bug fixes.
+These may be relevant and the latest release is always recommended but in general
+there is no strict need to update the runtimes more frequently than the major releases.
+The runtime releases must match the release of MATLAB used to compile
+libraries being deployed to a given cluster.</p>
+<h4 data-sourcepos="168:1-168:23" dir="auto" id="user-content-runtime-zip-files">Runtime .zip files</h4>
+<p data-sourcepos="170:1-172:78" dir="auto">If the MATLAB runtime license is accepted then the next step is to select which
+releases of the MATLAB runtime to support.
+For more details on supported releases see: <a data-sourcepos="172:45-172:77" href="SupportMatrix.html">SupportMatrix</a>.</p>
+<p data-sourcepos="174:1-174:47" dir="auto"><a class="no-attachment-icon" href="images/setup13.png" rel="noopener noreferrer" target="_blank"><img alt="MATLAB release selection" data-sourcepos="174:1-174:47" src="images/setup13.png"/></a></p>
+<p data-sourcepos="176:1-185:14" dir="auto">The MATLAB runtimes are large .zip files, c. 4.5GB. The most effective way to provision
+them inside a Databricks environment is to create a notebook and use <code data-sourcepos="177:70-177:75">%%sh</code> &amp; <code data-sourcepos="177:79-177:84">wget</code>
+to download them directly from MathWorks.
+The package dynamically generates the required command to copy and paste in a notebook.
+As in this case if a file is already found the command is still generated as useful
+reference but is commented out. If internet access from the cluster is prohibited then
+the recommended approach is to use the links provided to download the zip files
+elsewhere and upload them via the Databricks portal using the generated destination
+link, this will take some time. In initial testing consider using just one runtime
+to begin with.</p>
+<p data-sourcepos="187:1-187:53" dir="auto"><a class="no-attachment-icon" href="images/setup14.png" rel="noopener noreferrer" target="_blank"><img alt="MATLAB runtime download/upload" data-sourcepos="187:1-187:53" src="images/setup14.png"/></a></p>
+<h4 data-sourcepos="189:1-189:16" dir="auto" id="user-content-init-script">Init script</h4>
+<blockquote data-sourcepos="191:1-192:80" dir="auto">
+<p data-sourcepos="191:3-192:80">From v7.0.0 the use of init scripts not supported on MATLAB runtime clusters that
+do not have internet access or that require Databricks runtime v17 or greater.</p>
+</blockquote>
+<blockquote data-sourcepos="194:1-196:252" dir="auto">
+<p data-sourcepos="194:3-196:252">From v6.0.0 the use of init scripts is deprecated and Docker® is now the preferred,
+and in some cases required, way to deploy the MATLAB runtime to a databricks cluster.
+See: <a data-sourcepos="196:8-196:49" href="ContainerServices.html">Container Services</a> &amp; <a data-sourcepos="196:53-196:252" href="https://github.com/mathworks-ref-arch/matlab-on-databricks/tree/main/resources/dockerfiles/runtime" rel="nofollow noreferrer noopener" target="_blank">https://github.com/mathworks-ref-arch/matlab-on-databricks/tree/main/resources/dockerfiles/runtime</a></p>
+</blockquote>
+<p data-sourcepos="198:1-200:70" dir="auto">If not using a <a data-sourcepos="198:16-198:51" href="ContainerServices.html">docker based</a> cluster provisioning approach,
+so called <a data-sourcepos="199:11-199:82" href="https://docs.databricks.com/en/init-scripts/index.html" rel="nofollow noreferrer noopener" target="_blank"><code data-sourcepos="199:12-199:25">init scripts</code></a>
+are used to install MATLAB runtime on cluster nodes as the nodes boot.</p>
+<p data-sourcepos="202:1-204:75" dir="auto">A template init script is distributed with the package and if the runtime license
+is accepted this can be uploaded to the <code data-sourcepos="203:41-203:73">/[Interface Directory]/runtimes</code>. Alternatively it can
+be manually uploaded via the Workspace GUI, the relevant link is generated.</p>
+<p data-sourcepos="206:1-206:41" dir="auto"><a class="no-attachment-icon" href="images/setup15.png" rel="noopener noreferrer" target="_blank"><img alt="Init script upload" data-sourcepos="206:1-206:41" src="images/setup15.png"/></a></p>
+<h3 data-sourcepos="208:1-208:20" dir="auto" id="user-content-policy-provision">Policy provision</h3>
+<p data-sourcepos="210:1-212:308" dir="auto">Policies can be used to add preconfigured MATLAB entries to the Databricks Compute
+interface. This step will typically require administrative privileges.
+For details of policy configurations see: <a data-sourcepos="212:43-212:308" href="https://github.com/mathworks-ref-arch/matlab-on-databricks/blob/main/guides/admin/create-cluster-policy-for-matlab-on-databricks.html" rel="nofollow noreferrer noopener" target="_blank">https://github.com/mathworks-ref-arch/matlab-on-databricks/blob/main/guides/admin/create-cluster-policy-for-matlab-on-databricks.md</a></p>
+<blockquote data-sourcepos="214:1-214:92" dir="auto">
+<p data-sourcepos="214:3-214:92">With sufficient privileges the package can create the polices directly using the REST API.</p>
+</blockquote>
+<p data-sourcepos="216:1-216:153" dir="auto">See also: <a data-sourcepos="216:11-216:153" href="https://docs.databricks.com/en/admin/clusters/policies.html#libraries." rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/en/admin/clusters/policies.html#libraries</a></p>
+<h2 data-sourcepos="218:1-218:51" dir="auto" id="user-content-configuration-and-settings-files-further-details">Configuration and Settings files further details</h2>
+<table data-sourcepos="220:1-224:95" dir="auto">
+<thead>
+<tr data-sourcepos="220:1-220:95">
+<th data-sourcepos="220:2-220:29">File name</th>
+<th data-sourcepos="220:31-220:45">Type</th>
+<th data-sourcepos="220:47-220:54">Format</th>
+<th data-sourcepos="220:56-220:79">Default location</th>
+<th data-sourcepos="220:81-220:94">More details</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="222:1-222:121">
+<td data-sourcepos="222:2-222:29"><code data-sourcepos="222:3-222:18">.databrickscfg</code></td>
+<td data-sourcepos="222:31-222:45">Configuration</td>
+<td data-sourcepos="222:47-222:54">INI</td>
+<td data-sourcepos="222:56-222:79">Home directory</td>
+<td data-sourcepos="222:81-222:120"><a data-sourcepos="222:82-222:119" href="Authentication.html">Authentication.md</a></td>
+</tr>
+<tr data-sourcepos="223:1-223:95">
+<td data-sourcepos="223:2-223:29"><code data-sourcepos="223:3-223:28">databricks-settings.json</code></td>
+<td data-sourcepos="223:31-223:45">Settings</td>
+<td data-sourcepos="223:47-223:54">JSON</td>
+<td data-sourcepos="223:56-223:79"><code data-sourcepos="223:57-223:65">prefdir</code></td>
+<td data-sourcepos="223:81-223:94">See below</td>
+</tr>
+<tr data-sourcepos="224:1-224:95">
+<td data-sourcepos="224:2-224:29"><code data-sourcepos="224:3-224:24">databricks-http.json</code></td>
+<td data-sourcepos="224:31-224:45">Settings</td>
+<td data-sourcepos="224:47-224:54">JSON</td>
+<td data-sourcepos="224:56-224:79">Software/MATLAB/config</td>
+<td data-sourcepos="224:81-224:94">See below</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="226:1-230:78" dir="auto">The files are divided into two types, <em data-sourcepos="226:39-226:48">settings</em> and <em data-sourcepos="226:54-226:68">configuration</em>. The distinction is
+simply that <em data-sourcepos="227:13-227:22">settings</em> files are only used by this package and the <em data-sourcepos="227:68-227:82">configuration</em> file
+is also used by Databricks tools and libraries e.g. the Databricks CLI and Databricks Connect.
+These files can be customized using a text editor e.g. the MATLAB® editor.
+Typically only <code data-sourcepos="230:16-230:31">.databrickscfg</code> and <code data-sourcepos="230:37-230:62">databricks-settings.json</code> are customized.</p>
+<ul data-sourcepos="232:1-243:31" dir="auto">
+<li data-sourcepos="232:1-235:46">The <code data-sourcepos="232:7-232:32">databricks-settings.json</code> full path is given first by the <code data-sourcepos="232:66-232:91">DATABRICKS_SETTINGS_FILE</code>
+environment variable, if set. If not, the default directory is the user's MATLAB <code data-sourcepos="233:82-233:90">prefdir</code>
+directory and otherwise the MATLAB path. Note this makes it specific to MATLAB releases which
+must be considered if using multiple releases.</li>
+<li data-sourcepos="236:1-238:152">The <code data-sourcepos="236:7-236:22">.databrickscfg</code> full path is given first by <code data-sourcepos="236:52-236:75">DATABRICKS_CONFIG_FILE</code> environment
+variable, if set. If not the default directory is the user's home directory and
+otherwise the MATLAB path. This file may also be used by Databricks packages such as the <a data-sourcepos="238:90-238:151" href="https://docs.databricks.com/en/dev-tools/cli/index.html" rel="nofollow noreferrer noopener" target="_blank">CLI</a>.</li>
+<li data-sourcepos="239:1-241:26"><code data-sourcepos="239:3-239:24">databricks-http.json</code> controls HTTP connection properties and is rarely changed, it is located
+in the the package's <code data-sourcepos="240:22-240:45">Software/MATLAB/config</code> directory. It can be moved if required but should
+remain on the MATLAB path.</li>
+<li data-sourcepos="242:1-244:0">The <code data-sourcepos="242:7-242:21">runtimes.json</code>, <code data-sourcepos="242:24-242:44">.databricks-connect</code> and <code data-sourcepos="242:50-242:68">javaclasspath.txt</code> files used by versions prior
+to v5.0 are no longer required.</li>
+</ul>
+<h3 data-sourcepos="245:1-245:51" dir="auto" id="user-content-manually-configuring-databricks-settingsjson">Manually configuring <code data-sourcepos="245:26-245:51">databricks-settings.json</code></h3>
+<p data-sourcepos="247:1-249:100" dir="auto">The template settings file <code data-sourcepos="247:28-247:85">Software/MATLAB/config/databricks-settings.json.template</code>,
+when populated is stored in <code data-sourcepos="248:29-248:75">fullfile(prefdir, 'databricks-settings.json')</code> by default.
+For a typical Windows® user this is <code data-sourcepos="249:41-249:99">C:\Users\someuser\.matlab\R2024b\databricks-settings.json</code>.</p>
+<p data-sourcepos="251:1-253:84" dir="auto">If necessary change the vendor value to <em data-sourcepos="251:41-251:45">aws</em> or <em data-sourcepos="251:50-251:56">azure</em> depending on the cloud
+environment in use. Change the default node machine type if desired. Configure a
+notification email address that can optionally be used for job status notifications.</p>
+<p data-sourcepos="255:1-256:49" dir="auto">The default Databricks runtime version used when creating a cluster can be changed
+by updating the <code data-sourcepos="256:17-256:42">defaultDatabricksRuntime</code> value.</p>
+<h3 data-sourcepos="258:1-258:38" dir="auto" id="user-content-configuring-databricks-httpjson">Configuring <code data-sourcepos="258:17-258:38">databricks-http.json</code></h3>
+<p data-sourcepos="260:1-262:232" dir="auto">If necessary change the <code data-sourcepos="260:25-260:46">databricks-http.json</code> file to override the settings that the package
+uses for REST based communication. In general the default values should suffice. In this case
+a template and a preconfigured file are provided. For details see: <a data-sourcepos="262:68-262:231" href="https://www.mathworks.com/help/matlab/ref/matlab.net.http.httpoptions-class.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/help/matlab/ref/matlab.net.http.httpoptions-class.html</a>.</p></div></main><script src="resources/copycode.js">//</script></body></html>

@@ -1,0 +1,605 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="./">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Index &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="#" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Index</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+
+<h1 id="index">Index</h1>
+
+<div class="genindex-jumpbox">
+ <a href="#A"><strong>A</strong></a>
+ | <a href="#B"><strong>B</strong></a>
+ | <a href="#C"><strong>C</strong></a>
+ | <a href="#D"><strong>D</strong></a>
+ | <a href="#E"><strong>E</strong></a>
+ | <a href="#F"><strong>F</strong></a>
+ | <a href="#G"><strong>G</strong></a>
+ | <a href="#I"><strong>I</strong></a>
+ | <a href="#L"><strong>L</strong></a>
+ | <a href="#M"><strong>M</strong></a>
+ | <a href="#O"><strong>O</strong></a>
+ | <a href="#P"><strong>P</strong></a>
+ | <a href="#R"><strong>R</strong></a>
+ | <a href="#S"><strong>S</strong></a>
+ | <a href="#U"><strong>U</strong></a>
+ | <a href="#V"><strong>V</strong></a>
+ 
+</div>
+<h2 id="A">A</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.active_run">active_run() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.add_trace">add_trace() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.AdditionalFiles">AdditionalFiles (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.AutoDetectDataFiles">AutoDetectDataFiles (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="B">B</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonMlflowBuilder.build">build() (compiler.build.mlflow.PythonMlflowBuilder method)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="C">C</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.clear_active_model">clear_active_model() (in module mlflow)</a>
+</li>
+      <li>
+    compiler.build.mlflow
+
+      <ul>
+        <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#module-compiler.build.mlflow">module</a>
+</li>
+      </ul></li>
+      <li>
+    compiler.build.mlflow.types
+
+      <ul>
+        <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#module-compiler.build.mlflow.types">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.create_experiment">create_experiment() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.create_external_model">create_external_model() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.create_workspace">create_workspace() (in module mlflow)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="D">D</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.Debug">Debug (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.delete_assessment">delete_assessment() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.delete_experiment">delete_experiment() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.delete_experiment_tag">delete_experiment_tag() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.delete_logged_model_tag">delete_logged_model_tag() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.delete_prompt_alias">delete_prompt_alias() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.delete_run">delete_run() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.delete_tag">delete_tag() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.delete_trace_tag">delete_trace_tag() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.delete_workspace">delete_workspace() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.disable_system_metrics_logging">disable_system_metrics_logging() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.doctor">doctor() (in module mlflow)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="E">E</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.enable_system_metrics_logging">enable_system_metrics_logging() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.end_run">end_run() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.ExternalEncryptionKey">ExternalEncryptionKey (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="F">F</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.finalize_logged_model">finalize_logged_model() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.flush_artifact_async_logging">flush_artifact_async_logging() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.flush_async_logging">flush_async_logging() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.flush_trace_async_logging">flush_trace_async_logging() (in module mlflow)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="G">G</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.types.generateFunctionSignature">generateFunctionSignature() (in module compiler.build.mlflow.types)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_active_model_id">get_active_model_id() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_active_trace_id">get_active_trace_id() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_artifact_uri">get_artifact_uri() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_assessment">get_assessment() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_current_active_span">get_current_active_span() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_experiment">get_experiment() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_experiment_by_name">get_experiment_by_name() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_last_active_trace_id">get_last_active_trace_id() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_logged_model">get_logged_model() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_parent_run">get_parent_run() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_registry_uri">get_registry_uri() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_run">get_run() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_trace">get_trace() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_tracking_uri">get_tracking_uri() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.get_workspace">get_workspace() (in module mlflow)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="I">I</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.import_checkpoints">import_checkpoints() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.initialize_logged_model">initialize_logged_model() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.is_tracking_uri_set">is_tracking_uri_set() (in module mlflow)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="L">L</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.last_active_run">last_active_run() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.last_logged_model">last_logged_model() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.list_workspaces">list_workspaces() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/matlab_flavor/Usage.html#mlflow.matlab.load_model">load_model() (in module mlflow.matlab)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.load_prompt">load_prompt() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.load_table">load_table() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_artifact">log_artifact() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_artifacts">log_artifacts() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_assessment">log_assessment() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_dict">log_dict() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_expectation">log_expectation() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_feedback">log_feedback() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_figure">log_figure() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_image">log_image() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_input">log_input() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_inputs">log_inputs() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_metric">log_metric() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_metrics">log_metrics() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/matlab_flavor/Usage.html#mlflow.matlab.log_model">log_model() (in module mlflow.matlab)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_model_params">log_model_params() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_outputs">log_outputs() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_param">log_param() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_params">log_params() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_stream">log_stream() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_table">log_table() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_text">log_text() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.log_trace">log_trace() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.login">login() (in module mlflow)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="M">M</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    mlflow
+
+      <ul>
+        <li><a href="matlab-mlflow/FluentAPI.html#module-mlflow">module</a>
+</li>
+      </ul></li>
+      <li>
+    mlflow.matlab
+
+      <ul>
+        <li><a href="matlab-mlflow/matlab_flavor/Usage.html#module-mlflow.matlab">module</a>
+</li>
+      </ul></li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li>
+    module
+
+      <ul>
+        <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#module-compiler.build.mlflow">compiler.build.mlflow</a>
+</li>
+        <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#module-compiler.build.mlflow.types">compiler.build.mlflow.types</a>
+</li>
+        <li><a href="matlab-mlflow/FluentAPI.html#module-mlflow">mlflow</a>
+</li>
+        <li><a href="matlab-mlflow/matlab_flavor/Usage.html#module-mlflow.matlab">mlflow.matlab</a>
+</li>
+      </ul></li>
+  </ul></td>
+</tr></table>
+
+<h2 id="O">O</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.ObfuscateArchive">ObfuscateArchive (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.OutputDir">OutputDir (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.override_feedback">override_feedback() (in module mlflow)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="P">P</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.PackageName">PackageName (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonMlflowBuilder">PythonMlflowBuilder (class in compiler.build.mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.pythonPackage">pythonPackage() (in module compiler.build.mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions">PythonPackageOptions (class in compiler.build.mlflow)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="R">R</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.register_model">register_model() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.register_prompt">register_prompt() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.run">run() (in module mlflow)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="S">S</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.SampleGenerationFiles">SampleGenerationFiles (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+      <li><a href="matlab-mlflow/matlab_flavor/Usage.html#mlflow.matlab.save_model">save_model() (in module mlflow.matlab)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.search_experiments">search_experiments() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.search_logged_models">search_logged_models() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.search_model_versions">search_model_versions() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.search_prompts">search_prompts() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.search_registered_models">search_registered_models() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.search_runs">search_runs() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.search_sessions">search_sessions() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.search_traces">search_traces() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.SecretsManifest">SecretsManifest (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_active_model">set_active_model() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_experiment">set_experiment() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_experiment_tag">set_experiment_tag() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_experiment_tags">set_experiment_tags() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_logged_model_tags">set_logged_model_tags() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_model_version_tag">set_model_version_tag() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_prompt_alias">set_prompt_alias() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_registry_uri">set_registry_uri() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_system_metrics_node_id">set_system_metrics_node_id() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_system_metrics_samples_before_logging">set_system_metrics_samples_before_logging() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_system_metrics_sampling_interval">set_system_metrics_sampling_interval() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_tag">set_tag() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_tags">set_tags() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_telemetry_client">set_telemetry_client() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_trace_tag">set_trace_tag() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_tracking_uri">set_tracking_uri() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.set_workspace">set_workspace() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.start_run">start_run() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.start_span">start_span() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.start_span_no_context">start_span_no_context() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.SupportPackages">SupportPackages (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="U">U</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.update_assessment">update_assessment() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.update_current_trace">update_current_trace() (in module mlflow)</a>
+</li>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.update_workspace">update_workspace() (in module mlflow)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+<h2 id="V">V</h2>
+<table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/FluentAPI.html#mlflow.validate_evaluation_results">validate_evaluation_results() (in module mlflow)</a>
+</li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="matlab-mlflow/matlab_flavor/subflavors/compiler_sdk_python.html#compiler.build.mlflow.PythonPackageOptions.Verbose">Verbose (compiler.build.mlflow.PythonPackageOptions attribute)</a>
+</li>
+  </ul></td>
+</tr></table>
+
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

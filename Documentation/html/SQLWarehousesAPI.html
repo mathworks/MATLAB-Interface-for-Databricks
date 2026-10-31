@@ -1,0 +1,244 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>SQL Warehouses API</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:20" dir="auto" id="user-content-sql-warehouses-api">SQL Warehouses API</h1>
+<p data-sourcepos="3:1-6:21" dir="auto">A SQL warehouse is a managed computation resource that allows one to run SQL
+commands on data objects within Databricks® SQL, see the
+<a data-sourcepos="5:1-5:91" href="https://docs.databricks.com/en/compute/sql-warehouse/index.html" rel="nofollow noreferrer noopener" target="_blank">Databricks documentation</a>
+for more information.</p>
+<p data-sourcepos="8:1-10:49" dir="auto">At the time of writing, SQL warehouses are only available on Databricks
+Enterprise workspaces. Trying to use the feature on workspaces which do not
+support it will lead to errors being thrown like:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="12:1-17:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">Error</span> <span class="n">using</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="o">.</span><span class="n">list</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">Failed</span> <span class="n">to</span> <span class="n">list</span> <span class="n">SQL</span> <span class="n">warehouses</span></span>
+<span class="line" data-lang="matlab" id="LC3">  <span class="n">error_code</span><span class="p">:</span> <span class="n">FEATURE_DISABLED</span></span>
+<span class="line" data-lang="matlab" id="LC4">  <span class="n">message</span><span class="p">:</span> <span class="n">DBSQL</span> <span class="n">is</span> <span class="nb">not</span> <span class="n">supported</span> <span class="n">on</span> <span class="n">workspace</span> <span class="n">with</span> <span class="n">Standard</span> <span class="n">feature</span> <span class="n">tier</span><span class="o">.</span> <span class="n">Please</span> <span class="n">contact</span> <span class="n">Databricks</span> <span class="nb">support</span><span class="o">.</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="19:1-21:88" dir="auto">Even with no SQL warehouses available it may still be possible to connect to
+Databricks using Database Toolbox™ and the Databricks JDBC driver by connecting
+to specific clusters instead of a SQL warehouse, see <a data-sourcepos="21:54-21:87" href="JDBCWorkflow.html">JDBCWorkflow.md</a>.</p>
+<p data-sourcepos="23:1-27:77" dir="auto">The MATLAB® Interface for Databricks package offers an interface to the
+<a data-sourcepos="24:1-24:81" href="https://docs.databricks.com/sql/api/sql-endpoints.html" rel="nofollow noreferrer noopener" target="_blank">SQL Warehouses REST API</a>
+as well as an option to connect to these SQL warehouses using
+<a data-sourcepos="26:1-26:68" href="https://www.mathworks.com/products/database.html" rel="nofollow noreferrer noopener" target="_blank">Database Toolbox</a> and the
+<a data-sourcepos="27:1-27:49" href="InstallingJDBCDriver.html">Databricks JDBC driver</a> using the <code data-sourcepos="27:61-27:69">connect</code> method.</p>
+<p data-sourcepos="29:1-33:56" dir="auto">Interaction with the REST API takes place through the <code data-sourcepos="29:55-29:79">databricks.SQLWarehouse</code>
+class in MATLAB. The class has the same properties as an warehouse in the REST
+API, see the
+<a data-sourcepos="32:1-32:107" href="https://docs.databricks.com/sql/api/sql-endpoints.html#get" rel="nofollow noreferrer noopener" target="_blank">Databricks documentation on the Get operation</a>
+for a full overview of the properties and their meaning.</p>
+<h2 data-sourcepos="35:1-35:40" dir="auto" id="user-content-sql-warehouses-rest-api-version-20">SQL warehouses REST API (version 2.0)</h2>
+<h3 data-sourcepos="37:1-37:8" dir="auto" id="user-content-list">List</h3>
+<p data-sourcepos="39:1-40:52" dir="auto">To list all available SQL warehouses in the <a data-sourcepos="39:45-39:66" href="Setup.html">configured</a>
+Databricks workspace, call the static <code data-sourcepos="40:39-40:44">list</code> method:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="42:1-44:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">warehouses</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="o">.</span><span class="n">list</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="46:1-47:81" dir="auto">This will return an array of <code data-sourcepos="46:30-46:54">databricks.SQLWarehouse</code> objects. If no warehouses have been
+configured an empty <code data-sourcepos="47:21-47:25">0x0</code> array of <code data-sourcepos="47:36-47:60">databricks.SQLWarehouse</code> objects is returned.</p>
+<h3 data-sourcepos="49:1-49:10" dir="auto" id="user-content-create">Create</h3>
+<p data-sourcepos="51:1-54:52" dir="auto">Creating a SQL warehouse <em data-sourcepos="51:26-51:35">requires</em> a number of options to be set and some
+<em data-sourcepos="52:1-52:10">optional</em> options can be configured as well, see the <a data-sourcepos="52:55-53:77" href="https://docs.databricks.com/sql/api/sql-endpoints.html#create" rel="nofollow noreferrer noopener" target="_blank">Databricks
+documentation</a>
+for exact details and descriptions of these options.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="56:1-66:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Create an empty SQLWarehouse instance</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">warehouse</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% Configure all required options - the actual values are just an example here</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">warehouse</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"myNewInstance"</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">warehouse</span><span class="o">.</span><span class="n">cluster_size</span> <span class="o">=</span> <span class="s2">"Small"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">warehouse</span><span class="o">.</span><span class="n">min_num_clusters</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">warehouse</span><span class="o">.</span><span class="n">max_num_clusters</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="c1">% Create the SQL warehouse on Databricks</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="n">warehouse</span><span class="o">.</span><span class="n">create</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="68:1-71:44" dir="auto">If successful <code data-sourcepos="68:15-68:25">warehouse</code>'s <code data-sourcepos="68:29-68:32">id</code> property is updated with the id of the newly
+created warehouse and is then <a data-sourcepos="69:31-69:51" href="#refresh">refreshed</a> such that other properties
+like <code data-sourcepos="70:6-70:12">state</code> will also be updated (and the <code data-sourcepos="70:44-70:50">state</code> would typically then be
+<code data-sourcepos="71:1-71:12">'STARTING'</code> for a newly created warehouse).</p>
+<h3 data-sourcepos="73:1-73:11" dir="auto" id="user-content-refresh">Refresh</h3>
+<blockquote data-sourcepos="75:1-76:80" dir="auto">
+<p data-sourcepos="75:3-76:80"><em data-sourcepos="75:3-75:9">NOTE:</em> This method in the Databricks API is called <code data-sourcepos="75:55-75:59">Get</code>. It's called
+<code data-sourcepos="76:1-76:9">refresh</code> here, to avoid confusion with the built-in MATLAB <code data-sourcepos="76:61-76:65">get</code>/<code data-sourcepos="76:67-76:71">set</code> methods.</p>
+</blockquote>
+<p data-sourcepos="78:1-79:35" dir="auto">Refresh can be used to update the properties of a SQLWarehouse obtained before
+(e.g. through <code data-sourcepos="79:15-79:20">list</code>), for example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="81:1-107:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">%% Initial inspection of the warehouses</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="c1">% List all warehouses</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="o">&gt;&gt;</span> <span class="n">warehouses</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="o">.</span><span class="n">list</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="c1">% As an example select the second one</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="o">&gt;&gt;</span> <span class="n">warehouse</span> <span class="o">=</span> <span class="n">warehouses</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="c1">% Check the state</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="o">&gt;&gt;</span> <span class="n">warehouse</span><span class="o">.</span><span class="n">state</span></span>
+<span class="line" data-lang="matlab" id="LC8"/>
+<span class="line" data-lang="matlab" id="LC9"><span class="nb">ans</span> <span class="o">=</span> </span>
+<span class="line" data-lang="matlab" id="LC10"/>
+<span class="line" data-lang="matlab" id="LC11">  <span class="n">WarehouseState</span> <span class="nb">enumeration</span></span>
+<span class="line" data-lang="matlab" id="LC12"/>
+<span class="line" data-lang="matlab" id="LC13">    <span class="n">STARTING</span></span>
+<span class="line" data-lang="matlab" id="LC14"/>
+<span class="line" data-lang="matlab" id="LC15"><span class="c1">%% At some later point in time, check whether the state is still the same</span></span>
+<span class="line" data-lang="matlab" id="LC16"><span class="c1">% First refresh</span></span>
+<span class="line" data-lang="matlab" id="LC17"><span class="o">&gt;&gt;</span> <span class="n">warehouse</span><span class="o">.</span><span class="nb">refresh</span><span class="p">()</span></span>
+<span class="line" data-lang="matlab" id="LC18"><span class="c1">% And display the current state</span></span>
+<span class="line" data-lang="matlab" id="LC19"><span class="o">&gt;&gt;</span> <span class="n">warehouse</span><span class="o">.</span><span class="n">state</span></span>
+<span class="line" data-lang="matlab" id="LC20"/>
+<span class="line" data-lang="matlab" id="LC21"><span class="nb">ans</span> <span class="o">=</span> </span>
+<span class="line" data-lang="matlab" id="LC22"/>
+<span class="line" data-lang="matlab" id="LC23">  <span class="n">WarehouseState</span> <span class="nb">enumeration</span></span>
+<span class="line" data-lang="matlab" id="LC24"/>
+<span class="line" data-lang="matlab" id="LC25">    <span class="n">RUNNING</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="109:1-110:12" dir="auto">Or this can be used to query the information of an warehouse with some known ID,
+for example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="112:1-145:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Create a SQLWarehouse instance - all its properties will be empty</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="o">&gt;&gt;</span> <span class="n">warehouse</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% Specify a specific known ID - id is then set, but all other properties are still empty</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="o">&gt;&gt;</span> <span class="n">warehouse</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">"qfufxboufejuuibuxbz"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="c1">% Call refresh - this queries the REST API and all other properties will be filled out</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="o">&gt;&gt;</span> <span class="n">warehouse</span><span class="o">.</span><span class="nb">refresh</span><span class="p">()</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="c1">% Show the object</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="o">&gt;&gt;</span> <span class="n">warehouse</span></span>
+<span class="line" data-lang="matlab" id="LC9"/>
+<span class="line" data-lang="matlab" id="LC10">    <span class="n">warehouse</span> <span class="o">=</span> </span>
+<span class="line" data-lang="matlab" id="LC11">      </span>
+<span class="line" data-lang="matlab" id="LC12">        <span class="n">SQLWarehouse</span> <span class="n">with</span> <span class="k">properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC13">      </span>
+<span class="line" data-lang="matlab" id="LC14">                             <span class="n">id</span><span class="p">:</span> <span class="s2">"qfufxboufejuuibuxbz"</span></span>
+<span class="line" data-lang="matlab" id="LC15">                           <span class="n">name</span><span class="p">:</span> <span class="s2">"myWarehouse"</span></span>
+<span class="line" data-lang="matlab" id="LC16">                   <span class="n">cluster_size</span><span class="p">:</span> <span class="s2">"2X-Small"</span></span>
+<span class="line" data-lang="matlab" id="LC17">                 <span class="n">auto_stop_mins</span><span class="p">:</span> <span class="mi">10</span></span>
+<span class="line" data-lang="matlab" id="LC18">           <span class="n">spot_instance_policy</span><span class="p">:</span> <span class="n">COST_OPTIMIZED</span></span>
+<span class="line" data-lang="matlab" id="LC19">                   <span class="n">num_clusters</span><span class="p">:</span> <span class="mi">1</span></span>
+<span class="line" data-lang="matlab" id="LC20">               <span class="n">min_num_clusters</span><span class="p">:</span> <span class="mi">1</span></span>
+<span class="line" data-lang="matlab" id="LC21">               <span class="n">max_num_clusters</span><span class="p">:</span> <span class="mi">1</span></span>
+<span class="line" data-lang="matlab" id="LC22">            <span class="n">num_active_sessions</span><span class="p">:</span> <span class="mi">0</span></span>
+<span class="line" data-lang="matlab" id="LC23">                          <span class="n">state</span><span class="p">:</span> <span class="n">RUNNING</span></span>
+<span class="line" data-lang="matlab" id="LC24">                   <span class="n">creator_name</span><span class="p">:</span> <span class="s2">"username@example.com"</span></span>
+<span class="line" data-lang="matlab" id="LC25">                     <span class="n">creator_id</span><span class="p">:</span> <span class="s2">"3141592653589793"</span></span>
+<span class="line" data-lang="matlab" id="LC26">                       <span class="n">jdbc_url</span><span class="p">:</span> <span class="s2">"jdbc:spark://adb-42424242424242.1.azuredatabricks.net:443/default;transportMode=http;ssl=1;AuthMech=3;httpPath=/sql/1.0/warehouses/qfufxboufejuuibuxbz;"</span></span>
+<span class="line" data-lang="matlab" id="LC27">                    <span class="n">odbc_params</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">ODBCParams</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC28">                           <span class="n">tags</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">WarehouseTags</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC29">                         <span class="n">health</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">WarehouseHealth</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC30">                  <span class="n">enable_photon</span><span class="p">:</span> <span class="mi">1</span></span>
+<span class="line" data-lang="matlab" id="LC31">      <span class="n">enable_serverless_compute</span><span class="p">:</span> <span class="mi">0</span></span>
+<span class="line" data-lang="matlab" id="LC32">                        <span class="n">channel</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="n">databricks</span><span class="o">.</span><span class="n">datastructures</span><span class="o">.</span><span class="n">Channel</span><span class="p">]</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="147:1-147:79" dir="auto"><code data-sourcepos="147:1-147:9">refresh</code> can also be used to refresh multiple warehouses at once, for example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="149:1-154:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Get the list of warehouses, if there are more than one this will be an array</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">warehouses</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouses</span><span class="o">.</span><span class="n">list</span><span class="p">()</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% Update all of those warehouses in one call</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">warehouses</span><span class="o">.</span><span class="nb">refresh</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="156:1-156:8" dir="auto" id="user-content-edit">Edit</h3>
+<p data-sourcepos="158:1-162:27" dir="auto">Edit can be used to change the settings of an existing cluster. See the <a data-sourcepos="158:73-159:79" href="https://docs.databricks.com/sql/api/sql-endpoints.html#edit" rel="nofollow noreferrer noopener" target="_blank">REST
+API documentation</a>
+for more information about what can be changed exactly. To be able to use the
+<code data-sourcepos="161:1-161:6">edit</code> method, the <code data-sourcepos="161:20-161:23">id</code> property <em data-sourcepos="161:34-161:39">must</em> be set, as well as any settings that are
+to be changed, for example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="164:1-173:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Create an SQLWarehouse Instance</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">warehouse</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% Specify which instance is to be updated</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">warehouse</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">"qfufxboufejuuibuxbz"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="c1">% Set a modified value</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">warehouse</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"My New Name"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="c1">% Apply the edit</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="n">warehouse</span><span class="o">.</span><span class="nb">edit</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="175:1-176:54" dir="auto">It is for example also possible to first obtain an warehouse through <code data-sourcepos="175:70-175:75">list</code>,
+modify one or more properties and then apply the edit:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="178:1-188:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Get the list</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">warehouses</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="o">.</span><span class="n">list</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% Select the first warehouse</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">warehouse</span> <span class="o">=</span> <span class="n">warehouses</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="c1">% Modify two of its settings</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">warehouse</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">"My New Name"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">warehouses</span><span class="o">.</span><span class="n">max_num_clusters</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="c1">% Apply the edit</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="n">warehouse</span><span class="o">.</span><span class="nb">edit</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="190:1-191:21" dir="auto">The <code data-sourcepos="190:5-190:10">edit</code> method can only be used on <code data-sourcepos="190:39-190:63">databricks.SQLWarehouse</code> scalars and does
+<em data-sourcepos="191:1-191:5">not</em> work on arrays.</p>
+<h3 data-sourcepos="193:1-193:9" dir="auto" id="user-content-start">Start</h3>
+<p data-sourcepos="195:1-196:75" dir="auto">The <code data-sourcepos="195:5-195:11">start</code> method starts existing but stopped SQL warehouses. This can again
+operate on an existing <code data-sourcepos="196:24-196:48">databricks.SQLWarehouse</code> instance obtained earlier:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="198:1-203:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% List all warehouses</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">warehouses</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="o">.</span><span class="n">list</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% As an example select the second one</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">warehouse</span> <span class="o">=</span> <span class="n">warehouses</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="205:1-206:16" dir="auto">or if a specific id is known, a <code data-sourcepos="205:33-205:46">SQLWarehouse</code> instance can be created and its id
+can then be set:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="208:1-213:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Create a SQLWarehouse instance </span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">warehouse</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% And specify a specific id</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">warehouse</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">"qfufxboufejuuibuxbz"</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="215:1-215:61" dir="auto">Then call the <code data-sourcepos="215:15-215:21">start</code> method to actually start the warehouse:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="217:1-219:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">warehouse</span><span class="o">.</span><span class="nb">start</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="221:1-222:36" dir="auto">This methods <em data-sourcepos="221:14-221:18">can</em> be used on arrays of <code data-sourcepos="221:41-221:65">databricks.SQLWarehouse</code> to start
+multiple SQL warehouses in one call.</p>
+<h3 data-sourcepos="224:1-224:8" dir="auto" id="user-content-stop">Stop</h3>
+<p data-sourcepos="226:1-226:55" dir="auto">Similar to starting SQL warehouses they can be stopped:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="228:1-230:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">warehouse</span><span class="o">.</span><span class="nb">stop</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="232:1-233:36" dir="auto">This methods <em data-sourcepos="232:14-232:18">can</em> be used on arrays of <code data-sourcepos="232:41-232:65">databricks.SQLWarehouse</code> to stop
+multiple SQL warehouses in one call.</p>
+<h3 data-sourcepos="235:1-235:10" dir="auto" id="user-content-delete">Delete</h3>
+<blockquote data-sourcepos="237:1-240:53" dir="auto">
+<p data-sourcepos="237:3-240:53"><em data-sourcepos="237:3-237:9">NOTE:</em> This method is called delete in the Databricks API. It is called remove
+here, to avoid confusion with the built-in MATLAB delete method. This works
+similarly to start and stop, a previously obtained <code data-sourcepos="239:52-239:76">databricks.SQLWarehouse</code> can
+be used or a new instance with <code data-sourcepos="240:32-240:35">id</code> set, can be used:</p>
+</blockquote>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="242:1-244:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">warehouse</span><span class="o">.</span><span class="nb">remove</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="246:1-247:36" dir="auto">This methods <em data-sourcepos="246:14-246:18">can</em> be used on arrays of <code data-sourcepos="246:41-246:65">databricks.SQLWarehouse</code> to delete
+multiple SQL warehouses in one call.</p>
+<h2 data-sourcepos="249:1-249:54" dir="auto" id="user-content-connecting-to-a-sql-warehouse-with-database-toolbox">Connecting to a SQL warehouse with Database Toolbox</h2>
+<p data-sourcepos="251:1-256:68" dir="auto">To connect to a SQL warehouse using Database Toolbox, Database Toolbox
+must be installed, this can be quickly checked using the <code data-sourcepos="252:58-252:62">ver</code> command.
+Furthermore, the Databricks JDBC driver must be downloaded from
+<a data-sourcepos="254:1-254:67" href="https://www.databricks.com/spark/jdbc-drivers-archive" rel="nofollow noreferrer noopener" target="_blank">Databricks</a>. The <code data-sourcepos="254:74-254:86">jarFilePath</code>
+argument can be used to specify the path to the driver.
+See <a data-sourcepos="256:5-256:55" href="InstallingJDBCDriver.html">JDBC driver installation</a> for details.</p>
+<p data-sourcepos="258:1-259:74" dir="auto">Similar to most of the other operations listed above, to connect to a SQL
+warehouse, one can first either list the warehouses and then "select" one:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="261:1-266:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% List all warehouses</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">warehouses</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="o">.</span><span class="n">list</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% As an example select the second one</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">warehouse</span> <span class="o">=</span> <span class="n">warehouses</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="268:1-269:8" dir="auto">or if a specific id is known up-front, create a <code data-sourcepos="268:49-268:62">SQLWarehouse</code> instance and set
+that id:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="271:1-276:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Create a SQLWarehouse instance </span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">warehouse</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">SQLWarehouse</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% And specify a specific id</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">warehouse</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="s2">"qfufxboufejuuibuxbz"</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="278:1-279:20" dir="auto">And then to connect using Database Toolbox and the Databricks JDBC Driver,
+simply call connect:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="281:1-283:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">conn</span> <span class="o">=</span> <span class="n">warehouse</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="285:1-289:47" dir="auto">This uses Database Toolbox' <code data-sourcepos="285:29-285:38">database</code> function and the connection
+object is the same kind of object as returned by <code data-sourcepos="286:50-286:59">database</code>. As always in
+Database Toolbox, check the <code data-sourcepos="287:29-287:37">Message</code> field of the object to ensure the
+connection was successful in which case <code data-sourcepos="288:41-288:49">Message</code> will be empty, if there was an
+error <code data-sourcepos="289:7-289:15">Message</code> will contain the error message.</p>
+<p data-sourcepos="291:1-292:24" dir="auto">The <code data-sourcepos="291:5-291:13">connect</code> method can only be used on <code data-sourcepos="291:42-291:66">databricks.SQLWarehouse</code> scalars and
+does not work on arrays.</p>
+<p data-sourcepos="294:1-298:69" dir="auto">Use <code data-sourcepos="294:5-294:41">doc databricks.SQLWarehouse.connect</code> for further argument details.
+The <code data-sourcepos="295:5-295:13">connect</code> method uses a <code data-sourcepos="295:29-295:55">databricks.JDBCConnection</code> or a <code data-sourcepos="295:62-295:88">databricks.ODBCConnection</code>
+object to create the returned connection, see: <a data-sourcepos="296:48-296:81" href="JDBCWorkflow.html">JDBCWorkflow.md</a>
+or <a data-sourcepos="297:4-297:37" href="ODBCWorkflow.html">ODBCWorkflow.md</a> for additional details. A JDBC connection is
+used by default, use the <code data-sourcepos="298:26-298:31">mode</code> argument to select ODBC if preferred.</p>
+<h3 data-sourcepos="300:1-300:48" dir="auto" id="user-content-using-a-sql-warehouse-with-database-explorer">Using a SQL Warehouse with Database Explorer</h3>
+<p data-sourcepos="302:1-302:70" dir="auto">Create a warehouse as above but return the xDBCConnection result also.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="304:1-306:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="p">[</span><span class="n">conn</span><span class="p">,</span> <span class="n">xDBCConnection</span><span class="p">]</span> <span class="o">=</span> <span class="n">warehouse</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="308:1-310:30" dir="auto">Save the connection as a source, by default the source name will be: <code data-sourcepos="308:70-308:96">Databricks-&lt;Warehouse Id&gt;</code>.
+By default a source is created when a connection is created but it is not saved
+unless <code data-sourcepos="310:8-310:19">saveSource</code> is called.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="312:1-314:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">xDBCConnection</span><span class="o">.</span><span class="n">saveSource</span><span class="p">()</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="316:1-316:64" dir="auto">Copy the connection's token to the clipboard for use in the GUI.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="318:1-320:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">j</span><span class="o">.</span><span class="n">copyToken</span><span class="p">()</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="322:1-327:12" dir="auto">Then in the Database Explorer app select the newly created data source. When the
+username and password are requested enter "token" as the username and paste the
+token value from the clipboard as the password. Once created the app will ask for the
+catalog and schema to connect to before displaying a list of tables. One can then
+proceed to explore the data and build up queries that can be easily imported into
+MATLAB code.</p>
+<blockquote data-sourcepos="329:1-330:21" dir="auto">
+<p data-sourcepos="329:3-330:21">Currently JDBC is supported. Support for saving ODBC data sources will be enabled
+in a later release.</p>
+</blockquote>
+<h2 data-sourcepos="332:1-332:23" dir="auto" id="user-content-oauth-authentication">Oauth authentication</h2>
+<h3 data-sourcepos="334:1-334:50" dir="auto" id="user-content-oauthu2m---jdbc-driver-bug-under-investigation">OauthU2M - JDBC Driver bug under investigation</h3>
+<p data-sourcepos="336:1-340:78" dir="auto">Currently the Databricks JDBC driver v2.6.36 produces an incorrect scope value
+in certain circumstances when using Oauth, thus preventing the return of a valid
+redirect URL. This issue is under investigation with Databricks. While this
+interface attempts to use the correct value despite this it may be necessary to
+override the scope or other oauth argument fields until the issue is resolved.</p>
+<p data-sourcepos="342:1-345:20" dir="auto">Not that if the token value is overridden in Oauth flows the JDBC driver will not
+refresh the token which will expire in 1 hour typically, and it must be refreshed
+manually. Creating a new connection is the simplest approach, pending a resolution
+of the driver issue.</p></div></main><script src="resources/copycode.js">//</script></body></html>

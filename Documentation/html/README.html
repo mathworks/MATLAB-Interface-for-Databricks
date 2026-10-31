@@ -1,0 +1,89 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>MATLAB Interface for Databricks</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:35" dir="auto" id="user-content-matlab-interface-for-databricks">MATLAB Interface <em data-sourcepos="1:20-1:35">for Databricks</em></h1>
+<h2 data-sourcepos="3:1-3:11" dir="auto" id="user-content-contents">Contents</h2>
+<ul data-sourcepos="5:1-59:50" dir="auto">
+<li data-sourcepos="5:1-5:25"><a data-sourcepos="5:3-5:25" href="Overview.html">Overview</a></li>
+<li data-sourcepos="6:1-15:75">Setup &amp; Configuration
+<ul data-sourcepos="7:3-15:75">
+<li data-sourcepos="7:3-7:21"><a data-sourcepos="7:5-7:21" href="Setup.html">Setup</a></li>
+<li data-sourcepos="8:3-8:39"><a data-sourcepos="8:5-8:39" href="Authentication.html">Authentication</a></li>
+<li data-sourcepos="9:3-9:46"><a data-sourcepos="9:5-9:46" href="SupportMatrix.html">Feature support matrix</a></li>
+<li data-sourcepos="10:3-10:51"><a data-sourcepos="10:5-10:51" href="Upgrade.html">Upgrading from a previous release</a></li>
+<li data-sourcepos="11:3-11:73"><a data-sourcepos="11:5-11:73" href="InstallingJDBCDriver.html">Installing the Databricks® JDBC driver</a></li>
+<li data-sourcepos="12:3-12:68"><a data-sourcepos="12:5-12:68" href="InstallingMATLABRuntime.html">Installing the MATLAB® Runtime</a></li>
+<li data-sourcepos="13:3-13:47"><a data-sourcepos="13:5-13:47" href="InitScripts.html">Init script configuration</a></li>
+<li data-sourcepos="14:3-14:62"><a data-sourcepos="14:5-14:62" href="DBConnect.html">Installing Databricks Connect using MATLAB</a></li>
+<li data-sourcepos="15:3-15:75"><a data-sourcepos="15:5-15:75" href="ContainerServices.html">Installing the MATLAB Runtime using Docker®</a></li>
+</ul>
+</li>
+<li data-sourcepos="16:1-17:61">Databricks Connect
+<ul data-sourcepos="17:3-17:61">
+<li data-sourcepos="17:3-17:61"><a data-sourcepos="17:5-17:61" href="DBConnectWorkflow.html">Databricks Connect based workflow</a></li>
+</ul>
+</li>
+<li data-sourcepos="18:1-22:79">Jobs &amp; Libraries
+<ul data-sourcepos="19:3-22:79">
+<li data-sourcepos="19:3-19:40"><a data-sourcepos="19:5-19:40" href="JobWorkflow.html">Job-based workflow</a></li>
+<li data-sourcepos="20:3-20:73"><a data-sourcepos="20:5-20:73" href="matlab-spark-api/PythonSparkBuilder.html">Build MATLAB .whl libraries</a></li>
+<li data-sourcepos="21:3-21:65"><a data-sourcepos="21:5-21:65" href="matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li data-sourcepos="22:3-22:79"><a data-sourcepos="22:5-22:79" href="matlab-spark-api/SparkBuilderDataTypes.html">Spark™ Builder Datatypes</a></li>
+</ul>
+</li>
+<li data-sourcepos="23:1-25:41">Spark
+<ul data-sourcepos="24:3-25:41">
+<li data-sourcepos="24:3-24:47"><a data-sourcepos="24:5-24:47" href="SparkSemantics.html">MATLAB Spark semantics</a></li>
+<li data-sourcepos="25:3-25:41"><a data-sourcepos="25:5-25:41" href="MATLABSparkAPI.html">MATLAB Spark API</a></li>
+</ul>
+</li>
+<li data-sourcepos="26:1-27:88">Examples:
+<ul data-sourcepos="27:3-27:88">
+<li data-sourcepos="27:3-27:88"><a data-sourcepos="27:5-27:88" href="ExampleSimulink.html">End-to-End example using Simulink® with data on Databricks</a></li>
+</ul>
+</li>
+<li data-sourcepos="28:1-32:67">Database Interfaces
+<ul data-sourcepos="29:3-32:67">
+<li data-sourcepos="29:3-29:53"><a data-sourcepos="29:5-29:53" href="JDBCWorkflow.html">JDBC Connection based workflow</a></li>
+<li data-sourcepos="30:3-30:53"><a data-sourcepos="30:5-30:53" href="ODBCWorkflow.html">ODBC Connection based workflow</a></li>
+<li data-sourcepos="31:3-31:67"><a data-sourcepos="31:5-31:67" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC interface</a></li>
+<li data-sourcepos="32:3-32:67"><a data-sourcepos="32:5-32:67" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC interface</a></li>
+</ul>
+</li>
+<li data-sourcepos="33:1-47:25">REST API Interfaces
+<ul data-sourcepos="34:3-47:25">
+<li data-sourcepos="34:3-34:29"><a data-sourcepos="34:5-34:29" href="ClusterAPI.html">Clusters</a></li>
+<li data-sourcepos="35:3-35:44"><a data-sourcepos="35:5-35:44" href="CommandExecution.html">Command Execution</a></li>
+<li data-sourcepos="36:3-36:19"><a data-sourcepos="36:5-36:19" href="DBFS.html">DBFS</a></li>
+<li data-sourcepos="37:3-37:21"><a data-sourcepos="37:5-37:21" href="Files.html">Files</a></li>
+<li data-sourcepos="38:3-38:22"><a data-sourcepos="38:5-38:22" href="JobsAPI.html">Jobs</a></li>
+<li data-sourcepos="39:3-39:30"><a data-sourcepos="39:5-39:30" href="LibraryAPI.html">Libraries</a></li>
+<li data-sourcepos="40:3-40:28"><a data-sourcepos="40:5-40:28" href="SecretsAPI.html">Secrets</a></li>
+<li data-sourcepos="41:3-41:41"><a data-sourcepos="41:5-41:41" href="SQLWarehousesAPI.html">SQL Warehouses</a></li>
+<li data-sourcepos="42:3-42:48"><a data-sourcepos="42:5-42:48" href="StatementExecution.html">Statement Execution</a></li>
+<li data-sourcepos="43:3-43:24"><a data-sourcepos="43:5-43:24" href="TokenAPI.html">Token</a></li>
+<li data-sourcepos="44:3-44:38"><a data-sourcepos="44:5-44:38" href="UnityCatalogAPI.html">UnityCatalog</a></li>
+<li data-sourcepos="45:3-45:34"><a data-sourcepos="45:5-45:34" href="WorkspacesAPI.html">Workspaces</a></li>
+<li data-sourcepos="46:3-46:21"><a data-sourcepos="46:5-46:21" href="Genie.html">Genie</a></li>
+<li data-sourcepos="47:3-47:25"><a data-sourcepos="47:5-47:25" href="Zerobus.html">Zerobus</a></li>
+</ul>
+</li>
+<li data-sourcepos="48:1-49:45">Docker
+<ul data-sourcepos="49:3-49:45">
+<li data-sourcepos="49:3-49:45"><a data-sourcepos="49:5-49:45" href="ContainerServices.html">Docker &amp; Runtimes</a></li>
+</ul>
+</li>
+<li data-sourcepos="50:1-52:44">Databricks Platform
+<ul data-sourcepos="51:3-52:44">
+<li data-sourcepos="51:3-51:45"><a data-sourcepos="51:5-51:45" href="WorkingWithFiles.html">Working with files</a></li>
+<li data-sourcepos="52:3-52:44"><a data-sourcepos="52:5-52:44" href="Isolation.html">Standard/Shared Clusters</a></li>
+</ul>
+</li>
+<li data-sourcepos="53:1-59:50">Other
+<ul data-sourcepos="54:3-59:50">
+<li data-sourcepos="54:3-54:46"><a data-sourcepos="54:5-54:46" href="FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+<li data-sourcepos="55:3-55:42"><a data-sourcepos="55:5-55:42" href="DatabricksAPI.html">REST API Reference</a></li>
+<li data-sourcepos="56:3-56:58"><a data-sourcepos="56:5-56:58" href="matlab-spark-api/SparkApiRef.html">Spark API reference</a></li>
+<li data-sourcepos="57:3-57:64"><a data-sourcepos="57:5-57:64" href="matlab-spark-api/CompilerApiRef.html">Compiler API reference</a></li>
+<li data-sourcepos="58:3-58:71"><a data-sourcepos="58:5-58:71" href="matlab-spark-api/MiscApiRef.html">Miscellaneous Spark API reference</a></li>
+<li data-sourcepos="59:3-59:50"><a data-sourcepos="59:5-59:50" href="matlab-mlflow/index.html">MLflow API Reference</a></li>
+</ul>
+</li>
+</ul></div></main><script src="resources/copycode.js">//</script></body></html>

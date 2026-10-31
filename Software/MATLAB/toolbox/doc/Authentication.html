@@ -1,0 +1,285 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Authentication</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:16" dir="auto" id="user-content-authentication">Authentication</h1>
+<p data-sourcepos="3:1-5:52" dir="auto">Authentication between MATLAB® and Databricks® can be accomplished through several
+mechanisms using the Databricks Unified Authentication provider chain.
+It supports the following authentication mechanisms:</p>
+<ul data-sourcepos="7:1-10:45" dir="auto">
+<li data-sourcepos="7:1-7:116">Chain - Evaluate methods in the following order until a working methods is found, this option is rarely necessary.</li>
+<li data-sourcepos="8:1-8:67">OauthU2M - OAuth user-to-machine (U2M) authentication, (default).</li>
+<li data-sourcepos="9:1-9:59">OauthM2M - OAuth machine-to-machine (M2M) authentication.</li>
+<li data-sourcepos="10:1-10:45">PAT - Personal Access Token authentication.</li>
+</ul>
+<p data-sourcepos="12:1-13:60" dir="auto">Support for the unified authentication provider enables MATLAB and other Databricks
+related tools to share authentication configuration details.</p>
+<p data-sourcepos="15:1-18:22" dir="auto">OauthU2M is used as the default authentication mechanism. Oauth mechanisms enable
+capabilities such as short lived tokens and the use of service principals.
+OauthM2M is more appropriate for use with software services and OauthU2M is used
+for individual access.</p>
+<p data-sourcepos="20:1-23:33" dir="auto">PAT based authentication while simple to use may not be enabled in favour of OauthU2M.
+The personal access token can be created either using the Databricks Workspace
+UI or from MATLAB via the <a data-sourcepos="22:27-22:50" href="TokenAPI.html">Token API</a>, the latter requires that authentication
+of some form is already in place.</p>
+<h2 data-sourcepos="25:1-25:33" dir="auto" id="user-content-configuration--settings-files">Configuration &amp; Settings files</h2>
+<blockquote data-sourcepos="27:1-27:96" dir="auto">
+<p data-sourcepos="27:3-27:96">If using MATLAB on Databricks typically the configuration and settings files are prepopulated.</p>
+</blockquote>
+<h3 data-sourcepos="29:1-29:23" dir="auto" id="user-content-databrickscfg-file">.databrickscfg file</h3>
+<p data-sourcepos="31:1-33:57" dir="auto">Authentication configuration details are stored in <code data-sourcepos="31:52-31:81">HomeDirectory/.databrickscfg</code>.
+This file enables multiple profiles using <em data-sourcepos="32:43-32:57">profile names</em>, typically a profile named
+<code data-sourcepos="33:1-33:11">[DEFAULT]</code> is used as the <a data-sourcepos="33:28-33:56" href="#profile-selection">default</a>.</p>
+<blockquote data-sourcepos="35:1-35:98" dir="auto">
+<p data-sourcepos="35:3-35:98">Setting the <code data-sourcepos="35:15-35:38">DATABRICKS_CONFIG_FILE</code> environment variable allows an alternative file to be used.</p>
+</blockquote>
+<p data-sourcepos="37:1-37:22" dir="auto">Sample file structure:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-ini" data-canonical-lang="ini" data-sourcepos="39:1-53:3" v-pre="true"><code><span class="line" data-lang="ini" id="LC1"><span class="nn">[DEFAULT]</span></span>
+<span class="line" data-lang="ini" id="LC2"><span class="py">token</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">dap&lt;REDACTED&gt;2</span></span>
+<span class="line" data-lang="ini" id="LC3"><span class="py">host</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">https://adb-12345678.azuredatabricks.net</span></span>
+<span class="line" data-lang="ini" id="LC4"><span class="py">cluster_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">0521-002819-eit9opfk</span></span>
+<span class="line" data-lang="ini" id="LC5"><span class="py">org_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">123456789</span></span>
+<span class="line" data-lang="ini" id="LC6"/>
+<span class="line" data-lang="ini" id="LC7"><span class="nn">[U2M]</span></span>
+<span class="line" data-lang="ini" id="LC8"><span class="py">host</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">https://adb-12345678.azuredatabricks.net</span></span>
+<span class="line" data-lang="ini" id="LC9"/>
+<span class="line" data-lang="ini" id="LC10"><span class="nn">[M2M]</span></span>
+<span class="line" data-lang="ini" id="LC11"><span class="py">host</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">https://adb-12345678.azuredatabricks.net</span></span>
+<span class="line" data-lang="ini" id="LC12"><span class="py">client_id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&lt;REDACTED&gt;</span></span>
+<span class="line" data-lang="ini" id="LC13"><span class="py">client_secret</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&lt;REDACTED&gt;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="55:1-55:29" dir="auto">Commonly used profile fields:</p>
+<table data-sourcepos="57:1-70:67" dir="auto">
+<thead>
+<tr data-sourcepos="57:1-57:59">
+<th data-sourcepos="57:2-57:24">Authentication Method</th>
+<th data-sourcepos="57:26-57:37">Field Name</th>
+<th data-sourcepos="57:39-57:48">Required</th>
+<th data-sourcepos="57:50-57:58">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="59:1-59:92">
+<td data-sourcepos="59:2-59:24">PAT</td>
+<td data-sourcepos="59:26-59:37">host</td>
+<td data-sourcepos="59:39-59:48">Yes</td>
+<td data-sourcepos="59:50-59:91"><a data-sourcepos="59:51-59:90" href="https://adb-12345678.azuredatabricks.net" rel="nofollow noreferrer noopener" target="_blank">https://adb-12345678.azuredatabricks.net</a></td>
+</tr>
+<tr data-sourcepos="60:1-60:66">
+<td data-sourcepos="60:2-60:24"/>
+<td data-sourcepos="60:26-60:37">token</td>
+<td data-sourcepos="60:39-60:48">Yes</td>
+<td data-sourcepos="60:50-60:65">dap-REDACTED-2</td>
+</tr>
+<tr data-sourcepos="61:1-61:72">
+<td data-sourcepos="61:2-61:24"/>
+<td data-sourcepos="61:26-61:37">cluster_id</td>
+<td data-sourcepos="61:39-61:48">Optional</td>
+<td data-sourcepos="61:50-61:71">0521-002819-eit9opfk</td>
+</tr>
+<tr data-sourcepos="62:1-62:67">
+<td data-sourcepos="62:2-62:24"/>
+<td data-sourcepos="62:26-62:37">org_id</td>
+<td data-sourcepos="62:39-62:48">Optional</td>
+<td data-sourcepos="62:50-62:66">123456789455407</td>
+</tr>
+<tr data-sourcepos="63:1-63:92">
+<td data-sourcepos="63:2-63:24">OauthU2M</td>
+<td data-sourcepos="63:26-63:37">host</td>
+<td data-sourcepos="63:39-63:48">Yes</td>
+<td data-sourcepos="63:50-63:91"><a data-sourcepos="63:51-63:90" href="https://adb-12345678.azuredatabricks.net" rel="nofollow noreferrer noopener" target="_blank">https://adb-12345678.azuredatabricks.net</a></td>
+</tr>
+<tr data-sourcepos="64:1-64:72">
+<td data-sourcepos="64:2-64:24"/>
+<td data-sourcepos="64:26-64:37">cluster_id</td>
+<td data-sourcepos="64:39-64:48">Optional</td>
+<td data-sourcepos="64:50-64:71">0521-002819-eit9opfk</td>
+</tr>
+<tr data-sourcepos="65:1-65:67">
+<td data-sourcepos="65:2-65:24"/>
+<td data-sourcepos="65:26-65:37">org_id</td>
+<td data-sourcepos="65:39-65:48">Optional</td>
+<td data-sourcepos="65:50-65:66">123456789455407</td>
+</tr>
+<tr data-sourcepos="66:1-66:92">
+<td data-sourcepos="66:2-66:24">OauthM2M</td>
+<td data-sourcepos="66:26-66:37">host</td>
+<td data-sourcepos="66:39-66:48">Yes</td>
+<td data-sourcepos="66:50-66:91"><a data-sourcepos="66:51-66:90" href="https://adb-12345678.azuredatabricks.net" rel="nofollow noreferrer noopener" target="_blank">https://adb-12345678.azuredatabricks.net</a></td>
+</tr>
+<tr data-sourcepos="67:1-67:68">
+<td data-sourcepos="67:2-67:24"/>
+<td data-sourcepos="67:26-67:37">client_id</td>
+<td data-sourcepos="67:39-67:48">Yes</td>
+<td data-sourcepos="67:50-67:67">fa0-REDACTED-cd1</td>
+</tr>
+<tr data-sourcepos="68:1-68:68">
+<td data-sourcepos="68:2-68:24"/>
+<td data-sourcepos="68:26-68:40">client_secret</td>
+<td data-sourcepos="68:42-68:48">Yes</td>
+<td data-sourcepos="68:50-68:67">bc0-REDACTED-cd1</td>
+</tr>
+<tr data-sourcepos="69:1-69:72">
+<td data-sourcepos="69:2-69:24"/>
+<td data-sourcepos="69:26-69:37">cluster_id</td>
+<td data-sourcepos="69:39-69:48">Optional</td>
+<td data-sourcepos="69:50-69:71">0521-002819-eit9opfk</td>
+</tr>
+<tr data-sourcepos="70:1-70:67">
+<td data-sourcepos="70:2-70:24"/>
+<td data-sourcepos="70:26-70:37">org_id</td>
+<td data-sourcepos="70:39-70:48">Optional</td>
+<td data-sourcepos="70:50-70:66">123456789455407</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="72:1-73:29" dir="auto">If the following environment variables are set they take precedence over the
+<code data-sourcepos="73:1-73:16">.databrickscfg</code> file values.</p>
+<table data-sourcepos="75:1-85:44" dir="auto">
+<thead>
+<tr data-sourcepos="75:1-75:44">
+<th data-sourcepos="75:2-75:27">Environment Variable</th>
+<th data-sourcepos="75:29-75:43">Profile field</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="77:1-77:44">
+<td data-sourcepos="77:2-77:27">DATABRICKS_HOST</td>
+<td data-sourcepos="77:29-77:43">host</td>
+</tr>
+<tr data-sourcepos="78:1-78:44">
+<td data-sourcepos="78:2-78:27">DATABRICKS_TOKEN</td>
+<td data-sourcepos="78:29-78:43">token</td>
+</tr>
+<tr data-sourcepos="79:1-79:44">
+<td data-sourcepos="79:2-79:27">DATABRICKS_USERNAME</td>
+<td data-sourcepos="79:29-79:43">username</td>
+</tr>
+<tr data-sourcepos="80:1-80:44">
+<td data-sourcepos="80:2-80:27">DATABRICKS_PASSWORD</td>
+<td data-sourcepos="80:29-80:43">password</td>
+</tr>
+<tr data-sourcepos="81:1-81:44">
+<td data-sourcepos="81:2-81:27">DATABRICKS_CLIENT_ID</td>
+<td data-sourcepos="81:29-81:43">client_id</td>
+</tr>
+<tr data-sourcepos="82:1-82:44">
+<td data-sourcepos="82:2-82:27">DATABRICKS_CLIENT_SECRET</td>
+<td data-sourcepos="82:29-82:43">client_secret</td>
+</tr>
+<tr data-sourcepos="83:1-83:44">
+<td data-sourcepos="83:2-83:27">DATABRICKS_ACCOUNT_ID</td>
+<td data-sourcepos="83:29-83:43">account_id</td>
+</tr>
+<tr data-sourcepos="84:1-84:44">
+<td data-sourcepos="84:2-84:27">DATABRICKS_CLUSTER_ID</td>
+<td data-sourcepos="84:29-84:43">cluster_id</td>
+</tr>
+<tr data-sourcepos="85:1-85:44">
+<td data-sourcepos="85:2-85:27">DATABRICKS_ORG_ID</td>
+<td data-sourcepos="85:29-85:43">org_id</td>
+</tr>
+</tbody>
+</table>
+<blockquote data-sourcepos="87:1-88:41" dir="auto">
+<p data-sourcepos="87:3-88:41">The <code data-sourcepos="87:7-87:28">DATABRICKS_AUTH_TYPE</code> environment variable is not yet supported, see:
+settings file based <code data-sourcepos="88:23-88:34">authMethod</code> below.</p>
+</blockquote>
+<p data-sourcepos="90:1-90:83" dir="auto">The Databricks JDBC driver supports the following additional environment variables:</p>
+<ul data-sourcepos="92:1-93:24" dir="auto">
+<li data-sourcepos="92:1-92:96"><code data-sourcepos="92:3-92:30">DATABRICKS_SERVER_HOSTNAME</code> this will be used in preference to <code data-sourcepos="92:67-92:83">DATABRICKS_HOST</code> if also set.</li>
+<li data-sourcepos="93:1-94:0"><code data-sourcepos="93:3-93:24">DATABRICKS_HTTP_PATH</code></li>
+</ul>
+<blockquote data-sourcepos="95:1-95:61" dir="auto">
+<p data-sourcepos="95:3-95:61">For JDBC &amp; ODBC JWT assertions are not currently supported.</p>
+</blockquote>
+<blockquote data-sourcepos="97:1-98:58" dir="auto">
+<p data-sourcepos="97:3-98:58">Comments indicated with a ";"  character are used but currently may be automatically
+removed in certain circumstances and so are discouraged.</p>
+</blockquote>
+<h4 data-sourcepos="100:1-100:29" dir="auto" id="user-content-account-level-operations">Account-level operations</h4>
+<p data-sourcepos="102:1-105:205" dir="auto">For account-level operations the <code data-sourcepos="102:34-102:39">host</code> value should typically be <code data-sourcepos="102:67-102:105">https://accounts.cloud.databricks.com</code>
+rather than a workspace URL of the form <code data-sourcepos="103:41-103:88">https://dbc-a1b2345c-d6e7.cloud.databricks.com</code>.
+The <code data-sourcepos="104:5-104:16">account_id</code> value should also be specified and is only used when using an account host.
+To locate the account ID see: <a data-sourcepos="105:31-105:204" href="https://learn.microsoft.com/en-us/azure/databricks/admin/account-settings/#account-id" rel="nofollow noreferrer noopener" target="_blank">https://learn.microsoft.com/en-us/azure/databricks/admin/account-settings/#account-id</a>.</p>
+<h4 data-sourcepos="107:1-107:11" dir="auto" id="user-content-org_id">org_id</h4>
+<p data-sourcepos="109:1-112:38" dir="auto">The creation of a Databricks JDBC/ODBC connection URL requires an <em data-sourcepos="109:67-109:74">ORG ID</em>
+value. This is not used by REST interface or Databricks Connect authentication.
+For more details see <a data-sourcepos="111:22-111:55" href="ODBCWorkflow.html">ODBCWorkflow.md</a>
+or <a data-sourcepos="112:4-112:37" href="JDBCWorkflow.html">JDBCWorkflow.md</a>.</p>
+<h4 data-sourcepos="114:1-114:16" dir="auto" id="user-content-token-cache">Token cache</h4>
+<p data-sourcepos="116:1-119:30" dir="auto">When using Oauth authentication the token is not stored in the profile.
+The short lived access token is cached in a plain text file named:
+<code data-sourcepos="118:1-118:42">HomeDirectory/.databricksOauthTokenCache</code>. When the token expires,
+it is automatically refreshed.</p>
+<ul data-sourcepos="121:1-127:55" dir="auto">
+<li data-sourcepos="121:1-122:23">
+<p data-sourcepos="121:3-122:23">An alternative cache file location can be specified using the <code data-sourcepos="121:65-121:93">DATABRICKS_TOKEN_CACHE_FILE</code>
+environment variable.</p>
+</li>
+<li data-sourcepos="124:1-125:89">
+<p data-sourcepos="124:3-125:89">To disable the local caching of tokens set the <code data-sourcepos="124:50-124:81">DISABLE_DATABRICKS_TOKEN_CACHE</code>
+environment variable to <code data-sourcepos="125:27-125:32">true</code>. This will result in additional authentication requests.</p>
+</li>
+<li data-sourcepos="127:1-128:0">
+<p data-sourcepos="127:3-127:55">The setup process deletes any existing cached tokens.</p>
+</li>
+</ul>
+<h4 data-sourcepos="129:1-129:21" dir="auto" id="user-content-related-settings">Related settings</h4>
+<p data-sourcepos="131:1-132:29" dir="auto">The settings file <code data-sourcepos="131:19-131:44">databricks-settings.json</code> stored in the MATLAB <code data-sourcepos="131:67-131:75">prefdir</code> has
+the following related fields:</p>
+<ul data-sourcepos="134:1-136:85" dir="auto">
+<li data-sourcepos="134:1-134:115"><code data-sourcepos="134:3-134:14">authMethod</code> - Set to Chain, PAT, OauthM2M or OauthU2M (default) to indicate the preferred authentication method.</li>
+<li data-sourcepos="135:1-135:88"><code data-sourcepos="135:3-135:15">profileName</code> - To indicate the preferred profile to use in the <code data-sourcepos="135:67-135:82">.databrickscfg</code> file.</li>
+<li data-sourcepos="136:1-136:85"><code data-sourcepos="136:3-136:10">vendor</code> - Indicates which cloud platform is in use, required for cluster creation.</li>
+</ul>
+<p data-sourcepos="138:1-138:64" dir="auto">For more details on the settings file see: <a data-sourcepos="138:44-138:63" href="Setup.html">Setup.md</a>.</p>
+<h3 data-sourcepos="140:1-140:21" dir="auto" id="user-content-profile-selection">Profile selection</h3>
+<p data-sourcepos="142:1-143:32" dir="auto">A <code data-sourcepos="142:3-142:18">.databrickscfg</code> file supports multiple profiles, which profile to use is selected
+based on the following priority:</p>
+<ol data-sourcepos="145:1-149:43" dir="auto">
+<li data-sourcepos="145:1-145:90">Many functions support an argument or optional argument typically called <code data-sourcepos="145:77-145:89">profileName</code>.</li>
+<li data-sourcepos="146:1-146:55">The value of the <code data-sourcepos="146:21-146:47">DATABRICKS_CONFIG_PROFILE</code> if set.</li>
+<li data-sourcepos="147:1-147:78">The <code data-sourcepos="147:8-147:20">profileName</code> field in the <a data-sourcepos="147:35-147:72" href="Setup.html"><code data-sourcepos="147:36-147:61">databricks-settings.json</code></a> file.</li>
+<li data-sourcepos="148:1-148:42">The profile named <code data-sourcepos="148:22-148:30">DEFAULT</code> if present.</li>
+<li data-sourcepos="149:1-149:43">Otherwise The first profile in the file.</li>
+</ol>
+<p data-sourcepos="151:1-152:52" dir="auto">If a profile cannot be determined an empty <code data-sourcepos="151:44-151:93">databricks.internal.configurationprofile.Profile</code>
+object may result. Profile names are case sensitive.</p>
+<h3 data-sourcepos="154:1-154:19" dir="auto" id="user-content-oauth-client_id">Oauth client_id</h3>
+<p data-sourcepos="156:1-160:18" dir="auto">MATLAB uses the value "databricks-cli" as the Oauth <code data-sourcepos="156:53-156:63">client_id</code> value, not to be
+confused with the OauthM2M <code data-sourcepos="157:28-157:38">client_id</code> field set in the <code data-sourcepos="157:57-157:72">.databrickscfg</code>.
+In general this is not a concern for end users but if required an organization can
+register an alternative value and update the <code data-sourcepos="159:46-159:94">databricks.internal.unifiedauthentication.Oauth</code>
+class accordingly.</p>
+<h2 data-sourcepos="162:1-162:24" dir="auto" id="user-content-docker-authentication">Docker authentication</h2>
+<p data-sourcepos="164:1-167:66" dir="auto">When using Databricks Container Services to create clusters using custom Docker®
+images access to those images requires authentication credentials for the docker
+registry. The image <code data-sourcepos="166:21-166:25">url</code> is always necessary, and typically a username and password
+are also required. For example if using <code data-sourcepos="167:41-167:65">createDatabricksCluster</code>:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="169:1-180:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s1">'myClusterName'</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC2">    <span class="n">dockerURL</span><span class="o">=</span><span class="s2">"myrepo.io/matlab/databricks/runtime:r2025b-dbx17.3"</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC3">    <span class="n">dockerUsername</span><span class="o">=</span> <span class="s2">"someuser"</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC4">    <span class="n">dockerPassword</span><span class="o">=</span> <span class="s2">"secretpassword"</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC5">    <span class="n">sparkVersion</span><span class="o">=</span><span class="s2">"17.3.x-scala2.13"</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC6"/>
+<span class="line" data-lang="matlab" id="LC7"><span class="c1">% Or if using a publicly available image</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="n">cl</span> <span class="o">=</span> <span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s1">'myClusterName'</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC9">    <span class="n">dockerURL</span><span class="o">=</span><span class="s2">"myrepo.io/matlab/databricks/runtime:r2025b-dbx17.3"</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC10">    <span class="n">sparkVersion</span><span class="o">=</span><span class="s2">"17.3.x-scala2.13"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="182:1-182:75" dir="auto">It is also possible to save this information in a JSON-file for easier use.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="184:1-186:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span> <span class="o">=</span> <span class="n">createDatabricksCluster</span><span class="p">(</span><span class="s1">'Test'</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dockerAuthFile</span><span class="o">=</span><span class="s2">"dk_runtime_25b_17.3.json"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="188:1-188:52" dir="auto">with the file <code data-sourcepos="188:15-188:40">dk_runtime_25b_17.3.json</code> containing:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-json" data-canonical-lang="json" data-sourcepos="190:1-199:3" v-pre="true"><code><span class="line" data-lang="json" id="LC1"><span class="p">{</span></span>
+<span class="line" data-lang="json" id="LC2"><span class="w">  </span><span class="nl">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myrepo.io/matlab/databricks/runtime:r2025b-dbx17.3"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC3"><span class="w">  </span><span class="nl">"basic_auth"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span></span>
+<span class="line" data-lang="json" id="LC4"><span class="w">    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"someuser"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC5"><span class="w">    </span><span class="nl">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"secretpassword"</span></span>
+<span class="line" data-lang="json" id="LC6"><span class="w">  </span><span class="p">},</span></span>
+<span class="line" data-lang="json" id="LC7"><span class="w">  </span><span class="nl">"spark_version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17.3.x-scala2.13"</span></span>
+<span class="line" data-lang="json" id="LC8"><span class="p">}</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<blockquote data-sourcepos="201:1-203:47" dir="auto">
+<p data-sourcepos="201:3-203:47"><strong data-sourcepos="201:3-201:11">Note:</strong> The <code data-sourcepos="201:17-201:31">spark_version</code>, is not used for authentication, but is required
+to configure the cluster correctly and should correspond to the Databricks runtime
+version used when the docker image was built.</p>
+</blockquote>
+<h2 data-sourcepos="205:1-205:13" dir="auto" id="user-content-references">References</h2>
+<ul data-sourcepos="207:1-208:151" dir="auto">
+<li data-sourcepos="207:1-207:129">AWS® - <a data-sourcepos="207:14-207:129" href="https://docs.databricks.com/en/dev-tools/auth/index.html" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/en/dev-tools/auth/index.html</a></li>
+<li data-sourcepos="208:1-208:151">Azure® - <a data-sourcepos="208:16-208:151" href="https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/" rel="nofollow noreferrer noopener" target="_blank">https://learn.microsoft.com/en-us/azure/databricks/dev-tools/auth/</a></li>
+</ul></div></main><script src="resources/copycode.js">//</script></body></html>

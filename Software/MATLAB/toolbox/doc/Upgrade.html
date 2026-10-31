@@ -1,0 +1,35 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Upgrading the Interface from a previous release</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:49" dir="auto" id="user-content-upgrading-the-interface-from-a-previous-release">Upgrading the Interface from a previous release</h1>
+<p data-sourcepos="3:1-8:87" dir="auto">If upgrading using a <code data-sourcepos="3:22-3:27">.zip</code> file it is recommended to install the package alongside
+any existing installation by putting it in a separate directory. Consider including
+the version in the directory name. The use of older releases should be discontinued
+once a transition to a later release can be completed. Only one version of the package
+should exist on the MATLAB® path at any one time. Restarting MATLAB and running the
+respective <code data-sourcepos="8:12-8:38">Software/MATLAB/startup.m</code> file is a simple way to ensure this is the case.</p>
+<p data-sourcepos="10:1-11:47" dir="auto">Configuration file settings generally remain similar and can be compared with those
+of a previous release for non default settings.</p>
+<p data-sourcepos="13:1-18:64" dir="auto">From version 5.0.0 the <code data-sourcepos="13:24-13:44">.databricks-connect</code> file is no longer used and should be
+removed if not used by older releases. Also, any Databricks® Connect jar file that
+has been added to the static <code data-sourcepos="15:30-15:48">javaclasspath.txt</code> file is no longer required.
+This entry should be removed or commented out using a <code data-sourcepos="16:55-16:57">#</code>.
+Updating this file requires MATLAB to be restarted. The jar file referenced
+has been replaced with Python® based libraries as of v5.0.0.</p>
+<h2 data-sourcepos="20:1-20:14" dir="auto" id="user-content-jdbc-driver">JDBC Driver</h2>
+<p data-sourcepos="22:1-25:66" dir="auto">The Databricks JDBC driver is no longer included in the package. The driver must
+be downloaded from <a data-sourcepos="23:20-23:86" href="https://www.databricks.com/spark/jdbc-drivers-archive" rel="nofollow noreferrer noopener" target="_blank">Databricks</a>.
+The <code data-sourcepos="24:5-24:17">jarFilePath</code> name-value pair can be used to specify the path to the driver.
+See <a data-sourcepos="25:5-25:53" href="InstallingJDBCDriver.html">Installing JDBC Driver</a> for details.</p>
+<h2 data-sourcepos="27:1-27:18" dir="auto" id="user-content-matlab-runtimes">MATLAB Runtimes</h2>
+<p data-sourcepos="29:1-33:69" dir="auto">MATLAB Runtimes stored on <code data-sourcepos="29:27-29:36">/Volumes</code> in the "interface directory" do not need to be
+updated unless a new release of MATLAB is to be used, however it is good practice
+to periodically update runtimes to the latest releases to receive the latest bug fixes.
+For details see <a data-sourcepos="32:17-32:51" href="SupportMatrix.html">Feature Support</a>. Versions prior to 5.0.0 stored
+MATLAB runtimes on DBFS, these are not used by version 5 and greater.</p>
+<h2 data-sourcepos="35:1-35:15" dir="auto" id="user-content-init-scripts">Init Scripts</h2>
+<p data-sourcepos="37:1-39:62" dir="auto">Similarly, as of version 5.0.0 the init script is stored in the "interface directory"
+on <code data-sourcepos="38:4-38:13">/Volumes</code>. It is not backwardly compatible with older init scripts. From 5.0.0
+only one init script is used regardless of the MATLAB version.</p>
+<p data-sourcepos="41:1-42:19" dir="auto">If a custom init script is required by a user consider storing that in their Workspace
+to avoid confusion.</p>
+<p data-sourcepos="44:1-44:68" dir="auto">Init scripts cannot be used with Databricks runtimes 17 and greater.</p>
+<p data-sourcepos="46:1-47:35" dir="auto">If there are specific questions not covered or a need for support in migration,
+contact <a data-sourcepos="47:9-47:34" href="mailto:databricks@mathworks.com">databricks@mathworks.com</a>.</p></div></main><script src="resources/copycode.js">//</script></body></html>

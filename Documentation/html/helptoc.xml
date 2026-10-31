@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toc version="1.0">
+    <tocitem target="index.html">MATLAB Interface for Databricks<tocitem target="Overview.html">Overview</tocitem>
+        <tocitem target="Setup.html">Getting Started<tocitem target="Setup.html">Setup</tocitem>
+            <tocitem target="Authentication.html">Authentication</tocitem>
+            <tocitem target="SupportMatrix.html">Support Matrix</tocitem>
+            <tocitem target="Upgrade.html">Upgrade</tocitem>
+            <tocitem target="InstallingJDBCDriver.html">Installing JDBC Driver</tocitem>
+            <tocitem target="InstallingMATLABRuntime.html">Installing MATLAB Runtime</tocitem>
+            <tocitem target="InitScripts.html">Init Scripts</tocitem>
+            <tocitem target="DBConnect.html">Databricks Connect Setup</tocitem>
+            <tocitem target="ContainerServices.html">Container Services</tocitem>
+        </tocitem>
+        <tocitem target="DBConnectWorkflow.html">Databricks Connect<tocitem target="DBConnectWorkflow.html">Databricks Connect Workflow</tocitem>
+        </tocitem>
+        <tocitem target="JobWorkflow.html">Jobs &amp; Libraries<tocitem target="JobWorkflow.html">Job Workflow</tocitem>
+        </tocitem>
+        <tocitem target="ExampleSimulink.html">Examples<tocitem target="ExampleSimulink.html">Simulink Example</tocitem>
+        </tocitem>
+        <tocitem target="JDBCWorkflow.html">Database Interfaces<tocitem target="JDBCWorkflow.html">JDBC Workflow</tocitem>
+            <tocitem target="StandaloneJDBCDatabaseInterface.html">Standalone JDBC</tocitem>
+            <tocitem target="ODBCWorkflow.html">ODBC Workflow</tocitem>
+            <tocitem target="StandaloneODBCDatabaseInterface.html">Standalone ODBC</tocitem>
+        </tocitem>
+        <tocitem target="ClusterAPI.html">REST API Interfaces<tocitem target="ClusterAPI.html">Cluster API</tocitem>
+            <tocitem target="CommandExecution.html">Command Execution</tocitem>
+            <tocitem target="DBFS.html">DBFS</tocitem>
+            <tocitem target="Files.html">Files</tocitem>
+            <tocitem target="JobsAPI.html">Jobs API</tocitem>
+            <tocitem target="LibraryAPI.html">Library API</tocitem>
+            <tocitem target="SecretsAPI.html">Secrets API</tocitem>
+            <tocitem target="SQLWarehousesAPI.html">SQL Warehouses API</tocitem>
+            <tocitem target="StatementExecution.html">Statement Execution</tocitem>
+            <tocitem target="TokenAPI.html">Token API</tocitem>
+            <tocitem target="UnityCatalogAPI.html">Unity Catalog API</tocitem>
+            <tocitem target="WorkspacesAPI.html">Workspaces API</tocitem>
+            <tocitem target="Genie.html">Genie</tocitem>
+        </tocitem>
+        <tocitem target="WorkingWithFiles.html">Databricks Platform<tocitem target="WorkingWithFiles.html">Working With Files</tocitem>
+            <tocitem target="Isolation.html">Isolation</tocitem>
+        </tocitem>
+        <tocitem target="DatabricksAPI.html">Other<tocitem target="DatabricksAPI.html">Databricks API</tocitem>
+            <tocitem target="StartupShutdown.html">Startup &amp; Shutdown</tocitem>
+            <tocitem target="Zerobus.html">Zerobus</tocitem>
+            <tocitem target="License.html">License</tocitem>
+            <tocitem target="FAQ.html">FAQ</tocitem>
+        </tocitem>
+    </tocitem>
+</toc>

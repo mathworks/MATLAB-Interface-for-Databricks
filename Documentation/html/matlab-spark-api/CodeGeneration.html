@@ -1,0 +1,568 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Code generation &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Executing Simulink models with data on Databricks" href="../ExampleSimulink.html" />
+    <link rel="prev" title="SparkBuilder data types" href="SparkBuilderDataTypes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Code generation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#required-products">Required products</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#restrictions">Restrictions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building">Building</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#example-functions">Example functions</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#matlab-example">MATLAB Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#python-example">Python Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#notebook-example">Notebook Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spark-example">Spark Example</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Code generation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/matlab-spark-api/CodeGeneration.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="code-generation">
+<h1>Code generation<a class="headerlink" href="#code-generation" title="Link to this heading"></a></h1>
+<blockquote>
+<div><p><strong>Note:</strong>  There are different constraints and different advantages and
+disadvantages to using either the Compiler workflows or the Coder workflows.
+The differences can be found in the documentation of the respective products,
+so it won't be discussed at length here.</p>
+</div></blockquote>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Code generation can be used to convert a Simulink® model to a shared library (<code class="docutils literal notranslate"><span class="pre">.so</span></code>),
+which can then be used in a Spark/Databricks® computation. In general, this feature
+relies on a Simulink® model being fed data from a Pandas DataFrame.</p>
+<blockquote>
+<div><p><strong>Note:</strong> This feature can currently only be used on a Linux® platform, as
+Databricks nodes are always running Linux.
+A <code class="docutils literal notranslate"><span class="pre">.so</span></code> is a binary, and thus a platform dependent library. As such,
+it must be used on the same platform it was compiled for.</p>
+</div></blockquote>
+</section>
+<section id="required-products">
+<h2>Required products<a class="headerlink" href="#required-products" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>MATLAB®</p></li>
+<li><p>Simulink®</p></li>
+<li><p>MATLAB® Coder™</p></li>
+<li><p>Simulink® Coder™</p></li>
+<li><p>Embedded Coder®</p></li>
+</ul>
+<p>To see what products are installed, perform the the command <code class="docutils literal notranslate"><span class="pre">ver</span></code> in a
+MATLAB® command window.</p>
+</section>
+<section id="restrictions">
+<h2>Restrictions<a class="headerlink" href="#restrictions" title="Link to this heading"></a></h2>
+<p>Not all Simulink® models will be suitable for this workflow.
+At least the following requirements must be fulfilled:</p>
+<ul class="simple">
+<li><p>The model must have a fixed sample-time</p></li>
+<li><p>The data fed to the model must have the same sample time has the model</p></li>
+<li><p>Only scalar inport and outport data is supported (this may change in a later version)</p></li>
+</ul>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Link to this heading"></a></h2>
+<p>This example contains a very simple model used to show the basic aspects of this feature.
+The demo can be found in the Databricks package at
+<code class="docutils literal notranslate"><span class="pre">Software/MATLAB/examples/Preview/CodeGeneration/Simulink/</span></code>.</p>
+<p>The model is called <code class="docutils literal notranslate"><span class="pre">states_one</span></code>, and is the simple model shown in the
+picture below.
+<img alt="states_one model" src="../_images/sl_codegen_states_one_1.png" /></p>
+<p>As can be seen, it has 6 inports and 6 outports. The datatypes are
+<code class="docutils literal notranslate"><span class="pre">double</span></code>, <code class="docutils literal notranslate"><span class="pre">single</span></code>, <code class="docutils literal notranslate"><span class="pre">int64</span></code>, <code class="docutils literal notranslate"><span class="pre">int32</span></code>, <code class="docutils literal notranslate"><span class="pre">int16</span></code> and <code class="docutils literal notranslate"><span class="pre">boolean</span></code> respectively.</p>
+<p>The configuration of the model must be set to <code class="docutils literal notranslate"><span class="pre">sim_pandas.tlc</span></code> as the code generation
+target, and furthermore the <em>Code interface  packaging</em> must be set too <em>Reusable function</em>
+and the <em>Pass root-level I/O as</em> must be set to <em>Part of model data structure</em>,
+as seen in the images below.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Provided the Databricks/Spark package was installed correctly, the
+<code class="docutils literal notranslate"><span class="pre">sim_pandas.tlc</span></code> target will be found by clicking the <em>Browse</em> button in
+the picture.</p>
+</div></blockquote>
+<p><img alt="Target setting" src="../_images/sl_codegen_states_one_2.png" /></p>
+<p><img alt="Interface setting" src="../_images/sl_codegen_states_one_3.png" /></p>
+<blockquote>
+<div><p><strong>Note:</strong> This functionality is still being developed. The exact interface
+may change as the feature matures.</p>
+</div></blockquote>
+<section id="building">
+<h3>Building<a class="headerlink" href="#building" title="Link to this heading"></a></h3>
+<p>To build the model, it suffices to either start the build from within the model
+(e.g. by pressing CTRL+B), or from the commandline:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">slbuild</span><span class="p">(</span><span class="s">"states_one"</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will build the shared object (<code class="docutils literal notranslate"><span class="pre">states_one.so</span></code>) in the same directory.
+In the directory with the generated code, <code class="docutils literal notranslate"><span class="pre">states_one_sim_pandas</span></code>, the code
+is found, as well as a Python® library (its source code), some MATLAB® helper functions
+for testing the code, and a <code class="docutils literal notranslate"><span class="pre">.zip</span></code> file artifact of the Python library.</p>
+<p>The Python library is what will be calling the shared object, and it will contain
+some functions to easily interact with the shared object.</p>
+<p>The Python package will have the general name <code class="docutils literal notranslate"><span class="pre">simutil.&lt;MODELNAME&gt;_wrapper.simpandas</span></code>,
+in this case <code class="docutils literal notranslate"><span class="pre">simutil.states_one_wrapper.simpandas</span></code>.</p>
+<blockquote>
+<div><p><strong>Note:</strong> This name may be parameterizable in a later version.</p>
+</div></blockquote>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>simutil
+└──<span class="w"> </span>states_one_wrapper
+<span class="w">    </span>└──<span class="w"> </span>simpandas.py
+</pre></div>
+</div>
+<p>This package contains 2 functions for executing the compiled version of the model,</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_sim</span><span class="p">(</span><span class="n">pdf_in</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" run_sim</span>
+<span class="sd">    This function will run a Simulink® simulation with inputs from</span>
+<span class="sd">    the Pandas DataFrame argument """</span>
+</pre></div>
+</div>
+<p>and</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">run_sim_iter</span><span class="p">(</span><span class="n">iterator</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" A function to be used with mapInPandas.</span>
+<span class="sd">    It takes an argument an iterator over Pandas DataFrames"""</span>
+</pre></div>
+</div>
+</section>
+<section id="example-functions">
+<h3>Example functions<a class="headerlink" href="#example-functions" title="Link to this heading"></a></h3>
+<p>Please note that these example functions must all be called from within the
+code generation folder. This is to ensure that the library can be found.</p>
+<section id="matlab-example">
+<h4>MATLAB Example<a class="headerlink" href="#matlab-example" title="Link to this heading"></a></h4>
+<p>The function <code class="docutils literal notranslate"><span class="pre">&lt;MODELNAME&gt;_matlab_example</span></code> (here <code class="docutils literal notranslate"><span class="pre">states_one_matlab_example</span></code>)
+can be used to call the library from within MATLAB®.</p>
+<p>It takes a MATLAB® table, converts it to a Pandas DataFrame, and calls the
+Python library (which invokes the shared library, i.e. the <code class="docutils literal notranslate"><span class="pre">.so</span></code> file).
+This returns another Pandas DataFrame,
+which is converted to a MATLAB® table, which is returned by the function.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>T_OUT<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">states_one_matlab_example</span><span class="p">(</span>N<span class="p">)</span>
+<span class="w">    </span><span class="c">% states_one_matlab_example</span>
+<span class="w">    </span><span class="c">% Example to call .so from MATLAB.</span>
+<span class="w">   </span>
+<span class="w">    </span><span class="nb">arguments</span>
+<span class="w">        </span><span class="n">N</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="nb">double</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="n">In1</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">double</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="p">)</span><span class="o">'</span><span class="p">;</span>
+<span class="w">    </span><span class="n">In2</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">int64</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="p">)</span><span class="o">'</span><span class="p">;</span>
+<span class="w">    </span><span class="n">In3</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">double</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="p">)</span><span class="o">'</span><span class="p">;</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">% Create MATLAB table for inputs</span>
+<span class="w">    </span><span class="n">T_IN</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">(</span><span class="n">In1</span><span class="p">,</span><span class="w"> </span><span class="n">In2</span><span class="p">,</span><span class="w"> </span><span class="n">In3</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c">% Convert this to a Pandas DataFrame</span>
+<span class="w">    </span><span class="n">pdf_in</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">py</span><span class="p">.</span><span class="n">pandas</span><span class="p">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">T_IN</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c">% Call the SO through the Python package</span>
+<span class="w">    </span><span class="n">pdf_out</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">py</span><span class="p">.</span><span class="n">simutil</span><span class="p">.</span><span class="n">states_one_wrapper</span><span class="p">.</span><span class="n">simpandas</span><span class="p">.</span><span class="n">run_sim</span><span class="p">(</span><span class="n">pdf_in</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c">% Convert Python DataFrame to MATLAB table</span>
+<span class="w">    </span><span class="n">T_OUT</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">(</span><span class="n">pdf_out</span><span class="p">);</span>
+
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+<section id="python-example">
+<h4>Python Example<a class="headerlink" href="#python-example" title="Link to this heading"></a></h4>
+<p>The function <code class="docutils literal notranslate"><span class="pre">&lt;MODELNAME&gt;_python_example</span></code> (here <code class="docutils literal notranslate"><span class="pre">states_one_python_example</span></code>)
+can be used to call the library from within Python.</p>
+<p>It creates a Pandas DataFrame and calls the
+Python library (which invokes the shared library).
+This returns another Pandas DataFrame which is printed out.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># states_one_python_example.py</span>
+<span class="c1"># Example to call SO from Python.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">simutil.states_one_wrapper.simpandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">swo</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+    <span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+
+    <span class="c1"># Create some example data</span>
+    <span class="n">col_In1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float'</span><span class="p">)</span>
+    <span class="n">col_In2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'int'</span><span class="p">)</span>
+    <span class="n">col_In3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float'</span><span class="p">)</span>
+    
+    <span class="c1"># Create DataFrame for input data</span>
+    <span class="n">pdf_in</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s1">'In1'</span><span class="p">:</span> <span class="n">col_In1</span><span class="p">,</span> <span class="s1">'In2'</span><span class="p">:</span> <span class="n">col_In2</span><span class="p">,</span> <span class="s1">'In3'</span><span class="p">:</span> <span class="n">col_In3</span><span class="p">})</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'pdf_in:</span><span class="se">\n</span><span class="si">{</span><span class="n">pdf_in</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+
+    <span class="c1"># Run simulation</span>
+    <span class="n">pdf_out</span> <span class="o">=</span> <span class="n">swo</span><span class="o">.</span><span class="n">run_sim</span><span class="p">(</span><span class="n">pdf_in</span><span class="p">)</span>
+
+    <span class="c1"># Print the output</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">'pdf_out:</span><span class="se">\n</span><span class="si">{</span><span class="n">pdf_out</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">"__main__"</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+<span class="c1"># End of file: states_one_python_example.py </span>
+</pre></div>
+</div>
+</section>
+<section id="notebook-example">
+<h4>Notebook Example<a class="headerlink" href="#notebook-example" title="Link to this heading"></a></h4>
+<p>This example runs in a notebook on Databricks. In this example, the notebook
+will be called <code class="docutils literal notranslate"><span class="pre">states_one_notebook_example.py</span></code>, and is located in the output
+directory, <code class="docutils literal notranslate"><span class="pre">states_one_sim_pandas</span></code>.</p>
+<p>It can be imported to Databricks through the portal, or by calling a helper
+function in MATLAB®.</p>
+<blockquote>
+<div><p><strong>Note:</strong> Many Apache® Spark™ environments also support notebooks, but there are
+currently no MATLAB® functions in this package to facilitate the upload.
+Apart from this, the workload should be similar, though.</p>
+</div></blockquote>
+<div class="highlight-matlabsession notranslate"><div class="highlight"><pre><span></span><span class="go">matlab.databricks.workspace.import(...</span>
+<span class="go">    "states_one_notebook_example.py", ...</span>
+<span class="go">    "/Users/user@example.com/tmp", ...</span>
+<span class="go">    printURL=true)</span>
+</pre></div>
+</div>
+<p>Please note that the destination directory, in this case
+<code class="docutils literal notranslate"><span class="pre">&quot;/Users/user&#64;example.com/tmp&quot;</span></code>, must already exist in the workspace.</p>
+<p>Doing this upload will also output a hyperlink for opening the notebook.
+The notebook starts with some comments stating that the wheel file must first be
+uploaded to the Databricks environment. It contains example MATLAB® code for doing this,
+in this example it looks like this:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">F</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">Files</span><span class="p">();</span>
+<span class="n">F</span><span class="p">.</span><span class="n">upload</span><span class="p">(</span><span class="w"> </span><span class="k">...</span>
+<span class="w">  </span><span class="s">'/matlab-databricks/Software/MATLAB/examples/Preview/CodeGeneration/Simulink/states_one_sim_pandas/dist/simutil_states_one_wrapper-24.2.0-py3-none-any.whl'</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">  </span><span class="s">'/Volumes/main/default/myvolume/MATLABExamples/states_one/simutil_states_one_wrapper-24.2.0-py3-none-any.whl'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The code can be copied and executed in MATLAB®, which will upload the file. The next
+cell contains code for installing this on the cluster, <code class="docutils literal notranslate"><span class="pre">%pip</span> <span class="pre">install</span> <span class="pre">...</span></code>.</p>
+<p>The full contents of this notebook is as seen below. The data is random, but of the
+right type. It's meant as a starting point for how this can be used.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Databricks notebook source</span>
+<span class="c1">#DBTITLE 1,Example for states_one_wrapper</span>
+<span class="c1"># This notebook contains example for states_one_wrapper</span>
+
+<span class="c1">#COMMAND ----------</span>
+
+<span class="c1">#DBTITLE 1,Install the wheel file</span>
+<span class="c1"># MAGIC %md</span>
+<span class="c1"># MAGIC # Install the wheel file</span>
+<span class="c1"># MAGIC To install the wheel file, it must be available on the cluster.</span>
+<span class="c1"># MAGIC </span>
+<span class="c1"># MAGIC It can be uploaded from the MATLAB session where it was created like this:</span>
+<span class="c1"># MAGIC </span>
+<span class="c1"># MAGIC ```matlab</span>
+<span class="c1"># MAGIC F = databricks.Files();</span>
+<span class="c1"># MAGIC F.upload( ...</span>
+<span class="c1"># MAGIC   '/local/EI-DTST/Platforms/azure-databricks-https/Software/MATLAB/examples/Preview/CodeGeneration/Simulink/states_one_sim_pandas/dist/simutil_states_one_wrapper-24.2.0-py3-none-any.whl', ...</span>
+<span class="c1"># MAGIC   '/Volumes/main/default/myvolume/MATLABExamples/states_one/simutil_states_one_wrapper-24.2.0-py3-none-any.whl')</span>
+<span class="c1"># MAGIC ```</span>
+
+<span class="c1">#COMMAND ----------</span>
+
+<span class="c1">#DBTITLE 1,Install the wheel file</span>
+<span class="c1"># Provided the wheel has been uploaded (see previous cell), it can now be installed</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">/</span><span class="n">Volumes</span><span class="o">/</span><span class="n">main</span><span class="o">/</span><span class="n">default</span><span class="o">/</span><span class="n">myvolume</span><span class="o">/</span><span class="n">MATLABExamples</span><span class="o">/</span><span class="n">states_one</span><span class="o">/</span><span class="n">simutil_states_one_wrapper</span><span class="o">-</span><span class="mf">24.2.0</span><span class="o">-</span><span class="n">py3</span><span class="o">-</span><span class="n">none</span><span class="o">-</span><span class="nb">any</span><span class="o">.</span><span class="n">whl</span> <span class="o">--</span><span class="n">force</span><span class="o">-</span><span class="n">reinstall</span>
+
+<span class="c1">#COMMAND ----------</span>
+
+<span class="c1">#DBTITLE 1,Imports</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pyspark.sql.types</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+
+<span class="c1">#COMMAND ----------</span>
+
+<span class="c1">#DBTITLE 1,Helper functions for madeup data</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">C_F64__ex</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Example code for C type c_double, column C_F64_."""</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">C_F32__ex</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Example code for C type c_float, column C_F32_."""</span>
+    <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">C_I64__ex</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Example code for C type c_int64, column C_I64_."""</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">C_I32__ex</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Example code for C type c_int32, column C_I32_."""</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">C_I16__ex</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Example code for C type c_int16, column C_I16_."""</span>
+    <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">C_IBOOL__ex</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Example code for C type c_bool, column C_IBOOL_."""</span>
+    <span class="k">return</span> <span class="n">num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span>
+
+
+<span class="c1">#COMMAND ----------</span>
+
+<span class="c1">#DBTITLE 1,Generate the example data</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+<span class="n">DATA</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">di</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">DATA</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">C_F64__ex</span><span class="p">(</span><span class="n">di</span> <span class="o">+</span> <span class="mi">0</span><span class="p">),</span> <span class="n">C_F32__ex</span><span class="p">(</span><span class="n">di</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">C_I64__ex</span><span class="p">(</span><span class="n">di</span> <span class="o">+</span> <span class="mi">2</span><span class="p">),</span> <span class="n">C_I32__ex</span><span class="p">(</span><span class="n">di</span> <span class="o">+</span> <span class="mi">3</span><span class="p">),</span> <span class="n">C_I16__ex</span><span class="p">(</span><span class="n">di</span> <span class="o">+</span> <span class="mi">4</span><span class="p">),</span> <span class="n">C_IBOOL__ex</span><span class="p">(</span><span class="n">di</span> <span class="o">+</span> <span class="mi">5</span><span class="p">),))</span>
+
+<span class="c1">#COMMAND ----------</span>
+
+<span class="c1">#DBTITLE 1,Create Dataframe schema</span>
+<span class="n">dfSchema</span> <span class="o">=</span> <span class="n">StructType</span><span class="p">([</span><span class="n">StructField</span><span class="p">(</span><span class="s1">'F64'</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'F32'</span><span class="p">,</span> <span class="n">FloatType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'I64'</span><span class="p">,</span> <span class="n">LongType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'I32'</span><span class="p">,</span> <span class="n">IntegerType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'I16'</span><span class="p">,</span> <span class="n">ShortType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">),</span> <span class="n">StructField</span><span class="p">(</span><span class="s1">'IBOOL'</span><span class="p">,</span> <span class="n">BooleanType</span><span class="p">(),</span> <span class="kc">True</span><span class="p">)])</span>
+<span class="n">dfSchema</span>
+
+<span class="c1">#COMMAND ----------</span>
+
+<span class="c1">#DBTITLE 1,Create the actual Dataframe</span>
+<span class="n">DF</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">createDataFrame</span><span class="p">(</span><span class="n">DATA</span><span class="p">,</span> <span class="n">dfSchema</span><span class="p">)</span>
+
+<span class="c1">#COMMAND ----------</span>
+
+<span class="c1">#DBTITLE 1,Show some example data</span>
+<span class="n">DF</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="c1">#COMMAND ----------</span>
+
+<span class="c1">#DBTITLE 1,Run mapInPandas example</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">simutil.states_one_wrapper.simpandas</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_sim_iter</span>
+<span class="n">DF_OUT</span> <span class="o">=</span> <span class="n">DF</span><span class="o">.</span><span class="n">mapInPandas</span><span class="p">(</span><span class="n">run_sim_iter</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="s1">'O_F64 double, O_F32 float, O_I64 long, O_I32 int, O_I16 short, O_BOOL boolean'</span><span class="p">);</span>
+
+
+<span class="c1">#COMMAND ----------</span>
+
+<span class="c1">#DBTITLE 1,Check results</span>
+<span class="n">DF_OUT</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="spark-example">
+<h4>Spark Example<a class="headerlink" href="#spark-example" title="Link to this heading"></a></h4>
+<p>This example calls Databricks from within MATLAB®.</p>
+<blockquote>
+<div><p><strong>Note:</strong> The current version of this feature will assume that the <code class="docutils literal notranslate"><span class="pre">.so</span></code> file
+is found on a <em>Volume</em> in the Databricks environment.
+For this example:
+<code class="docutils literal notranslate"><span class="pre">/Volumes/main/default/myvolume/MyWheels/DLLs/states_one.so</span></code>
+This will be possible to vary in a later version.</p>
+</div></blockquote>
+<p>This example first creates a Spark Session (by default a serverless one),
+and adds the zip artifact with the <code class="docutils literal notranslate"><span class="pre">addArtifact</span></code> method.
+It creates a Spark DataFrame dynamically (with synthetic data),
+and then performs a <code class="docutils literal notranslate"><span class="pre">mapInPandas</span></code> with the <code class="docutils literal notranslate"><span class="pre">run_sim_iter</span></code> function.</p>
+<p>The resulting DataFrame is converted to a MATLAB® table and returned
+from the function.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>T_OUT<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">states_one_spark_example</span><span class="p">(</span>options<span class="p">)</span>
+<span class="w">    </span><span class="c">% states_one_spark_example</span>
+<span class="w">    </span><span class="c">% Example to call .so from MATLAB.</span>
+<span class="w">    </span><span class="c">% The default is to use a serverless session. If this is</span>
+<span class="w">    </span><span class="c">% not desired, please specify the additional argument serverless=false.</span>
+<span class="w">    </span><span class="c">% NOTE: This example currently only works with Databricks</span>
+
+<span class="w">    </span><span class="nb">arguments</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">N</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="nb">double</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="mi">100</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">serverless</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="nb">logical</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">true</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">profileName</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="nb">string</span>
+<span class="w">        </span><span class="n">options</span><span class="p">.</span><span class="n">authMethod</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">matlab</span><span class="p">.</span><span class="n">databricks</span><span class="p">.</span><span class="n">AuthMethod</span>
+<span class="w">    </span><span class="k">end</span>
+
+<span class="w">    </span><span class="c">% Get a serverless Spark Session</span>
+<span class="w">    </span><span class="n">args</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">matlab</span><span class="p">.</span><span class="n">utils</span><span class="p">.</span><span class="n">addArgs</span><span class="p">(</span><span class="n">options</span><span class="p">,</span><span class="w"> </span><span class="p">[</span><span class="s">"authMethod"</span><span class="p">,</span><span class="w"> </span><span class="s">"profileName"</span><span class="p">,</span><span class="w"> </span><span class="s">"serverless"</span><span class="p">]);</span>
+<span class="w">    </span><span class="n">spark</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">databricks</span><span class="p">.</span><span class="n">PySparkSession</span><span class="p">(</span><span class="n">args</span><span class="p">{:});</span>
+
+<span class="w">    </span><span class="c">% Add the zip artifact to the session</span>
+<span class="w">    </span><span class="n">spark</span><span class="p">.</span><span class="n">addArtifact</span><span class="p">(</span><span class="s">'states_one_artifact.zip'</span><span class="p">,</span><span class="w"> </span><span class="n">pyfile</span><span class="p">=</span><span class="nb">true</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c">% Create some example data</span>
+<span class="w">    </span><span class="n">R</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">spark</span><span class="p">.</span><span class="n">range</span><span class="p">(</span><span class="n">options</span><span class="p">.</span><span class="n">N</span><span class="p">);</span>
+<span class="w">    </span><span class="n">DF</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">R</span><span class="w"> </span><span class="k">...</span>
+<span class="w">        </span><span class="p">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s">'In1'</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="s">'id'</span><span class="p">).</span><span class="n">cast</span><span class="p">(</span><span class="s">'double'</span><span class="p">))</span><span class="w"> </span><span class="k">...</span>
+<span class="w">        </span><span class="p">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s">'In2'</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="s">'id'</span><span class="p">).</span><span class="n">cast</span><span class="p">(</span><span class="s">'long'</span><span class="p">))</span><span class="w"> </span><span class="k">...</span>
+<span class="w">        </span><span class="p">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s">'In3'</span><span class="p">,</span><span class="w"> </span><span class="n">R</span><span class="p">.</span><span class="n">col</span><span class="p">(</span><span class="s">'id'</span><span class="p">).</span><span class="n">cast</span><span class="p">(</span><span class="s">'double'</span><span class="p">))</span><span class="w"> </span><span class="k">...</span>
+<span class="w">        </span><span class="p">.</span><span class="n">select</span><span class="p">(</span><span class="s">'In1'</span><span class="p">,</span><span class="w"> </span><span class="s">'In2'</span><span class="p">,</span><span class="w"> </span><span class="s">'In3'</span><span class="p">);</span>
+<span class="w">    </span>
+<span class="w">    </span><span class="c">% Run as mapInPandas</span>
+<span class="w">    </span><span class="n">pyrun</span><span class="p">(</span><span class="s">"from simutil.states_one_wrapper.simpandas import run_sim_iter"</span><span class="p">)</span>
+<span class="w">    </span><span class="n">DF_OUT</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">DF</span><span class="p">.</span><span class="n">mapInPandas</span><span class="p">(</span><span class="s">"run_sim_iter"</span><span class="p">,</span><span class="w"> </span><span class="n">schema</span><span class="p">=</span><span class="s">"'Out1 double, Out2 long, Out3 double'"</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c">% Create MATLAB table</span>
+<span class="w">    </span><span class="n">T_OUT</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">DF_OUT</span><span class="p">.</span><span class="n">table</span><span class="p">();</span>
+
+<span class="k">end</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="SparkBuilderDataTypes.html" class="btn btn-neutral float-left" title="SparkBuilder data types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ExampleSimulink.html" class="btn btn-neutral float-right" title="Executing Simulink models with data on Databricks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,8 @@
+{
+  "MaxRedirects": 20,
+  "ConnectTimeout": 10,
+  "UseProxy": 1,
+  "ProxyURI": "",
+  "CertificateFilename": "default",
+  "VerifyServerName": 1
+}

@@ -1,0 +1,351 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Standalone JDBC database interface</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:36" dir="auto" id="user-content-standalone-jdbc-database-interface">Standalone JDBC database interface</h1>
+<p data-sourcepos="3:1-11:68" dir="auto">The StandaloneJDBCConnection class is designed to provide standalone
+functionality which can be used independently of the wider MATLAB® Interface
+for Databricks® package.
+This class has no external dependencies to the Databricks, making this
+class simpler to integrate in certain scenarios where a Database Toolbox™ based
+interface <em data-sourcepos="8:11-8:16">only</em> is required, i.e. other interfaces such as the REST API or
+Databricks Connect are not required. A JSON settings file is also
+typically used. A template can be found in:
+<code data-sourcepos="11:3-11:68">/Software/MATLAB/config/databricks_standalone_jdbc_settings.json</code></p>
+<blockquote data-sourcepos="13:1-14:36" dir="auto">
+<p data-sourcepos="13:3-14:36">The standalone interface does not yet support the Databricks OSS JDBC driver,
+only the older Simba based driver.</p>
+</blockquote>
+<p data-sourcepos="16:1-16:51" dir="auto">Settings are applied with the following precedence:</p>
+<ol data-sourcepos="18:3-20:56" dir="auto">
+<li data-sourcepos="18:3-18:33">Arguments ot the constructor</li>
+<li data-sourcepos="19:3-19:77">Values defined in databricks_standalone_jdbc_settings.json where present</li>
+<li data-sourcepos="20:3-20:56">Defaults defined in configureDefaults where present</li>
+</ol>
+<p data-sourcepos="22:1-25:19" dir="auto">By design this class does not use the same configuration and settings files
+as the wider MATLAB Interface for Databricks package.
+Required values for which a default is not defined must be provided as
+function arguments.</p>
+<p data-sourcepos="27:1-30:60" dir="auto">The expectation is that this file will be copied outside the context
+of the Databricks package and so the MATLAB path is searched for the
+location of the databricks_standalone_jdbc_settings.json file.
+All fields in the JSON file are specified as scalar strings.</p>
+<p data-sourcepos="32:1-33:73" dir="auto">If using the wider package then the <code data-sourcepos="32:37-32:63">databricks.JDBCConnection</code> class provides
+similar functionality with deeper integration and so is then recommended.</p>
+<p data-sourcepos="35:1-37:75" dir="auto">The primary role of this class is to construct the connection URL used
+by the Databricks JDBC driver. Essentially this URL combines a large number
+of configuration values. This is somewhat error prone to construct by hand.</p>
+<p data-sourcepos="39:1-39:59" dir="auto">The Connection object is stored in the Connection property.</p>
+<p data-sourcepos="41:1-41:57" dir="auto">MATLAB R2024b or later and Database Toolbox are required.</p>
+<p data-sourcepos="43:1-46:28" dir="auto">The following optional named arguments can be used to override the values
+obtained from the JSON file. Aside from a logical verbose flag arguments are
+scalar strings as the package's dedicated classes and enumerations are
+assumed not to be available.</p>
+<table data-sourcepos="48:1-83:109" dir="auto">
+<thead>
+<tr data-sourcepos="48:1-48:96">
+<th data-sourcepos="48:2-48:26">Name</th>
+<th data-sourcepos="48:28-48:37">Required</th>
+<th data-sourcepos="48:39-48:59">Default</th>
+<th data-sourcepos="48:61-48:95">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="50:1-50:130">
+<td data-sourcepos="50:2-50:26">settingsFile</td>
+<td data-sourcepos="50:28-50:37"/>
+<td data-sourcepos="50:39-50:80">databricks_standalone_jdbc_settings.json</td>
+<td data-sourcepos="50:82-50:129">Non default must be set as a function argument</td>
+</tr>
+<tr data-sourcepos="51:1-51:62">
+<td data-sourcepos="51:2-51:26"/>
+<td data-sourcepos="51:28-51:37"/>
+<td data-sourcepos="51:39-51:59"/>
+<td data-sourcepos="51:61-51:61"/>
+</tr>
+<tr data-sourcepos="52:1-52:134">
+<td data-sourcepos="52:2-52:26">host</td>
+<td data-sourcepos="52:28-52:37">Yes</td>
+<td data-sourcepos="52:39-52:59"/>
+<td data-sourcepos="52:61-52:133">Workspace URL e.g. "<a data-sourcepos="52:82-52:131" href="https://adb-1234567890123456.1.azuredatabricks.net" rel="nofollow noreferrer noopener" target="_blank">https://adb-1234567890123456.1.azuredatabricks.net</a>"</td>
+</tr>
+<tr data-sourcepos="53:1-53:109">
+<td data-sourcepos="53:2-53:26">port</td>
+<td data-sourcepos="53:28-53:37">Yes</td>
+<td data-sourcepos="53:39-53:59">443</td>
+<td data-sourcepos="53:61-53:108">Port used by the driver, specified as a string</td>
+</tr>
+<tr data-sourcepos="54:1-54:103">
+<td data-sourcepos="54:2-54:26">orgId</td>
+<td data-sourcepos="54:28-54:37">Yes</td>
+<td data-sourcepos="54:39-54:59"/>
+<td data-sourcepos="54:61-54:102">Workspace org_id e.g. "1234567890123456"</td>
+</tr>
+<tr data-sourcepos="55:1-55:121">
+<td data-sourcepos="55:2-55:26">clusterId</td>
+<td data-sourcepos="55:28-55:37">Yes</td>
+<td data-sourcepos="55:39-55:59"/>
+<td data-sourcepos="55:61-55:120">Id of cluster or SQL Warehouse e.g. "0912-173539-zf4ob0md"</td>
+</tr>
+<tr data-sourcepos="56:1-56:97">
+<td data-sourcepos="56:2-56:26">schema</td>
+<td data-sourcepos="56:28-56:37">Yes</td>
+<td data-sourcepos="56:39-56:59"/>
+<td data-sourcepos="56:61-56:96">Name of the database/schema to use</td>
+</tr>
+<tr data-sourcepos="57:1-57:96">
+<td data-sourcepos="57:2-57:26">catalog</td>
+<td data-sourcepos="57:28-57:37">Yes</td>
+<td data-sourcepos="57:39-57:59"/>
+<td data-sourcepos="57:61-57:95">Name of the Unity Catalog catalog</td>
+</tr>
+<tr data-sourcepos="58:1-58:62">
+<td data-sourcepos="58:2-58:26"/>
+<td data-sourcepos="58:28-58:37"/>
+<td data-sourcepos="58:39-58:59"/>
+<td data-sourcepos="58:61-58:61"/>
+</tr>
+<tr data-sourcepos="59:1-59:116">
+<td data-sourcepos="59:2-59:26">authMethod</td>
+<td data-sourcepos="59:28-59:37">Yes</td>
+<td data-sourcepos="59:39-59:59">OauthU2M</td>
+<td data-sourcepos="59:61-59:115">Authentication method, one of PAT, OauthU2M, OauthM2M</td>
+</tr>
+<tr data-sourcepos="60:1-60:92">
+<td data-sourcepos="60:2-60:26">token</td>
+<td data-sourcepos="60:28-60:37"/>
+<td data-sourcepos="60:39-60:59"/>
+<td data-sourcepos="60:61-60:91">Token if using authMethod PAT</td>
+</tr>
+<tr data-sourcepos="61:1-61:90">
+<td data-sourcepos="61:2-61:26">clientId</td>
+<td data-sourcepos="61:28-61:37"/>
+<td data-sourcepos="61:39-61:59"/>
+<td data-sourcepos="61:61-61:89">Client Id if using OauthM2M</td>
+</tr>
+<tr data-sourcepos="62:1-62:94">
+<td data-sourcepos="62:2-62:26">clientSecret</td>
+<td data-sourcepos="62:28-62:37"/>
+<td data-sourcepos="62:39-62:59"/>
+<td data-sourcepos="62:61-62:93">Client secret if using OauthM2M</td>
+</tr>
+<tr data-sourcepos="63:1-63:112">
+<td data-sourcepos="63:2-63:26">passthroughAccessToken</td>
+<td data-sourcepos="63:28-63:37"/>
+<td data-sourcepos="63:39-63:59"/>
+<td data-sourcepos="63:61-63:111">Value for an access token that is passed opaquely</td>
+</tr>
+<tr data-sourcepos="64:1-64:112">
+<td data-sourcepos="64:2-64:26">passthroughRefreshToken</td>
+<td data-sourcepos="64:28-64:37"/>
+<td data-sourcepos="64:39-64:59"/>
+<td data-sourcepos="64:61-64:111">Value for a refresh token that is passed opaquely</td>
+</tr>
+<tr data-sourcepos="65:1-65:125">
+<td data-sourcepos="65:2-65:26">enableTokenCache</td>
+<td data-sourcepos="65:28-65:37"/>
+<td data-sourcepos="65:39-65:60">1</td>
+<td data-sourcepos="65:62-65:124">1 or 0, specified as a string, enable caching of Oauth Tokens</td>
+</tr>
+<tr data-sourcepos="66:1-66:117">
+<td data-sourcepos="66:2-66:26">tokenCachePassPhrase</td>
+<td data-sourcepos="66:28-66:37"/>
+<td data-sourcepos="66:39-66:68">InsecureTokenCachePassPhrase</td>
+<td data-sourcepos="66:70-66:116">Optional pass phrase to protect cached tokens</td>
+</tr>
+<tr data-sourcepos="67:1-67:62">
+<td data-sourcepos="67:2-67:26"/>
+<td data-sourcepos="67:28-67:37"/>
+<td data-sourcepos="67:39-67:59"/>
+<td data-sourcepos="67:61-67:61"/>
+</tr>
+<tr data-sourcepos="68:1-68:99">
+<td data-sourcepos="68:2-68:26">scope</td>
+<td data-sourcepos="68:28-68:37"/>
+<td data-sourcepos="68:39-68:59"/>
+<td data-sourcepos="68:61-68:98">Sets the scope used with Oauth flows</td>
+</tr>
+<tr data-sourcepos="69:1-69:125">
+<td data-sourcepos="69:2-69:26">oauthService</td>
+<td data-sourcepos="69:28-69:37">Yes</td>
+<td data-sourcepos="69:39-69:59">Databricks</td>
+<td data-sourcepos="69:61-69:124">Oauth service provider one of Databricks, EntraID, Unspecified</td>
+</tr>
+<tr data-sourcepos="70:1-70:95">
+<td data-sourcepos="70:2-70:26">oauth2ClientId</td>
+<td data-sourcepos="70:28-70:37"/>
+<td data-sourcepos="70:39-70:59">databricks-sql-jdbc</td>
+<td data-sourcepos="70:61-70:94">Defaults to: databricks-sql-jdbc</td>
+</tr>
+<tr data-sourcepos="71:1-71:82">
+<td data-sourcepos="71:2-71:26">vendor</td>
+<td data-sourcepos="71:28-71:37"/>
+<td data-sourcepos="71:39-71:59"/>
+<td data-sourcepos="71:61-71:81">Set to azure or aws</td>
+</tr>
+<tr data-sourcepos="72:1-72:62">
+<td data-sourcepos="72:2-72:26"/>
+<td data-sourcepos="72:28-72:37"/>
+<td data-sourcepos="72:39-72:59"/>
+<td data-sourcepos="72:61-72:61"/>
+</tr>
+<tr data-sourcepos="73:1-73:94">
+<td data-sourcepos="73:2-73:26">driverClass</td>
+<td data-sourcepos="73:28-73:37">Yes</td>
+<td data-sourcepos="73:39-73:73">com.databricks.client.jdbc.Driver</td>
+<td data-sourcepos="73:75-73:93">JDBC driver class</td>
+</tr>
+<tr data-sourcepos="74:1-74:106">
+<td data-sourcepos="74:2-74:26">jarFilePath</td>
+<td data-sourcepos="74:28-74:37">Yes</td>
+<td data-sourcepos="74:39-74:59"/>
+<td data-sourcepos="74:61-74:105">Path to the downloaded JDBC driver jar file</td>
+</tr>
+<tr data-sourcepos="75:1-75:62">
+<td data-sourcepos="75:2-75:26"/>
+<td data-sourcepos="75:28-75:37"/>
+<td data-sourcepos="75:39-75:59"/>
+<td data-sourcepos="75:61-75:61"/>
+</tr>
+<tr data-sourcepos="76:1-76:106">
+<td data-sourcepos="76:2-76:26">connectionURL</td>
+<td data-sourcepos="76:28-76:37"/>
+<td data-sourcepos="76:39-76:59"/>
+<td data-sourcepos="76:61-76:105">Overrides the complete connection URL value</td>
+</tr>
+<tr data-sourcepos="77:1-77:156">
+<td data-sourcepos="77:2-77:26">connectionURLAppend</td>
+<td data-sourcepos="77:28-77:37"/>
+<td data-sourcepos="77:39-77:59"/>
+<td data-sourcepos="77:61-77:155">Value appended to the connection URL, can be used to add further values to the connection URL</td>
+</tr>
+<tr data-sourcepos="78:1-78:115">
+<td data-sourcepos="78:2-78:26">httpPath</td>
+<td data-sourcepos="78:28-78:37"/>
+<td data-sourcepos="78:39-78:59"/>
+<td data-sourcepos="78:61-78:114">Overrides the httpPath portion of the connection URL</td>
+</tr>
+<tr data-sourcepos="79:1-79:92">
+<td data-sourcepos="79:2-79:26">ssl</td>
+<td data-sourcepos="79:28-79:37"/>
+<td data-sourcepos="79:39-79:59">1</td>
+<td data-sourcepos="79:61-79:91">1 or 0, specified as a string</td>
+</tr>
+<tr data-sourcepos="80:1-80:84">
+<td data-sourcepos="80:2-80:26">thriftTransport</td>
+<td data-sourcepos="80:28-80:37"/>
+<td data-sourcepos="80:39-80:59"/>
+<td data-sourcepos="80:61-80:83">Thrift transport flag</td>
+</tr>
+<tr data-sourcepos="81:1-81:62">
+<td data-sourcepos="81:2-81:26"/>
+<td data-sourcepos="81:28-81:37"/>
+<td data-sourcepos="81:39-81:59"/>
+<td data-sourcepos="81:61-81:61"/>
+</tr>
+<tr data-sourcepos="82:1-82:84">
+<td data-sourcepos="82:2-82:26">logLevel</td>
+<td data-sourcepos="82:28-82:37"/>
+<td data-sourcepos="82:39-82:59">0</td>
+<td data-sourcepos="82:61-82:83">Specified as a string</td>
+</tr>
+<tr data-sourcepos="83:1-83:109">
+<td data-sourcepos="83:2-83:26">verbose</td>
+<td data-sourcepos="83:28-83:37"/>
+<td data-sourcepos="83:39-83:59">1</td>
+<td data-sourcepos="83:61-83:108">Function argument only, specified as a logical</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="85:1-85:52" dir="auto">The following authentication arguments are required:</p>
+<table data-sourcepos="87:1-91:42" dir="auto">
+<thead>
+<tr data-sourcepos="87:1-87:42">
+<th data-sourcepos="87:2-87:14">Auth method</th>
+<th data-sourcepos="87:16-87:41">Authentication arguments</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="89:1-89:42">
+<td data-sourcepos="89:2-89:14">PAT</td>
+<td data-sourcepos="89:16-89:41">token</td>
+</tr>
+<tr data-sourcepos="90:1-90:42">
+<td data-sourcepos="90:2-90:14">OauthU2M</td>
+<td data-sourcepos="90:16-90:41">None</td>
+</tr>
+<tr data-sourcepos="91:1-91:42">
+<td data-sourcepos="91:2-91:14">OauthM2M</td>
+<td data-sourcepos="91:16-91:41">clientId &amp; clientSecret</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="93:1-97:50" dir="auto">If a <code data-sourcepos="93:6-93:29">passthroughAccessToken</code> and optional <code data-sourcepos="93:44-93:68">passthroughRefreshToken</code> are provided
+They will be used directly as passthrough value for authentication and the
+drivers authentication mechanisms will not be used. Be aware that access
+tokens typically expire after a certain amount of time, after which you must
+either refresh the token or obtain a new token(s).</p>
+<p data-sourcepos="99:1-106:124" dir="auto">This class requires the Databricks JDBC driver v2.7.3 or greater.
+The driver must be downloaded from
+<a data-sourcepos="101:1-101:67" href="https://www.databricks.com/spark/jdbc-drivers-archive" rel="nofollow noreferrer noopener" target="_blank">Databricks</a>. The <code data-sourcepos="101:74-101:86">jarFilePath</code>
+argument or JSON settings file can be used to specify the path to the driver. See
+<a data-sourcepos="103:1-103:49" href="InstallingJDBCDriver.html">Installing JDBC Driver</a> for download and Java version
+compatibility details.
+The driver's license can be found here:
+<a data-sourcepos="106:7-106:124" href="https://www.databricks.com/legal/jdbc-odbc-driver-license" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/legal/jdbc-odbc-driver-license</a></p>
+<p data-sourcepos="108:1-109:54" dir="auto">This function assumes that the driver file has been added to the MATLAB dynamic
+Java® class path, see the <code data-sourcepos="109:31-109:45">javaaddpath()</code> command.</p>
+<p data-sourcepos="111:1-113:10" dir="auto">The class is not added to the MATLAB path by the package as it is intended to be
+used in isolation and so should be added to the path manually or as part of a wider
+code base.</p>
+<p data-sourcepos="115:1-116:55" dir="auto">This functionality is independent of the <code data-sourcepos="115:42-115:54">Spark.sql()</code> functionality which
+can also be used to execute SQL commands on Databricks.</p>
+<p data-sourcepos="118:1-119:71" dir="auto">Call the Connection's close method when the connection is no longer needed.
+The object's close method will also call the connection's close method.</p>
+<p data-sourcepos="121:1-123:79" dir="auto">If a connection cannot be created an empty <code data-sourcepos="121:44-121:69">database.jdbc.connection</code> is returned
+in the connection property. If a JDBC Driver Error is returned in the connection's
+Message property it will be displayed but an error will not be raised directly.</p>
+<p data-sourcepos="125:1-125:8" dir="auto">Example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="127:1-135:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Can be moved to a namespace if desired</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="c1">% Not added to the path by the package</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">j</span> <span class="o">=</span> <span class="n">StandaloneJDBCConnection</span><span class="p">(</span><span class="n">schema</span><span class="o">=</span><span class="s1">'myDatabaseName'</span><span class="p">,</span> <span class="k">...</span><span class="c">);</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">conn</span> <span class="o">=</span> <span class="n">j</span><span class="o">.</span><span class="n">Connection</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC5"/>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">j</span> <span class="o">=</span> <span class="n">StandaloneJDBCConnection</span><span class="p">;</span> <span class="c1">% Use default schema/database name from the settings file</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">resultTable</span> <span class="o">=</span> <span class="n">fetch</span><span class="p">(</span><span class="n">j</span><span class="o">.</span><span class="n">Connection</span><span class="p">,</span> <span class="s2">"SELECT * from myTableName"</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="137:1-137:55" dir="auto">Sample <code data-sourcepos="137:8-137:49">databricks_standalone_jdbc_settings.json</code> file:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-json" data-canonical-lang="json" data-sourcepos="139:1-174:3" v-pre="true"><code><span class="line" data-lang="json" id="LC1"><span class="p">{</span></span>
+<span class="line" data-lang="json" id="LC2"><span class="w">    </span><span class="nl">"host"</span><span class="p">:</span><span class="s2">"https://adb-1234567890123456.1.azuredatabricks.net"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC3"><span class="w">    </span><span class="nl">"port"</span><span class="p">:</span><span class="w"> </span><span class="s2">"443"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC4"><span class="w">    </span><span class="nl">"orgId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234567890123456"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC5"><span class="w">    </span><span class="nl">"clusterId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1234-123456-abcdefgh"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC6"><span class="w">    </span><span class="nl">"schema"</span><span class="p">:</span><span class="w"> </span><span class="s2">"myschema"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC7"><span class="w">    </span><span class="nl">"catalog"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mycatalog"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC8"/>
+<span class="line" data-lang="json" id="LC9"><span class="w">    </span><span class="nl">"authMethod"</span><span class="p">:</span><span class="w"> </span><span class="s2">"OauthU2M"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC10"><span class="w">    </span><span class="nl">"token"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC11"><span class="w">    </span><span class="nl">"clientId"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC12"><span class="w">    </span><span class="nl">"clientSecret"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC13"><span class="w">    </span><span class="nl">"passthroughAccessToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC14"><span class="w">    </span><span class="nl">"passthroughRefreshToken"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC15"><span class="w">    </span><span class="nl">"enableTokenCache"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC16"><span class="w">    </span><span class="nl">"tokenCachePassPhrase"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC17"/>
+<span class="line" data-lang="json" id="LC18"><span class="w">    </span><span class="nl">"scope"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC19"><span class="w">    </span><span class="nl">"oauthService"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Databricks"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC20"><span class="w">    </span><span class="nl">"oauth2ClientId"</span><span class="p">:</span><span class="w"> </span><span class="s2">"databricks-sql-jdbc"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC21"><span class="w">    </span><span class="nl">"vendor"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC22"/>
+<span class="line" data-lang="json" id="LC23"><span class="w">    </span><span class="nl">"driverClass"</span><span class="p">:</span><span class="w"> </span><span class="s2">"com.databricks.client.jdbc.Driver"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC24"><span class="w">    </span><span class="nl">"jarFilePath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/path/to/databricks-jdbc-2.8.0.jar"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC25"/>
+<span class="line" data-lang="json" id="LC26"><span class="w">    </span><span class="nl">"connectionURL"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC27"><span class="w">    </span><span class="nl">"connectionURLAppend"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC28"><span class="w">    </span><span class="nl">"httpPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC29"><span class="w">    </span><span class="nl">"ssl"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC30"><span class="w">    </span><span class="nl">"thriftTransport"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC31"/>
+<span class="line" data-lang="json" id="LC32"><span class="w">    </span><span class="nl">"logLevel"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC33"><span class="w">    </span><span class="nl">"verbose"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span></span>
+<span class="line" data-lang="json" id="LC34"><span class="p">}</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="176:1-176:29" dir="auto">Values set to "" are ignored.</p>
+<p data-sourcepos="178:1-180:87" dir="auto">If specifying a <code data-sourcepos="178:17-178:29">jarFilePath</code> argument using a Windows® path that contains "" symbols.
+In the JSON settings file escape any slashes with an additional slash as
+required by JSON syntax, e.g.: <code data-sourcepos="180:32-180:87">"jarFilePath": "c:\\mydir\\databricks-jdbc-2.8.0.jar",</code></p>
+<p data-sourcepos="182:1-182:228" dir="auto">See also: <a data-sourcepos="182:11-182:228" href="https://docs.databricks.com/en/_extras/documents/Databricks-JDBC-Driver-Install-and-Configuration-Guide.pdf" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/en/_extras/documents/Databricks-JDBC-Driver-Install-and-Configuration-Guide.pdf</a></p></div></main><script src="resources/copycode.js">//</script></body></html>

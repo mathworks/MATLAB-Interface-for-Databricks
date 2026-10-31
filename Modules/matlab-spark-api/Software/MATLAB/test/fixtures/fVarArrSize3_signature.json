@@ -1,0 +1,14 @@
+{
+  "InTypes": [
+    ["datetime", [1, 1], "ts"],
+    ["string", [1, 3], "a"],
+    ["int32", [1, 5], "b"]
+  ],
+  "OutTypes": [
+    ["datetime", [1, 1], "ts"],
+    ["string", [1, 3], "a"],
+    ["int32", [1, 5], "b"],
+    ["string", [1, 3], "x"],
+    ["int32", [1, 5], "y"]
+  ]
+}

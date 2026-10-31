@@ -1,0 +1,37 @@
+{
+  "type": "compiler",
+  "funcname": "fFilter1",
+  "fullFilename": "/matlab-databricks/Modules/matlab-spark-api/Software/MATLAB/test/fixtures/fFilter1.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "id",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "long"
+    },
+    {
+      "type": "io",
+      "Name": "str",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "string"
+    },
+    {
+      "type": "io",
+      "Name": "i32",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "integer"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "ret",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "boolean"
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Installing the Databricks JDBC driver</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:39" dir="auto" id="user-content-installing-the-databricks-jdbc-driver">Installing the Databricks JDBC driver</h1>
+<p data-sourcepos="3:1-7:32" dir="auto">Using MATLAB® it is possible to connect to a variety of databases. The MathWorks
+<a data-sourcepos="4:1-4:67" href="https://mathworks.com/products/database.html" rel="nofollow noreferrer noopener" target="_blank">Database Toolbox™</a> is often used
+to connect to databases in a user friendly manner using ODBC/JDBC connections.
+The following describes how to connect to Databricks® using Database Toolbox
+and the Databricks JDBC drivers.</p>
+<p data-sourcepos="9:1-9:50" dir="auto">The package supports both Databricks JDBC drivers:</p>
+<ul data-sourcepos="11:1-12:44" dir="auto">
+<li data-sourcepos="11:1-11:65">Versions &gt;= 2.7.3 and &lt; 3.0.0 (the non-OSS Simba based driver).</li>
+<li data-sourcepos="12:1-12:44">Versions 3.0.3 and newer (the OSS driver).</li>
+</ul>
+<p data-sourcepos="14:1-15:78" dir="auto">The JDBC driver must be downloaded from Databricks. The <code data-sourcepos="14:57-14:69">jarFilePath</code> name-value
+pair can be used when creating a connection to specify the path to the driver.</p>
+<p data-sourcepos="17:1-17:49" dir="auto">Links to the licenses for the Databricks drivers:</p>
+<ul data-sourcepos="19:1-21:126" dir="auto">
+<li data-sourcepos="19:1-19:134">JDBC (Simba) <a data-sourcepos="19:16-19:133" href="https://www.databricks.com/legal/jdbc-odbc-driver-license" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/legal/jdbc-odbc-driver-license</a>.</li>
+<li data-sourcepos="20:1-20:143">JDBC (OSS) <a data-sourcepos="20:14-20:143" href="https://github.com/databricks/databricks-jdbc/blob/main/LICENSE" rel="nofollow noreferrer noopener" target="_blank">https://github.com/databricks/databricks-jdbc/blob/main/LICENSE</a></li>
+<li data-sourcepos="21:1-22:0">ODBC <a data-sourcepos="21:8-21:125" href="https://www.databricks.com/legal/jdbc-odbc-driver-license" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/legal/jdbc-odbc-driver-license</a>.</li>
+</ul>
+<h2 data-sourcepos="23:1-23:25" dir="auto" id="user-content-downloading-the-driver">Downloading the Driver</h2>
+<p data-sourcepos="25:1-26:110" dir="auto">The Databricks JDBC driver can be downloaded from:
+<a data-sourcepos="26:1-26:110" href="https://www.databricks.com/spark/jdbc-drivers-archive" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/spark/jdbc-drivers-archive</a></p>
+<p data-sourcepos="28:1-28:70" dir="auto">The correct driver version depends on the Java version used by MATLAB:</p>
+<table data-sourcepos="30:1-34:42" dir="auto">
+<thead>
+<tr data-sourcepos="30:1-30:43">
+<th data-sourcepos="30:2-30:16">Java version</th>
+<th data-sourcepos="30:18-30:42">Driver version required</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="32:1-32:42">
+<td data-sourcepos="32:2-32:16">Java 8</td>
+<td data-sourcepos="32:18-32:41">2.X</td>
+</tr>
+<tr data-sourcepos="33:1-33:42">
+<td data-sourcepos="33:2-33:16">Java 11</td>
+<td data-sourcepos="33:18-33:41">2.X or 3.X</td>
+</tr>
+<tr data-sourcepos="34:1-34:42">
+<td data-sourcepos="34:2-34:16">Java 17+</td>
+<td data-sourcepos="34:18-34:41">3.X</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="36:1-36:71" dir="auto">MATLAB's Java version can be checked using the <code data-sourcepos="36:48-36:62">version -java</code> command.</p>
+<p data-sourcepos="38:1-39:9" dir="auto">Once downloaded, provide the path to the driver JAR file using the <code data-sourcepos="38:68-38:80">jarFilePath</code>
+argument:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="41:1-43:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">j</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">JDBCConnection</span><span class="p">(</span><span class="n">jarFilePath</span><span class="o">=</span><span class="s2">"/path/to/databricks-jdbc-2.8.0.jar"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="45:1-45:19" dir="auto" id="user-content-driver-selection">Driver Selection</h2>
+<p data-sourcepos="47:1-49:21" dir="auto">When both a <code data-sourcepos="47:13-47:25">jarFilePath</code> and a <code data-sourcepos="47:33-47:47">useDriverType</code> argument are provided, both
+are used. If only one is provided, the driver type is inferred from the JAR
+file or the argument.</p>
+<table data-sourcepos="51:1-57:57" dir="auto">
+<thead>
+<tr data-sourcepos="51:1-51:57">
+<th data-sourcepos="51:2-51:18">Driver selected</th>
+<th data-sourcepos="51:20-51:36">Driver argument</th>
+<th data-sourcepos="51:38-51:56">Jar file Argument</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="53:1-53:57">
+<td data-sourcepos="53:2-53:18">Argument based</td>
+<td data-sourcepos="53:20-53:36">OSS/Simba</td>
+<td data-sourcepos="53:38-53:56">OSS/Simba</td>
+</tr>
+<tr data-sourcepos="54:1-54:57">
+<td data-sourcepos="54:2-54:18">OSS</td>
+<td data-sourcepos="54:20-54:36">OSS</td>
+<td data-sourcepos="54:38-54:56">Unset</td>
+</tr>
+<tr data-sourcepos="55:1-55:57">
+<td data-sourcepos="55:2-55:18">Simba</td>
+<td data-sourcepos="55:20-55:36">Simba</td>
+<td data-sourcepos="55:38-55:56">Unset</td>
+</tr>
+<tr data-sourcepos="56:1-56:57">
+<td data-sourcepos="56:2-56:18">OSS</td>
+<td data-sourcepos="56:20-56:36">Unset</td>
+<td data-sourcepos="56:38-56:56">OSS</td>
+</tr>
+<tr data-sourcepos="57:1-57:57">
+<td data-sourcepos="57:2-57:18">Simba</td>
+<td data-sourcepos="57:20-57:36">Unset</td>
+<td data-sourcepos="57:38-57:56">Simba</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="59:1-60:78" dir="auto">When a JDBC Connection is made using <code data-sourcepos="59:38-59:64">databricks.JDBCConnection</code> the chosen driver
+is added to the dynamic Java class path prior to the invocation of the driver.</p>
+<h2 data-sourcepos="62:1-62:29" dir="auto" id="user-content-java-version-configuration">Java version configuration</h2>
+<p data-sourcepos="64:1-69:103" dir="auto">The OSS driver requires that MATLAB uses a Java environment of v11 or greater,
+and so is not compatible with MATLAB's included default Java environment.
+MATLAB's Java version can be changed using the <a data-sourcepos="66:48-66:108" href="https://www.mathworks.com/help/matlab/ref/jenv.html" rel="nofollow noreferrer noopener" target="_blank"><code data-sourcepos="66:49-66:54">jenv</code></a>
+command. If the common <code data-sourcepos="67:24-67:34">JAVA_HOME</code> environment variable is defined the <code data-sourcepos="67:72-67:98">jenv(getenv("JAVA_HOME"))</code>
+command can be convenient. Alternatively a specific path can be set e.g.: <code data-sourcepos="68:75-68:98">jenv("/usr/local/jre")</code>.
+The version can be reset using <code data-sourcepos="69:32-69:48">jenv("factory")</code>. MATLAB must be restarted for a change to take effect.</p>
+<p data-sourcepos="71:1-71:167" dir="auto">For information on compatible versions see: <a data-sourcepos="71:45-71:166" href="https://www.mathworks.com/support/requirements/openjdk.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/support/requirements/openjdk.html</a>.</p>
+<p data-sourcepos="73:1-77:104" dir="auto">If Java 16 is used the following configuration argument must be passed to Java
+<code data-sourcepos="74:1-74:73">--add-opens=java.base/java.nio=org.apache.arrow.memory.core ALL-UNNAMED</code>.
+See: <a data-sourcepos="75:6-75:99" href="https://github.com/databricks/databricks-jdbc" rel="nofollow noreferrer noopener" target="_blank">https://github.com/databricks/databricks-jdbc</a>.
+To configure MATLAB Java startup options see: <a data-sourcepos="76:47-76:186" href="https://www.mathworks.com/help/matlab/matlab_env/java-opts-file.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/help/matlab/matlab_env/java-opts-file.html</a>.
+It is recommended to avoid version 16 for this reason and that it is not formally qualified with MATLAB.</p>
+<h2 data-sourcepos="79:1-79:8" dir="auto" id="user-content-usage">Usage</h2>
+<p data-sourcepos="81:1-81:87" dir="auto">The following documents detail how the various database centric interfaces can be used:</p>
+<ul data-sourcepos="83:1-87:46" dir="auto">
+<li data-sourcepos="83:1-83:51"><a data-sourcepos="83:3-83:51" href="JDBCWorkflow.html">JDBC Connection based workflow</a></li>
+<li data-sourcepos="84:1-84:51"><a data-sourcepos="84:3-84:51" href="ODBCWorkflow.html">ODBC Connection based workflow</a></li>
+<li data-sourcepos="85:1-85:65"><a data-sourcepos="85:3-85:65" href="StandaloneJDBCDatabaseInterface.html">Standalone JDBC interface</a></li>
+<li data-sourcepos="86:1-86:65"><a data-sourcepos="86:3-86:65" href="StandaloneODBCDatabaseInterface.html">Standalone ODBC interface</a></li>
+<li data-sourcepos="87:1-87:46"><a data-sourcepos="87:3-87:46" href="StatementExecution.html">Statement Execution</a></li>
+</ul></div></main><script src="resources/copycode.js">//</script></body></html>

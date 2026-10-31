@@ -1,0 +1,239 @@
+{
+  "type": "compiler",
+  "funcname": "deeply",
+  "fullFilename": "/matlab-databricks/Software/MATLAB/examples/DatabricksConnect/Structures/deeply.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "IN",
+      "Direction": "in",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "metadata": {},
+            "name": "id",
+            "nullable": true,
+            "type": "long"
+          },
+          {
+            "metadata": {},
+            "name": "name",
+            "nullable": true,
+            "type": "string"
+          },
+          {
+            "metadata": {},
+            "name": "info",
+            "nullable": true,
+            "type": {
+              "fields": [
+                {
+                  "metadata": {},
+                  "name": "age",
+                  "nullable": true,
+                  "type": "double"
+                },
+                {
+                  "metadata": {},
+                  "name": "country",
+                  "nullable": true,
+                  "type": "string"
+                },
+                {
+                  "metadata": {},
+                  "name": "arrI32",
+                  "nullable": true,
+                  "type": "integer"
+                },
+                {
+                  "metadata": {},
+                  "name": "deep",
+                  "nullable": true,
+                  "type": {
+                    "fields": [
+                      {
+                        "metadata": {},
+                        "name": "flip",
+                        "nullable": true,
+                        "type": "timestamp"
+                      },
+                      {
+                        "metadata": {},
+                        "name": "flop",
+                        "nullable": true,
+                        "type": "boolean"
+                      },
+                      {
+                        "metadata": {},
+                        "name": "flap",
+                        "nullable": true,
+                        "type": "interval day to second"
+                      }
+                    ],
+                    "type": "struct"
+                  }
+                }
+              ],
+              "type": "struct"
+            }
+          },
+          {
+            "metadata": {},
+            "name": "arr",
+            "nullable": true,
+            "type": {
+              "containsNull": true,
+              "elementType": "integer",
+              "type": "array"
+            }
+          },
+          {
+            "metadata": {},
+            "name": "as",
+            "nullable": true,
+            "type": {
+              "containsNull": true,
+              "elementType": {
+                "fields": [
+                  {
+                    "metadata": {},
+                    "name": "Id",
+                    "nullable": true,
+                    "type": "long"
+                  },
+                  {
+                    "metadata": {},
+                    "name": "country",
+                    "nullable": true,
+                    "type": "string"
+                  }
+                ],
+                "type": "struct"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "OUT",
+      "Direction": "out",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "metadata": {},
+            "name": "id",
+            "nullable": true,
+            "type": "long"
+          },
+          {
+            "metadata": {},
+            "name": "name",
+            "nullable": true,
+            "type": "string"
+          },
+          {
+            "metadata": {},
+            "name": "info",
+            "nullable": true,
+            "type": {
+              "fields": [
+                {
+                  "metadata": {},
+                  "name": "age",
+                  "nullable": true,
+                  "type": "double"
+                },
+                {
+                  "metadata": {},
+                  "name": "country",
+                  "nullable": true,
+                  "type": "string"
+                },
+                {
+                  "metadata": {},
+                  "name": "arrI32",
+                  "nullable": true,
+                  "type": "integer"
+                },
+                {
+                  "metadata": {},
+                  "name": "deep",
+                  "nullable": true,
+                  "type": {
+                    "fields": [
+                      {
+                        "metadata": {},
+                        "name": "flip",
+                        "nullable": true,
+                        "type": "timestamp"
+                      },
+                      {
+                        "metadata": {},
+                        "name": "flop",
+                        "nullable": true,
+                        "type": "boolean"
+                      },
+                      {
+                        "metadata": {},
+                        "name": "flap",
+                        "nullable": true,
+                        "type": "interval day to second"
+                      }
+                    ],
+                    "type": "struct"
+                  }
+                }
+              ],
+              "type": "struct"
+            }
+          },
+          {
+            "metadata": {},
+            "name": "arr",
+            "nullable": true,
+            "type": {
+              "containsNull": true,
+              "elementType": "integer",
+              "type": "array"
+            }
+          },
+          {
+            "metadata": {},
+            "name": "as",
+            "nullable": true,
+            "type": {
+              "containsNull": true,
+              "elementType": {
+                "fields": [
+                  {
+                    "metadata": {},
+                    "name": "Id",
+                    "nullable": true,
+                    "type": "long"
+                  },
+                  {
+                    "metadata": {},
+                    "name": "country",
+                    "nullable": true,
+                    "type": "string"
+                  }
+                ],
+                "type": "struct"
+              },
+              "type": "array"
+            }
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "InTypes": [
+    [
+      "table",
+      [
+        ["double", [1, 1], "A"],
+        ["double", [1, 1], "B"]
+      ]
+    ],
+    [
+      "table",
+      [
+        ["double", [1, 1], "A"],
+        ["double", [1, 1], "B"]
+      ]
+    ]
+  ],
+  "OutTypes": [
+    [
+      "table",
+      [
+        ["double", [1, 1], "A"],
+        ["double", [1, 1], "B"]
+      ]
+    ]
+  ]
+}

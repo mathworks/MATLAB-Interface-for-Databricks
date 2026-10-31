@@ -1,0 +1,373 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Frequently Asked Questions (FAQ)</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:34" dir="auto" id="user-content-frequently-asked-questions-faq">Frequently Asked Questions (FAQ)</h1>
+<h2 data-sourcepos="3:1-3:20" dir="auto" id="user-content-long-path-support">Long Path support</h2>
+<p data-sourcepos="5:1-8:18" dir="auto">If using Windows® and parts of the package appear to be "missing", this may be due
+to Windows path length limitations. Windows has a maximum path length of 260
+(256 usable) characters. This can be increased to 32,767 characters by enabling
+long path support.</p>
+<p data-sourcepos="10:1-10:224" dir="auto">For more information see: <a data-sourcepos="10:27-10:224" href="https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry" rel="nofollow noreferrer noopener" target="_blank">https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation?tabs=registry</a></p>
+<p data-sourcepos="12:1-13:54" dir="auto">Once enabled the partial copy of the package should be deleted and the package
+should be reinstalled from the original download file.</p>
+<h2 data-sourcepos="15:1-15:25" dir="auto" id="user-content-databricks-arm-support">Databricks ARM support</h2>
+<p data-sourcepos="17:1-19:63" dir="auto">Clusters used to run MATLAB on Databricks® must be x86-64 based. ARM-based clusters
+(such as AWS® Graviton-based instances) are not supported. The error message below
+indicates an attempt to install MATLAB on an ARM-based cluster:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="21:1-24:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">/tmp/MATLAB_installer/install: 1: exec: /tmp/MATLAB_installer/bin/linux-arm-64/install_unix_legacy: not found</span>
+<span class="line" data-lang="plaintext" id="LC2">Install of MATLAB runtime failed, returned: 127</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="26:1-26:70" dir="auto">Apple® silicon ARM based systems are supported as desktop clients.</p>
+<h2 data-sourcepos="28:1-28:36" dir="auto" id="user-content-enable-matlab-startup-diagnostics">Enable MATLAB startup diagnostics</h2>
+<p data-sourcepos="30:1-34:38" dir="auto">When running MATLAB on Databricks, the startup process is more complex.
+I.e. starting the MATLAB Web Proxy and desktop MATLAB from a custom Docker® image.
+It can be difficult to determine a point of failure especially if introducing
+custom startup code. For example, to install in-house toolboxes prior to the end
+user getting access to the MATLAB IDE.</p>
+<p data-sourcepos="36:1-37:14" dir="auto">This can be addressed by setting the following environment variables at cluster
+creation time:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-shell" data-canonical-lang="bash" data-sourcepos="39:1-43:3" v-pre="true"><code><span class="line" data-lang="shell" id="LC1">MW_DIAGNOSTIC_SPEC<span class="s1">' = ".*=fatal,critical,error,warning;connector::worker.*=all;connector::container::http=all;connector::lifecycle=all;connector::http::server=all"</span></span>
+<span class="line" data-lang="shell" id="LC2"/>
+<span class="line" data-lang="shell" id="LC3"><span class="s1">'</span>MW_DIAGNOSTIC_DEST<span class="s1">'="file=/tmp/myLog.txt"</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="45:1-47:43" dir="auto">Once MATLAB has started, or attempted to start, the log file can be retrieved from
+the cluster by using a notebook to copy it to a workspace location from which
+it can be downloaded via the Databricks UI.</p>
+<h2 data-sourcepos="49:1-49:65" dir="auto" id="user-content-what-simulink-features-are-supported-in-matlab-on-databricks">What Simulink features are supported in MATLAB <em data-sourcepos="49:51-49:54">on</em> Databricks</h2>
+<p data-sourcepos="51:1-53:19" dir="auto">When running the MATLAB/Simulink® desktop environment on Databricks some limitations
+apply, e.g. hardware in-the-loop scenarios are not possible as hardware cannot be
+directly connected.</p>
+<p data-sourcepos="55:1-58:76" dir="auto">The following high-level guidance aimed at MATLAB® Online™ is broadly applicable
+as the underlying browser based desktop approaches are very similar:
+<a data-sourcepos="57:1-57:134" href="https://www.mathworks.com/products/matlab-online/limitations.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/products/matlab-online/limitations.html</a>
+For clarification on specific use cases contact: <a data-sourcepos="58:50-58:75" href="mailto:databricks@mathworks.com">databricks@mathworks.com</a>.</p>
+<h2 data-sourcepos="60:1-60:44" dir="auto" id="user-content-illegal-parquet-type-int64-time_micros">Illegal Parquet type: INT64 (TIME_MICROS)</h2>
+<p data-sourcepos="62:1-63:42" dir="auto">The following error can indicate a current incompatibility between Spark™ and <code data-sourcepos="62:85-62:94">.parquet</code> files
+written by MATLAB, using <code data-sourcepos="63:26-63:41">parquetwrite()</code>:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="65:1-70:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">...java.io.IOException: Could not read or convert schema for file: dbfs:/myData/myDurationData.parquet</span>
+<span class="line" data-lang="plaintext" id="LC2">...</span>
+<span class="line" data-lang="plaintext" id="LC3">Caused by: org.apache.spark.sql.AnalysisException: Illegal Parquet type: INT64 (TIME_MICROS);</span>
+<span class="line" data-lang="plaintext" id="LC4"> at org.apache.spark.sql.execution.datasources.parquet.</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="72:1-72:91" dir="auto">The issue arises if the MATLAB data contains a duration data type. Current workarounds are:</p>
+<ul data-sourcepos="74:1-76:54" dir="auto">
+<li data-sourcepos="74:1-74:100">Write a numeric value e.g. an <code data-sourcepos="74:33-74:39">int64</code> as an alternative to represent a number of milliseconds etc.</li>
+<li data-sourcepos="75:1-75:101">Write two datetimes in the parquet, e.g. a start and stop time and compute the difference in Spark.</li>
+<li data-sourcepos="76:1-77:0">Write and import data in another format e.g. <code data-sourcepos="76:48-76:53">.csv</code>.</li>
+</ul>
+<h2 data-sourcepos="78:1-78:51" dir="auto" id="user-content-did-not-start-the-server-desired-port-was-31515">Did not start the server. Desired port was 31515</h2>
+<p data-sourcepos="80:1-80:122" dir="auto">This error can be caused by security restriction on the cluster that prevent the MATLAB runtime from opening a given port.</p>
+<p data-sourcepos="82:1-84:176" dir="auto">In version of the package &gt; 2.0.2 this should be addressed by the automatic addition of:
+<code data-sourcepos="83:1-83:41">MW_CONNECTOR_CONNECTION_PROFILES="noop"</code> as a Spark environment variable when the cluster is configured.
+However is cluster is started by other means then this value should be set in addition to the MATLAB runtime's required LD_LIBRARY_PATH settings as Spark environment variables.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="86:1-89:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">MatlabRuntimeError: An Error occurred when evaluating the result from a function. Details: Dynamic exception type: std::runtime_error</span>
+<span class="line" data-lang="plaintext" id="LC2">std::exception::what: Did not start the server. Desired port was 31515. Last error was: Failed to start server: 127.0.0.1:31614</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="91:1-91:61" dir="auto" id="user-content-invalid-shard-address--certificate-chain-validation-error">Invalid shard address / Certificate chain validation error</h2>
+<p data-sourcepos="93:1-93:92" dir="auto">An error similar to the following most simply may indicate an invalid host value being used.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="95:1-113:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">ds = spark.range(10)</span>
+<span class="line" data-lang="plaintext" id="LC2">15:59:41.804 [main] ERROR com.databricks.service.SparkClientManager - Fail to get the SparkClient</span>
+<span class="line" data-lang="plaintext" id="LC3">java.util.concurrent.ExecutionException: com.databricks.service.SparkServiceConnectionException: Invalid shard address: "https://adb-1122334455667788.19.azuredatabricks.net"</span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">To connect to a Databricks cluster, you must specify the URL of your Databricks shard.</span>
+<span class="line" data-lang="plaintext" id="LC6">Shard address: The URL of your shard (e.g., "https://dbc-01234567-89ab.cloud.databricks.com")</span>
+<span class="line" data-lang="plaintext" id="LC7">  - Get current value: spark.conf.get("spark.databricks.service.address")</span>
+<span class="line" data-lang="plaintext" id="LC8">  - Set via conf: spark.conf.set("spark.databricks.service.address", &lt;your shard address&gt;)</span>
+<span class="line" data-lang="plaintext" id="LC9">  - Set via environment variable: export DATABRICKS_ADDRESS=&lt;your shard address&gt;</span>
+<span class="line" data-lang="plaintext" id="LC10">.</span>
+<span class="line" data-lang="plaintext" id="LC11">.</span>
+<span class="line" data-lang="plaintext" id="LC12">.</span>
+<span class="line" data-lang="plaintext" id="LC13">Caused by: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path to requested target</span>
+<span class="line" data-lang="plaintext" id="LC14">                at sun.security.provider.certpath.SunCertPathBuilder.build(SunCertPathBuilder.java:141)</span>
+<span class="line" data-lang="plaintext" id="LC15">                at sun.security.provider.certpath.SunCertPathBuilder.engineBuild(SunCertPathBuilder.java:126)</span>
+<span class="line" data-lang="plaintext" id="LC16">                at java.security.cert.CertPathBuilder.build(CertPathBuilder.java:280)</span>
+<span class="line" data-lang="plaintext" id="LC17">                at sun.security.validator.PKIXValidator.doBuild(PKIXValidator.java:392)</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="115:1-116:85" dir="auto">To rule this out double check the value used by Databricks Connect in the .databricks-connect file.
+Test the REST API connectivity with the same host value e.g. using a basic DBFS call.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="118:1-121:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">db</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">DBFS</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">l</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="nb">ls</span><span class="p">(</span><span class="s1">'/'</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="123:1-125:43" dir="auto">A more problematic cause can be a failed SSL hand shake in the Databricks Connect
+communication between MATLAB and the cluster.
+Check the error log for reports similar to:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="127:1-130:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">Caused by: sun.security.validator.ValidatorException: PKIX path building failed: sun.security.provider.certpath.SunCertPathBuilderException: unable to find valid certification path</span>
+<span class="line" data-lang="plaintext" id="LC2">to requested target</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="132:1-135:82" dir="auto">This may be caused by a proxy between the MATLAB client and the Databricks cluster
+for which MATLAB does not have a trusted certificate chain. This can be addressed
+by adding an additional certificate to the MATLAB Java® trust store using the
+<code data-sourcepos="135:1-135:9">keytool</code> program, which is part of the the Java Runtime Environment (JRE™).</p>
+<p data-sourcepos="137:1-139:79" dir="auto"><strong data-sourcepos="137:1-137:11">Warning</strong>: Only trust a certificate that you know to be trustworthy, having
+checked with IT security. An invalid SSL handshake may indicate a serious security
+issue and trusting a malicious certificate risks exposing data and credentials.</p>
+<p data-sourcepos="141:1-141:55" dir="auto">MATLAB JRE's copy of <code data-sourcepos="141:22-141:30">keytool</code> by default is stored in:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="143:1-145:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&lt;matlabroot&gt;/sys/java/jre/&lt;arch&gt;/jre/bin</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="147:1-148:77" dir="auto">The exact path for a given MATLAB installation can be found using:
+<code data-sourcepos="148:1-148:76">fullfile(matlabroot, "sys", "java", "jre", computer("arch"), "jre", "bin")</code>.</p>
+<p data-sourcepos="150:1-150:43" dir="auto">From the command line in the JRE directory:</p>
+<p data-sourcepos="152:1-152:11" dir="auto">Linux®:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-shell" data-canonical-lang="bash" data-sourcepos="154:1-160:3" v-pre="true"><code><span class="line" data-lang="shell" id="LC1">keytool <span class="nt">-importcert</span> <span class="nt">-trustcacerts</span> <span class="nt">-file</span> newCert.pem <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC2"> <span class="nt">-alias</span> myalias1 <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC3"> <span class="nt">-keystore</span> ../lib/security/cacerts <span class="se">\</span></span>
+<span class="line" data-lang="shell" id="LC4"> <span class="nt">-storepass</span> changeit</span>
+<span class="line" data-lang="shell" id="LC5"/></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="162:1-162:8" dir="auto">Windows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-batchfile" data-canonical-lang="bat" data-sourcepos="164:1-166:3" v-pre="true"><code><span class="line" data-lang="batchfile" id="LC1"><span class="kd">keytool</span><span class="err">.exe</span> <span class="na">-importcert -trustcacerts -file </span><span class="s2">"c:\newCert.cer"</span> <span class="na">-keystore </span><span class="kd">lib</span>\security\cacerts <span class="na">-alias </span><span class="kd">myalias1</span> <span class="na">-storepass </span><span class="kd">changeit</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="168:1-170:15" dir="auto">Then restart MATLAB and attempt to create a Spark session and invoke a
+Spark API call. Simply creating a Spark session is not sufficient to
+verify the fix.</p>
+<p data-sourcepos="172:1-173:21" dir="auto">To get more detailed SSL logs create a file call java.opts in a given
+directory containing:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-shell" data-canonical-lang="bash" data-sourcepos="175:1-177:3" v-pre="true"><code><span class="line" data-lang="shell" id="LC1"><span class="nt">-Djavax</span>.net.debug<span class="o">=</span>ssl:handshake</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="179:1-183:56" dir="auto">Start MATLAB in that directory to observe increased logging <code data-sourcepos="179:61-179:77">javax.net.debug</code>
+accepts a number of other options.
+See: <a data-sourcepos="181:6-181:145" href="https://www.mathworks.com/help/matlab/matlab_env/java-opts-file.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/help/matlab/matlab_env/java-opts-file.html</a>
+A large amount of output can be expected, using the <code data-sourcepos="182:53-182:66">diary on/off</code> feature
+can be helpful to easily capture output to a file, e.g.:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="185:1-187:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="nb">diary</span> <span class="n">on</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="189:1-189:36" dir="auto" id="user-content-saving-a-mat-file-to-dbfs-fails">Saving a .mat file to /dbfs fails</h2>
+<p data-sourcepos="191:1-193:57" dir="auto">Due to a limitation in the FUSE mount used for <code data-sourcepos="191:48-191:54">/dbfs</code> certain IO operations
+are not possible, see <a data-sourcepos="192:23-192:37" href="DBFS.html">DBFS</a> for more details.
+Consider using the <a data-sourcepos="193:20-193:36" href="Files.html">Files</a> API instead of DBFS.</p>
+<h2 data-sourcepos="195:1-195:41" dir="auto" id="user-content-spark-submit-fails-to-find-jar-on-dbfs">Spark Submit fails to find jar on dbfs</h2>
+<p data-sourcepos="197:1-199:52" dir="auto">An Spark submit task failing with the following error could be due to missing
+<code data-sourcepos="198:1-198:7">/dbfs</code> in the path defined for <code data-sourcepos="198:33-198:47">inputLocation</code> and <code data-sourcepos="198:53-198:62">SparkJar</code>. The output
+location on the other hand does not require <code data-sourcepos="199:45-199:51">/dbfs</code>.</p>
+<p data-sourcepos="201:1-202:97" dir="auto">This is an error Log for spark-submit task on databricks cluster.
+The log clearly states that the <code data-sourcepos="202:33-202:96">Local jar /example/flightsByCarrierDemo_21a.jar does not exist</code>.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="204:1-224:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">21/04/09 17:26:37 WARN SparkConf: The configuration key 'spark.akka.frameSize' has been deprecated as of Spark 1.6 and may be removed in the future. Please use the new key 'spark.rpc.message.maxSize' instead.</span>
+<span class="line" data-lang="plaintext" id="LC2">21/04/09 17:26:39 WARN DependencyUtils: Local jar /example/flightsByCarrierDemo_21a.jar does not exist, skipping.</span>
+<span class="line" data-lang="plaintext" id="LC3">21/04/09 17:26:39 WARN SparkSubmit$$anon$2: Failed to load com.mathworks.mlspark.mlsubmit.MatlabSubmit.</span>
+<span class="line" data-lang="plaintext" id="LC4">java.lang.ClassNotFoundException: com.mathworks.mlspark.mlsubmit.MatlabSubmit</span>
+<span class="line" data-lang="plaintext" id="LC5">  at java.net.URLClassLoader.findClass(URLClassLoader.java:382)</span>
+<span class="line" data-lang="plaintext" id="LC6">  at java.lang.ClassLoader.loadClass(ClassLoader.java:418)</span>
+<span class="line" data-lang="plaintext" id="LC7">  at java.lang.ClassLoader.loadClass(ClassLoader.java:351)</span>
+<span class="line" data-lang="plaintext" id="LC8">  at java.lang.Class.forName0(Native Method)</span>
+<span class="line" data-lang="plaintext" id="LC9">  at java.lang.Class.forName(Class.java:348)</span>
+<span class="line" data-lang="plaintext" id="LC10">  at org.apache.spark.util.Utils$.classForName(Utils.scala:257)</span>
+<span class="line" data-lang="plaintext" id="LC11">  at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:806)</span>
+<span class="line" data-lang="plaintext" id="LC12">  at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:161)</span>
+<span class="line" data-lang="plaintext" id="LC13">  at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:184)</span>
+<span class="line" data-lang="plaintext" id="LC14">  at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:86)</span>
+<span class="line" data-lang="plaintext" id="LC15">  at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:920)</span>
+<span class="line" data-lang="plaintext" id="LC16">  at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:929)</span>
+<span class="line" data-lang="plaintext" id="LC17">  at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)</span>
+<span class="line" data-lang="plaintext" id="LC18">21/04/09 17:26:39 INFO ShutdownHookManager: Shutdown hook called</span>
+<span class="line" data-lang="plaintext" id="LC19">21/04/09 17:26:39 INFO ShutdownHookManager: Deleting directory /local_disk0/tmp/spark-1253f705-6769-41bd-a25e-77114ead1a21</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="226:1-228:53" dir="auto">If the jar actually exists at <code data-sourcepos="226:31-226:40">/example</code> on dbfs, the reason could be
+<code data-sourcepos="227:1-227:44">defining the Job has missing /dbfs in path</code> while providing
+input data location and SparkJar location as follows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="230:1-250:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Defining path for input, output and application</span></span>
+<span class="line" data-lang="matlab" id="LC2"/>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">inputLocation</span> <span class="o">=</span> <span class="s2">"/data/airlinedelay/*.csv"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">sparkApp</span> <span class="o">=</span> <span class="s2">"/example/flightsByCarrierDemo_21a.jar"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">outputLocation</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'/output/output'</span><span class="p">,</span><span class="nb">datestr</span><span class="p">(</span><span class="nb">now</span><span class="p">,</span><span class="mi">30</span><span class="p">)];</span></span>
+<span class="line" data-lang="matlab" id="LC6"/>
+<span class="line" data-lang="matlab" id="LC7"><span class="c1">% Creating a Job and a Task </span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="c1">% Assigning the above paths before running a Spark Submit Job on a new cluster</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="n">job</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Job</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC10"><span class="n">job</span><span class="o">.</span><span class="n">setCluster</span><span class="p">(</span><span class="n">cl</span><span class="p">);</span> <span class="c1">% given cl is a valid cluster definition</span></span>
+<span class="line" data-lang="matlab" id="LC11"/>
+<span class="line" data-lang="matlab" id="LC12"><span class="n">task</span><span class="o">.</span><span class="n">Application</span> <span class="o">=</span> <span class="n">sparkApp</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC13"><span class="n">task</span><span class="o">.</span><span class="n">Arguments</span> <span class="o">=</span> <span class="p">[</span><span class="n">task</span><span class="o">.</span><span class="n">MCRROOT</span><span class="p">,</span><span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC14">    <span class="n">inputLocation</span><span class="p">,</span><span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC15">    <span class="n">outputLocation</span><span class="p">];</span></span>
+<span class="line" data-lang="matlab" id="LC16"/>
+<span class="line" data-lang="matlab" id="LC17"><span class="n">job</span><span class="o">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">task</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC18"><span class="n">job</span><span class="o">.</span><span class="n">create</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC19"><span class="n">job</span><span class="o">.</span><span class="n">runNow</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="252:1-252:58" dir="auto">The above translates to the following <code data-sourcepos="252:39-252:52">spark-submit</code> task:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="254:1-257:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">Task: spark-submit</span>
+<span class="line" data-lang="plaintext" id="LC2">Arguments: ["--class","com.mathworks.mlspark.mlsubmit.MatlabSubmit","--driver-library-path","/usr/local/MATLAB/MATLAB_Runtime/v910/runtime/glnxa64:/usr/local/MATLAB/MATLAB_Runtime/v910/bin/glnxa64:/usr/local/MATLAB/MATLAB_Runtime/v910/sys/os/glnxa64:/usr/local/MATLAB/MATLAB_Runtime/v910/extern/bin/glnxa64","--jars","/usr/local/MATLAB/MATLAB_Runtime/v910/toolbox/mlhadoop/jar/a2.2.0/mwmapreduce.jar,/usr/local/MATLAB/MATLAB_Runtime/v910/toolbox/shared/bigdata/jar/hadoop.2.jar,/usr/local/MATLAB/MATLAB_Runtime/v910/toolbox/compiler/mlspark/jars/2.x/mlspark.jar,","/example/flightsByCarrierDemo_21a.jar","/usr/local/MATLAB/MATLAB_Runtime/v910","/data/airlinedelay/*.csv","/output/output20210409T131006"]</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="259:1-259:95" dir="auto">The solution in this case would be to change the path to inputLocation and SparkJar as follows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="261:1-264:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">inputLocation</span> <span class="o">=</span> <span class="s2">"/dbfs/data/airlinedelay/*.csv"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">sparkApp</span> <span class="o">=</span> <span class="s2">"/dbfs/example/flightsByCarrierDemo_21a.jar"</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="266:1-266:60" dir="auto" id="user-content-checking-if-the-matlab-runtime-is-configured-on-a-cluster">Checking if the MATLAB Runtime is configured on a cluster</h2>
+<p data-sourcepos="268:1-271:6" dir="auto">If the MATLAB Runtime is configured on a given cluster then the LD_LIBRARY_PATH should
+be configured to point to it. This is easily checked by starting a notebook and typing
+the following shell command, note the use of the leading <em data-sourcepos="270:58-270:60">%</em> to pass the command to a
+shell:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-shell" data-canonical-lang="bash" data-sourcepos="273:1-277:3" v-pre="true"><code><span class="line" data-lang="shell" id="LC1">%sh <span class="nb">env</span> | <span class="nb">grep</span> <span class="nt">-i</span> MATLAB</span>
+<span class="line" data-lang="shell" id="LC2"/>
+<span class="line" data-lang="shell" id="LC3"><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/MATLAB_Runtime/runtime/glnxa64:/MATLAB_Runtime/bin/glnxa64:/MATLAB_Runtime/sys/os/glnxa64:/MATLAB_Runtime/extern/bin/glnxa64</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="279:1-279:56" dir="auto">(Paths will differ slightly in versions prior to v5.0.0)</p>
+<p data-sourcepos="281:1-284:68" dir="auto">The result returns the LD_LIBRARY_PATH variable, To verify that the corresponding
+files exist the following command can be used, again in a notebook, taking the path
+from the LD_LIBRARY_PATH. The output will be similar to the following, where the
+<code data-sourcepos="284:1-284:11">&lt;release&gt;</code> element shows which MATLAB Runtime release is installed:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-xml" data-canonical-lang="xml" data-sourcepos="286:1-298:3" v-pre="true"><code><span class="line" data-lang="xml" id="LC1">%sh cat /MATLAB_Runtime/VersionInfo.xml</span>
+<span class="line" data-lang="xml" id="LC2"/>
+<span class="line" data-lang="xml" id="LC3"><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span>
+<span class="line" data-lang="xml" id="LC4"><span class="c">&lt;!-- Version information for MathWorks R&lt;YYYY&gt;&lt;a|b&gt; Release --&gt;</span></span>
+<span class="line" data-lang="xml" id="LC5"><span class="nt">&lt;MathWorks_version_info&gt;</span></span>
+<span class="line" data-lang="xml" id="LC6">  <span class="nt">&lt;version&gt;</span>...<span class="nt">&lt;/version&gt;</span></span>
+<span class="line" data-lang="xml" id="LC7">  <span class="nt">&lt;release&gt;</span>R<span class="nt">&lt;YYYY&gt;&lt;a</span><span class="err">|b</span><span class="nt">&gt;&lt;/release&gt;</span></span>
+<span class="line" data-lang="xml" id="LC8">  <span class="nt">&lt;description&gt;</span>Update <span class="nt">&lt;N&gt;&lt;/description&gt;</span></span>
+<span class="line" data-lang="xml" id="LC9">  <span class="nt">&lt;date&gt;</span>...<span class="nt">&lt;/date&gt;</span></span>
+<span class="line" data-lang="xml" id="LC10">  <span class="nt">&lt;checksum&gt;</span>...<span class="nt">&lt;/checksum&gt;</span></span>
+<span class="line" data-lang="xml" id="LC11"><span class="nt">&lt;/MathWorks_version_info&gt;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="300:1-300:84" dir="auto">This indicates the runtime is installed and gives some detailed release information.</p>
+<h2 data-sourcepos="302:1-302:60" dir="auto" id="user-content-cluster-startup-fails-with-javalangnoclassdeffounderror">Cluster startup fails with java.lang.NoClassDefFoundError</h2>
+<blockquote data-sourcepos="304:1-305:97" dir="auto">
+<p data-sourcepos="304:3-305:97">In release 5.0.0 and greater, while the error may still be indicative of a similar problem,
+<code data-sourcepos="305:3-305:17">runtimes.json</code> is no longer used, see <a data-sourcepos="305:42-305:97" href="InstallingMATLABRuntime.html">InstallingMATLABRuntime.md</a></p>
+</blockquote>
+<p data-sourcepos="307:1-309:204" dir="auto">If cluster startup fails with java.lang.NoClassDefFoundError:com/mathworks/toolbox/javabuilder/MWApplication
+this error denotes that the MATLAB Runtime was not installed on an on-demand cluster.
+Make sure that /databricks-v0.4.9/Software/MATLAB/config/runtimes.json includes the correct block for your MATLAB version and that the runtime used is the <em data-sourcepos="309:156-309:162">Linux</em> version, one that ends with _glnxa64.zip.</p>
+<p data-sourcepos="311:1-311:128" dir="auto">In addition, include the following call in your cluster setup to ensure that the MATLAB Runtime is enabled on the cluster nodes.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="313:1-316:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">cl</span><span class="o">.</span><span class="n">enableMATLABRuntime</span><span class="p">(</span><span class="s1">'enableInitLogging'</span><span class="p">,</span> <span class="nb">true</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC2">                       <span class="s1">'enableRuntimeInstall'</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="318:1-318:26" dir="auto" id="user-content-basic-connectivity-test">Basic connectivity test</h2>
+<p data-sourcepos="320:1-320:67" dir="auto">A simple test for basic connectivity using only curl is as follows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-shell" data-canonical-lang="bash" data-sourcepos="322:1-324:3" v-pre="true"><code><span class="line" data-lang="shell" id="LC1">curl <span class="nt">--location</span> <span class="nt">--request</span> GET <span class="s2">"https://&lt;REDACTED ENDPOINT&gt;.azuredatabricks.net/api/2.0/clusters/list"</span> <span class="nt">--header</span> <span class="s2">"Authorization: Bearer dap&lt;REDACTED TOKEN&gt;573"</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="326:1-326:216" dir="auto">The JSON response will include details of clusters. If this request does not succeed then it is unlikely that REST API requests from within MATLAB will succeed and underlying connectivity issues should be considered.</p>
+<h2 data-sourcepos="328:1-328:68" dir="auto" id="user-content-getting-an-exception-in-thread-main-javalangnosuchmethoderror">Getting an Exception in thread "main" java.lang.NoSuchMethodError</h2>
+<p data-sourcepos="330:1-336:52" dir="auto">If an Exception in thread "main"
+<code data-sourcepos="331:1-331:56">java.lang.NoSuchMethodError: scala.Predef$.refArrayOps</code> arises.
+This means that the version of Scala® requested on the on-demand cluster is too
+new for the MATLAB Spark implementation.
+The error is caused by Scala 2.12 being installed where the requested method
+was deprecated on Scala versions newer than 2.11.
+Solution: request a cluster with Scala version 2.11.</p>
+<h2 data-sourcepos="338:1-338:43" dir="auto" id="user-content-what-version-of-db-connect-should-i-use">What version of DB Connect should I use?</h2>
+<p data-sourcepos="340:1-340:138" dir="auto">Databricks advises that the version of Databricks Connect used should match the version of the Databricks used on the cluster in question.</p>
+<h2 data-sourcepos="342:1-342:20" dir="auto" id="user-content-jars-do-not-exist">Jars do not exist</h2>
+<p data-sourcepos="344:1-344:123" dir="auto">The following error indicates that the <code data-sourcepos="344:40-344:63">runtime_install.sh</code> script has not be executed when a node(s) were initialized.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="346:1-368:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">20/04/21 17:48:34 WARN SparkConf: The configuration key 'spark.akka.frameSize' has been deprecated as of Spark 1.6 and may be removed in the future. Please use the new key 'spark.rpc.message.maxSize' instead.</span>
+<span class="line" data-lang="plaintext" id="LC2">20/04/21 17:48:36 WARN DependencyUtils: Local jar /usr/local/MATLAB/MATLAB_Runtime/v97/toolbox/mlhadoop/jar/a2.2.0/mwmapreduce.jar does not exist, skipping.</span>
+<span class="line" data-lang="plaintext" id="LC3">20/04/21 17:48:36 WARN DependencyUtils: Local jar /usr/local/MATLAB/MATLAB_Runtime/v97/toolbox/shared/bigdata/jar/hadoop.2.jar does not exist, skipping.</span>
+<span class="line" data-lang="plaintext" id="LC4">20/04/21 17:48:36 WARN DependencyUtils: Local jar /usr/local/MATLAB/MATLAB_Runtime/v97/toolbox/compiler/mlspark/jars/2.x/mlspark.jar does not exist, skipping.</span>
+<span class="line" data-lang="plaintext" id="LC5">20/04/21 17:48:36 WARN SparkSubmit$$anon$2: Failed to load com.mathworks.mlspark.mlsubmit.MatlabSubmit.</span>
+<span class="line" data-lang="plaintext" id="LC6">java.lang.ClassNotFoundException: com.mathworks.mlspark.mlsubmit.MatlabSubmit</span>
+<span class="line" data-lang="plaintext" id="LC7">                at java.net.URLClassLoader.findClass(URLClassLoader.java:382)</span>
+<span class="line" data-lang="plaintext" id="LC8">                at java.lang.ClassLoader.loadClass(ClassLoader.java:418)</span>
+<span class="line" data-lang="plaintext" id="LC9">                at java.lang.ClassLoader.loadClass(ClassLoader.java:351)</span>
+<span class="line" data-lang="plaintext" id="LC10">                at java.lang.Class.forName0(Native Method)</span>
+<span class="line" data-lang="plaintext" id="LC11">                at java.lang.Class.forName(Class.java:348)</span>
+<span class="line" data-lang="plaintext" id="LC12">                at org.apache.spark.util.Utils$.classForName(Utils.scala:257)</span>
+<span class="line" data-lang="plaintext" id="LC13">                at org.apache.spark.deploy.SparkSubmit.org$apache$spark$deploy$SparkSubmit$$runMain(SparkSubmit.scala:806)</span>
+<span class="line" data-lang="plaintext" id="LC14">                at org.apache.spark.deploy.SparkSubmit.doRunMain$1(SparkSubmit.scala:161)</span>
+<span class="line" data-lang="plaintext" id="LC15">                at org.apache.spark.deploy.SparkSubmit.submit(SparkSubmit.scala:184)</span>
+<span class="line" data-lang="plaintext" id="LC16">                at org.apache.spark.deploy.SparkSubmit.doSubmit(SparkSubmit.scala:86)</span>
+<span class="line" data-lang="plaintext" id="LC17">                at org.apache.spark.deploy.SparkSubmit$$anon$2.doSubmit(SparkSubmit.scala:920)</span>
+<span class="line" data-lang="plaintext" id="LC18">                at org.apache.spark.deploy.SparkSubmit$.main(SparkSubmit.scala:929)</span>
+<span class="line" data-lang="plaintext" id="LC19">                at org.apache.spark.deploy.SparkSubmit.main(SparkSubmit.scala)</span>
+<span class="line" data-lang="plaintext" id="LC20">20/04/21 17:48:36 INFO ShutdownHookManager: Shutdown hook called</span>
+<span class="line" data-lang="plaintext" id="LC21">20/04/21 17:48:36 INFO ShutdownHookManager: Deleting directory /local_disk0/tmp/spark-3cf75386-147b-4989-a776-58c3f9e416dc</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="370:1-370:33" dir="auto" id="user-content-spark-reports-a-bind-exception">Spark reports a bind exception</h2>
+<p data-sourcepos="372:1-372:21" dir="auto">The error looks like:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="374:1-401:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">Error using matlab.compiler.mlspark.SparkSession (line 62)</span>
+<span class="line" data-lang="plaintext" id="LC2">    Java exception occurred:</span>
+<span class="line" data-lang="plaintext" id="LC3">    java.net.BindException: Cannot assign requested address: bind: Service</span>
+<span class="line" data-lang="plaintext" id="LC4">    'sparkDriver' failed after 16 retries (on a random free port)! Consider</span>
+<span class="line" data-lang="plaintext" id="LC5">    explicitly setting the appropriate binding address for the service</span>
+<span class="line" data-lang="plaintext" id="LC6">    'sparkDriver' (for example spark.driver.bindAddress for SparkDriver) to the</span>
+<span class="line" data-lang="plaintext" id="LC7">    correct binding address.</span>
+<span class="line" data-lang="plaintext" id="LC8">        at sun.nio.ch.Net.bind0(Native Method)</span>
+<span class="line" data-lang="plaintext" id="LC9">        at sun.nio.ch.Net.bind(Net.java:433)</span>
+<span class="line" data-lang="plaintext" id="LC10">        at sun.nio.ch.Net.bind(Net.java:425)</span>
+<span class="line" data-lang="plaintext" id="LC11">        at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:223)</span>
+<span class="line" data-lang="plaintext" id="LC12">        at io.netty.channel.socket.nio.NioServerSocketChannel.doBind(NioServerSocketChannel.java:132)</span>
+<span class="line" data-lang="plaintext" id="LC13">        at io.netty.channel.AbstractChannel$AbstractUnsafe.bind(AbstractChannel.java:551)</span>
+<span class="line" data-lang="plaintext" id="LC14">        at io.netty.channel.DefaultChannelPipeline$HeadContext.bind(DefaultChannelPipeline.java:1346)</span>
+<span class="line" data-lang="plaintext" id="LC15">        at io.netty.channel.AbstractChannelHandlerContext.invokeBind(AbstractChannelHandlerContext.java:503)</span>
+<span class="line" data-lang="plaintext" id="LC16">        at io.netty.channel.AbstractChannelHandlerContext.bind(AbstractChannelHandlerContext.java:488)</span>
+<span class="line" data-lang="plaintext" id="LC17">        at io.netty.channel.DefaultChannelPipeline.bind(DefaultChannelPipeline.java:985)</span>
+<span class="line" data-lang="plaintext" id="LC18">        at io.netty.channel.AbstractChannel.bind(AbstractChannel.java:247)</span>
+<span class="line" data-lang="plaintext" id="LC19">        at io.netty.bootstrap.AbstractBootstrap$2.run(AbstractBootstrap.java:344)</span>
+<span class="line" data-lang="plaintext" id="LC20">        at io.netty.util.concurrent.AbstractEventExecutor.safeExecute(AbstractEventExecutor.java:163)</span>
+<span class="line" data-lang="plaintext" id="LC21">        at io.netty.util.concurrent.SingleThreadEventExecutor.runAllTasks(SingleThreadEventExecutor.java:510)</span>
+<span class="line" data-lang="plaintext" id="LC22">        at io.netty.channel.nio.NioEventLoop.run(NioEventLoop.java:518)</span>
+<span class="line" data-lang="plaintext" id="LC23">        at io.netty.util.concurrent.SingleThreadEventExecutor$6.run(SingleThreadEventExecutor.java:1044)</span>
+<span class="line" data-lang="plaintext" id="LC24">        at io.netty.util.internal.ThreadExecutorMap$2.run(ThreadExecutorMap.java:74)</span>
+<span class="line" data-lang="plaintext" id="LC25">        at io.netty.util.concurrent.FastThreadLocalRunnable.run(FastThreadLocalRunnable.java:30)</span>
+<span class="line" data-lang="plaintext" id="LC26">        at java.lang.Thread.run(Thread.java:748)</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="403:1-405:26" dir="auto">This is usually caused due to a change in the computer's network configuration
+typically due to a VPN connection or similar changes. The simplest way to fix
+this is to restart MATLAB.</p>
+<h2 data-sourcepos="407:1-407:22" dir="auto" id="user-content-what-is-dbc-format">What is DBC format?</h2>
+<p data-sourcepos="409:1-409:150" dir="auto">A Databricks archive is a JAR file with additional metadata and .dbc extension. It is used to exchange notebooks and can be imported and exported See:</p>
+<ul data-sourcepos="411:1-412:162" dir="auto">
+<li data-sourcepos="411:1-411:36"><a data-sourcepos="411:3-411:36" href="WorkspacesAPI.html">Workspaces API</a></li>
+<li data-sourcepos="412:1-413:0"><a data-sourcepos="412:3-412:162" href="https://docs.databricks.com/notebooks/notebooks-manage.html#databricks-archive" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/notebooks/notebooks-manage.html#databricks-archive</a></li>
+</ul>
+<h2 data-sourcepos="414:1-414:115" dir="auto" id="user-content-deployed-simulink-simulation-fails-to-run-with-libx86_64-linux-gnulibcso6-version-glibc_234-not-found">Deployed Simulink simulation fails to run with "/lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found"</h2>
+<p data-sourcepos="416:1-416:79" dir="auto">Deployed Simulink models may fail to run throwing a long error stack including:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="418:1-420:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">Error occurred while simulating the model 'mymodel' in rapid accelerator mode. Rerun the simulation in normal mode to diagnose this error. /root/.mcrCache9.12/mypack0/mymodel/slprj/raccel_deploy/mymodel/mymodel: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.34' not found (required by /root/.mcrCache9.12/mypack0/mymodel/slprj/raccel_deploy/mymodel/mymodel)</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="422:1-422:106" dir="auto">The exact version mentioned in the error <code data-sourcepos="422:42-422:53">GLIBC_2.34</code> may differ, e.g. <code data-sourcepos="422:72-422:83">GLIBC_2.35</code> could be seen as well.</p>
+<p data-sourcepos="424:1-424:644" dir="auto">This error occurs if the native model binary was built on a system with a newer <code data-sourcepos="424:81-424:87">glibc</code> library version than in the runtime image, making it incompatible Databricks runtime images. Rebuild the package on an older Linux system which is compatible with the operating system used in the Databricks runtime image that is used. Typically the best option is to use the same OS distribution and version as used by the Databricks runtime which is used. Check the <a data-sourcepos="424:456-424:549" href="https://docs.databricks.com/release-notes/runtime/releases.html" rel="nofollow noreferrer noopener" target="_blank">Databricks runtime releases</a> documentation to see which exact base OS is used by the different Databricks runtime versions.</p>
+<h2 data-sourcepos="426:1-426:46" dir="auto" id="user-content-name-change-sql-endpoints-to-sql-warehouses">Name change SQL Endpoints to SQL Warehouses</h2>
+<p data-sourcepos="428:1-428:312" dir="auto">Databricks has <a data-sourcepos="428:16-428:173" href="https://docs.databricks.com/sql/admin/sql-endpoints.html#sql-endpoints-name-changed-to-sql-warehouses" rel="nofollow noreferrer noopener" target="_blank">changed the name from SQL endpoints to SQL warehouses</a>. Due to this change the class names in the MATLAB package have changed as well and code making use of the old class names must be updated:</p>
+<table data-sourcepos="430:1-438:94" dir="auto">
+<thead>
+<tr data-sourcepos="430:1-430:94">
+<th data-sourcepos="430:2-430:46">Old class name</th>
+<th data-sourcepos="430:48-430:93">New class name</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="432:1-432:94">
+<td data-sourcepos="432:2-432:46"><code data-sourcepos="432:3-432:26">databricks.SQLEndpoint</code></td>
+<td data-sourcepos="432:48-432:93"><code data-sourcepos="432:49-432:73">databricks.SQLWarehouse</code></td>
+</tr>
+<tr data-sourcepos="433:1-433:94">
+<td data-sourcepos="433:2-433:46"><code data-sourcepos="433:3-433:44">databricks.datastructures.EndpointHealth</code></td>
+<td data-sourcepos="433:48-433:93"><code data-sourcepos="433:49-433:91">databricks.datastructures.WarehouseHealth</code></td>
+</tr>
+<tr data-sourcepos="434:1-434:94">
+<td data-sourcepos="434:2-434:46"><code data-sourcepos="434:3-434:45">databricks.datastructures.EndpointTagPair</code></td>
+<td data-sourcepos="434:48-434:93"><code data-sourcepos="434:49-434:92">databricks.datastructures.WarehouseTagPair</code></td>
+</tr>
+<tr data-sourcepos="435:1-435:94">
+<td data-sourcepos="435:2-435:46"><code data-sourcepos="435:3-435:42">databricks.datastructures.EndpointTags</code></td>
+<td data-sourcepos="435:48-435:93"><code data-sourcepos="435:49-435:89">databricks.datastructures.WarehouseTags</code></td>
+</tr>
+<tr data-sourcepos="436:1-436:114">
+<td data-sourcepos="436:2-436:56"><code data-sourcepos="436:3-436:55">databricks.datastructures.EnpointSpotInstancePolicy</code></td>
+<td data-sourcepos="436:58-436:113"><code data-sourcepos="436:59-436:112">databricks.datastructures.WarehousepotInstancePolicy</code></td>
+</tr>
+<tr data-sourcepos="437:1-437:94">
+<td data-sourcepos="437:2-437:46"><code data-sourcepos="437:3-437:43">databricks.datastructures.EndpointState</code></td>
+<td data-sourcepos="437:48-437:93"><code data-sourcepos="437:49-437:90">databricks.datastructures.WarehouseState</code></td>
+</tr>
+<tr data-sourcepos="438:1-438:94">
+<td data-sourcepos="438:2-438:46"><code data-sourcepos="438:3-438:44">databricks.datastructures.EndpointStatus</code></td>
+<td data-sourcepos="438:48-438:93"><code data-sourcepos="438:49-438:91">databricks.datastructures.WarehouseStatus</code></td>
+</tr>
+</tbody>
+</table>
+<h2 data-sourcepos="440:1-440:68" dir="auto" id="user-content-error-creating-directory-usersdefaultnameexamplecommathworks">Error Creating directory /Users/<a data-sourcepos="440:36-440:58" href="mailto:defaultname@example.com">defaultname@example.com</a>/MathWorks</h2>
+<p data-sourcepos="442:1-442:63" dir="auto">During a cluster based installed the following error can arise:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="444:1-449:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">Importing notebooks to perform cluster based tasks:</span>
+<span class="line" data-lang="plaintext" id="LC2">Creating directory: /Users/defaultname@example.com/MathWorks</span>
+<span class="line" data-lang="plaintext" id="LC3">Error using matlab.databricks.internal.responseError</span>
+<span class="line" data-lang="plaintext" id="LC4">Failed to create directory: /Users/defaultname@example.com/MathWorks  error_code: DIRECTORY_PROTECTED  message: Folder Users is protected</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="451:1-453:209" dir="auto">This indicates that Databricks is preventing the creation of a directory and notebook for the user "<a data-sourcepos="451:101-451:123" href="mailto:defaultname@example.com">defaultname@example.com</a>".
+This reflects a missed configuration step for the <code data-sourcepos="452:51-452:76">databricks-settings.json</code> file, whereby the default username and probably notification email address have not been updated. For further details see <a data-sourcepos="452:200-452:219" href="Setup.html">Setup.md</a>.
+The path to the file is returned by: <code data-sourcepos="453:38-453:84">fullfile(prefdir, 'databricks-settings.json')</code>. If the file is not present a template version can be found in: <code data-sourcepos="453:150-453:208">/Software/MATLAB/config/databricks-settings.json.template</code>.</p>
+<h2 data-sourcepos="455:1-455:37" dir="auto" id="user-content-base64-encodingdecoding-mex-files">Base64 encoding/decoding mex files</h2>
+<p data-sourcepos="457:1-459:163" dir="auto">Where possible platform specific mex files are used to improve the performance of base64 encoding and decoding. This is used heavily in DBFS upload and download operations.
+Security measures intended to prevent the execution of unsigned binaries, e.g. macOS® Gatekeeper, can prevent the execution of mex files.
+If there is an issue executing the mex files the preference set at install time can be controlled using the following commands after running the <code data-sourcepos="459:146-459:154">startup</code> command:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="461:1-467:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Use optimized mex file</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="nb">matlab</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">base64</span><span class="p">(</span><span class="s1">'setconfig'</span><span class="p">,</span> <span class="s1">'mex'</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3"/>
+<span class="line" data-lang="matlab" id="LC4"><span class="c1">% Use MATLAB's standard base64 support</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="nb">matlab</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">base64</span><span class="p">(</span><span class="s1">'setconfig'</span><span class="p">,</span> <span class="s1">'shipping'</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="469:1-469:56" dir="auto"><em data-sourcepos="469:1-469:7">Note:</em> Restart MATLAB to allow a change to take effect.</p>
+<p data-sourcepos="471:1-471:39" dir="auto">The current mode can be returned using:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="473:1-475:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="nb">matlab</span><span class="o">.</span><span class="n">net</span><span class="o">.</span><span class="n">base64</span><span class="p">(</span><span class="s1">'getconfig'</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="477:1-478:91" dir="auto">The startup command will report the current mode as <code data-sourcepos="477:53-477:83">DBFS transfer mode: Optimized</code> or <code data-sourcepos="477:88-477:117">DBFS transfer mode: Standard</code>.
+For example, <code data-sourcepos="478:14-478:23">shipping</code> mode can be used while an issue with mex execution is investigated.</p>
+<h2 data-sourcepos="480:1-480:53" dir="auto" id="user-content-problem-when-build-a-wheel-file-on-a-network-drive">Problem when build a wheel file on a network drive</h2>
+<p data-sourcepos="482:1-482:80" dir="auto">Occasionally an issue may be seen when building a wheel file on a network drive.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="text" data-sourcepos="484:1-495:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">Error using compiler.build.spark.PythonSparkBuilder/createWheel (line 42)</span>
+<span class="line" data-lang="plaintext" id="LC2">Error building .whl file: * Getting build dependencies for wheel...</span>
+<span class="line" data-lang="plaintext" id="LC3">running egg_info</span>
+<span class="line" data-lang="plaintext" id="LC4">creating demo_nyc_164.egg-info</span>
+<span class="line" data-lang="plaintext" id="LC5">writing demo_nyc_164.egg-info\PKG-INFO</span>
+<span class="line" data-lang="plaintext" id="LC6">   ... Many error lines</span>
+<span class="line" data-lang="plaintext" id="LC7"/>
+<span class="line" data-lang="plaintext" id="LC8">error: [WinError 145] The directory is not empty: 'build\\bdist.win-amd64\\wheel\\.\\demo_nyc_164-26.2.0-py3.12.egg-info'</span>
+<span class="line" data-lang="plaintext" id="LC9"/>
+<span class="line" data-lang="plaintext" id="LC10">ERROR Backend subprocess exited when trying to invoke build_wheel </span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="497:1-498:83" dir="auto">A workaround is to try the build on a local disk instead, by setting the <code data-sourcepos="497:74-497:84">OutputDir</code>
+argument for <code data-sourcepos="498:14-498:50">compiler.build.PythonPackageOptions</code> to a local directory as follows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="500:1-505:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">opts</span> <span class="o">=</span> <span class="n">compiler</span><span class="o">.</span><span class="nb">build</span><span class="o">.</span><span class="n">PythonPackageOptions</span><span class="p">(</span><span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC2">    <span class="p">[</span><span class="s2">"foo.m"</span><span class="p">,</span> <span class="s2">"baz.m"</span><span class="p">],</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC3">    <span class="n">OutputDir</span><span class="o">=</span><span class="s2">"C:\Temp\_build"</span><span class="p">,</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC4">    <span class="n">PackageName</span><span class="o">=</span><span class="s2">"foo.bar"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="507:1-508:37" dir="auto">The problem relates to the underlying Python® command that packages the resulting
+wheel file and is being investigated.</p></div></main><script src="resources/copycode.js">//</script></body></html>

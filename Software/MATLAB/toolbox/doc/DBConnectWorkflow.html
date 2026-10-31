@@ -1,0 +1,156 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Using Databricks-Connect from MATLAB</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:38" dir="auto" id="user-content-using-databricks-connect-from-matlab">Using Databricks-Connect from MATLAB</h1>
+<h2 data-sourcepos="3:1-3:8" dir="auto" id="user-content-setup">Setup</h2>
+<p data-sourcepos="5:1-7:57" dir="auto">For instructions on setting up Databricks® Connect see <a data-sourcepos="5:60-5:76" href="Setup.html">Setup</a> and
+<a data-sourcepos="6:1-6:40" href="DBConnect.html">Databricks Connect Setup</a>. If using MATLAB® on Databricks specific
+Databricks Connect setup sets are generally not required.</p>
+<h2 data-sourcepos="9:1-9:18" dir="auto" id="user-content-getting-started">Getting started</h2>
+<p data-sourcepos="11:1-12:92" dir="auto">The following is a simple test to determine if Databricks Connect is connecting
+from MATLAB to a cluster using simple Spark™ <code data-sourcepos="12:52-12:58">range</code>, <code data-sourcepos="12:61-12:72">withColumn</code> &amp; <code data-sourcepos="12:76-12:82">randn</code> commands.</p>
+<p data-sourcepos="14:1-14:83" dir="auto">A Spark session is instantiated in MATLAB with the <code data-sourcepos="14:52-14:73">getDatabricksSession</code> function.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="16:1-21:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">spark</span> <span class="o">=</span> <span class="n">getDatabricksSession</span><span class="p">()</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">R</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">range</span><span class="p">(</span><span class="mf">1e5</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">DF</span> <span class="o">=</span> <span class="n">R</span><span class="o">.</span><span class="n">withColumn</span><span class="p">(</span><span class="s2">"newCol"</span><span class="p">,</span> <span class="nb">matlab</span><span class="o">.</span><span class="n">pyspark</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="nb">functions</span><span class="o">.</span><span class="nb">randn</span><span class="p">());</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">DF</span><span class="o">.</span><span class="nb">show</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="23:1-23:22" dir="auto" id="user-content-state-of-a-session">State of a session</h3>
+<p data-sourcepos="25:1-28:26" dir="auto">When a Databricks Connect session is created with <code data-sourcepos="25:51-25:74">getDatabricksSession()</code>, it uses
+the underlying Databricks Connect Python® based library to create the session.
+In many cases, calling this a second time (with the same arguments), will simply
+reuse an existing session.</p>
+<p data-sourcepos="30:1-33:13" dir="auto">Sometimes, a session may become <code data-sourcepos="30:33-30:39">stale</code>, and unusable. In this case, it helps to
+clear any existing objects containing a session, e.g. <code data-sourcepos="31:55-31:67">clear spark</code>, and then
+create a new session. Server side content in the previous session e.g. Dataframes,
+will be lost.</p>
+<p data-sourcepos="35:1-39:32" dir="auto">The <code data-sourcepos="35:5-35:21">forceNewSession</code> named argument to <code data-sourcepos="35:41-35:62">getDatabricksSession</code> can be set to <code data-sourcepos="35:78-35:83">true</code>
+to create a new Session rather than reuse an existing Spark Session, if available.
+This is especially useful in development workflows, where a new version of an
+artifact is uploaded with the <code data-sourcepos="38:31-38:43">addArtifact</code> method. If an old session is reused,
+the artifact cannot be replaced.</p>
+<h2 data-sourcepos="41:1-41:13" dir="auto" id="user-content-serverless">Serverless</h2>
+<p data-sourcepos="43:1-45:74" dir="auto">A <em data-sourcepos="43:3-43:14">serverless</em> compute based Spark Session is supported with more recent Databricks
+Connect versions, 17.3 or later is recommended. A serverless session can be created
+very quickly, typically a few seconds. Such sessions have some contraints:</p>
+<ul data-sourcepos="47:1-49:60" dir="auto">
+<li data-sourcepos="47:1-47:73">They do no currently support compiled MATLAB as <code data-sourcepos="47:51-47:56">.zip</code> or <code data-sourcepos="47:61-47:66">.whl</code> files.</li>
+<li data-sourcepos="48:1-48:47">They time out after 10 minutes of inactivity.</li>
+<li data-sourcepos="49:1-49:60">Connection creation failures can time out after 5 minutes.</li>
+</ul>
+<p data-sourcepos="51:1-51:35" dir="auto">Serverless compute will be used if:</p>
+<ul data-sourcepos="53:1-56:68" dir="auto">
+<li data-sourcepos="53:1-53:45">The <code data-sourcepos="53:7-53:18">serverless</code> argument is set to <code data-sourcepos="53:39-53:44">true</code>.</li>
+<li data-sourcepos="54:1-54:79">The environment variable <code data-sourcepos="54:28-54:61">DATABRICKS_SERVERLESS_COMPUTE_ID</code> is set to <code data-sourcepos="54:73-54:78">auto</code>.</li>
+<li data-sourcepos="55:1-55:70">The configuration profile has <code data-sourcepos="55:33-55:55">serverless_compute_id</code> set to <code data-sourcepos="55:64-55:69">auto</code>.</li>
+<li data-sourcepos="56:1-57:0">The configuration profile should not contain a <code data-sourcepos="56:50-56:61">cluster_id</code> field.</li>
+</ul>
+<h2 data-sourcepos="58:1-58:16" dir="auto" id="user-content-data-transfer">Data transfer</h2>
+<p data-sourcepos="60:1-68:36" dir="auto">When using Databricks Connect keep in mind that the Spark dataset object returned to
+MATLAB by many Spark calls is effectively a "handle" to the data and the data still
+resides on the Spark cluster.
+Only when converted to a MATLAB datatype does it become a value in the MATLAB
+workspace and uses a meaningful amount of memory with MATLAB.
+Thus to minimize memory usage by MATLAB and data transfer bandwidth from the
+cluster to MATLAB, perform any possible Spark filtering or data reduction
+operations using the Spark APIs on the dataset object before converting to a
+native MATLAB datatype e.g. a Table.</p>
+<h2 data-sourcepos="70:1-70:14" dir="auto" id="user-content-limitations">Limitations</h2>
+<p data-sourcepos="72:1-72:241" dir="auto">Databricks documents a number of limitations of Databricks Connect here: <a data-sourcepos="72:74-72:241" href="https://docs.databricks.com/aws/en/dev-tools/databricks-connect/python/limitations" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/aws/en/dev-tools/databricks-connect/python/limitations</a></p>
+<p data-sourcepos="74:1-75:104" dir="auto">This package does not support Databricks Connect versions below 13.3.
+For relevant details of Python and MATLAB version compatibility see: <a data-sourcepos="75:70-75:103" href="SupportMatrix.html">Support Matrix</a>.</p>
+<p data-sourcepos="77:1-78:20" dir="auto">When using Databricks Connect the use of the latest Databricks LTS runtime is
+strongly encouraged.</p>
+<h2 data-sourcepos="80:1-80:27" dir="auto" id="user-content-compilation-of-artifacts">Compilation of Artifacts</h2>
+<p data-sourcepos="82:1-83:29" dir="auto">See the examples in the directory: <code data-sourcepos="82:36-82:73">examples/DatabricksConnect/Artifacts</code>
+and the included <code data-sourcepos="83:18-83:28">README.md</code>.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="85:1-87:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="nb">cd</span><span class="p">(</span><span class="n">databricksRoot</span><span class="p">(</span><span class="s1">'examples'</span><span class="p">,</span> <span class="s1">'DatabricksConnect'</span><span class="p">,</span> <span class="s1">'Artifacts'</span><span class="p">))</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="89:1-90:21" dir="auto">This folder contains some trivial example functions, <code data-sourcepos="89:54-89:61">plusPi</code>, <code data-sourcepos="89:64-89:71">doMath</code>,
+<code data-sourcepos="90:1-90:14">addStringCol</code>, etc..</p>
+<p data-sourcepos="92:1-92:14" dir="auto">Run the build:</p>
+<blockquote data-sourcepos="94:1-95:72" dir="auto">
+<p data-sourcepos="94:3-95:72"><strong data-sourcepos="94:3-94:11">Note:</strong> Use Databricks Runtime version &gt;= v17.3, which is the first general
+availability (GA) version that officially supports this functionality.</p>
+</blockquote>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="97:1-99:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">PSB</span> <span class="o">=</span> <span class="n">buildLibrary</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="101:1-102:84" dir="auto">This builds a wheel file, but additionally
+a file <code data-sourcepos="102:8-102:39">&lt;package_name&gt;_ZipArtifact.zip</code> (in this example <code data-sourcepos="102:58-102:82">my.example_Artifact.zip</code>).</p>
+<p data-sourcepos="104:1-104:85" dir="auto">The function <code data-sourcepos="104:14-104:27">addStringCol</code> expects a table with two columns, <code data-sourcepos="104:63-104:71">integer</code> and <code data-sourcepos="104:77-104:84">double</code>:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="106:1-113:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="k">function</span> <span class="n">T_OUT</span> <span class="o">=</span> <span class="n">addStringCol</span><span class="p">(</span><span class="n">T_IN</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC2">    <span class="c1">% addStringCol</span></span>
+<span class="line" data-lang="matlab" id="LC3"/>
+<span class="line" data-lang="matlab" id="LC4">    <span class="n">T_OUT</span> <span class="o">=</span> <span class="n">T_IN</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC5">    <span class="n">T_OUT</span><span class="o">.</span><span class="n">hello</span> <span class="o">=</span> <span class="nb">string</span><span class="p">(</span><span class="n">T_IN</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"_hello_"</span> <span class="o">+</span> <span class="nb">string</span><span class="p">(</span><span class="n">T_IN</span><span class="o">.</span><span class="n">did</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="k">end</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="115:1-115:41" dir="auto">Use the following steps to build and run:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="117:1-135:4" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; spark = getDatabricksSession</span>
+<span class="line" data-lang="plaintext" id="LC2">spark = </span>
+<span class="line" data-lang="plaintext" id="LC3">  PySparkSession with properties:</span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">      ClusterId: "0812-091301-zntwkr4b"</span>
+<span class="line" data-lang="plaintext" id="LC6">    BaseVersion: "14.3"</span>
+<span class="line" data-lang="plaintext" id="LC7">    SparkServer: []</span>
+<span class="line" data-lang="plaintext" id="LC8">&gt;&gt; R = spark.range(1e3)</span>
+<span class="line" data-lang="plaintext" id="LC9">R = </span>
+<span class="line" data-lang="plaintext" id="LC10">  Dataframe with no properties.</span>
+<span class="line" data-lang="plaintext" id="LC11">&gt;&gt; DF = R.withColumn('did', matlab.pyspark.sql.functions.randn())</span>
+<span class="line" data-lang="plaintext" id="LC12">DF = </span>
+<span class="line" data-lang="plaintext" id="LC13">  Dataframe with no properties.</span>
+<span class="line" data-lang="plaintext" id="LC14">&gt;&gt; DF.printSchema</span>
+<span class="line" data-lang="plaintext" id="LC15">root</span>
+<span class="line" data-lang="plaintext" id="LC16"> |-- id: long (nullable = false)</span>
+<span class="line" data-lang="plaintext" id="LC17"> |-- did: double (nullable = false)</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="137:1-137:55" dir="auto">To run this from within MATLAB two things must be done:</p>
+<ol data-sourcepos="139:1-141:18" dir="auto">
+<li data-sourcepos="139:1-139:63">The artifact must be added to the current Spark session, and</li>
+<li data-sourcepos="140:1-141:18">The functions from the python library must be imported into the current
+MATLAB session.</li>
+</ol>
+<p data-sourcepos="143:1-143:74" dir="auto">This can be done using a helper method of the <code data-sourcepos="143:47-143:66">PythonSparkBuilder</code> object.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="145:1-147:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">PSB.addArtifact(spark);</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="149:1-151:28" dir="auto">This artifact is now <em data-sourcepos="149:22-149:32">available</em> in the current Spark session.
+Furthermore, the helper methods imports the generated Python functions
+into the MATLAB environment.</p>
+<p data-sourcepos="153:1-154:24" dir="auto"><em data-sourcepos="153:1-154:24">Thus one can call a MATLAB function, compiled into a Python library, directly on Databricks
+without leaving MATLAB.</em></p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="156:1-179:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; OUT = DF.mapInPandas("addStringCol")</span>
+<span class="line" data-lang="plaintext" id="LC2">OUT = </span>
+<span class="line" data-lang="plaintext" id="LC3">  Dataframe with no properties.</span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">&gt;&gt; OUT.show(10, false)</span>
+<span class="line" data-lang="plaintext" id="LC6">+---+-------------------+----------------+</span>
+<span class="line" data-lang="plaintext" id="LC7">|id |did                |hello           |</span>
+<span class="line" data-lang="plaintext" id="LC8">+---+-------------------+----------------+</span>
+<span class="line" data-lang="plaintext" id="LC9">|0  |-0.7208682031019744|0_hello_-0.72087|</span>
+<span class="line" data-lang="plaintext" id="LC10">|1  |1.1940700163708902 |1_hello_1.1941  |</span>
+<span class="line" data-lang="plaintext" id="LC11">|2  |-2.727349160372737 |2_hello_-2.7273 |</span>
+<span class="line" data-lang="plaintext" id="LC12">|3  |1.270339150176543  |3_hello_1.2703  |</span>
+<span class="line" data-lang="plaintext" id="LC13">|4  |0.6858066765685452 |4_hello_0.68581 |</span>
+<span class="line" data-lang="plaintext" id="LC14">|5  |-0.8616134822263833|5_hello_-0.86161|</span>
+<span class="line" data-lang="plaintext" id="LC15">|6  |1.3108976149587273 |6_hello_1.3109  |</span>
+<span class="line" data-lang="plaintext" id="LC16">|7  |1.9688320133711728 |7_hello_1.9688  |</span>
+<span class="line" data-lang="plaintext" id="LC17">|8  |-0.5911113396114568|8_hello_-0.59111|</span>
+<span class="line" data-lang="plaintext" id="LC18">|9  |0.10349332957650109|9_hello_0.10349 |</span>
+<span class="line" data-lang="plaintext" id="LC19">+---+-------------------+----------------+</span>
+<span class="line" data-lang="plaintext" id="LC20">only showing top 10 rows</span>
+<span class="line" data-lang="plaintext" id="LC21"/>
+<span class="line" data-lang="plaintext" id="LC22">&gt;&gt; T = table(OUT);</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="181:1-182:82" dir="auto">The data in the table <code data-sourcepos="181:23-181:25">T</code> can now be used, extended, changed, etc.
+If the table should be converted back to a Spark Dataframe, it is done as follows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="184:1-201:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Make some change to table</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">T</span><span class="o">.</span><span class="n">str_id</span> <span class="o">=</span> <span class="nb">string</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">id</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"/>
+<span class="line" data-lang="matlab" id="LC4"><span class="c1">% Convert it to a Spark Dataframe</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="o">&gt;&gt;</span> <span class="n">DF_NEW</span> <span class="o">=</span> <span class="nb">matlab</span><span class="o">.</span><span class="n">sparkutils</span><span class="o">.</span><span class="n">table2dataset</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="n">spark</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">DF_NEW</span> <span class="o">=</span> </span>
+<span class="line" data-lang="matlab" id="LC7">  <span class="n">Dataframe</span> <span class="n">with</span> <span class="n">no</span> <span class="k">properties</span><span class="o">.</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="o">&gt;&gt;</span> <span class="n">DF_NEW</span><span class="o">.</span><span class="n">printSchema</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="n">root</span></span>
+<span class="line" data-lang="matlab" id="LC10"> <span class="o">|--</span> <span class="n">id</span><span class="p">:</span> <span class="n">long</span> <span class="p">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC11"> <span class="o">|--</span> <span class="n">did</span><span class="p">:</span> <span class="nb">double</span> <span class="p">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC12"> <span class="o">|--</span> <span class="n">hello</span><span class="p">:</span> <span class="nb">string</span> <span class="p">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC13"> <span class="o">|--</span> <span class="n">str_id</span><span class="p">:</span> <span class="nb">string</span> <span class="p">(</span><span class="n">nullable</span> <span class="o">=</span> <span class="nb">true</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC14"/>
+<span class="line" data-lang="matlab" id="LC15"><span class="c1">% Write it in Spark</span></span>
+<span class="line" data-lang="matlab" id="LC16"><span class="n">DF_NEW</span><span class="o">.</span><span class="nb">write</span><span class="o">.</span><span class="nb">format</span><span class="p">(</span><span class="s1">'parquet'</span><span class="p">)</span><span class="o">.</span><span class="nb">save</span><span class="p">(</span><span class="s1">'/Volumes/main/default/myvolume/Scratch/new_data'</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<blockquote data-sourcepos="203:1-205:177" dir="auto">
+<p data-sourcepos="203:3-205:177"><strong data-sourcepos="203:3-203:11">Note:</strong> Some restrictions apply. E.g., In the current version it is not
+possible to do a <code data-sourcepos="204:20-204:32">mapInPandas</code> with a table <strong data-sourcepos="204:47-204:53">and</strong> additional arguments.
+See: <a data-sourcepos="205:8-205:177" href="https://docs.databricks.com/en/dev-tools/databricks-connect/python/limitations.html" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/en/dev-tools/databricks-connect/python/limitations.html</a></p>
+</blockquote></div></main><script src="resources/copycode.js">//</script></body></html>

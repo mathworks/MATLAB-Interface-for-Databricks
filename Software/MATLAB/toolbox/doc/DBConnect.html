@@ -1,0 +1,239 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Databricks Connect Setup</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:26" dir="auto" id="user-content-databricks-connect-setup">Databricks Connect Setup</h1>
+<h2 data-sourcepos="3:1-3:15" dir="auto" id="user-content-introduction">Introduction</h2>
+<p data-sourcepos="5:1-6:83" dir="auto">Databricks® Connect enables access to many Spark™ API calls from within MATLAB®.
+The MATLAB interface uses the Databricks Connect Python® library when doing so.</p>
+<blockquote data-sourcepos="8:1-8:91" dir="auto">
+<p data-sourcepos="8:3-8:91">Version 17.3 is the first "GA" release of Databricks Connect and is strongly recommended.</p>
+</blockquote>
+<h3 data-sourcepos="10:1-10:30" dir="auto" id="user-content-using-matlab-on-databricks">Using MATLAB on Databricks</h3>
+<p data-sourcepos="12:1-15:133" dir="auto">If using <a data-sourcepos="12:10-12:91" href="https://github.com/mathworks-ref-arch/matlab-on-databricks" rel="nofollow noreferrer noopener" target="_blank">MATLAB on Databricks</a>,
+Databricks Connect can be pre-configured using the client version included in the
+Databricks Runtime of that cluster. No additional setup is required.
+For details see: <a data-sourcepos="15:18-15:133" href="https://github.com/mathworks-ref-arch/matlab-on-databricks/guides/PSP%2520docs/SparkInMATLAB.html" rel="nofollow noreferrer noopener" target="_blank">Use Spark in MATLAB</a></p>
+<h3 data-sourcepos="17:1-17:55" dir="auto" id="user-content-connecting-remotely-ie-matlab-not-on-databricks">Connecting remotely (i.e. MATLAB not on Databricks)</h3>
+<p data-sourcepos="19:1-22:64" dir="auto">The setup process requires a compatible Python environment with the <code data-sourcepos="19:69-19:88">databricks-connect</code>
+package installed. The compatibility between this Python environment and the Databricks
+cluster version is critical. If connecting to Databricks clusters with different
+Spark versions multiple configured Python versions are required.</p>
+<blockquote data-sourcepos="24:1-26:115" dir="auto">
+<p data-sourcepos="24:3-26:115">The Python environment used can be altered using MATLAB's <code data-sourcepos="24:61-24:67">pyenv</code> command.
+MATLAB supports using only one version of Python at a time.
+See: <a data-sourcepos="26:8-26:115" href="https://www.mathworks.com/help/matlab/ref/pyenv.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/help/matlab/ref/pyenv.html</a></p>
+</blockquote>
+<p data-sourcepos="28:1-28:40" dir="auto">The <a data-sourcepos="28:5-28:21" href="Setup.html">Setup</a> process typically:</p>
+<ul data-sourcepos="30:1-32:54" dir="auto">
+<li data-sourcepos="30:1-30:43">Determines if Python &amp; pip are installed.</li>
+<li data-sourcepos="31:1-31:64">Builds a Python virtual environment(s) for Databricks Connect.</li>
+<li data-sourcepos="32:1-32:54">Downloads the required Databricks Connect libraries.</li>
+</ul>
+<p data-sourcepos="34:1-37:32" dir="auto">There are scenarios whereby it may be necessary to rerun this setup process
+or further customize it. The <code data-sourcepos="35:30-35:52">Software/MATLAB/setup</code> function can be rerun and
+unrelated steps can be skipped. Alternatively, the <code data-sourcepos="36:52-36:89">matlab.databricks.setup.configureDBC</code>
+function can be called directly.</p>
+<blockquote data-sourcepos="39:1-40:85" dir="auto">
+<p data-sourcepos="39:3-40:85">Python virtual environments are preferred as they isolate changes to the Python
+installation, but are not required if an externally configured environment is used.</p>
+</blockquote>
+<blockquote data-sourcepos="42:1-46:13" dir="auto">
+<p data-sourcepos="42:3-46:13">The <code data-sourcepos="42:7-42:12">.whl</code> files for the Databricks Connect Python library are <em data-sourcepos="42:66-42:69">no</em> longer included
+in the package and must be downloaded during setup. This change reflects the
+increasing trend towards local dependency supply chain management for security
+reasons. The download can be from the public internet or a specified local package
+repository.</p>
+</blockquote>
+<blockquote data-sourcepos="48:1-49:70" dir="auto">
+<p data-sourcepos="48:3-49:70">The licenses for the Databricks-Connect Python package and its
+dependencies can be found in: <code data-sourcepos="49:33-49:69">3rdPartyLicenses/databricks-connect</code>.</p>
+</blockquote>
+<p data-sourcepos="51:1-52:28" dir="auto">Serverless mode is supported by more recent releases of the Databricks Connect
+Library and cluster runtime.</p>
+<p data-sourcepos="54:1-55:35" dir="auto">Typically using the latest release of Databricks Connect is recommended where
+possible based on Cluster versions.</p>
+<h3 data-sourcepos="57:1-57:16" dir="auto" id="user-content-requirements">Requirements</h3>
+<ul data-sourcepos="59:1-62:103" dir="auto">
+<li data-sourcepos="59:1-59:32">Python 3.10, 3.11 and or 3.12.</li>
+<li data-sourcepos="60:1-60:118">Ideally Python virtual environment support, Python 3 typically supports <code data-sourcepos="60:75-60:86">virtualenv</code> or <code data-sourcepos="60:91-60:96">venv</code> as a built in module.</li>
+<li data-sourcepos="61:1-61:76">pip package manager, pip is typically available in Python 3 installations.</li>
+<li data-sourcepos="62:1-62:103">Access to a public Python package repository (e.g., PyPI) or a configured private package repository.</li>
+</ul>
+<p data-sourcepos="64:1-66:84" dir="auto">In general Databricks require that the Databricks Connect version matches that of the
+Databricks cluster runtime version being connected to and use the same Python version
+on the client as the runtime.  The relationship for LTS versions is described below.</p>
+<table data-sourcepos="68:1-74:46" dir="auto">
+<thead>
+<tr data-sourcepos="68:1-68:46">
+<th data-sourcepos="68:2-68:27">Databricks Runtime (LTS)</th>
+<th data-sourcepos="68:29-68:45">Required Python</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="70:1-70:46">
+<td data-sourcepos="70:2-70:27">17.3</td>
+<td data-sourcepos="70:29-70:45">3.12</td>
+</tr>
+<tr data-sourcepos="71:1-71:46">
+<td data-sourcepos="71:2-71:27">16.4</td>
+<td data-sourcepos="71:29-71:45">3.12</td>
+</tr>
+<tr data-sourcepos="72:1-72:46">
+<td data-sourcepos="72:2-72:27">15.4</td>
+<td data-sourcepos="72:29-72:45">3.11</td>
+</tr>
+<tr data-sourcepos="73:1-73:46">
+<td data-sourcepos="73:2-73:27">14.3</td>
+<td data-sourcepos="73:29-73:45">3.10</td>
+</tr>
+<tr data-sourcepos="74:1-74:46">
+<td data-sourcepos="74:2-74:27">13.3</td>
+<td data-sourcepos="74:29-74:45">3.10</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="76:1-76:44" dir="auto">For MATLAB Python version compatibility see:</p>
+<ul data-sourcepos="78:1-79:150" dir="auto">
+<li data-sourcepos="78:1-78:38"><a data-sourcepos="78:3-78:38" href="SupportMatrix.html">SupportMatrix.md</a></li>
+<li data-sourcepos="79:1-79:150"><a data-sourcepos="79:3-79:150" href="https://www.mathworks.com/support/requirements/python-compatibility.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/support/requirements/python-compatibility.html</a></li>
+</ul>
+<p data-sourcepos="81:1-81:80" dir="auto">Databricks Connect version compatibility with compute types and Python versions:</p>
+<table data-sourcepos="83:1-94:86" dir="auto">
+<thead>
+<tr data-sourcepos="83:1-83:86">
+<th data-sourcepos="83:2-83:33">Databricks Connect version</th>
+<th data-sourcepos="83:35-83:57">Compute type</th>
+<th data-sourcepos="83:59-83:85">Compatible Python version</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="85:1-85:86">
+<td data-sourcepos="85:2-85:33">18.0 - 18.1</td>
+<td data-sourcepos="85:35-85:57">Cluster</td>
+<td data-sourcepos="85:59-85:85">3.12</td>
+</tr>
+<tr data-sourcepos="86:1-86:86">
+<td data-sourcepos="86:2-86:33">18.0</td>
+<td data-sourcepos="86:35-86:57">Serverless version 5</td>
+<td data-sourcepos="86:59-86:85">3.12</td>
+</tr>
+<tr data-sourcepos="87:1-87:86">
+<td data-sourcepos="87:2-87:33">17.2 - 17.3</td>
+<td data-sourcepos="87:35-87:57">Serverless version 4</td>
+<td data-sourcepos="87:59-87:85">3.12</td>
+</tr>
+<tr data-sourcepos="88:1-88:86">
+<td data-sourcepos="88:2-88:33">17.2 - 17.3</td>
+<td data-sourcepos="88:35-88:57">Cluster</td>
+<td data-sourcepos="88:59-88:85">3.12</td>
+</tr>
+<tr data-sourcepos="89:1-89:86">
+<td data-sourcepos="89:2-89:33">16.4.1 - &lt;17</td>
+<td data-sourcepos="89:35-89:57">Serverless version 3</td>
+<td data-sourcepos="89:59-89:85">3.12</td>
+</tr>
+<tr data-sourcepos="90:1-90:86">
+<td data-sourcepos="90:2-90:33">16.4</td>
+<td data-sourcepos="90:35-90:57">Cluster</td>
+<td data-sourcepos="90:59-90:85">3.12</td>
+</tr>
+<tr data-sourcepos="91:1-91:86">
+<td data-sourcepos="91:2-91:33">15.4.10 - &lt;16</td>
+<td data-sourcepos="91:35-91:57">Serverless version 2</td>
+<td data-sourcepos="91:59-91:85">3.11</td>
+</tr>
+<tr data-sourcepos="92:1-92:86">
+<td data-sourcepos="92:2-92:33">15.4</td>
+<td data-sourcepos="92:35-92:57">Cluster</td>
+<td data-sourcepos="92:59-92:85">3.11</td>
+</tr>
+<tr data-sourcepos="93:1-93:86">
+<td data-sourcepos="93:2-93:33">14.3</td>
+<td data-sourcepos="93:35-93:57">Cluster</td>
+<td data-sourcepos="93:59-93:85">3.10</td>
+</tr>
+<tr data-sourcepos="94:1-94:86">
+<td data-sourcepos="94:2-94:33">13.3</td>
+<td data-sourcepos="94:35-94:57">Cluster</td>
+<td data-sourcepos="94:59-94:85">3.10</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="96:1-96:161" dir="auto">See: <a data-sourcepos="96:6-96:161" href="https://docs.databricks.com/aws/en/dev-tools/databricks-connect/requirements" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/aws/en/dev-tools/databricks-connect/requirements</a></p>
+<h2 data-sourcepos="98:1-98:16" dir="auto" id="user-content-configuration">Configuration</h2>
+<p data-sourcepos="100:1-100:76" dir="auto"><code data-sourcepos="100:1-100:38">matlab.databricks.setup.configureDBC</code> has the following optional arguments:</p>
+<table data-sourcepos="102:1-107:64" dir="auto">
+<thead>
+<tr data-sourcepos="102:1-102:34">
+<th data-sourcepos="102:2-102:19">Argument</th>
+<th data-sourcepos="102:21-102:33">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr data-sourcepos="104:1-104:240">
+<td data-sourcepos="104:2-104:19">dbcVersions</td>
+<td data-sourcepos="104:21-104:239">Databricks Connect versions to support. A corresponding  directory is expected in <code data-sourcepos="104:104-104:128">Software/MATLAB/Connect</code> e.g. <code data-sourcepos="104:135-104:165">Software/MATLAB/Connect/15.4/</code> By default the supported versions in <code data-sourcepos="104:204-104:228">Software/MATLAB/Connect</code> are used.</td>
+</tr>
+<tr data-sourcepos="105:1-105:84">
+<td data-sourcepos="105:2-105:19">alternativeRepo</td>
+<td data-sourcepos="105:21-105:83">URL for an alternative library source, e.g. Artifactory®.</td>
+</tr>
+<tr data-sourcepos="106:1-106:173">
+<td data-sourcepos="106:2-106:19">pythonExecutable</td>
+<td data-sourcepos="106:21-106:172">Version argument for <code data-sourcepos="106:43-106:49">pyenv</code> command to specify the Python used to create virtual environments. Can be used if Python is not found on the system path.</td>
+</tr>
+<tr data-sourcepos="107:1-107:64">
+<td data-sourcepos="107:2-107:19">verbose</td>
+<td data-sourcepos="107:21-107:63">Produce additional output. Default: true.</td>
+</tr>
+</tbody>
+</table>
+<p data-sourcepos="109:1-111:91" dir="auto">During <a data-sourcepos="109:8-109:24" href="Setup.html">setup</a>, MATLAB will detect at most one Python version, e.g. 3.11,
+if installed. Consequently, if all listed Databricks Connect versions are required,
+changing the Python version is also required. If doing so, one can do one of the following:</p>
+<ol data-sourcepos="113:1-117:84" dir="auto">
+<li data-sourcepos="113:1-114:89">Update the system path to point to an alternative Python version, restart MATLAB
+in that context, and rerun setup to detect it etc. skipping non Databricks Connect steps.</li>
+<li data-sourcepos="115:1-116:9">Use the <code data-sourcepos="115:12-115:29">pythonExecutable</code> argument and call <code data-sourcepos="115:49-115:86">matlab.databricks.setup.configureDBC</code>
+directly.</li>
+<li data-sourcepos="117:1-118:0">Use MATLAB's <code data-sourcepos="117:17-117:23">pyenv</code> command to point to an alternative Python and rerun <code data-sourcepos="117:77-117:83">setup</code>.</li>
+</ol>
+<blockquote data-sourcepos="119:1-121:73" dir="auto">
+<p data-sourcepos="119:3-121:73">The matlab <code data-sourcepos="119:14-119:20">pyenv</code> command can be used to examine and control which Python environment
+is being used by MATLAB. Note that if the environment is changed e.g to select a
+virtual environment this change is persistent until reset with <code data-sourcepos="121:66-121:72">pyenv</code>.</p>
+</blockquote>
+<p data-sourcepos="123:1-126:89" dir="auto">The Databricks Connect library and its dependencies are no longer included in the
+package. The required packages as specified by the version specific <code data-sourcepos="124:69-124:86">requirements.txt</code>
+file should be downloaded inline with organizational policy and security requirements.
+If <code data-sourcepos="126:4-126:15">Python/pip</code> is configured appropriately the packages can be downloaded automatically.</p>
+<p data-sourcepos="128:1-129:33" dir="auto">If <code data-sourcepos="128:4-128:20">alternativeRepo</code> argument is set, an alternative source for Databricks Connect
+and its dependencies can be used.</p>
+<blockquote data-sourcepos="131:1-131:67" dir="auto">
+<p data-sourcepos="131:3-131:67">The packages downloaded are specific to a given operating system.</p>
+</blockquote>
+<h3 data-sourcepos="133:1-133:28" dir="auto" id="user-content-python-version-selection">Python version selection</h3>
+<p data-sourcepos="135:1-136:71" dir="auto">The <code data-sourcepos="135:5-135:36">spark = getDatabricksSession()</code> command assumes that the appropriate Python
+Environment has already been configured using MATLAB's <code data-sourcepos="136:56-136:62">pyenv</code> command.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="138:1-140:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">spark</span> <span class="o">=</span> <span class="n">getDatabricksSession</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="142:1-142:78" dir="auto"><code data-sourcepos="142:1-142:26">doc getDatabricksSession</code> for more information on additional arguments, e.g.:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="144:1-146:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">spark</span> <span class="o">=</span> <span class="n">getDatabricksSession</span><span class="p">(</span><span class="n">cluster</span><span class="o">=</span><span class="s2">"1006-200022-cv9r8lwc"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="148:1-148:50" dir="auto" id="user-content-virtual-environment-configuration-from-a-shell">Virtual environment configuration from a shell</h3>
+<p data-sourcepos="150:1-151:23" dir="auto">Should it be necessary for some reason to manually install the package it
+can be done as follows:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-shell" data-canonical-lang="bash" data-sourcepos="153:1-158:3" v-pre="true"><code><span class="line" data-lang="shell" id="LC1">python3 <span class="nt">-m</span> venv .venv</span>
+<span class="line" data-lang="shell" id="LC2"><span class="nb">source</span> ./.venv/bin/activate</span>
+<span class="line" data-lang="shell" id="LC3">pip <span class="nb">install</span> <span class="nt">--requirement</span> Software/MATLAB/Connect/&lt;version&gt;/requirements.txt</span>
+<span class="line" data-lang="shell" id="LC4"><span class="c"># e.g. pip install Software/MATLAB/Connect/17.3/requirements.txt</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="160:1-161:12" dir="auto">Ensure that the <code data-sourcepos="160:17-160:36">databricks-connect</code> is the version that will be used on
+the cluster.</p>
+<p data-sourcepos="163:1-165:28" dir="auto">Make sure to activate the virtual environment from a shell and then start MATLAB
+from that shell or configure a MATLAB <code data-sourcepos="164:39-164:45">pyenv</code> object to point to the virtual
+environment's <code data-sourcepos="165:15-165:22">python</code> link.</p>
+<h2 data-sourcepos="167:1-167:8" dir="auto" id="user-content-usage">Usage</h2>
+<p data-sourcepos="169:1-169:106" dir="auto">The use of Databricks Connect Spark Session is discussed in: <a data-sourcepos="169:62-169:105" href="DBConnectWorkflow.html">DBConnectWorkflow.md</a>.</p>
+<h2 data-sourcepos="171:1-171:8" dir="auto" id="user-content-macos">macOS</h2>
+<p data-sourcepos="173:1-174:101" dir="auto">Databricks Connect is not supported on the Apple® Intel® architecture.
+Thus Databricks Connect can only be used on macOS® with a native Apple silicon release of MATLAB.</p>
+<blockquote data-sourcepos="176:1-178:25" dir="auto">
+<p data-sourcepos="176:3-178:25">Use the <code data-sourcepos="176:11-176:28">computer('arch')</code> command to determine the architecture used by a given
+release of MATLAB. A result of <code data-sourcepos="177:34-177:41">maca64</code> indicates Apple silicon and <code data-sourcepos="177:71-177:78">maci64</code> indicates
+the Intel architecture.</p>
+</blockquote></div></main><script src="resources/copycode.js">//</script></body></html>

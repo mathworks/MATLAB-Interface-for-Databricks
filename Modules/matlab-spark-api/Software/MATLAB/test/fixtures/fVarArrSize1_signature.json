@@ -1,0 +1,11 @@
+{
+  "InTypes": [
+    ["datetime", [1, 1], "ts"],
+    ["int32", [1, 1], "low"],
+    ["int32", [1, 1], "high"]
+  ],
+  "OutTypes": [
+    ["datetime", [1, 1], "ts"],
+    ["string", [1, 6], "str_arr"]
+  ]
+}

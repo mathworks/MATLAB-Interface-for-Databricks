@@ -1,0 +1,121 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Jobs API</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:10" dir="auto" id="user-content-jobs-api">Jobs API</h1>
+<p data-sourcepos="3:1-4:151" dir="auto">A job allows users to create automation clusters based on a specified cluster configuration.
+This allows creation and submission of jobs that will either use an existing cluster or create a new Spark™ cluster for the execution of the job.</p>
+<h2 data-sourcepos="6:1-6:15" dir="auto" id="user-content-create-a-job">Create a job</h2>
+<p data-sourcepos="8:1-8:152" dir="auto">A job can be created using the <code data-sourcepos="8:32-8:43">create</code> method. If a cluster profile is specified, the job will create the Spark cluster based on the configuration.</p>
+<p data-sourcepos="10:1-10:12" dir="auto">For example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="12:1-17:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Cluster object based configuration</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">cl</span><span class="o">.</span><span class="n">setNumWorkers</span><span class="p">([</span><span class="mi">2</span> <span class="mi">10</span><span class="p">]);</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="c1">% Note: do not specify cluster name</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="19:1-20:38" dir="auto">Furthermore, a job without a task (or a list of tasks), has no purpose, as it will not do anything.
+As an example, create a notebook task.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="22:1-28:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">NT</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">NotebookTask</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">nbPath</span> <span class="o">=</span> <span class="s1">'/Shared/UnitTests/Simulink_3DOFs'</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">baseParams</span> <span class="o">=</span> <span class="nb">struct</span><span class="p">(</span><span class="s1">'massLow'</span><span class="p">,</span> <span class="s1">'1200'</span><span class="p">,</span> <span class="s1">'massHigh'</span><span class="p">,</span> <span class="s1">'1400'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">NT</span><span class="o">.</span><span class="n">notebook_path</span> <span class="o">=</span> <span class="n">nbPath</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">NT</span><span class="o">.</span><span class="n">base_parameters</span> <span class="o">=</span> <span class="n">baseParams</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="30:1-30:60" dir="auto">To create a new job using the cluster definition, minimally:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="32:1-38:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">jb</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Job</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">jb</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Example'</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">jb</span><span class="o">.</span><span class="n">setCluster</span><span class="p">(</span><span class="n">cl</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">jb</span><span class="o">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">NT</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">jb</span><span class="o">.</span><span class="n">create</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="40:1-42:52" dir="auto">This will result in a job being created on the Databricks® platform.
+The job has still not run. It can be started through other methods on the <code data-sourcepos="41:75-41:90">databricks.Job</code> object,
+or by starting it from the Databricks web interface.</p>
+<p data-sourcepos="44:1-44:38" dir="auto"><a class="no-attachment-icon" href="images/jobcreation.png" rel="noopener noreferrer" target="_blank"><img alt="JobCreation" data-sourcepos="44:1-44:38" src="images/jobcreation.png"/></a></p>
+<h2 data-sourcepos="46:1-46:12" dir="auto" id="user-content-list-jobs">List Jobs</h2>
+<p data-sourcepos="48:1-48:40" dir="auto">A list of all jobs can be queried using:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="50:1-52:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">jobs</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Job</span><span class="o">.</span><span class="n">list</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="54:1-54:77" dir="auto">This will return a list of Jobs on Databricks as an array of Databricks jobs.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="56:1-72:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="o">&gt;&gt;</span> <span class="n">jobs</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC2"/>
+<span class="line" data-lang="matlab" id="LC3"><span class="nb">ans</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC4"/>
+<span class="line" data-lang="matlab" id="LC5">  <span class="n">Job</span> <span class="n">with</span> <span class="k">properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC6"/>
+<span class="line" data-lang="matlab" id="LC7">                   <span class="n">name</span><span class="p">:</span> <span class="s1">'TestJob31-Jul-2019 13:16:16'</span></span>
+<span class="line" data-lang="matlab" id="LC8">        <span class="n">timeout_seconds</span><span class="p">:</span> <span class="mi">3600</span></span>
+<span class="line" data-lang="matlab" id="LC9">            <span class="n">max_retries</span><span class="p">:</span> <span class="mi">1</span></span>
+<span class="line" data-lang="matlab" id="LC10">           <span class="n">created_time</span><span class="p">:</span> <span class="mf">1.5646e+12</span></span>
+<span class="line" data-lang="matlab" id="LC11">                 <span class="n">job_id</span><span class="p">:</span> <span class="mi">8</span></span>
+<span class="line" data-lang="matlab" id="LC12">            <span class="n">new_cluster</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC13">    <span class="n">email_notifications</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC14">    <span class="n">max_concurrent_runs</span><span class="p">:</span> <span class="mi">1</span></span>
+<span class="line" data-lang="matlab" id="LC15">      <span class="n">creator_user_name</span><span class="p">:</span> <span class="s1">'user@example.com'</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="74:1-74:41" dir="auto" id="user-content-setup-of-job-based-event-notifications">Setup of Job-based event notifications</h2>
+<p data-sourcepos="76:1-78:12" dir="auto">Databricks can be configured to send out email notifications on Job based events. To configure a job
+to respond to these events by sending emails, users can use the <code data-sourcepos="77:65-77:98">databricks.JobEmailNotifications</code> object.
+For example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="80:1-85:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="nb">notify</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">JobEmailNotifications</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="nb">notify</span><span class="o">.</span><span class="n">on_start</span> <span class="o">=</span> <span class="s1">'user@example.com'</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="nb">notify</span><span class="o">.</span><span class="n">on_success</span> <span class="o">=</span> <span class="s1">'user@example.com'</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="nb">notify</span><span class="o">.</span><span class="n">on_failure</span> <span class="o">=</span> <span class="s1">'user@example.com'</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="87:1-87:158" dir="auto">An additional property <code data-sourcepos="87:24-87:50">no_alert_for_skipped_runs</code> exists. If true, there will be no email sent to recipients specified in <code data-sourcepos="87:124-87:135">on_failure</code> if the run is skipped.</p>
+<p data-sourcepos="89:1-89:81" dir="auto">This object can be attached to a job using the <code data-sourcepos="89:48-89:73">setJobEmailNotifications</code> method.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="91:1-93:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">jb</span><span class="o">.</span><span class="n">setJobEmailNotifications</span><span class="p">(</span><span class="nb">notify</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="95:1-95:62" dir="auto">To set all of the notification conditions more concisely call:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="97:1-99:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">job</span><span class="o">.</span><span class="n">setJobEmailNotifications</span><span class="p">(</span><span class="s1">'user@example.com'</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="101:1-101:81" dir="auto">Or if a notification address is configured in <code data-sourcepos="101:47-101:72">databricks-settings.json</code>, simply:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="103:1-105:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">job</span><span class="o">.</span><span class="n">setJobEmailNotifications</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="107:1-107:29" dir="auto" id="user-content-connect-to-an-existing-job">Connect to an existing job</h2>
+<p data-sourcepos="109:1-109:120" dir="auto">A job on the databricks system is identified by a job_id. It is possible to connect to an existing job using its job_id.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="111:1-129:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">jb</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Job</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">jb</span><span class="o">.</span><span class="n">setJobId</span><span class="p">(</span><span class="mi">87</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">jb</span><span class="o">.</span><span class="nb">refresh</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC4"/>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">jb</span> <span class="o">=</span></span>
+<span class="line" data-lang="matlab" id="LC6"/>
+<span class="line" data-lang="matlab" id="LC7">  <span class="n">Job</span> <span class="n">with</span> <span class="k">properties</span><span class="p">:</span></span>
+<span class="line" data-lang="matlab" id="LC8"/>
+<span class="line" data-lang="matlab" id="LC9">                   <span class="n">name</span><span class="p">:</span> <span class="s1">'Untitled'</span></span>
+<span class="line" data-lang="matlab" id="LC10">        <span class="n">timeout_seconds</span><span class="p">:</span> <span class="mi">0</span></span>
+<span class="line" data-lang="matlab" id="LC11">            <span class="n">max_retries</span><span class="p">:</span> <span class="mf">1.00</span></span>
+<span class="line" data-lang="matlab" id="LC12">                 <span class="n">job_id</span><span class="p">:</span> <span class="mf">101.00</span></span>
+<span class="line" data-lang="matlab" id="LC13">    <span class="n">max_concurrent_runs</span><span class="p">:</span> <span class="mf">1.00</span></span>
+<span class="line" data-lang="matlab" id="LC14">      <span class="n">creator_user_name</span><span class="p">:</span> <span class="s1">'user@example.com'</span></span>
+<span class="line" data-lang="matlab" id="LC15">           <span class="n">created_time</span><span class="p">:</span> <span class="mf">1566439248663.00</span></span>
+<span class="line" data-lang="matlab" id="LC16">    <span class="n">email_notifications</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">]</span></span>
+<span class="line" data-lang="matlab" id="LC17">            <span class="n">new_cluster</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="err">×</span><span class="mi">1</span> <span class="nb">struct</span><span class="p">]</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="131:1-131:12" dir="auto" id="user-content-run-a-job">Run a job</h2>
+<p data-sourcepos="133:1-133:24" dir="auto">To run a configured job:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="135:1-137:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">jb</span><span class="o">.</span><span class="n">runNow</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="139:1-139:17" dir="auto" id="user-content-schedule-a-job">Schedule a job</h2>
+<p data-sourcepos="141:1-141:71" dir="auto">A job can be scheduled to run at a given time(s) using a Cron Schedule:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="143:1-167:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Sample job and cluster objects</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">jb</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Job</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">jb</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">'Example'</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">jb</span><span class="o">.</span><span class="n">setCluster</span><span class="p">(</span><span class="n">cl</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC6"/>
+<span class="line" data-lang="matlab" id="LC7"><span class="c1">% Create a CronSchedule object</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="n">cs</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">CronSchedule</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="c1">% Configure its Quartz Cron Expression</span></span>
+<span class="line" data-lang="matlab" id="LC10"><span class="c1">% see: http://www.quartz-scheduler.org/documentation/quartz-2.3.0/tutorials/crontrigger.html</span></span>
+<span class="line" data-lang="matlab" id="LC11"><span class="n">cs</span><span class="o">.</span><span class="n">setQuartzCronExpression</span><span class="p">(</span><span class="s2">"0 15 22 * * ?"</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC12"><span class="c1">% Optionally set its execution to PAUSED or UNPAUSED</span></span>
+<span class="line" data-lang="matlab" id="LC13"><span class="n">cs</span><span class="o">.</span><span class="n">setPauseStatus</span><span class="p">(</span><span class="s2">"UNPAUSED"</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC14"><span class="c1">% Set the timezone for the schedule</span></span>
+<span class="line" data-lang="matlab" id="LC15"><span class="n">cs</span><span class="o">.</span><span class="n">setTimezoneId</span><span class="p">(</span><span class="s2">"Ireland/Dublin"</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC16"><span class="c1">% Apply the schedule to the job</span></span>
+<span class="line" data-lang="matlab" id="LC17"><span class="n">jb</span><span class="o">.</span><span class="n">setSchedule</span><span class="p">(</span><span class="n">cs</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC18"/>
+<span class="line" data-lang="matlab" id="LC19"><span class="c1">% Configure a task</span></span>
+<span class="line" data-lang="matlab" id="LC20"><span class="n">task</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">MATLABBatchTask</span><span class="p">(</span><span class="s2">"disp(datetime)"</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC21"><span class="n">job</span><span class="o">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">task</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC22"/>
+<span class="line" data-lang="matlab" id="LC23"><span class="n">jb</span><span class="o">.</span><span class="n">create</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="169:1-169:43" dir="auto" id="user-content-run-a-job-as-a-user-or-service-principal">Run a job as a user or service principal</h2>
+<p data-sourcepos="171:1-173:74" dir="auto">The setRunAs method specifies the user or service principal that the job runs as.
+If not specified, the job runs as the user who created the job.
+Only <code data-sourcepos="173:6-173:16">user_name</code> or <code data-sourcepos="173:21-173:44">service_principal_name</code> can be specified as the type.</p>
+<p data-sourcepos="175:1-176:59" dir="auto">Type <code data-sourcepos="175:6-175:16">user_name</code> should specify the email of an active workspace user.
+Non-admin users can only set this field to their own email.</p>
+<p data-sourcepos="178:1-180:5" dir="auto">Type <code data-sourcepos="178:6-178:29">service_principal_name</code> should specify Application ID of an active
+service principal. Setting this field requires the servicePrincipal/user
+role.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="182:1-185:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">j</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Job</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">j</span><span class="o">.</span><span class="n">runAs</span><span class="p">(</span><span class="s2">"user_name"</span><span class="p">,</span> <span class="s2">"joe@example.com"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="187:1-190:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">j</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Job</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">j</span><span class="o">.</span><span class="n">runAs</span><span class="p">(</span><span class="s2">"service_principal_name"</span><span class="p">,</span> <span class="s2">"123bc6d0-ffa3-11ed-be56-1234ac123456"</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div></div></main><script src="resources/copycode.js">//</script></body></html>

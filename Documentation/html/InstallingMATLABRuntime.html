@@ -1,0 +1,86 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Installing the MATLAB Runtime</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:31" dir="auto" id="user-content-installing-the-matlab-runtime">Installing the MATLAB Runtime</h1>
+<h2 data-sourcepos="3:1-3:8" dir="auto" id="user-content-setup">Setup</h2>
+<p data-sourcepos="5:1-7:85" dir="auto">For details of provisioning the MATLAB runtime on Databricks® clusters see the
+<a data-sourcepos="6:1-6:105" href="https://github.com/mathworks-ref-arch/matlab-on-databricks" rel="nofollow noreferrer noopener" target="_blank">MATLAB on Databricks Reference Architecture</a>.
+This is the recommended approach for provisioning the MATLAB runtime and uses docker.</p>
+<p data-sourcepos="9:1-11:43" dir="auto">This applies both if the cluster is created via a policy or the <code data-sourcepos="9:65-9:89">createDatabricksCluster</code>
+MATLAB command. However if desired the following describes alternative manual
+configuration approaches can be considered.</p>
+<blockquote data-sourcepos="13:1-13:75" dir="auto">
+<p data-sourcepos="13:2-13:75">For clusters using Databricks runtime v17 or greater, docker must be used.</p>
+</blockquote>
+<h2 data-sourcepos="15:1-15:15" dir="auto" id="user-content-custom-setup">Custom setup</h2>
+<p data-sourcepos="17:1-22:101" dir="auto">If executing MATLAB code that has been compiled (using MATLAB® Compiler SDK™) to <code data-sourcepos="17:92-17:97">.whl</code>
+format on a Databricks cluster, the cluster must be provisioned with the
+version of the MATLAB runtime corresponding to the version of MATLAB used for the
+compilation step. The MATLAB runtime can be configured using init scripts or by using
+a docker container that includes the runtime, see:
+<a data-sourcepos="22:1-22:70" href="ContainerServices.html">Docker® runtimes for MATLAB and Databricks</a> and <a data-sourcepos="22:76-22:100" href="ClusterAPI.html">Clusters</a>.</p>
+<p data-sourcepos="24:1-28:81" dir="auto">Typically MATLAB runtimes are stored in <code data-sourcepos="24:41-24:46">.zip</code> form on <code data-sourcepos="24:56-24:65">/Volumes</code>, the default
+directory being <code data-sourcepos="25:17-25:35">MathWorks/runtime</code>. At cluster creation time the runtime is
+copied to the cluster nodes, decompressed and installed via an init script.
+A local copy of the init script is included in the package and can be found in
+<code data-sourcepos="28:1-28:43">Software/MATLAB/script/runtime_install.sh</code>. See: <a data-sourcepos="28:51-28:80" href="InitScripts.html">Init Scripts</a>.</p>
+<p data-sourcepos="30:1-32:62" dir="auto">If more than one version of MATLAB is being used at the client side then multiple
+corresponding runtimes should be put in place on the server side. However, only
+one runtime version is supported on a cluster at any one time.</p>
+<p data-sourcepos="34:1-34:182" dir="auto">The MATLAB runtimes can be freely downloaded from: <a data-sourcepos="34:52-34:181" href="https://www.mathworks.com/products/compiler/matlab-runtime.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/products/compiler/matlab-runtime.html</a>.</p>
+<blockquote data-sourcepos="36:1-37:25" dir="auto">
+<p data-sourcepos="36:3-37:25">Databricks nodes always use Linux®, thus <em data-sourcepos="36:48-36:53">only</em> the Linux version of the MATLAB
+runtime should be used.</p>
+</blockquote>
+<blockquote data-sourcepos="39:1-40:50" dir="auto">
+<p data-sourcepos="39:3-40:50">The MATLAB runtime is <em data-sourcepos="39:25-39:29">not</em> required to use Databricks Connect (unless using UDFs),
+JDBC/ODBC or the Databricks REST API interfaces.</p>
+</blockquote>
+<p data-sourcepos="42:1-46:83" dir="auto">The runtime setup step from the setup process can be invoked directly by calling:
+<code data-sourcepos="43:1-43:45">matlab.databricks.setup.configureRuntimes()</code> or by calling <code data-sourcepos="43:61-43:85">Software/MATLAB/setup.m</code>
+and skipping the unrelated sections. This will generate <code data-sourcepos="44:57-44:62">wget</code> shell commands to
+download the runtime directly to <code data-sourcepos="45:34-45:43">/Volumes</code> using a <code data-sourcepos="45:53-45:57">%sh</code> cell in a notebook.
+They also provide the deep link directly to the <code data-sourcepos="46:49-46:58">runtimes</code> directory in the portal.</p>
+<p data-sourcepos="48:1-48:51" dir="auto">There are several ways to put the runtime in place:</p>
+<ul data-sourcepos="50:1-52:78" dir="auto">
+<li data-sourcepos="50:1-50:25">Notebook based download</li>
+<li data-sourcepos="51:1-51:22">Portal based upload.</li>
+<li data-sourcepos="52:1-52:78">Uploads to cloud object stores e.g.: AWS® S3 or Azure® Blob Storage.</li>
+</ul>
+<p data-sourcepos="54:1-54:80" dir="auto">Upload via the Files and particularly DBFS APIs are slower and or less reliable.</p>
+<blockquote data-sourcepos="56:1-58:78" dir="auto">
+<p data-sourcepos="56:3-58:78">If a non default runtime location is used, e.g. S3 or ABFSS/Blob, this
+must then be specified as an argument when creating a cluster and should be
+configured in any policies in use. Using <code data-sourcepos="58:44-58:53">/Volumes</code> is strongly recommended.</p>
+</blockquote>
+<p data-sourcepos="60:1-61:68" dir="auto">Runtime download URLs are configured in the <code data-sourcepos="60:45-60:90">Software/MATLAB/config/package-settings.json</code>
+file. End user updates to this file should not normally be required.</p>
+<h2 data-sourcepos="63:1-63:31" dir="auto" id="user-content-offline-cluster-requirements">Offline cluster requirements</h2>
+<p data-sourcepos="65:1-68:62" dir="auto">For offline clusters (clusters without internet access), the MATLAB requires 2 essential
+dependencies <code data-sourcepos="66:14-66:22">libgbm1</code> and <code data-sourcepos="66:28-66:36">libnss3</code>, which are needed for Simulink® Compiler™ output.
+The corresponding <code data-sourcepos="67:19-67:24">.deb</code> files returned by apt-get should be stored in a <code data-sourcepos="67:74-67:81">/deps/</code>
+subdirectory of the directory containing the runtime.zip file.</p>
+<blockquote data-sourcepos="70:1-70:95" dir="auto">
+<p data-sourcepos="70:3-70:95">Using docker removes this complexity by bundling all dependencies within the container image.</p>
+</blockquote>
+<h2 data-sourcepos="72:1-72:54" dir="auto" id="user-content-enabling-the-matlab-runtime-on-a-databricks-cluster">Enabling the MATLAB Runtime on a Databricks Cluster</h2>
+<p data-sourcepos="74:1-76:92" dir="auto">Once the MATLAB Runtime .zip file is in place on Databricks it needs to enabled on
+newly created clusters. By default and when not using docker images this is done
+using so called init scripts, this is described in detail in <a data-sourcepos="76:62-76:91" href="InitScripts.html">Init Scripts</a>.</p>
+<h3 data-sourcepos="78:1-78:45" dir="auto" id="user-content-using-the-aws-simple-storage-service-s3">Using the AWS Simple Storage Service (S3)</h3>
+<p data-sourcepos="80:1-81:81" dir="auto">Navigate to an appropriate folder (e.g.: <code data-sourcepos="80:42-80:66">/MathWorks/runtime/</code>) on AWS S3. Upload the
+runtime image manually either using the web UI or via an appropriate CLI command.</p>
+<p data-sourcepos="83:1-84:35" dir="auto">Web UI:
+<a class="no-attachment-icon" href="images/AWSS3Upload.png" rel="noopener noreferrer" target="_blank"><img alt="UploadUI" data-sourcepos="84:1-84:35" src="images/AWSS3Upload.png"/></a></p>
+<p data-sourcepos="86:1-87:34" dir="auto">On successful upload, the installer will be available at the specified location
+for use with the installer script.</p>
+<p data-sourcepos="89:1-89:49" dir="auto"><a class="no-attachment-icon" href="images/AWSS3UploadProgress.png" rel="noopener noreferrer" target="_blank"><img alt="UploadProgress" data-sourcepos="89:1-89:49" src="images/AWSS3UploadProgress.png"/></a></p>
+<p data-sourcepos="91:1-91:4" dir="auto">CLI:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-shell" data-canonical-lang="bash" data-sourcepos="93:1-95:3" v-pre="true"><code><span class="line" data-lang="shell" id="LC1">aws s3 <span class="nb">cp</span> ./MATLAB_Runtime_R2025b_glnxa64.zip s3://[REDACTED]/runtime/</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="97:1-97:40" dir="auto" id="user-content-using-the-matlab-interface-to-aws-s3">Using the MATLAB Interface to AWS S3</h3>
+<p data-sourcepos="99:1-101:26" dir="auto">To upload the runtime from with MATLAB directly to an S3 location see:
+<a data-sourcepos="100:1-100:156" href="https://mathworks.com/help/matlab/import_export/work-with-remote-data.html" rel="nofollow noreferrer noopener" target="_blank">https://www.mathworks.com/help/matlab/import_export/work-with-remote-data.html</a>
+for configuration details:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="103:1-107:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="nb">setenv</span><span class="p">(</span><span class="s1">'AWS_ACCESS_KEY_ID'</span><span class="p">,</span> <span class="s1">'YOUR_AWS_ACCESS_KEY_ID'</span><span class="p">);</span> </span>
+<span class="line" data-lang="matlab" id="LC2"><span class="nb">setenv</span><span class="p">(</span><span class="s1">'AWS_SECRET_ACCESS_KEY'</span><span class="p">,</span> <span class="s1">'YOUR_AWS_SECRET_ACCESS_KEY'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="nb">copyfile</span><span class="p">(</span><span class="s1">'c:\localDir\MATLAB_Runtime_R2025b_glnxa64.zip'</span><span class="p">,</span> <span class="s1">'s3://mybucketname/runtimes/'</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h3 data-sourcepos="109:1-109:28" dir="auto" id="user-content-using-azure-blob-storage">Using Azure Blob storage</h3>
+<p data-sourcepos="111:1-112:48" dir="auto">The runtime can e stored in blob storage and a <code data-sourcepos="111:48-111:54">HTTPS</code> Shared Access Signature (SAS) URL
+can be generated and used for runtime downloads.</p></div></main><script src="resources/copycode.js">//</script></body></html>

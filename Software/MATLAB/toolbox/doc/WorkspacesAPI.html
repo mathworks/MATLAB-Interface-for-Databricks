@@ -1,0 +1,156 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Workspaces API</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:16" dir="auto" id="user-content-workspaces-api">Workspaces API</h1>
+<p data-sourcepos="3:1-5:179" dir="auto">The Workspace API allows the listing, importing, exporting, and deletion of
+notebooks and directories. The maximum allowed size of a request to the
+Workspace API is 500MB. For further details see <a data-sourcepos="5:49-5:179" href="https://docs.databricks.com/dev-tools/api/latest/workspace.html." rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/dev-tools/api/latest/workspace.html</a></p>
+<p data-sourcepos="7:1-7:71" dir="auto">Note that notebooks can be executed using the <code data-sourcepos="7:47-7:64">NotebookTask</code> class.</p>
+<p data-sourcepos="9:1-9:69" dir="auto">Workspaces to be imported or exported can have the following formats:</p>
+<ul data-sourcepos="11:1-14:5" dir="auto">
+<li data-sourcepos="11:1-11:8">SOURCE</li>
+<li data-sourcepos="12:1-12:6">HTML</li>
+<li data-sourcepos="13:1-13:9">JUPYTER</li>
+<li data-sourcepos="14:1-14:5">DBC</li>
+</ul>
+<p data-sourcepos="16:1-16:76" dir="auto">Where the format is SOURCE then the language value can one of the following:</p>
+<ul data-sourcepos="18:1-21:3" dir="auto">
+<li data-sourcepos="18:1-18:7">SCALA</li>
+<li data-sourcepos="19:1-19:8">PYTHON</li>
+<li data-sourcepos="20:1-20:5">SQL</li>
+<li data-sourcepos="21:1-22:0">R</li>
+</ul>
+<blockquote data-sourcepos="23:1-23:103" dir="auto">
+<blockquote data-sourcepos="23:2-23:103">
+<p data-sourcepos="23:4-23:103">See <a data-sourcepos="23:8-23:33" href="LibraryAPI.html">Libraries</a> for information on installing notebook scoped libraries using <code data-sourcepos="23:97-23:102">%pip</code>.</p>
+</blockquote>
+</blockquote>
+<h2 data-sourcepos="25:1-25:15" dir="auto" id="user-content-sample-usage">Sample usage</h2>
+<p data-sourcepos="27:1-27:62" dir="auto">The following example shows sample usage of the Workspace API.</p>
+<h2 data-sourcepos="29:1-29:28" dir="auto" id="user-content-create-a-workspace-object">Create a workspace object</h2>
+<p data-sourcepos="31:1-31:41" dir="auto">Create a Databricks® Workspace object</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="33:1-41:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; ws = databricks.Workspace()</span>
+<span class="line" data-lang="plaintext" id="LC2"/>
+<span class="line" data-lang="plaintext" id="LC3">ws = </span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">  Workspace with properties:</span>
+<span class="line" data-lang="plaintext" id="LC6"/>
+<span class="line" data-lang="plaintext" id="LC7">    username: 'user@example.com'</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="43:1-43:55" dir="auto" id="user-content-list-existing-objects-and-directories-in-a-workspace">List existing objects and directories in a workspace</h2>
+<p data-sourcepos="45:1-45:55" dir="auto">Use the object to list existing objects and directories</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="47:1-58:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; wsArray = ws.list(sprintf('/Users/%s',ws.username))</span>
+<span class="line" data-lang="plaintext" id="LC2"/>
+<span class="line" data-lang="plaintext" id="LC3">wsArray = </span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">  1x42 ObjectInfo array with properties:</span>
+<span class="line" data-lang="plaintext" id="LC6"/>
+<span class="line" data-lang="plaintext" id="LC7">    object_type</span>
+<span class="line" data-lang="plaintext" id="LC8">    object_id</span>
+<span class="line" data-lang="plaintext" id="LC9">    path</span>
+<span class="line" data-lang="plaintext" id="LC10">    language</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="60:1-60:44" dir="auto" id="user-content-examine-objects-in-this-case-a-notebook">Examine objects (in this case a notebook)</h2>
+<p data-sourcepos="62:1-62:21" dir="auto">Examining the output:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="64:1-75:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; wsArray(10)</span>
+<span class="line" data-lang="plaintext" id="LC2"/>
+<span class="line" data-lang="plaintext" id="LC3">ans = </span>
+<span class="line" data-lang="plaintext" id="LC4"/>
+<span class="line" data-lang="plaintext" id="LC5">  ObjectInfo with properties:</span>
+<span class="line" data-lang="plaintext" id="LC6"/>
+<span class="line" data-lang="plaintext" id="LC7">    object_type: NOTEBOOK</span>
+<span class="line" data-lang="plaintext" id="LC8">      object_id: 2181061688109446</span>
+<span class="line" data-lang="plaintext" id="LC9">           path: "/Users/user@example.com/foo"</span>
+<span class="line" data-lang="plaintext" id="LC10">       language: "PYTHON"</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="77:1-77:42" dir="auto" id="user-content-fetch-the-status-of-an-objectdirectory">Fetch the status of an object/directory</h2>
+<p data-sourcepos="79:1-79:57" dir="auto">The getStatus method will return the status of the object</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="81:1-93:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">% Use getStatus to check on the same entry</span>
+<span class="line" data-lang="plaintext" id="LC2">&gt;&gt; ws.getStatus('/Users/user@example.com/foo')</span>
+<span class="line" data-lang="plaintext" id="LC3"/>
+<span class="line" data-lang="plaintext" id="LC4">ans = </span>
+<span class="line" data-lang="plaintext" id="LC5"/>
+<span class="line" data-lang="plaintext" id="LC6">  struct with fields:</span>
+<span class="line" data-lang="plaintext" id="LC7"/>
+<span class="line" data-lang="plaintext" id="LC8">    object_type: 'NOTEBOOK'</span>
+<span class="line" data-lang="plaintext" id="LC9">           path: '/Users/user@example.com/foo'</span>
+<span class="line" data-lang="plaintext" id="LC10">       language: 'PYTHON'</span>
+<span class="line" data-lang="plaintext" id="LC11">      object_id: 2181061688109446</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="95:1-95:51" dir="auto" id="user-content-export-the-content-of-the-notebook-to-examine-it">Export the content of the notebook to examine it</h2>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-plaintext" data-canonical-lang="matlabsession" data-sourcepos="97:1-104:3" v-pre="true"><code><span class="line" data-lang="plaintext" id="LC1">&gt;&gt; result = ws.export('/Users/user@example.com/myScript', 'SOURCE', false)</span>
+<span class="line" data-lang="plaintext" id="LC2"/>
+<span class="line" data-lang="plaintext" id="LC3">result =</span>
+<span class="line" data-lang="plaintext" id="LC4">  struct with fields:</span>
+<span class="line" data-lang="plaintext" id="LC5">      content: '# Databricks notebook source print("Hello World")'</span>
+<span class="line" data-lang="plaintext" id="LC6">    file_type: 'py'</span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="106:1-106:34" dir="auto" id="user-content-import-a-notebook-from-a-string">Import a notebook from a string</h2>
+<p data-sourcepos="108:1-109:51" dir="auto">Create a new Python® notebook using uppercase HELLO WORLD
+Confirm its creation using the Databricks Workspace</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="111:1-120:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">ws</span><span class="o">.</span><span class="k">import</span><span class="p">(</span><span class="s1">'path'</span><span class="p">,</span> <span class="s1">'/Users/joe@example.com/MYSCRIPT'</span><span class="p">,</span> <span class="s1">'format'</span><span class="p">,</span> <span class="s1">'SOURCE'</span><span class="p">,</span><span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC2">          <span class="s1">'language'</span><span class="p">,</span> <span class="s1">'PYTHON'</span><span class="p">,</span> <span class="s1">'content'</span><span class="p">,</span> <span class="s1">'print("HELLO WORLD")'</span><span class="p">,</span><span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC3">          <span class="s1">'overwrite'</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC4"/>
+<span class="line" data-lang="matlab" id="LC5"><span class="c1">% Delete the initial notebook</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">recurse</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">ws</span><span class="o">.</span><span class="nb">delete</span><span class="p">(</span><span class="s1">'/Users/joe@example.com/MYSCRIPT'</span><span class="p">,</span> <span class="n">recurse</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="n">Deleted</span> <span class="n">object</span> <span class="nb">or</span> <span class="n">directory</span><span class="p">:</span> <span class="p">/</span><span class="n">Users</span><span class="p">/</span><span class="n">joe</span><span class="o">@</span><span class="n">example</span><span class="o">.</span><span class="n">com</span><span class="p">/</span><span class="n">MYSCRIPT</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="122:1-122:35" dir="auto" id="user-content-importing-a-notebook-from-a-file">Importing a notebook from a file</h2>
+<p data-sourcepos="124:1-128:17" dir="auto">The above example shows how to import a Workspace using a <em data-sourcepos="124:59-124:67">content</em> argument to
+specify the commands as a scalar string or character vector. For short examples as
+above or programmatically generated content this may be useful however more typically
+a Workspace will be imported from an existing file. The import command to do so is
+similar as shown:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="130:1-134:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">ws</span><span class="o">.</span><span class="k">import</span><span class="p">(</span><span class="s1">'path'</span><span class="p">,</span> <span class="s1">'/Users/joe@example.com/MYSCRIPT'</span><span class="p">,</span> <span class="s1">'format'</span><span class="p">,</span> <span class="s1">'SOURCE'</span><span class="p">,</span><span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC2">          <span class="s1">'language'</span><span class="p">,</span> <span class="s1">'PYTHON'</span><span class="p">,</span> <span class="s1">'file'</span><span class="p">,</span> <span class="s1">'/myPath/myFile.py'</span><span class="p">,</span><span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC3">          <span class="s1">'overwrite'</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="136:1-136:33" dir="auto" id="user-content-create-a-job-to-run-a-notebook">Create a job to run a notebook</h2>
+<p data-sourcepos="138:1-140:44" dir="auto">See <a data-sourcepos="138:5-138:26" href="JobsAPI.html">Jobs API</a> for full details of how to submit a job to Databricks.
+When running the key difference is setting the task to type <code data-sourcepos="139:61-139:89">databricks.NotebookTask</code>
+and adding the <code data-sourcepos="140:16-140:34">notebook_path</code> argument.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="142:1-165:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Find the cluster on which the job is to be run, e.g.</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">cl</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Cluster</span><span class="o">.</span><span class="n">findByName</span><span class="p">(</span><span class="s1">'myCluster'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC3"/>
+<span class="line" data-lang="matlab" id="LC4"><span class="c1">% Create the job</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">job</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Job</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="c1">% Assign an uniquely identifiable semi-random name</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">job</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'job-'</span><span class="p">,</span> <span class="nb">char</span><span class="p">(</span><span class="n">java</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">UUID</span><span class="o">.</span><span class="n">randomUUID</span><span class="p">)];</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="c1">% Specify to run the job on the existing cluster</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="n">job</span><span class="o">.</span><span class="n">setCluster</span><span class="p">(</span><span class="n">cl</span><span class="o">.</span><span class="n">cluster_id</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC10"/>
+<span class="line" data-lang="matlab" id="LC11"><span class="c1">% Optionally configure notifications</span></span>
+<span class="line" data-lang="matlab" id="LC12"><span class="n">job</span><span class="o">.</span><span class="n">setJobEmailNotifications</span><span class="p">(</span><span class="s1">'joe@example.com'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC13"/>
+<span class="line" data-lang="matlab" id="LC14"><span class="c1">% Add the notebook as a task to the job</span></span>
+<span class="line" data-lang="matlab" id="LC15"><span class="n">task</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">NotebookTask</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC16"><span class="n">task</span><span class="o">.</span><span class="n">notebook_path</span> <span class="o">=</span> <span class="s1">'/Users/joe@example.com/MYSCRIPT'</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC17"><span class="n">job</span><span class="o">.</span><span class="n">setTask</span><span class="p">(</span><span class="n">task</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC18"/>
+<span class="line" data-lang="matlab" id="LC19"><span class="c1">% Run the job</span></span>
+<span class="line" data-lang="matlab" id="LC20"><span class="n">job</span><span class="o">.</span><span class="n">create</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC21"><span class="nb">run</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">runNow</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC22"><span class="n">job</span><span class="o">.</span><span class="nb">refresh</span><span class="p">();</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="167:1-167:46" dir="auto" id="user-content-retrieve-the-job-result--view-the-notebook">Retrieve the job result &amp; view the notebook</h2>
+<p data-sourcepos="169:1-170:158" dir="auto">Wait for the job to enter a terminated state, i.e. the job has completed. This uses
+the <code data-sourcepos="170:5-170:9">run</code> returned by <code data-sourcepos="170:23-170:32">runNow()</code> and calls <code data-sourcepos="170:44-170:50">get()</code> on it to refresh its state. When terminated <code data-sourcepos="170:96-170:127">run.state.life_cycle_state</code> will equal <code data-sourcepos="170:140-170:157">'TERMINATED'</code>.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="172:1-180:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% As long as state is not TERMINATED yet</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="k">while</span> <span class="o">~</span><span class="nb">strcmp</span><span class="p">(</span><span class="nb">run</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">life_cycle_state</span><span class="p">,</span><span class="s1">'TERMINATED'</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC3">    <span class="c1">% Wait for a second</span></span>
+<span class="line" data-lang="matlab" id="LC4">    <span class="nb">pause</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC5">    <span class="c1">% And refresh the run to get an updated state</span></span>
+<span class="line" data-lang="matlab" id="LC6">    <span class="nb">run</span> <span class="o">=</span> <span class="nb">run</span><span class="o">.</span><span class="nb">get</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="k">end</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="182:1-182:58" dir="auto">If the notebook has a return value it can be retrieved by:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="184:1-187:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">returnVal</span> <span class="o">=</span> <span class="nb">run</span><span class="o">.</span><span class="n">getOutput</span><span class="p">();</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="nb">disp</span><span class="p">(</span><span class="n">returnVal</span><span class="o">.</span><span class="n">notebook_output</span><span class="o">.</span><span class="nb">result</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="189:1-189:120" dir="auto">If the result field is not present, update the notebook, at the end use <code data-sourcepos="189:73-189:95">dbutils.notebook.exit</code> to return a value, e.g.:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-python" data-canonical-lang="python" data-sourcepos="191:1-193:3" v-pre="true"><code><span class="line" data-lang="python" id="LC1"><span class="n">dbutils</span><span class="p">.</span><span class="n">notebook</span><span class="p">.</span><span class="nf">exit</span><span class="p">(</span><span class="sh">"</span><span class="s">myReturnValue</span><span class="sh">"</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="195:1-195:111" dir="auto">The notebook itself can be viewed by exporting the run to HTML, writing it to a file and then viewing the file:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="197:1-208:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="c1">% Export the run result</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="nb">result</span> <span class="o">=</span> <span class="nb">run</span><span class="o">.</span><span class="nb">export</span><span class="p">()</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="c1">% Create a temporary HTML file and write the HTML content to it</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">tmpName</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tempname</span><span class="p">,</span><span class="s1">'.html'</span><span class="p">];</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="n">fileID</span> <span class="o">=</span> <span class="nb">fopen</span><span class="p">(</span><span class="n">tmpName</span><span class="p">,</span><span class="s1">'w'</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC6"><span class="c1">% Write the HTML</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">nbytes</span> <span class="o">=</span> <span class="nb">fprintf</span><span class="p">(</span><span class="n">fileID</span><span class="p">,</span><span class="s1">'%s'</span><span class="p">,</span><span class="nb">result</span><span class="o">.</span><span class="n">views</span><span class="o">.</span><span class="n">content</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC8"><span class="nb">fclose</span><span class="p">(</span><span class="n">fileID</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC9"><span class="c1">% Open the file in the system web browser</span></span>
+<span class="line" data-lang="matlab" id="LC10"><span class="nb">web</span><span class="p">(</span><span class="n">tmpName</span><span class="p">,</span> <span class="s1">'-browser'</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<h2 data-sourcepos="210:1-210:13" dir="auto" id="user-content-references">References</h2>
+<p data-sourcepos="212:1-212:11" dir="auto">Please see:</p>
+<ul data-sourcepos="214:1-214:65" dir="auto">
+<li data-sourcepos="214:1-214:65"><a data-sourcepos="214:3-214:65" href="https://docs.databricks.com/dev-tools/api/latest/workspace.html" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/dev-tools/api/latest/workspace.html</a></li>
+</ul></div></main><script src="resources/copycode.js">//</script></body></html>

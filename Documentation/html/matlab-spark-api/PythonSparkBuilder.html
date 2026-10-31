@@ -1,0 +1,857 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Building Wheel libraries with MATLAB &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Function Schemas" href="FunctionSchemas.html" />
+    <link rel="prev" title="Job Workflows" href="../JobWorkflow.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Building Wheel libraries with MATLAB</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#basic-usage">Basic usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#setup">Setup</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-wheel">Building the wheel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generating-the-schemas">Generating the schemas</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#compiling-the-code">Compiling the code</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#providing-the-wheel-file-to-the-cluster">Providing the Wheel file to the cluster</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#importing-to-the-environment">Importing to the environment</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#example-functions">Example functions</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#using-udfs">Using UDFs</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#basic-udf-for-use-with-sql">Basic UDF, for use with SQL</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#basic-udf-for-use-with-dataframes">Basic UDF, for use with Dataframes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-a-panda-series-udf">Use a Panda Series UDF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#use-a-panda-iterator-series-udf">Use a Panda Iterator-Series UDF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#using-partial-tables">Using partial tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-parallel-computing-toolbox-in-spark-jobs">Using Parallel Computing Toolbox in Spark jobs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../matlab-mlflow/index.html">MATLAB Interface <em>for MLflow</em></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Building Wheel libraries with MATLAB</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/matlab-spark-api/PythonSparkBuilder.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="building-wheel-libraries-with-matlab">
+<h1>Building Wheel libraries with MATLAB<a class="headerlink" href="#building-wheel-libraries-with-matlab" title="Link to this heading"></a></h1>
+<p>A Wheel library is a Python® package form for a library, and is a file with a
+<code class="docutils literal notranslate"><span class="pre">.whl</span></code> extension.</p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>This utility, the <code class="docutils literal notranslate"><span class="pre">PythonSparkBuilder</span></code>, uses MATLAB® Compiler SDK™ to create a
+Python library, and then generates wrapper code that will enable the use of the
+underlying compiled MATLAB® functions in a Spark context.</p>
+<p>The methods applied to a Spark DataFrame (<code class="docutils literal notranslate"><span class="pre">mapInPandas</span></code>) or an
+RDD (<code class="docutils literal notranslate"><span class="pre">map</span></code>, <code class="docutils literal notranslate"><span class="pre">mapPartitions</span></code>), act on a chunk of a DataFrame. This could
+be seen as a table in MATLAB®. Other methods, <em>User Defined Functions</em> (UDFs),
+can be applied to one or more columns of a DataFrame.</p>
+<blockquote>
+<div><p>Using this functionality has as prerequisites MATLAB® Compiler SDK™ (and dependent toolboxes),
+as well as a Python installation and any needed libraries.
+Please see <a class="reference external" href="https://mathworks.com/support/requirements/python-compatibility.html">MATLAB®/Python version compatibility</a>
+It's important that the Python version and its libraries correspond to the libraries used
+in the Spark installation where it will be used.</p>
+</div></blockquote>
+</section>
+<section id="basic-usage">
+<h2>Basic usage<a class="headerlink" href="#basic-usage" title="Link to this heading"></a></h2>
+<p>The basic workflow will be described by some simple examples.</p>
+<section id="setup">
+<h3>Setup<a class="headerlink" href="#setup" title="Link to this heading"></a></h3>
+<p>These examples, located in a directory, something like this:
+<code class="docutils literal notranslate"><span class="pre">/&lt;somewhere&gt;/[Databricks|Spark]/Modules/matlab-spark-api/Software/MATLAB/examples/compiler</span></code></p>
+<p>The exact location can be found by executing this in MATLAB®:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">getSparkApiRoot</span><span class="p">(</span><span class="s">'examples'</span><span class="p">,</span><span class="w"> </span><span class="s">'compiler'</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This directory contains several MATLAB® functions, that show different examples of
+how to write a function, that can be used in a Spark context.</p>
+<blockquote>
+<div><p><strong>Note:</strong> If using the Databricks® package, please also see examples in the directory
+<code class="docutils literal notranslate"><span class="pre">databricksRoot('examples',</span> <span class="pre">'DatabricksConnect')</span></code></p>
+</div></blockquote>
+</section>
+<section id="building-the-wheel">
+<h3>Building the wheel<a class="headerlink" href="#building-the-wheel" title="Link to this heading"></a></h3>
+<p>All functions are compiled into the same Wheel file, but this is completely arbitrary.
+The user decides what files to compile into which library, and separate libraries
+could be built for all functions in this example.</p>
+<p>Before the functions can be compiled, <em>schema</em> files must be generated.</p>
+<section id="generating-the-schemas">
+<h4>Generating the schemas<a class="headerlink" href="#generating-the-schemas" title="Link to this heading"></a></h4>
+<p>The schemas are generated by calling the function
+<code class="docutils literal notranslate"><span class="pre">generateFunctionSchema</span></code>
+with the name of the function, as well as any arguments for it.</p>
+<p>In the first case, <code class="docutils literal notranslate"><span class="pre">plusPi</span></code> just takes a double argument:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>pp<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">plusPi</span><span class="p">(</span>x<span class="p">)</span>
+<span class="w">    </span><span class="n">pp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">pi</span><span class="p">;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> The way schemas are now generated, i.e. generating a <code class="docutils literal notranslate"><span class="pre">myfun.schema</span></code>
+from <code class="docutils literal notranslate"><span class="pre">myfun.m</span></code>, used to be generating a signature <code class="docutils literal notranslate"><span class="pre">myfun_signature.json</span></code>
+from <code class="docutils literal notranslate"><span class="pre">myfun.m</span></code>.
+This is still supported, but discouraged. The new
+<em>schema</em> relies on the schemas used by Apache® Spark™, and so is a better fit.
+It furthermore supports more Datatypes, notably <code class="docutils literal notranslate"><span class="pre">StructType</span></code> and <code class="docutils literal notranslate"><span class="pre">MapType</span></code>.
+The previous method is deprecated and will be removed in a future release.</p>
+</div></blockquote>
+<p>Generate the schema like this:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">generateFunctionSchema</span><span class="p">(</span><span class="s">"plusPi"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">33</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>This will generate a Schema file like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"compiler"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"funcname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"plusPi"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"fullFilename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Somewhere/plusPi.m"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"SparkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pp"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"out"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"SparkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>It's not important that the number 33 was used, just a double value in this case.
+Note that the output types weren't specified in the call. They are determined
+by MATLAB® calling the function with the argument(s) specified.</p>
+<p>This is done to provide the MATLAB® build with more information about the data it
+will act on. This takes away some of MATLAB®'s versatility with respect to data types,
+but for a good reason. When running on Spark, there is marshalling going on between
+Spark, Python and MATLAB®. The marshalling code can be more efficient if it's determined
+at compile time what the types are. Furthermore, the Spark Dataframes have specific
+types, so it's good to adhere to these types.</p>
+<blockquote>
+<div><p><strong>Note:</strong> More information on this is covered in
+<a class="reference internal" href="FunctionSchemas.html"><span class="std std-doc">Function Signatures</span></a>.</p>
+</div></blockquote>
+<p>The second function, <code class="docutils literal notranslate"><span class="pre">doMath</span></code>, takes 2 double arguments:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span><span class="p">[</span>x,y<span class="p">]</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">doMath</span><span class="p">(</span>a, b<span class="p">)</span>
+<span class="w">    </span><span class="n">x</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">-</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<span class="w">    </span><span class="n">y</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">int64</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">b</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Generate the function schema:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">generateFunctionSchema</span><span class="p">(</span><span class="s">"doMath"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4.5</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"compiler"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"funcname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"doMath"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"fullFilename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Somewhere/doMath.m"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"SparkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"SparkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"x"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"out"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"SparkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"y"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"out"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Table"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"SparkType"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The last function, <code class="docutils literal notranslate"><span class="pre">addStringCol</span></code>, takes a Dataframe as an argument (in Spark).</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="k">function</span><span class="w"> </span>T_OUT<span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nf">addStringCol</span><span class="p">(</span>T_IN<span class="p">)</span>
+<span class="w">    </span><span class="n">T_OUT</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">T_IN</span><span class="p">;</span>
+<span class="w">    </span><span class="n">T_OUT</span><span class="p">.</span><span class="n">hello</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="n">T_IN</span><span class="p">.</span><span class="n">id</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"_hello_"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="n">T_IN</span><span class="p">.</span><span class="n">did</span><span class="p">);</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>This corresponds to a table in MATLAB®, so a table is created for this purpose:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">id</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">int64</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">)</span><span class="o">'</span><span class="p">;</span>
+<span class="n">did</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">)</span><span class="o">'</span><span class="p">;</span>
+<span class="n">DF_T</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">table</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">did</span><span class="p">);</span>
+<span class="n">generateFunctionSchema</span><span class="p">(</span><span class="s">"addStringCol"</span><span class="p">,</span><span class="w"> </span><span class="p">{</span><span class="n">DF_T</span><span class="p">})</span>
+</pre></div>
+</div>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"compiler"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"funcname"</span><span class="p">:</span><span class="w"> </span><span class="s2">"addStringCol"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"fullFilename"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Somewhere/addStringCol.m"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"inputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T_IN"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"in"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Table"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"SparkType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"did"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"struct"</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"io"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"T_OUT"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Direction"</span><span class="p">:</span><span class="w"> </span><span class="s2">"out"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"Table"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"SparkType"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nt">"fields"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"id"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"long"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"did"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"double"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="p">{</span>
+<span class="w">            </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"hello"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"nullable"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"string"</span><span class="p">,</span>
+<span class="w">            </span><span class="nt">"metadata"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">],</span>
+<span class="w">        </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"struct"</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>All the previous code can be found in the function <code class="docutils literal notranslate"><span class="pre">generateSchemas.m</span></code> in
+the same directory.</p>
+<blockquote>
+<div><p><strong>Note:</strong> It should be noted that Spark doesn't guarantee that the chunks
+of a sorted table remains sorted. When a table is used in a context where
+ordering is of essence, this should be taken into account.
+As an example, if the table is providing input to a Simulink® model with a
+time vector and a corresponding value, these must be sorted. Simulink® will
+only accept a monotonically increasing time vector, and will fail otherwise.
+Depending on the model, it may also be necessary to shift the first time value
+to be zero.</p>
+<p>Furthermore, the resulting Dataframe doesn't have a guarantee on sorting
+either, so if sorting is of essence, the user of that Dataframe must ensure
+this manually, for example using <code class="docutils literal notranslate"><span class="pre">orderBy</span></code> or <code class="docutils literal notranslate"><span class="pre">sort</span></code>.</p>
+</div></blockquote>
+<p>A typical example for ordering the data used in the MATLAB® function
+may look like this:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="w">    </span><span class="c">% Sort the time</span>
+<span class="w">    </span><span class="n">data</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">sortrows</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="s">'t'</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c">% Reset to zero starting time</span>
+<span class="w">    </span><span class="n">data</span><span class="p">.</span><span class="n">t</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">t</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">data</span><span class="p">.</span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="compiling-the-code">
+<h4>Compiling the code<a class="headerlink" href="#compiling-the-code" title="Link to this heading"></a></h4>
+<p>To compile the code, an option object is first created, and the code is then built
+with this:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% First create the opts object</span>
+<span class="n">opts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">compiler</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">PythonPackageOptions</span><span class="p">(</span><span class="k">...</span>
+<span class="w">    </span><span class="p">[</span><span class="s">"plusPi.m"</span><span class="p">,</span><span class="w"> </span><span class="s">"doMath.m"</span><span class="p">,</span><span class="w"> </span><span class="s">"addStringCol.m"</span><span class="p">],</span><span class="w"> </span><span class="k">...</span><span class="c"> % the files to compile</span>
+<span class="w">    </span><span class="s">"OutputDir"</span><span class="p">,</span><span class="w"> </span><span class="s">"_build"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span><span class="c">                 % the output directory</span>
+<span class="w">    </span><span class="s">"PackageName"</span><span class="p">,</span><span class="w"> </span><span class="s">"mypackagename"</span><span class="p">);</span><span class="w">                     </span><span class="c">% the package name</span>
+
+<span class="c">% Then compile the code (note the `spark` in the function name)</span>
+<span class="n">PSB</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">compiler</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">spark</span><span class="p">.</span><span class="n">pythonPackage</span><span class="p">(</span><span class="n">opts</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>At this point, there should be a <em>wheel</em> present in the corresponding dist folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>dir<span class="w"> </span>_build/dist/
+mypackagename-24.2.0-py3-none-any.whl
+</pre></div>
+</div>
+<p>The code above is also present in <code class="docutils literal notranslate"><span class="pre">buildLibrary.m</span></code> in the same directory.</p>
+</section>
+</section>
+<section id="providing-the-wheel-file-to-the-cluster">
+<h3>Providing the Wheel file to the cluster<a class="headerlink" href="#providing-the-wheel-file-to-the-cluster" title="Link to this heading"></a></h3>
+<p>If this wheel file is used in a Spark/Databricks environment, the following
+steps are required:</p>
+<p>To run the file, it must be available on the cluster, and different clusters
+may have different options for this.</p>
+<p>In the case of Databricks, several methods and options exist to handle the wheel
+files more easily.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">PythonSparkBuilder</span></code> class has a method <code class="docutils literal notranslate"><span class="pre">uploadWheelFile</span></code> which will
+upload the wheel file to databricks. This method can be called on the result
+object of the build. The method takes the path to the wheel file as an optional
+named argument <code class="docutils literal notranslate"><span class="pre">destination</span></code> like this:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">PSB</span><span class="p">.</span><span class="n">uploadWheelFile</span><span class="p">(</span><span class="n">destination</span><span class="p">=</span><span class="s">"/Volumes/main/default/myvolume/mywheelfiles"</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Alternatively, the <code class="docutils literal notranslate"><span class="pre">compiler.build.spark.pythonPackage'</span> <span class="pre">function</span> <span class="pre">takes</span> <span class="pre">the</span> <span class="pre">optional</span> <span class="pre">named</span> <span class="pre">argument</span> </code>wheelDestination<code class="docutils literal notranslate"><span class="pre">,</span> <span class="pre">which</span> <span class="pre">allows</span> <span class="pre">the</span> <span class="pre">user</span> <span class="pre">to</span> <span class="pre">specify</span> <span class="pre">the</span> <span class="pre">future</span> <span class="pre">destination</span> <span class="pre">of</span> <span class="pre">the</span> <span class="pre">wheel</span> <span class="pre">file.</span> <span class="pre">If</span> <span class="pre">this</span> <span class="pre">was</span> <span class="pre">used,</span> <span class="pre">the</span> </code>uploadWheelFile`
+can be called as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">PSB</span><span class="p">.</span><span class="n">uploadWheelFile</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>It's also possible to directly install the wheel file on the cluster using the <code class="docutils literal notranslate"><span class="pre">installWheelOnDatabricksCluster</span></code> method. This used to be the only way to install
+a wheel file for use with Databricks, but is now used less, as it is less flexible
+compared to methods which <em>install a wheel file in a Spark Session</em>. Please refer
+to the notes on <code class="docutils literal notranslate"><span class="pre">%pip</span> <span class="pre">install</span></code> below.</p>
+<p>The method still exists, though, and can be used as follows:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">PSB</span><span class="p">.</span><span class="n">installWheelOnDatabricksCluster</span><span class="p">(</span><span class="s">"/Volumes/mycatalog/myschema/myvolume/some/directory"</span><span class="p">,</span><span class="w"> </span><span class="n">clusterId</span><span class="p">=</span><span class="n">cluster_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> <code class="docutils literal notranslate"><span class="pre">addArtifact</span></code> is an alternative method of provisioning a library to a Databricks cluster, it is used with Databricks/Spark Connect.
+<strong>Note:</strong> If the cluster defines a library using a policy, thus further libraries cannot
+be installed using the Libraries API. To install the library use the %pip command in a notebook:
+<code class="docutils literal notranslate"><span class="pre">%pip</span> <span class="pre">install</span> <span class="pre">/Volumes/mycatalog/myschema/myvolume/some/directory/my.example-24.2.0-py3-none-any.whl</span></code>
+If a new version of a library is installed, it may need the additional option <code class="docutils literal notranslate"><span class="pre">--force-reinstall</span></code>
+See Notebook scoped libraries in the <a class="reference internal" href="../LibraryAPI.html"><span class="std std-doc">LibraryAPI</span></a> in the Databricks documentation.</p>
+</div></blockquote>
+</section>
+<section id="importing-to-the-environment">
+<h3>Importing to the environment<a class="headerlink" href="#importing-to-the-environment" title="Link to this heading"></a></h3>
+<p>The functions to use with Spark will be created in a module called <code class="docutils literal notranslate"><span class="pre">wrapper</span></code>. In order to
+call a specific function, import it from the package.</p>
+<p>This code is assumed to be running in a Notebook.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, import the Wrapper class of this package</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mypackagename.wrapper</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>To simply call a function (will activate the MATLAB® runtime):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Test the function detectAnomaly</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">plusPi</span><span class="p">(</span><span class="mf">10.0</span><span class="p">)</span>
+<span class="c1"># T == 13.14...</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">doMath</span></code> takes 2 arguments:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">doMath</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">)</span>
+<span class="c1"># M == (12,35), a tuple, as two return values</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">addStringCol</span></code> expects a Dataframe with two columns, an <code class="docutils literal notranslate"><span class="pre">int</span></code> and a <code class="docutils literal notranslate"><span class="pre">double</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># DF  is a Dataframe as described</span>
+<span class="n">OUT</span> <span class="o">=</span> <span class="n">DF</span><span class="o">.</span><span class="n">mapInPandas</span><span class="p">(</span><span class="n">addStringCol_applyInPandas</span><span class="p">,</span> <span class="n">addStringCol_output_schema</span><span class="p">)</span>
+<span class="n">OUT</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For the previous function, it needs a pointer to the function
+(<code class="docutils literal notranslate"><span class="pre">addStringCol_applyInPandas</span></code>),
+as well as the schema of the output
+(<code class="docutils literal notranslate"><span class="pre">addStringCol_output_schema</span></code>).
+Both are generated, and part of the <code class="docutils literal notranslate"><span class="pre">wrapper</span></code> import.</p>
+<section id="example-functions">
+<h4>Example functions<a class="headerlink" href="#example-functions" title="Link to this heading"></a></h4>
+<p>For each function that was compiled, there is an example file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>dir<span class="w"> </span>_build/examples
+addStringCol_example.py
+doMath_example.py
+plusPi_example.py
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note:</strong> The examples are simple, and only use artificial data.
+They may, however, prove helpful to a MATLAB® user getting started with Spark,
+rather than as a guide to writing Spark jobs.</p>
+</div></blockquote>
+<p>The example files have this general form:</p>
+<ul class="simple">
+<li><p>Imports of available functions</p></li>
+<li><p>Creation of trivial data with correct types</p></li>
+<li><p>Examples of calling the functions in a Spark context</p></li>
+</ul>
+<p>The import can look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import special functions from wrapper</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mypackagename.wrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">addStringCol_output_names</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mypackagename.wrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">addStringCol_output_schema</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mypackagename.wrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">addStringCol_mapPartitions</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mypackagename.wrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">addStringCol_applyInPandas</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mypackagename.wrapper</span><span class="w"> </span><span class="kn">import</span> <span class="n">addStringCol_mapInPandas</span>
+</pre></div>
+</div>
+<p>The example data looks something like this;</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create some trivial input data with the right data types</span>
+<span class="n">DATA</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span>    <span class="nb">int</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>    <span class="nb">float</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>    <span class="p">),</span> 
+    <span class="p">(</span>    <span class="nb">int</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>    <span class="nb">float</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>    <span class="p">),</span> 
+ <span class="c1"># ...</span>
+    <span class="p">(</span>    <span class="nb">int</span><span class="p">(</span><span class="mi">98</span><span class="p">),</span>    <span class="nb">float</span><span class="p">(</span><span class="mi">98</span><span class="p">),</span>    <span class="p">),</span> 
+    <span class="p">(</span>    <span class="nb">int</span><span class="p">(</span><span class="mi">99</span><span class="p">),</span>    <span class="nb">float</span><span class="p">(</span><span class="mi">99</span><span class="p">),</span>    <span class="p">),</span> 
+    <span class="p">(</span>    <span class="nb">int</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>    <span class="nb">float</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>    <span class="p">)</span>
+<span class="p">]</span>
+</pre></div>
+</div>
+<p>Finally, examples may look like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"### Run applyInPandas with addStringCol"</span><span class="p">)</span>
+<span class="n">DF_applyInPandas</span> <span class="o">=</span> <span class="n">DF</span><span class="o">.</span><span class="n">groupBy</span><span class="p">(</span><span class="s2">"id"</span><span class="p">)</span><span class="o">.</span><span class="n">applyInPandas</span><span class="p">(</span><span class="n">addStringCol_applyInPandas</span><span class="p">,</span> <span class="n">addStringCol_output_schema</span><span class="p">)</span>
+<span class="n">DF_applyInPandas</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create a database view of the data</span>
+<span class="n">DF</span><span class="o">.</span><span class="n">createOrReplaceTempView</span><span class="p">(</span><span class="s1">'temptest_doMath'</span><span class="p">)</span>
+
+<span class="c1"># Register as UDF</span>
+<span class="n">doMath_reg_udf</span><span class="p">(</span><span class="n">spark</span><span class="p">)</span>
+
+<span class="c1"># Use the UDF on the temporary table</span>
+<span class="n">UDF1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s1">'SELECT a, b, doMath_udf(a, b) FROM temptest_doMath'</span><span class="p">)</span>
+<span class="n">UDF1</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="using-udfs">
+<h3>Using UDFs<a class="headerlink" href="#using-udfs" title="Link to this heading"></a></h3>
+<p>There are different flavours of UDFs that can be used. Not all function signatures can be used as UDFs however.</p>
+<p>This will generate the following helper functions that registers the corresponding function as a UDF.
+The helper functions for registration (<code class="docutils literal notranslate"><span class="pre">&lt;fcn_name&gt;_reg_udf*</span></code>) are generated with the package.
+The shown usage can be done in a notebook.</p>
+<blockquote>
+<div><p><strong>Note:</strong> The usage examples shown here are taken straight from the generated example files,
+and can be used as a starting point.</p>
+</div></blockquote>
+<section id="basic-udf-for-use-with-sql">
+<h4>Basic UDF, for use with SQL<a class="headerlink" href="#basic-udf-for-use-with-sql" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plusPi_reg_udf</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'plusPi_udf'</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" Register the function plusPi as a UDF</span>
+<span class="sd">    A second argument can be used to specify the name to be used."""</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">udf</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">plusPi</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">doMath_reg_udf</span><span class="p">(</span><span class="n">spark</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">'doMath_udf'</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">""" Register the function doMath as a UDF</span>
+<span class="sd">    A second argument can be used to specify the name to be used."""</span>
+    <span class="n">spark</span><span class="o">.</span><span class="n">udf</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">doMath</span><span class="p">,</span> <span class="n">doMath_output_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As can be seen in these definitions, the registered UDFs are given a default name
+(<code class="docutils literal notranslate"><span class="pre">&lt;fcn_name&gt;_udf</span></code>), but a different name can be chosen using a second argument.</p>
+<p>These can then be used as follows for <code class="docutils literal notranslate"><span class="pre">plusPi</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register as UDF</span>
+<span class="n">plusPi_reg_udf</span><span class="p">(</span><span class="n">spark</span><span class="p">)</span>
+
+<span class="c1"># Use the UDF on the temporary table</span>
+<span class="n">UDF1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s1">'SELECT X, plusPi_udf(X) FROM temptest_plusPi'</span><span class="p">)</span>
+<span class="n">UDF1</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And as follows for <code class="docutils literal notranslate"><span class="pre">doMath</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register as UDF</span>
+<span class="n">doMath_reg_udf</span><span class="p">(</span><span class="n">spark</span><span class="p">)</span>
+
+<span class="c1"># Use the UDF on the temporary table</span>
+<span class="n">UDF1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s1">'SELECT X, Y, doMath_udf(X, Y) FROM temptest_doMath'</span><span class="p">)</span>
+<span class="n">UDF1</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Evidently, after registering one of the previous UDFs, they can be used in <em>SQL cells</em> too.</p>
+<div class="highlight-sql notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">sql</span>
+<span class="k">SELECT</span><span class="w"> </span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">,</span><span class="w"> </span><span class="n">doMath_udf</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="w"> </span><span class="n">Y</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">temptest_doMath</span>
+</pre></div>
+</div>
+</section>
+<section id="basic-udf-for-use-with-dataframes">
+<h4>Basic UDF, for use with Dataframes<a class="headerlink" href="#basic-udf-for-use-with-dataframes" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plusPi_reg_udf_dataframe</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">""" Returns a UDF function for use with Dataframes."""</span>
+    <span class="k">return</span> <span class="n">udf</span><span class="p">(</span><span class="n">plusPi</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sqcombo_reg_udf_dataframe</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">""" Returns a UDF function for use with Dataframes."""</span>
+    <span class="k">return</span> <span class="n">udf</span><span class="p">(</span><span class="n">sqcombo</span><span class="p">,</span> <span class="n">sqcombo_output_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use this for <code class="docutils literal notranslate"><span class="pre">plusPi</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register as UDF for Dataframes</span>
+<span class="n">plusPi_udf_df</span> <span class="o">=</span> <span class="n">plusPi_reg_udf_dataframe</span><span class="p">()</span>
+
+<span class="c1"># Use in a Dataframe select statement</span>
+<span class="n">UDF2</span> <span class="o">=</span> <span class="n">DF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'X'</span><span class="p">,</span> <span class="n">plusPi_udf_df</span><span class="p">(</span><span class="s1">'X'</span><span class="p">))</span>
+<span class="n">UDF2</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And use this for <code class="docutils literal notranslate"><span class="pre">doMath</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register as UDF for Dataframes</span>
+<span class="n">doMath_udf_df</span> <span class="o">=</span> <span class="n">doMath_reg_udf_dataframe</span><span class="p">()</span>
+
+<span class="c1"># Use in a Dataframe select statement</span>
+<span class="n">UDF2</span> <span class="o">=</span> <span class="n">DF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'X'</span><span class="p">,</span> <span class="s1">'Y'</span><span class="p">,</span> <span class="n">doMath_udf_df</span><span class="p">(</span><span class="s1">'X'</span><span class="p">,</span> <span class="s1">'Y'</span><span class="p">))</span>
+<span class="n">UDF2</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="use-a-panda-series-udf">
+<h4>Use a Panda Series UDF<a class="headerlink" href="#use-a-panda-series-udf" title="Link to this heading"></a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plusPi_reg_udf_series</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">""" Register the function plusPi_series as a pandas_udf function.</span>
+<span class="sd">    It may be used as follows:</span>
+<span class="sd">      plusPi_pandas_udf = regUDFSeries()</span>
+<span class="sd">      DF.select(plusPi_pandas_udf(col('X')))</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pandas_udf</span><span class="p">(</span><span class="n">plusPi_series</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">())</span>
+
+  <span class="k">def</span><span class="w"> </span><span class="nf">doMath_reg_udf_series</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">""" Register the function doMath_series as a pandas_udf function.</span>
+<span class="sd">    It may be used as follows:</span>
+<span class="sd">      doMath_pandas_udf = doMath_reg_udf_series()</span>
+<span class="sd">      DF.select(doMath_pandas_udf(col('arg_a'), col('arg_b')))</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pandas_udf</span><span class="p">(</span><span class="n">doMath_series</span><span class="p">,</span> <span class="n">doMath_output_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use it for <code class="docutils literal notranslate"><span class="pre">plusPi</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register as UDF for Pandas series</span>
+<span class="n">plusPi_udf_series</span> <span class="o">=</span> <span class="n">plusPi_reg_udf_series</span><span class="p">()</span>
+
+<span class="c1"># Use in a Dataframe select statement</span>
+<span class="n">UDF3</span> <span class="o">=</span> <span class="n">DF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'X'</span><span class="p">,</span> <span class="n">plusPi_udf_series</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">'X'</span><span class="p">)))</span>
+<span class="n">UDF3</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And for <code class="docutils literal notranslate"><span class="pre">doMath</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register as UDF for Pandas series</span>
+<span class="n">doMath_udf_series</span> <span class="o">=</span> <span class="n">doMath_reg_udf_series</span><span class="p">()</span>
+
+<span class="c1"># Use in a Dataframe select statement</span>
+<span class="n">UDF3</span> <span class="o">=</span> <span class="n">DF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="n">doMath_udf_series</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">'a'</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s1">'b'</span><span class="p">)))</span>
+<span class="n">UDF3</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="use-a-panda-iterator-series-udf">
+<h4>Use a Panda Iterator-Series UDF<a class="headerlink" href="#use-a-panda-iterator-series-udf" title="Link to this heading"></a></h4>
+<p>These functions are similar to the previous ones, but with the difference
+that the input data will be an iterator of Pandas Series objects.
+This might be useful when needing to use different batch sizes for memory
+reasons, cf. <a class="reference external" href="https://learn.microsoft.com/en-us/azure/databricks/udf/pandas#setting-arrow-batch-size">Setting Arrow® batch size</a>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">plusPi_reg_udf_series_iter</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">""" Register the function plusPi_series_iter as a pandas_udf function.</span>
+<span class="sd">    It may be used as follows:</span>
+<span class="sd">      plusPi_pandas_udf_iter = plusPi_reg_udf_series_iter()</span>
+<span class="sd">      DF.select(plusPi_pandas_udf_iter(col('arg_x')))</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pandas_udf</span><span class="p">(</span><span class="n">plusPi_series_iter</span><span class="p">,</span> <span class="n">DoubleType</span><span class="p">())</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">doMath_reg_udf_series_iter</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">""" Register the function doMath_series_iter as a pandas_udf function.</span>
+<span class="sd">    It may be used as follows:</span>
+<span class="sd">      doMath_pandas_udf_iter = doMath_reg_udf_series_iter()</span>
+<span class="sd">      DF.select(doMath_pandas_udf_iter(col('arg_a'), col('arg_b')))</span>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="n">pandas_udf</span><span class="p">(</span><span class="n">doMath_series_iter</span><span class="p">,</span> <span class="n">doMath_output_schema</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Use it for <code class="docutils literal notranslate"><span class="pre">plusPi</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register as UDF for Pandas iterator-series</span>
+<span class="n">plusPi_udf_series_iter</span> <span class="o">=</span> <span class="n">plusPi_reg_udf_series_iter</span><span class="p">()</span>
+
+<span class="c1"># Use in a Dataframe select statement</span>
+<span class="n">UDF4</span> <span class="o">=</span> <span class="n">DF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'x'</span><span class="p">,</span> <span class="n">plusPi_udf_series_iter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">'x'</span><span class="p">)))</span>
+<span class="n">UDF4</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And for <code class="docutils literal notranslate"><span class="pre">doMath</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Register as UDF for Pandas iterator-series</span>
+<span class="n">doMath_udf_series_iter</span> <span class="o">=</span> <span class="n">doMath_reg_udf_series_iter</span><span class="p">()</span>
+
+<span class="c1"># Use in a Dataframe select statement</span>
+<span class="n">UDF4</span> <span class="o">=</span> <span class="n">DF</span><span class="o">.</span><span class="n">select</span><span class="p">(</span><span class="s1">'a'</span><span class="p">,</span> <span class="s1">'b'</span><span class="p">,</span> <span class="n">doMath_udf_series_iter</span><span class="p">(</span><span class="n">col</span><span class="p">(</span><span class="s1">'a'</span><span class="p">),</span> <span class="n">col</span><span class="p">(</span><span class="s1">'b'</span><span class="p">)))</span>
+<span class="n">UDF4</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p><strong>Note</strong>: Each environment (Apache Spark, Python and MATLAB®) have a certain
+set of supported data types. Often, there's a direct mapping between some types,
+and for others there's no exact mapping.
+For example, Spark supports (amongst others) <code class="docutils literal notranslate"><span class="pre">int16</span></code>, <code class="docutils literal notranslate"><span class="pre">int32</span></code> and <code class="docutils literal notranslate"><span class="pre">int64</span></code>,
+and so does MATLAB®. Python however, supports one integer type, of potentially
+unlimited bits. This can lead to cases where the implementation difference
+cause numeric differences in output.
+To see a complete list of data types supported with this workflow, please refer
+to the <a class="reference internal" href="SparkBuilderDataTypes.html"><span class="std std-doc">SparkBuilder data types</span></a> section.</p>
+</div></blockquote>
+</section>
+</section>
+</section>
+<section id="using-partial-tables">
+<h2>Using partial tables<a class="headerlink" href="#using-partial-tables" title="Link to this heading"></a></h2>
+<p>All functions used here must be written for the same datatypes, i.e. the same
+table structure. In some cases, though, there are data sources that leave out
+specific columns, and leave the user with a table with fewer columns than required.
+A reason for this could be a faulty sensor, that doesn't provide a certain column
+of values.</p>
+<p>The function analyzing the data could be written in a way that handles (certain)
+missing columns, and adapts itself accordingly. For this to work it's necessary
+that the code produced by the builder doesn't try to convert non-existing columns,
+and that it creates a corresponding table to be consumed by MATLAB® too. By default,
+the conversion algorithms will convert all columns part of the original data type
+specification. If columns are missing, the conversion will fail.</p>
+<p>To resolve this situation, the feature <em>PartialTables</em> was implemented.
+This feature will change the conversion code to only convert columns
+that are present. This option must be explicitly chosen, and its default is to
+be turned off. If it's turned on, code will be generated that does this selective
+conversion, as described above.</p>
+<blockquote>
+<div><p>It might be argued that always turning on this option would be preferable.
+Choosing either off or on as default has advantages and disadvantages. The
+reason for having the option 'off' the default here is that
+few columns, in general, are optional in a table If the user needs this
+feature, it should be turned on explicitly, and the code must be written in
+a way that handles the columns that may or may not be present.</p>
+</div></blockquote>
+<p>To use this option, turn this typical workflow:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">opts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">compiler</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">PythonPackageOptions</span><span class="p">(</span><span class="k">...</span>
+<span class="w">    </span><span class="s">"algoAC.m"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="s">"OutputDir"</span><span class="p">,</span><span class="w"> </span><span class="s">"_build"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="s">"PackageName"</span><span class="p">,</span><span class="w"> </span><span class="s">"exo.ac"</span><span class="p">);</span>
+
+<span class="n">PSB</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">compiler</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">spark</span><span class="p">.</span><span class="n">pythonPackage</span><span class="p">(</span><span class="n">opts</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>to:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">opts</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">compiler</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">PythonPackageOptions</span><span class="p">(</span><span class="k">...</span>
+<span class="w">    </span><span class="s">"algoAC.m"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="s">"OutputDir"</span><span class="p">,</span><span class="w"> </span><span class="s">"_build"</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">    </span><span class="s">"PackageName"</span><span class="p">,</span><span class="w"> </span><span class="s">"exo.ac"</span><span class="p">);</span>
+
+<span class="n">PSB</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">compiler</span><span class="p">.</span><span class="n">build</span><span class="p">.</span><span class="n">spark</span><span class="p">.</span><span class="n">pythonPackage</span><span class="p">(</span><span class="n">opts</span><span class="p">,</span><span class="w"> </span><span class="n">partialTables</span><span class="p">=</span><span class="nb">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="using-parallel-computing-toolbox-in-spark-jobs">
+<h2>Using Parallel Computing Toolbox in Spark jobs<a class="headerlink" href="#using-parallel-computing-toolbox-in-spark-jobs" title="Link to this heading"></a></h2>
+<p>Will compiled MATLAB® code in a Spark job run in parallel?
+The answer is yes, this is exactly what Spark does.
+When an operation is applied  on a Dataframe,
+Spark will give chunks of data to the algorithm, according to some heuristic
+that Spark considers the most performant. This can be influenced, if needed, by
+tweaking certain aspects like the number of partitions in a Dataset, or by doing
+grouping operations.</p>
+<p>As for distributed computing by using MATLAB® Parallel Computing Toolbox™.
+It can theoretically be used together with Spark, but it's in general not advisable.</p>
+<p>Spark is already doing the parallelization, and if there is another tool trying
+to do the same, they must have intricate knowledge of each other’s schemes in
+order to do it effectively.
+As an example, imagine 1 node with 4 cores. Spark runs a MATLAB® algorithm on
+each core (4x parallelization). In MATLAB®, each core realizes it’s on a
+4-core machine, and tries to do a 4-x parallelization, thereby trying to use
+16 processes in parallel on a 4-core machine.
+It should be clear that this will not be an optimal parallelization.</p>
+<p>If a compiled MATLAB® function is run on a Spark node without using Spark,
+parallelization of MATLAB® through Parallel Computing Toolbox™ can be used to
+improve the performance.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../JobWorkflow.html" class="btn btn-neutral float-left" title="Job Workflows" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="FunctionSchemas.html" class="btn btn-neutral float-right" title="Function Schemas" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

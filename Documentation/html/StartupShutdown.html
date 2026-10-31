@@ -1,0 +1,159 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Startup and Shutdown</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:22" dir="auto" id="user-content-startup-and-shutdown">Startup and Shutdown</h1>
+<blockquote data-sourcepos="3:1-4:33" dir="auto">
+<p data-sourcepos="3:3-4:33"><strong data-sourcepos="3:3-3:11">Note:</strong> This feature is currently being developed. It may be changed or
+removed without further notice.</p>
+</blockquote>
+<h2 data-sourcepos="6:1-6:15" dir="auto" id="user-content-introduction">Introduction</h2>
+<p data-sourcepos="8:1-11:34" dir="auto">When MATLAB® Desktop is started on Databricks®, it's in a fresh state. The user
+may need to change settings to get the environment they're used to and prefer.
+They may also want or need particular libraries, tools, configurations, etc.
+to be able to work as efficiently.</p>
+<p data-sourcepos="13:1-15:40" dir="auto">The feature is based on the concepts of <strong data-sourcepos="13:41-13:51">startup</strong> and <strong data-sourcepos="13:57-13:68">shutdown</strong>, i.e. that
+something should be done during or prior to <strong data-sourcepos="14:45-14:55">startup</strong>, and something should
+be done during or prior to <strong data-sourcepos="15:28-15:39">shutdown</strong>.</p>
+<p data-sourcepos="17:1-20:48" dir="auto">This feature makes it possible to choose certain files or folders on Databricks
+that should be compressed (<code data-sourcepos="18:28-18:35">tar.gz</code>) when MATLAB exits, and decompressed when
+starting a new MATLAB Desktop (on Databricks). It also enables installing
+user defined MATLAB Toolboxes (<code data-sourcepos="20:32-20:39">.mltbx</code> format).</p>
+<h2 data-sourcepos="22:1-22:14" dir="auto" id="user-content-basic-usage">Basic usage</h2>
+<p data-sourcepos="24:1-25:39" dir="auto">This feature is configured through a JSON file that must reside on Databricks,
+preferably in the user's own Workspace.</p>
+<p data-sourcepos="27:1-27:30" dir="auto">This is a very simple example:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-json" data-canonical-lang="json" data-sourcepos="29:1-49:3" v-pre="true"><code><span class="line" data-lang="json" id="LC1"><span class="p">{</span></span>
+<span class="line" data-lang="json" id="LC2"><span class="w">    </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Context"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC3"><span class="w">    </span><span class="nl">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"a_user"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC4"><span class="w">    </span><span class="nl">"operations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span></span>
+<span class="line" data-lang="json" id="LC5"><span class="w">        </span><span class="p">{</span></span>
+<span class="line" data-lang="json" id="LC6"><span class="w">            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"MLTbx"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC7"><span class="w">            </span><span class="nl">"tbx_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Volumes/main/default/myvolume/Examples/MATLABToolboxes/foobar.mltbx"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC8"><span class="w">            </span><span class="nl">"agree_to_license"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC9"><span class="w">            </span><span class="nl">"context"</span><span class="p">:</span><span class="w"> </span><span class="s2">"matlab"</span></span>
+<span class="line" data-lang="json" id="LC10"><span class="w">        </span><span class="p">},</span></span>
+<span class="line" data-lang="json" id="LC11"><span class="w">        </span><span class="p">{</span></span>
+<span class="line" data-lang="json" id="LC12"><span class="w">            </span><span class="nl">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Copy"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC13"><span class="w">            </span><span class="nl">"src_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/home/a_user/.matlab"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC14"><span class="w">            </span><span class="nl">"zip_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Workspace/Users/a_user@example.com/MathWorks/Context/R2025b"</span><span class="p">,</span></span>
+<span class="line" data-lang="json" id="LC15"><span class="w">            </span><span class="nl">"exclude_list"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"MWI"</span><span class="p">,</span><span class="w"> </span><span class="s2">"__mw_resources_mw__"</span><span class="p">],</span></span>
+<span class="line" data-lang="json" id="LC16"><span class="w">            </span><span class="nl">"context"</span><span class="p">:</span><span class="w"> </span><span class="s2">"python"</span></span>
+<span class="line" data-lang="json" id="LC17"><span class="w">        </span><span class="p">}</span></span>
+<span class="line" data-lang="json" id="LC18"><span class="w">    </span><span class="p">]</span></span>
+<span class="line" data-lang="json" id="LC19"><span class="p">}</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="51:1-53:20" dir="auto">There is currently no MATLAB tool to create this file automatically. Each element
+(on different levels) has the field <code data-sourcepos="52:37-52:42">type</code>, which is used for serialization
+and deserialization.</p>
+<p data-sourcepos="55:1-56:53" dir="auto"><code data-sourcepos="55:1-55:12">operations</code> is a list of different operations. There are currently two types,
+<code data-sourcepos="56:1-56:6">Copy</code> and <code data-sourcepos="56:12-56:18">MLTbx</code>, with the following functinoality:</p>
+<p data-sourcepos="58:1-61:62" dir="auto"><code data-sourcepos="58:1-58:6">Copy</code> will package a file or a directory on shutdown, and save it in the form
+of a <code data-sourcepos="59:6-59:14">.tar.gz</code> archive somewhere on the path. If this has been done, the next
+startup it will be loaded. This is a simple way to have different working
+folders that reappear in a new MATLAB session. The fields are:</p>
+<ul data-sourcepos="63:1-73:40" dir="auto">
+<li data-sourcepos="63:1-63:35"><code data-sourcepos="63:3-63:8">type</code> this must be set to <code data-sourcepos="63:30-63:35">Copy</code></li>
+<li data-sourcepos="64:1-64:55"><code data-sourcepos="64:3-64:16">src_location</code> which is the directory or file to save</li>
+<li data-sourcepos="65:1-65:65"><code data-sourcepos="65:3-65:16">zip_location</code> which is the directory where to save the package</li>
+<li data-sourcepos="66:1-72:45"><code data-sourcepos="66:3-66:16">exclude_list</code> enable excluding certain elements from the compressed archive.
+This can be done to exclude confidential material, or to reduce the size of
+the archive. In the example with <code data-sourcepos="68:36-68:44">.matlab</code>, it will remove the <code data-sourcepos="68:66-68:70">MWI</code> folder,
+which is not needed, and also the  <code data-sourcepos="69:38-69:58">__mw_resources_mw__</code> folder. The exclude
+algorithm will exclude any file containing one of the strings in the <code data-sourcepos="70:72-70:85">exclude_list</code>.
+is a list of files or folders to potentially exclude. Typical candidates here
+would be build folders or temporary files.</li>
+<li data-sourcepos="73:1-73:40"><code data-sourcepos="73:3-73:11">context</code> this must be set to <code data-sourcepos="73:33-73:40">python</code></li>
+</ul>
+<p data-sourcepos="75:1-77:15" dir="auto"><code data-sourcepos="75:1-75:7">MLTbx</code> will install a MATLAB toolbox at startup.
+No effort is made to uninstall it at shutdown.
+The fields are:</p>
+<ul data-sourcepos="79:1-84:33" dir="auto">
+<li data-sourcepos="79:1-79:36"><code data-sourcepos="79:3-79:8">type</code> this must be set to <code data-sourcepos="79:30-79:36">MLTbx</code></li>
+<li data-sourcepos="80:1-80:66"><code data-sourcepos="80:3-80:16">tbx_location</code> the location of the <code data-sourcepos="80:38-80:45">.mltbx</code> file to install from</li>
+<li data-sourcepos="81:1-83:34"><code data-sourcepos="81:3-81:20">agree_to_license</code> a boolean value, that when set to <code data-sourcepos="81:56-81:61">true</code> will accept the
+license, if any. Not setting this to <code data-sourcepos="82:41-82:46">true</code> for a <code data-sourcepos="82:54-82:61">.mltbx</code> that needs a license
+may freeze the startup process.</li>
+<li data-sourcepos="84:1-85:0"><code data-sourcepos="84:3-84:11">context</code> this must be <code data-sourcepos="84:26-84:33">matlab</code></li>
+</ul>
+<h3 data-sourcepos="86:1-86:22" dir="auto" id="user-content-release-dependency">Release dependency</h3>
+<p data-sourcepos="88:1-90:38" dir="auto">Please note that certain saved data may be release dependent. For that reason,
+we chose to save the MATLAB preference directory (<code data-sourcepos="89:51-89:59">prefdir</code>) in a specific
+directory (only readable by the user):</p>
+<p data-sourcepos="92:1-92:81" dir="auto"><code data-sourcepos="92:1-92:81">"zip_location": "/Workspace/Users/a_user@example.com/MathWorks/Context/R2025b",</code></p>
+<p data-sourcepos="94:1-94:59" dir="auto">See section <a data-sourcepos="94:13-94:43" href="#configuration">Configuration</a> about this too.</p>
+<h2 data-sourcepos="96:1-96:35" dir="auto" id="user-content-size-and-security-considerations">Size and security considerations</h2>
+<p data-sourcepos="98:1-99:40" dir="auto">Files can be saved to any persistent file system on Databricks. We recommend
+using either <code data-sourcepos="99:14-99:23">/Volumes</code> or <code data-sourcepos="99:28-99:39">/Workspace</code>.</p>
+<p data-sourcepos="101:1-103:14" dir="auto">The Databricks workspace currently has a size limit per file of 500 MB, so if
+larger files or directories must be compressed, it may be necessary to put them
+on <code data-sourcepos="103:4-103:13">/Volumes</code>.</p>
+<p data-sourcepos="105:1-106:13" dir="auto">If a directory should be copied, using the <code data-sourcepos="105:44-105:57">exclude_list</code> can be a way of
+ensuring that</p>
+<ul data-sourcepos="108:1-109:55" dir="auto">
+<li data-sourcepos="108:1-108:17">Size is reduced</li>
+<li data-sourcepos="109:1-109:55">Personal files are not part of the compressed archive</li>
+</ul>
+<p data-sourcepos="111:1-113:35" dir="auto">If the compressed file contains any confidential information (like ssh keys),
+it's the responsibility of the user to decide if the storage location is secure
+enough for the data that is stored.</p>
+<p data-sourcepos="115:1-118:18" dir="auto">It should be avoided to have common locations for compressed files. The
+<code data-sourcepos="116:1-116:10">tar gzip</code> process will preserve <code data-sourcepos="116:34-116:39">user</code> and <code data-sourcepos="116:45-116:51">group</code> information, so if
+<code data-sourcepos="117:1-117:7">alice</code> saves a folder, and <code data-sourcepos="117:29-117:33">bob</code> tries to unpack it, he may not be able
+to read the files.</p>
+<blockquote data-sourcepos="120:1-122:28" dir="auto">
+<p data-sourcepos="120:3-122:28"><strong data-sourcepos="120:3-120:11">Note:</strong> Having a common compressed file (that is maybe not changed, just
+used), may clearly be a use case. This may be added later as a setting or as
+a separate operation type.</p>
+</blockquote>
+<h2 data-sourcepos="124:1-124:16" dir="auto" id="user-content-configuration">Configuration</h2>
+<blockquote data-sourcepos="126:1-130:38" dir="auto">
+<p data-sourcepos="126:3-130:38"><strong data-sourcepos="126:3-126:11">Note:</strong> This configuration is going to change, as there is now an official
+reference architecture for running a MATLAB Desktop on Databricks, see
+<a data-sourcepos="128:3-128:84" href="https://github.com/mathworks-ref-arch/matlab-on-databricks" rel="nofollow noreferrer noopener" target="_blank">matlab-on-databricks</a>.
+The startup/shutdown feature is not directly supported with the reference
+architecture at the time of writing.</p>
+</blockquote>
+<p data-sourcepos="132:1-134:10" dir="auto">The default location for the <code data-sourcepos="132:30-132:35">json</code> file is in the users private workspace,
+with a directory added for the corresponding MATLAB Release. In this example
+<strong data-sourcepos="134:1-134:10">R2026a</strong></p>
+<p data-sourcepos="136:1-136:77" dir="auto"><code data-sourcepos="136:1-136:76">/Workspace/Users/a_user@example.com/MathWorks/Context/R2026a/mw_prefs.json</code>.</p>
+<blockquote data-sourcepos="138:1-138:76" dir="auto">
+<p data-sourcepos="138:3-138:76"><strong data-sourcepos="138:3-138:11">Note:</strong> See section <a data-sourcepos="138:25-138:65" href="#release-dependency">Release dependency</a> above too.</p>
+</blockquote>
+<p data-sourcepos="140:1-141:66" dir="auto">If the user wants to use a different location, this is possible by setting the
+environment variable <code data-sourcepos="141:22-141:49">MW_STARTUP_SHUTDOWN_CONFIG</code> correspondingly.</p>
+<p data-sourcepos="143:1-145:53" dir="auto">This can also be used to have different setups for different tasks, e.g.
+<code data-sourcepos="144:1-144:52">/Workspace/Users/a_user@example.com/project_x.json</code> and
+<code data-sourcepos="145:1-145:52">/Workspace/Users/a_user@example.com/project_y.json</code>.</p>
+<h2 data-sourcepos="147:1-147:27" dir="auto" id="user-content-missing-compressed-files">Missing compressed files</h2>
+<p data-sourcepos="149:1-150:79" dir="auto">If a <code data-sourcepos="149:6-149:14">.tar.gz</code> file is missing from the <code data-sourcepos="149:41-149:54">zip_location</code>, it's just ignored during
+the <code data-sourcepos="150:5-150:13">startup</code> phase. Consider the example saving git configurations above, i.e.</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-json" data-canonical-lang="json" data-sourcepos="152:1-155:3" v-pre="true"><code><span class="line" data-lang="json" id="LC1"><span class="w">    </span><span class="nl">"src_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/home/a_user/.gitconfig"</span><span class="err">,</span></span>
+<span class="line" data-lang="json" id="LC2"><span class="w">    </span><span class="nl">"zip_location"</span><span class="p">:</span><span class="w"> </span><span class="s2">"/Workspace/Users/a_user@example.com/MathWorks/Context"</span><span class="err">,</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="157:1-159:51" dir="auto">If the file
+<code data-sourcepos="158:1-158:73">/Workspace/Users/a_user@example.com/MathWorks/Context/.gitconfig.tar.gz</code>
+is missing, MATLAB simply starts without this file.</p>
+<p data-sourcepos="161:1-161:81" dir="auto">In the current MATLAB (on Databricks), the user can add some configurations, e.g.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="163:1-168:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="k">!</span>git config <span class="nt">--global</span> user.name <span class="s2">"My Name"</span></span>
+<span class="line" data-lang="matlab" id="LC2"><span class="k">!</span>git config <span class="nt">--global</span> user.email <span class="s2">"USERNAME@example.com"</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="k">!</span>git config <span class="nt">--global</span> alias.st status</span>
+<span class="line" data-lang="matlab" id="LC4"><span class="k">!</span>git config <span class="nt">--global</span> alias.co checkout</span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="170:1-173:71" dir="auto">When the <code data-sourcepos="170:10-170:19">shutdown</code> procedure is invoked, this file will be found, and the
+data will be compressed and saved. The next time when the user starts
+MATLAB Desktop on Databricks, the <code data-sourcepos="172:35-172:46">.gitconfig</code> file will be unpacked prior to
+starting MATLAB, and the user will have his or her <em data-sourcepos="173:52-173:70">usual environment</em>.</p>
+<p data-sourcepos="175:1-176:24" dir="auto">The user can use either command line git, as above, or the built-in support
+from the MATLAB Desktop.</p>
+<h2 data-sourcepos="178:1-178:31" dir="auto" id="user-content-startup-and-shutdown-methods">Startup and Shutdown methods</h2>
+<p data-sourcepos="180:1-181:85" dir="auto">The <strong data-sourcepos="180:5-180:15">startup</strong> methods are executed automatically, if configured, but when are
+the <strong data-sourcepos="181:5-181:16">shutdown</strong> methods executed? It turns out that they may or may not be executed.</p>
+<p data-sourcepos="183:1-183:72" dir="auto">There are a few ways of ensuring that the <strong data-sourcepos="183:43-183:54">shutdown</strong> methods will run.</p>
+<ul data-sourcepos="185:1-192:37" dir="auto">
+<li data-sourcepos="185:1-187:38">
+<p data-sourcepos="185:3-187:38">When leaving MATLAB, run <code data-sourcepos="185:28-185:33">exit</code> in MATLAB, as you might on a Desktop MATLAB
+on your computer. When it has finished (there is some output during <strong data-sourcepos="186:69-186:80">shutdown</strong>),
+the cluster can be terminated/deleted.</p>
+</li>
+<li data-sourcepos="189:1-192:37">
+<p data-sourcepos="189:3-192:37">Run <code data-sourcepos="189:7-189:14">finish</code>. The Databricks package contains a <code data-sourcepos="189:51-189:58">finish</code> function, which is called
+when the user executes <code data-sourcepos="190:24-190:29">exit</code>. It is, however, possible to simply call <code data-sourcepos="190:72-190:79">finish</code>
+without exiting MATLAB. The user may want to do this to
+<em data-sourcepos="192:1-192:36">save the data at regular intervals</em>.</p>
+</li>
+</ul></div></main><script src="resources/copycode.js">//</script></body></html>

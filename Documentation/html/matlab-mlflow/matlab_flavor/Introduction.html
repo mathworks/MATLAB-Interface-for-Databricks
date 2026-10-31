@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="English" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; MATLAB Interface for Databricks  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=9edc463e" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/mathworks.css?v=da5f381c" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=4b3d11ce"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Usage" href="Usage.html" />
+    <link rel="prev" title="MLflow MATLAB Fluent API" href="../FluentAPI.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            MATLAB Interface for Databricks
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Getting Started</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Overview.html">Overview</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Setup &amp; Configuration</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../Setup.html">Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Authentication.html">Authentication</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../SupportMatrix.html">Supported Workflows &amp; Releases</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Upgrade.html">Upgrading the Interface from a previous release</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../InstallingJDBCDriver.html">Installing the Databricks JDBC driver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../InstallingMATLABRuntime.html">Installing the MATLAB Runtime</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../InitScripts.html">Init script customization</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DBConnect.html">Databricks Connect Setup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Connect</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../DBConnectWorkflow.html">Using Databricks-Connect from MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/DataframeColumns.html">Dataframes and columns</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Jobs &amp; Libraries</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../JobWorkflow.html">Job Workflows</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/PythonSparkBuilder.html">Building Wheel libraries with MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/FunctionSchemas.html">Function Schemas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/FunctionSignatures.html">Function signatures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/SparkBuilderDataTypes.html">SparkBuilder data types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/CodeGeneration.html">Code generation</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ExampleSimulink.html">Executing Simulink models with data on Databricks</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Database Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../JDBCWorkflow.html">JDBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../StandaloneJDBCDatabaseInterface.html">Standalone JDBC database interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../ODBCWorkflow.html">ODBC and Database Toolbox workflow</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../StandaloneODBCDatabaseInterface.html">Standalone ODBC database interface</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">REST API Interfaces</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ClusterAPI.html">Clusters API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../CommandExecution.html">Command Execution</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../DBFS.html">DBFS API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Files.html">Files API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../JobsAPI.html">Jobs API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../LibraryAPI.html">Libraries</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../SecretsAPI.html">Secrets API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../SQLWarehousesAPI.html">SQL Warehouses API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../StatementExecution.html">Statement Execution API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../TokenAPI.html">Token API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../UnityCatalogAPI.html">Unity Catalog API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../WorkspacesAPI.html">Workspaces API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Genie.html">Genie - Public Preview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Zerobus.html">Zerobus   (Preview)</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Docker</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../ContainerServices.html">Using Databricks Container Services / Docker</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Databricks Platform</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../WorkingWithFiles.html">Working with files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../Isolation.html">Standard Clusters</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Other</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/SparkApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.pyspark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/CompilerApiRef.html">MATLAB Interface <em>for Apache Spark</em> (compiler.build.spark) - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../matlab-spark-api/MiscApiRef.html">MATLAB Interface <em>for Apache Spark</em> (matlab.sparkutils &amp; app/functions) - API Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">MATLAB Interface <em>for MLflow</em></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../InstallationPython.html">Installation and Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Fluent.html">Fluent MATLAB Interface for Tracking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../FluentAPI.html">MLflow MATLAB Fluent API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../InstallationPython.html">Installation and Configuration</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#sub-flavors">Sub Flavors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab-interface">MATLAB Interface</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="Usage.html">Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subflavors/none.html">none sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subflavors/compiler_sdk_python.html">compiler_sdk_python sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="subflavors/onnx.html">onnx sub flavor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../QuickStart.html">Quick Start</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../Authentication.html">Authentication</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../MLflowAPI.html">MATLAB Interface <em>for MLflow</em> - API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../DatabricksAPI.html">MATLAB Interface <em>for Databricks</em> - API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../FAQ.html">Frequently Asked Questions (FAQ)</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">MATLAB Interface for Databricks</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">MATLAB Interface <em>for MLflow</em></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/matlab-mlflow/matlab_flavor/Introduction.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p>A MATLAB flavor MLflow model can contain various pieces of information:</p>
+<ul>
+<li><p><strong>MATLAB/Simulink code and data <em>in their original format</em></strong>. If this is indeed included, the model can be loaded back into MATLAB such that it can be executed inside MATLAB or can be used for further development of new models.</p>
+<div class="admonition-runtime-requirements admonition">
+<p class="admonition-title">Runtime Requirements</p>
+<p>In order to be able to run the code inside MATLAB/Simulink, an end-user will require a MATLAB installation and license.</p>
+</div>
+</li>
+<li><p><strong>MATLAB/Simulink code and data <em>compiled into a MATLAB Compiler SDK Python Package (including data marshalling wrappers)</em></strong>. This allows the model to be <a class="reference external" href="https://mlflow.org/docs/latest/ml/model/#pyfunc-model-flavor"><code class="docutils literal notranslate"><span class="pre">pyfunc</span></code> compatible</a>. <code class="docutils literal notranslate"><span class="pre">pyfunc</span></code> compatibility enables other MLflow tools to work with the model regardless of which persistence module or framework was used to produce the model.</p>
+<div class="admonition-runtime-requirements admonition">
+<p class="admonition-title">Runtime Requirements</p>
+<p>While running the model does not require a MATLAB installation nor a MATLAB license, the <a class="reference external" href="https://www.mathworks.com/products/compiler/matlab-runtime.html">MATLAB Runtime</a> is required at runtime. Unfortunately the MATLAB Runtime cannot automatically be installed by MLflow's environment managers. But <em>if</em> the correct MATLAB Runtime version is available in an environment, other MLflow tools <em>will</em> indeed be able to simply run the model without needing any MATLAB specific knowledge. Also see <a class="reference internal" href="subflavors/compiler_sdk_python.html#matlab-runtime-requirements"><span class="std std-ref">MATLAB Runtime Requirements</span></a>.</p>
+</div>
+</li>
+<li><p><strong>A <a class="reference external" href="https://www.mathworks.com/products/deep-learning.html">Deep Learning Toolbox</a> network <em>saved in ONNX format</em></strong>. Various Deep Learning Toolbox networks can be exported to the ONNX format using the <a class="reference external" href="https://www.mathworks.com/help/deeplearning/ref/exportonnxnetwork.html"><code class="docutils literal notranslate"><span class="pre">exportONNXNetwork</span></code> function</a>. If a network can indeed be exported as such, it can be included in the MLflow model as <a class="reference external" href="https://mlflow.org/docs/latest/models.html#onnx-onnx">ONNX Flavor</a> which in turn offers <code class="docutils literal notranslate"><span class="pre">pyfunc</span></code> compatibility.</p>
+<div class="admonition-runtime-requirements admonition">
+<p class="admonition-title">Runtime Requirements</p>
+<p>In this case there is no further dependency on MATLAB or MATLAB Runtime whatsoever. The only dependency will be on the ONNX Runtime which MLflow environment managers will automatically install when needed.</p>
+</div>
+</li>
+</ul>
+<section id="sub-flavors">
+<h2>Sub Flavors<a class="headerlink" href="#sub-flavors" title="Link to this heading"></a></h2>
+<p>To indicate what information is saved in the model, a MATLAB flavor model is said to have one or more so called sub flavor. Click on their names to learn more about each sub flavor.</p>
+<p>:<a class="reference internal" href="subflavors/none.html"><span class="std std-doc">none</span></a>: only contains the MATLAB/Simulink code and data.
+:<a class="reference internal" href="subflavors/compiler_sdk_python.html"><span class="std std-doc">compiler_sdk_python</span></a>: contains the MATLAB Compiler SDK Python package. <em>May</em> also contain the original MATLAB/Simulink code and data.
+:<a class="reference internal" href="subflavors/onnx.html"><span class="std std-doc">onnx</span></a>: contains a Deep Learning Toolbox network in ONNX format. <em>May</em> also contain the original MATLAB/Simulink code and data.</p>
+<p>Note that it is possible for a MATLAB flavor model to contain multiple sub flavors. It is for example possible to have a model which contains both the original MATLAB code as well as the MATLAB Compiler SDK Python packaged version of the code such that the model is (re-)usable both inside as well as outside of MATLAB.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>When your MATLAB model is packaged as MATLAB Compiler SDK Python module, this offers certain <a class="reference external" href="https://www.mathworks.com/help/compiler_sdk/ml_code/deployable-archive.html">protection of your code and data</a> making it a suitable way to share your model with third parties. Of course this protection will be negated if you choose to also include the original MATLAB code and data in an MLflow MATLAB flavor model and then share the entire model. The Python module would still be protected but the original code would simply be available next to it. Therefore be selective with what different options to include in your MLflow MATLAB flavor model and carefully consider who you want to share which model with.</p>
+</div>
+</section>
+<section id="matlab-interface">
+<h2>MATLAB Interface<a class="headerlink" href="#matlab-interface" title="Link to this heading"></a></h2>
+<p>To learn more about the MATLAB functions which work with the MLflow MATLAB Flavor see <a class="reference internal" href="Usage.html"><span class="std std-doc">Usage</span></a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../FluentAPI.html" class="btn btn-neutral float-left" title="MLflow MATLAB Fluent API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Usage.html" class="btn btn-neutral float-right" title="Usage" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020-2025, MathWorks, Inc..</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html><html><head><meta content="MATLAB R2025b with MATLAB DocMaker 0.8.0" name="generator"/><meta charset="utf-8"/><title>Zerobus   (Preview)</title><link href="resources/github-markdown-light.css" rel="stylesheet"/><link href="resources/matlaby.css" rel="stylesheet"/><link href="resources/copycode.css" rel="stylesheet"/><link href="resources/matlaby-custom.css" rel="stylesheet"/></head><body class="markdown-body"><main class="markdown-body"><div><h1 data-sourcepos="1:1-1:21" dir="auto" id="user-content-zerobus---preview">Zerobus   (Preview)</h1>
+<p data-sourcepos="3:1-5:170" dir="auto">Zerobus ingest provides near real-time data ingestion of data into tables at high
+bandwidth for thousands of clients without need for a message bus. For details see:
+<a data-sourcepos="5:1-5:170" href="https://www.databricks.com/product/data-engineering/lakeflow-connect/zerobus-ingest" rel="nofollow noreferrer noopener" target="_blank">https://www.databricks.com/product/data-engineering/lakeflow-connect/zerobus-ingest</a></p>
+<blockquote data-sourcepos="7:1-8:84" dir="auto">
+<p data-sourcepos="7:3-8:84">Zerobus was announced by Databricks® at the Data + AI Summit in June 2026.
+It is currently a preview feature and so this interface may change without notice.</p>
+</blockquote>
+<h2 data-sourcepos="10:1-10:16" dir="auto" id="user-content-prerequisites">Prerequisites</h2>
+<ul data-sourcepos="12:1-14:59" dir="auto">
+<li data-sourcepos="12:1-12:22">A destination table.</li>
+<li data-sourcepos="13:1-13:22">A service principal.</li>
+<li data-sourcepos="14:1-14:59">Appropriate permissions granted to the service principal.</li>
+</ul>
+<p data-sourcepos="16:1-16:89" dir="auto">To create a table and grant permissions, given, sufficient rights, SQL can be used, e.g.:</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-sql" data-canonical-lang="sql" data-sourcepos="18:1-21:3" v-pre="true"><code><span class="line" data-lang="sql" id="LC1"><span class="o">%</span><span class="k">sql</span></span>
+<span class="line" data-lang="sql" id="LC2"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">main</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">air_quality</span> <span class="p">(</span><span class="n">device_name</span> <span class="n">STRING</span><span class="p">,</span> <span class="k">temp</span> <span class="nb">INT</span><span class="p">,</span> <span class="n">humidity</span> <span class="n">LONG</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-sql" data-canonical-lang="sql" data-sourcepos="23:1-28:3" v-pre="true"><code><span class="line" data-lang="sql" id="LC1"><span class="o">%</span><span class="k">sql</span></span>
+<span class="line" data-lang="sql" id="LC2"><span class="k">GRANT</span> <span class="n">USE</span> <span class="k">CATALOG</span> <span class="k">ON</span> <span class="k">CATALOG</span> <span class="n">main</span> <span class="k">TO</span> <span class="nv">`a&lt;REDACTED&gt;1`</span><span class="p">;</span></span>
+<span class="line" data-lang="sql" id="LC3"><span class="k">GRANT</span> <span class="n">USE</span> <span class="k">SCHEMA</span> <span class="k">ON</span> <span class="k">SCHEMA</span> <span class="n">main</span><span class="p">.</span><span class="k">default</span> <span class="k">TO</span> <span class="nv">`a&lt;REDACTED&gt;1`</span><span class="p">;</span></span>
+<span class="line" data-lang="sql" id="LC4"><span class="k">GRANT</span> <span class="k">MODIFY</span><span class="p">,</span> <span class="k">SELECT</span> <span class="k">ON</span> <span class="k">TABLE</span> <span class="n">main</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">air_quality</span> <span class="k">TO</span> <span class="nv">`a&lt;REDACTED&gt;1`</span><span class="p">;</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="30:1-30:24" dir="auto">For further details see:</p>
+<p data-sourcepos="32:1-32:224" dir="auto"><a data-sourcepos="32:1-32:224" href="https://docs.databricks.com/aws/en/ingestion/zerobus-ingest#get-your-workspace-url-and-zerobus-ingest-endpoint" rel="nofollow noreferrer noopener" target="_blank">https://docs.databricks.com/aws/en/ingestion/zerobus-ingest#get-your-workspace-url-and-zerobus-ingest-endpoint</a></p>
+<h2 data-sourcepos="34:1-34:17" dir="auto" id="user-content-zerobus-client">Zerobus client</h2>
+<p data-sourcepos="36:1-36:72" dir="auto">Create a Zerobus object that will authenticate as the service principal:</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="38:1-40:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">z</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Zerobus</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="s2">"main"</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="s2">"default"</span><span class="p">,</span> <span class="nb">table</span><span class="o">=</span><span class="s2">"air_quality"</span><span class="p">,</span> <span class="n">clientId</span><span class="o">=</span><span class="s2">"a&lt;REDACTED&gt;1"</span><span class="p">,</span> <span class="n">clientSecret</span><span class="o">=</span><span class="s2">"d&lt;REDACTED&gt;5"</span><span class="p">)</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="42:1-44:57" dir="auto">The client can be used to make repeated inserts into the table without the need for
+repeated authentication. The client obtains an access token with a life span of 1 hour.
+When the token expires the client will refresh the token.</p>
+<blockquote data-sourcepos="46:1-46:95" dir="auto">
+<p data-sourcepos="46:3-46:95">Currently a token may expire during a large transaction leading to a failure without a retry.</p>
+</blockquote>
+<p data-sourcepos="48:1-49:60" dir="auto">The following example creates a JSON payload array of two sets of values, corresponding
+to two table rows using the previously defined table schema.</p>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="51:1-57:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"><span class="n">payload</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'[{ "device_name": "device_num_1", "temp": 28, "humidity": 60 },'</span><span class="p">,</span> <span class="nb">newline</span> <span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC2">            <span class="s1">'{ "device_name": "device_num_2", "temp": 25, "humidity": 55 }]'</span><span class="p">];</span></span>
+<span class="line" data-lang="matlab" id="LC3"/>
+<span class="line" data-lang="matlab" id="LC4"><span class="c1">% Insert the data into the table</span></span>
+<span class="line" data-lang="matlab" id="LC5"><span class="p">[</span><span class="nb">result</span><span class="p">,</span> <span class="n">errorResponse</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<p data-sourcepos="59:1-60:69" dir="auto">Repeated calls to the <code data-sourcepos="59:23-59:30">insert</code> method can be made with different payloads. A new client
+should generally not be created per <code data-sourcepos="60:37-60:44">insert</code> call to reduce overhead.</p>
+<blockquote data-sourcepos="62:1-63:52" dir="auto">
+<p data-sourcepos="62:3-63:52">Writing a <em data-sourcepos="62:13-62:19">batch</em> of rows of data in a single request is more efficient than writing
+individual rows if the data is available a priori.</p>
+</blockquote>
+<h2 data-sourcepos="65:1-65:11" dir="auto" id="user-content-example">Example:</h2>
+<p data-sourcepos="67:1-67:31" dir="auto">First created a table using SQL</p>
+<div class="gl-relative markdown-code-block js-markdown-code"><pre class="code highlight js-syntax-highlight language-sql" data-canonical-lang="sql" data-sourcepos="68:1-70:3" v-pre="true"><code><span class="line" data-lang="sql" id="LC1"><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">main</span><span class="p">.</span><span class="k">default</span><span class="p">.</span><span class="n">air_quality</span> <span class="p">(</span><span class="n">device_name</span> <span class="n">STRING</span><span class="p">,</span> <span class="k">temp</span> <span class="nb">INT</span><span class="p">,</span> <span class="n">humidity</span> <span class="n">LONG</span><span class="p">);</span></span></code></pre><copy-code/><insert-code-snippet/></div>
+<div class="gl-relative markdown-code-block js-markdown-code highlight highlight-source-matlab"><pre class="code highlight js-syntax-highlight language-matlab" data-canonical-lang="matlab" data-sourcepos="72:1-114:3" v-pre="true"><code><span class="line" data-lang="matlab" id="LC1"/>
+<span class="line" data-lang="matlab" id="LC2"><span class="n">t</span> <span class="o">=</span> <span class="s2">"air_quality"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC3"><span class="n">catalog</span> <span class="o">=</span> <span class="s2">"main"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC4"><span class="n">schema</span> <span class="o">=</span> <span class="s2">"default"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC5"/>
+<span class="line" data-lang="matlab" id="LC6"><span class="n">sp_secret</span> <span class="o">=</span> <span class="s2">"d&lt;REDACTED&gt;5"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC7"><span class="n">sp_client_id</span> <span class="o">=</span> <span class="s2">"a&lt;REDACTED&gt;1"</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC8"/>
+<span class="line" data-lang="matlab" id="LC9"><span class="c1">% Create the Zerobus object</span></span>
+<span class="line" data-lang="matlab" id="LC10"><span class="n">z</span> <span class="o">=</span> <span class="n">databricks</span><span class="o">.</span><span class="n">Zerobus</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="n">catalog</span><span class="p">,</span> <span class="n">schema</span><span class="o">=</span><span class="n">schema</span><span class="p">,</span> <span class="nb">table</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">clientId</span><span class="o">=</span><span class="n">sp_client_id</span><span class="p">,</span> <span class="n">clientSecret</span><span class="o">=</span><span class="n">sp_secret</span><span class="p">)</span></span>
+<span class="line" data-lang="matlab" id="LC11"/>
+<span class="line" data-lang="matlab" id="LC12"><span class="c1">% Write 10 rows in total</span></span>
+<span class="line" data-lang="matlab" id="LC13"><span class="n">numRows</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span></span>
+<span class="line" data-lang="matlab" id="LC14"/>
+<span class="line" data-lang="matlab" id="LC15"><span class="c1">% Write 2 batched rows at a time</span></span>
+<span class="line" data-lang="matlab" id="LC16"><span class="k">for</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">numRows</span></span>
+<span class="line" data-lang="matlab" id="LC17">    <span class="c1">% Sample random temperature data</span></span>
+<span class="line" data-lang="matlab" id="LC18">    <span class="n">t1</span> <span class="o">=</span> <span class="nb">randi</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]);</span></span>
+<span class="line" data-lang="matlab" id="LC19">    <span class="n">t2</span> <span class="o">=</span> <span class="nb">randi</span><span class="p">([</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">50</span><span class="p">]);</span></span>
+<span class="line" data-lang="matlab" id="LC20">    <span class="c1">% Sample random humidity data</span></span>
+<span class="line" data-lang="matlab" id="LC21">    <span class="n">h1</span> <span class="o">=</span> <span class="nb">randi</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">]);</span></span>
+<span class="line" data-lang="matlab" id="LC22">    <span class="n">h2</span> <span class="o">=</span> <span class="nb">randi</span><span class="p">([</span><span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">]);</span></span>
+<span class="line" data-lang="matlab" id="LC23">    <span class="c1">% Ids for the supposed measurement devices</span></span>
+<span class="line" data-lang="matlab" id="LC24">    <span class="n">id1</span> <span class="o">=</span> <span class="s2">"device_num_"</span> <span class="o">+</span> <span class="nb">string</span><span class="p">(</span><span class="nb">num2str</span><span class="p">(</span><span class="n">n</span><span class="p">));</span></span>
+<span class="line" data-lang="matlab" id="LC25">    <span class="n">id2</span> <span class="o">=</span> <span class="s2">"device_num_"</span> <span class="o">+</span> <span class="nb">string</span><span class="p">(</span><span class="nb">num2str</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">));</span></span>
+<span class="line" data-lang="matlab" id="LC26"/>
+<span class="line" data-lang="matlab" id="LC27">    <span class="c1">% Payload for 2 rows as a JSON array</span></span>
+<span class="line" data-lang="matlab" id="LC28">    <span class="n">payload</span> <span class="o">=</span> <span class="nb">char</span><span class="p">(</span><span class="nb">sprintf</span><span class="p">(</span><span class="s1">'[{"device_name": "%s", "temp": %d, "humidity": %d }, \n { "device_name": "%s", "temp": %d, "humidity": %d }]'</span><span class="p">,</span><span class="k">...</span></span>
+<span class="line" data-lang="matlab" id="LC29">        <span class="n">id1</span><span class="p">,</span> <span class="n">t1</span><span class="p">,</span> <span class="n">h1</span><span class="p">,</span> <span class="n">id2</span><span class="p">,</span> <span class="n">t2</span><span class="p">,</span> <span class="n">h2</span><span class="p">));</span></span>
+<span class="line" data-lang="matlab" id="LC30">    </span>
+<span class="line" data-lang="matlab" id="LC31">    <span class="c1">% Provide some feedback</span></span>
+<span class="line" data-lang="matlab" id="LC32">    <span class="k">if</span> <span class="nb">mod</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span></span>
+<span class="line" data-lang="matlab" id="LC33">        <span class="nb">fprintf</span><span class="p">(</span><span class="s2">"Insert call #%d\n"</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC34">    <span class="k">end</span></span>
+<span class="line" data-lang="matlab" id="LC35"/>
+<span class="line" data-lang="matlab" id="LC36">    <span class="c1">% Send the data to Databricks</span></span>
+<span class="line" data-lang="matlab" id="LC37">    <span class="p">[</span><span class="nb">result</span><span class="p">,</span> <span class="n">errorResponse</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC38">    <span class="nb">assert</span><span class="p">(</span><span class="nb">result</span><span class="p">);</span></span>
+<span class="line" data-lang="matlab" id="LC39"><span class="k">end</span></span>
+<span class="line" data-lang="matlab" id="LC40"/>
+<span class="line" data-lang="matlab" id="LC41"/></code></pre><copy-code/><insert-code-snippet/></div></div></main><script src="resources/copycode.js">//</script></body></html>

@@ -1,0 +1,32 @@
+[build-system]
+requires = ["uv_build>=0.10.6,<0.11.0"]
+build-backend = "uv_build"
+
+
+[project]
+name = "matlab-mlflow"
+version = "1.0.0"
+description = "MATLAB Flavor for MLflow"
+license-files = ["LICENSE.MD"]
+requires-python = ">=3.10"
+authors = [
+    { name="The MathWorks Inc." }
+]
+dependencies = [
+    "mlflow>=2,<4",
+    "onnx",
+    "pip"
+]
+
+[dependency-groups]
+dev = [
+    "onnxruntime==1.23.* ; python_version<'3.11'",
+    "onnxruntime; python_version>='3.11'",
+    "pytest>=9.0.2",
+]
+
+[project.urls]
+Homepage = "https://github.com/mathworks-ref-arch/matlab-mlflow"
+Documentation = "https://mathworks-ref-arch.github.io/matlab-mlflow/main"
+Issues = "https://github.com/mathworks-ref-arch/matlab-mlflow/issues"
+

@@ -1,0 +1,18 @@
+[DEFAULT]
+host  = https://dbc-a1b2345c-d6e7.cloud.databricks.com
+token = dapi123
+
+[ACCOUNT]
+host       = https://accounts.cloud.databricks.com
+username   = someone@example.com
+password   = MyP25
+account_id = ab0cd1
+
+[WITHCOMMENT]
+host  = https://withcomment.databricks.com
+; this is comment1
+token = commenttoken ; this is comment2
+
+[ spaced profile ]
+host  = https://myhost
+token = dapi567

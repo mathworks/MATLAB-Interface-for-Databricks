@@ -1,0 +1,85 @@
+{
+  "type": "compiler",
+  "funcname": "nycAlgo",
+  "fullFilename": "C:\\git\\databricks\\Software\\MATLAB\\examples\\DatabricksConnect\\NYC\\nycAlgo.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "NYC",
+      "Direction": "in",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "metadata": {},
+            "name": "passenger_count",
+            "nullable": true,
+            "type": "integer"
+          },
+          {
+            "metadata": {},
+            "name": "trip_distance",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "fare_amount",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "tip_amount",
+            "nullable": true,
+            "type": "double"
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "OUT",
+      "Direction": "out",
+      "Table": true,
+      "SparkType": {
+        "fields": [
+          {
+            "metadata": {},
+            "name": "passenger_count",
+            "nullable": true,
+            "type": "integer"
+          },
+          {
+            "metadata": {},
+            "name": "trip_distance",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "fare_amount",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "tip_amount",
+            "nullable": true,
+            "type": "double"
+          },
+          {
+            "metadata": {},
+            "name": "entries",
+            "nullable": true,
+            "type": "double"
+          }
+        ],
+        "type": "struct"
+      }
+    }
+  ]
+}

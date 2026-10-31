@@ -1,0 +1,135 @@
+{
+  "type": "compiler",
+  "funcname": "fValues",
+  "fullFilename": "/matlab-databricks/Modules/matlab-spark-api/Software/MATLAB/test/fixtures/fValues.m",
+  "inputs": [
+    {
+      "type": "io",
+      "Name": "id",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "long"
+    },
+    {
+      "type": "io",
+      "Name": "ts",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "timestamp"
+    },
+    {
+      "type": "io",
+      "Name": "tf",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "boolean"
+    },
+    {
+      "type": "io",
+      "Name": "dn",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "double"
+    },
+    {
+      "type": "io",
+      "Name": "fl",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "float"
+    },
+    {
+      "type": "io",
+      "Name": "i16",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "short"
+    },
+    {
+      "type": "io",
+      "Name": "i32",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "integer"
+    },
+    {
+      "type": "io",
+      "Name": "i64",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "long"
+    },
+    {
+      "type": "io",
+      "Name": "name",
+      "Direction": "in",
+      "Table": false,
+      "SparkType": "string"
+    }
+  ],
+  "outputs": [
+    {
+      "type": "io",
+      "Name": "o_id",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "long"
+    },
+    {
+      "type": "io",
+      "Name": "o_ts",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "timestamp"
+    },
+    {
+      "type": "io",
+      "Name": "o_tf",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "boolean"
+    },
+    {
+      "type": "io",
+      "Name": "o_dn",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "double"
+    },
+    {
+      "type": "io",
+      "Name": "o_fl",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "float"
+    },
+    {
+      "type": "io",
+      "Name": "o_i16",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "short"
+    },
+    {
+      "type": "io",
+      "Name": "o_i32",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "integer"
+    },
+    {
+      "type": "io",
+      "Name": "o_i64",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "long"
+    },
+    {
+      "type": "io",
+      "Name": "o_name",
+      "Direction": "out",
+      "Table": false,
+      "SparkType": "string"
+    }
+  ]
+}
