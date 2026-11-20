@@ -1,6 +1,6 @@
 # MATLAB Interface for Databricks
 
-[![View MATLAB Interface for Databricks on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/####-matlab-interface-for-databricks)
+[![View MATLAB Interface for Databricks on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://www.mathworks.com/matlabcentral/fileexchange/185247-matlab-interface-for-databricks)
 
 MATLAB&reg; Interface for Databricks&reg; enables engineers and data scientists to develop, scale, and deploy MATLAB and Simulink&reg; workflows directly on Databricks, operationalizing algorithms and simulations in production pipelines and digital twins.
 
